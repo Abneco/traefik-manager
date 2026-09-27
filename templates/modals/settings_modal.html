@@ -1117,21 +1117,29 @@
                         </div>
                         <div style="margin-bottom:12px;" id="languageSection">
                             <div class="sc-sec-head"><i class="ph-bold ph-translate sc-sec-icon" style="color:var(--blue)"></i><span class="sc-sec-label">{{ _('Language') }}</span><span class="tm-info-btn" data-tip="{{ _('Saved in manager.yml, so the choice follows you to every browser. Follow system uses the language your browser asks for, and English when Traefik Manager does not have it. Also set by the language button in the nav bar.') }}"><i class="ph-bold ph-info"></i></span><span class="sc-sec-rule"></span></div>
-                            <div class="sc-panel">
-                                <div class="sc-set lang-row{% if not language_setting %} active{% endif %}" onclick="setLanguage('')" style="cursor:pointer">
-                                    <div class="sc-set-l">
-                                        <div class="sc-set-n"><i class="ph-bold ph-desktop" style="width:20px;display:inline-block;color:var(--muted)"></i>{{ _('Follow system') }}</div>
+                            {% set current_lang = language_options | selectattr('tag', 'equalto', language_setting) | first %}
+                            <div class="lang-select" id="langSelectWrap">
+                                <button type="button" id="langSelectBtn" class="input-field lang-select-btn" onclick="toggleSettingsLangMenu()" aria-haspopup="listbox" aria-expanded="false">
+                                    {% if current_lang %}<span lang="{{ current_lang.tag }}" class="lang-select-cur">{% if current_lang.region %}<span class="tm-flag tm-lang-flag" translate="no" aria-hidden="true" style="width:28px;display:inline-block">{{ current_lang.region | flag }}</span>{% else %}<i class="ph-bold ph-globe" style="width:28px;display:inline-block;color:var(--muted)"></i>{% endif %}{{ current_lang.name }}</span>
+                                    {% else %}<span class="lang-select-cur"><i class="ph-bold ph-desktop" style="width:20px;display:inline-block;color:var(--muted)"></i>{{ _('Follow system') }}</span>{% endif %}
+                                    <i class="ph-bold ph-caret-down lang-select-caret"></i>
+                                </button>
+                                <div id="langSelectMenu" class="lang-select-menu" role="listbox">
+                                    <div class="sc-set lang-row{% if not language_setting %} active{% endif %}" onclick="setLanguage('')" style="cursor:pointer">
+                                        <div class="sc-set-l">
+                                            <div class="sc-set-n"><i class="ph-bold ph-desktop" style="width:20px;display:inline-block;color:var(--muted)"></i>{{ _('Follow system') }}</div>
+                                        </div>
+                                        <div class="sc-set-v">{% if not language_setting %}<i class="ph-bold ph-check" style="color:var(--blue)"></i>{% endif %}</div>
                                     </div>
-                                    <div class="sc-set-v">{% if not language_setting %}<i class="ph-bold ph-check" style="color:var(--blue)"></i>{% endif %}</div>
-                                </div>
-                                {% for lang in language_options %}
-                                <div class="sc-set lang-row{% if language_setting == lang.tag %} active{% endif %}" data-lang="{{ lang.tag }}" onclick="setLanguage(this.dataset.lang)" style="cursor:pointer">
-                                    <div class="sc-set-l">
-                                        <div class="sc-set-n" lang="{{ lang.tag }}">{% if lang.region %}<span class="tm-flag tm-lang-flag" translate="no" aria-hidden="true" style="width:28px;display:inline-block">{{ lang.region | flag }}</span>{% else %}<i class="ph-bold ph-globe" style="width:28px;display:inline-block;color:var(--muted)"></i>{% endif %}{{ lang.name }}</div>
+                                    {% for lang in language_options %}
+                                    <div class="sc-set lang-row{% if language_setting == lang.tag %} active{% endif %}" data-lang="{{ lang.tag }}" onclick="setLanguage(this.dataset.lang)" style="cursor:pointer">
+                                        <div class="sc-set-l">
+                                            <div class="sc-set-n" lang="{{ lang.tag }}">{% if lang.region %}<span class="tm-flag tm-lang-flag" translate="no" aria-hidden="true" style="width:28px;display:inline-block">{{ lang.region | flag }}</span>{% else %}<i class="ph-bold ph-globe" style="width:28px;display:inline-block;color:var(--muted)"></i>{% endif %}{{ lang.name }}</div>
+                                        </div>
+                                        <div class="sc-set-v">{% if language_setting == lang.tag %}<i class="ph-bold ph-check" style="color:var(--blue)"></i>{% endif %}</div>
                                     </div>
-                                    <div class="sc-set-v">{% if language_setting == lang.tag %}<i class="ph-bold ph-check" style="color:var(--blue)"></i>{% endif %}</div>
+                                    {% endfor %}
                                 </div>
-                                {% endfor %}
                             </div>
                         </div>
                         <div style="margin-bottom:12px;" id="geoipSection">

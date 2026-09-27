@@ -1629,6 +1629,16 @@ html.tm-nav-collapsed .drawer-srv-head:hover .drawer-srv-mark { color: var(--tex
 .lang-opt > div { width: 100%; }
 .lang-opt.active { background: var(--input-bg); }
 .lang-row:hover { background: var(--input-bg); }
+.lang-select { position: relative; }
+.lang-select-btn { display: flex; align-items: center; gap: 8px; width: 100%; text-align: left; cursor: pointer; font: 600 12px/1.35 'JetBrains Mono', monospace; }
+.lang-select-cur { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lang-select-caret { color: var(--muted); transition: transform .12s; }
+.lang-select-btn[aria-expanded="true"] .lang-select-caret { transform: rotate(180deg); }
+.lang-select-menu { display: none; position: absolute; top: calc(100% + 4px); left: 0; right: 0; max-height: 300px; overflow-y: auto; z-index: 50; padding: 4px 6px; background: var(--card); border: 1px solid var(--border); border-radius: 8px; box-shadow: 0 12px 40px rgba(0,0,0,0.4); }
+.lang-select-menu.open { display: block; }
+.lang-select-menu.up { top: auto; bottom: calc(100% + 4px); }
+#settingsModal .sc-root .lang-select-menu .sc-set { align-items: center; padding: 6px 8px; }
+.lang-select-menu .lang-row.active { background: var(--input-bg); }
 @media (min-width: 1024px) { #pwaInstallBtn { display: none !important; } }
 .static-state-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 10px 14px; border-radius: 8px; font-size: 12px; }
 .static-state-bar .static-state-text { flex: 1; min-width: 0; }

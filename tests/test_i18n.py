@@ -366,8 +366,12 @@ def test_settings_lists_every_language_and_follow_system(client, with_languages)
     assert section.count('class="sc-set lang-row') == 4
     assert 'lang-row active" data-lang="de"' in section
     assert 'Follow system' in section
-    assert section.count('tm-lang-flag') == 3, \
-        'Settings shows the same flags as the navbar picker, not language codes'
+    assert section.count('tm-lang-flag') == 4, \
+        'Settings shows the same flags as the navbar picker, not language codes, plus one on the dropdown button'
+    button = _between(section, 'id="langSelectBtn"', 'id="langSelectMenu"')
+    assert 'lang="de"' in button and '\U0001F1E9\U0001F1EA' in button, 'the closed dropdown shows the saved language'
+    menu = section[section.index('id="langSelectMenu"'):]
+    assert menu.count('class="sc-set lang-row') == 4, 'every choice lives inside the dropdown'
     assert '\U0001F1E8\U0001F1E6' in section, 'English takes the Canadian flag in Settings too'
     assert 'tm-lang-code' not in section, 'the code was replaced by the flag'
     assert 'window.TM_LANGUAGE = "de"' in html
@@ -377,6 +381,8 @@ def test_follow_system_is_marked_when_nothing_is_saved(client):
     html = client.get('/').get_data(as_text=True)
     section = _between(html, 'id="languageSection"', 'id="geoipSection"')
     assert 'lang-row active" onclick="setLanguage(\'\')"' in section
+    button = _between(section, 'id="langSelectBtn"', 'id="langSelectMenu"')
+    assert 'Follow system' in button and 'tm-lang-flag' not in button
     assert 'window.TM_LANGUAGE = ""' in html
 
 

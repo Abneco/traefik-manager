@@ -836,12 +836,39 @@ function toggleLangMenu() {
     if (opening) menu.classList.add('open');
 }
 
+function toggleSettingsLangMenu(force) {
+    const menu = document.getElementById('langSelectMenu');
+    if (!menu) return;
+    const open = force === undefined ? !menu.classList.contains('open') : force;
+    menu.classList.toggle('open', open);
+    document.getElementById('langSelectBtn')?.setAttribute('aria-expanded', String(open));
+    if (!open) return;
+    const btn = document.getElementById('langSelectBtn').getBoundingClientRect();
+    const box = (menu.closest('.modal-panel') || document.documentElement).getBoundingClientRect();
+    const below = Math.min(box.bottom, window.innerHeight) - btn.bottom - 12;
+    const above = btn.top - Math.max(box.top, 0) - 12;
+    const up = below < 240 && above > below;
+    menu.classList.toggle('up', up);
+    menu.style.maxHeight = Math.max(120, Math.min(300, up ? above : below)) + 'px';
+    const active = menu.querySelector('.lang-row.active');
+    menu.scrollTop = active ? Math.max(0, active.offsetTop - (menu.clientHeight - active.offsetHeight) / 2) : 0;
+}
+
 document.addEventListener('click', e => {
     const wrap = document.getElementById('langPickerWrap');
     if (wrap && !wrap.contains(e.target)) {
         document.getElementById('langPickerMenu')?.classList.remove('open');
     }
+    const select = document.getElementById('langSelectWrap');
+    if (select && !select.contains(e.target)) toggleSettingsLangMenu(false);
 });
+
+document.addEventListener('keydown', e => {
+    if (e.key === 'Escape' && document.getElementById('langSelectMenu')?.classList.contains('open')) {
+        e.stopPropagation();
+        toggleSettingsLangMenu(false);
+    }
+}, true);
 
 function _tmLanguageUrl() {
     const tags = window.TM_LANGUAGE_TAGS || [];
