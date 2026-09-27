@@ -14,6 +14,7 @@ from babel import Locale, UnknownLocaleError
 from babel.messages.catalog import Catalog
 from babel.messages.extract import extract_from_dir
 from babel.messages.mofile import write_mo
+from babel.messages.plurals import PLURALS
 from babel.messages.pofile import read_po, write_po
 
 ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
@@ -28,6 +29,7 @@ STARTER_LOCALES = ('de', 'fr', 'es', 'zh_Hans', 'ru')
 WRAP_WIDTH = 79
 PLURAL_FORMS_RE = re.compile(r'nplurals\s*=\s*(\d+)\s*;\s*plural\s*=\s*(.+?)\s*;?\s*$')
 PLURAL_TOKEN_RE = re.compile(r'\d+|[A-Za-z_]+|[<>!=]=|&&|\|\||[-+*/%<>?:]')
+CLDR_CATEGORIES = ('zero', 'one', 'two', 'few', 'many', 'other')
 
 PY_KEYWORDS = {
     '_': None,
@@ -461,6 +463,25 @@ def same_plural_rule(actual, expected):
     return all(got(n) == want(n) for n in range(201))
 
 
+def matches_browser_plurals(actual, identifier):
+    mine = PLURAL_FORMS_RE.match(actual or '')
+    if not mine:
+        return False
+    tokens = PLURAL_TOKEN_RE.findall(mine.group(2))
+    if not any(tokens == PLURAL_TOKEN_RE.findall(rule) for _, rule in PLURALS.values()):
+        return False
+    try:
+        cldr = Locale.parse(identifier).plural_form
+        got = c2py(mine.group(2))
+    except (ValueError, UnknownLocaleError):
+        return False
+    categories = [cldr(n) for n in range(201)]
+    forms = sorted(set(categories), key=CLDR_CATEGORIES.index)
+    if int(mine.group(1)) != len(forms):
+        return False
+    return all(got(n) == forms.index(category) for n, category in enumerate(categories))
+
+
 def check_catalogue(path, identifier, template=None):
     rel = os.path.relpath(path, ROOT)
     problems = []
@@ -472,7 +493,8 @@ def check_catalogue(path, identifier, template=None):
     expected = Catalog(locale=identifier)
     if str(catalog.locale) != identifier:
         problems.append(Problem(rel, f'Language header is {catalog.locale}, expected {identifier}'))
-    if not same_plural_rule(catalog.plural_forms, expected.plural_forms):
+    if not (same_plural_rule(catalog.plural_forms, expected.plural_forms)
+            or matches_browser_plurals(catalog.plural_forms, identifier)):
         problems.append(Problem(rel, f'Plural-Forms is "{catalog.plural_forms}", expected "{expected.plural_forms}"'))
     content_type = dict(catalog.mime_headers).get('Content-Type', '')
     if 'charset=utf-8' not in content_type.lower():

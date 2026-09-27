@@ -361,6 +361,29 @@ def test_a_plural_rule_with_the_wrong_count_is_still_refused(tmp_path):
     assert any('Plural-Forms' in p.message for p in tmi18n.check_catalogue(path, 'de'))
 
 
+PT_HEADER = DE_HEADER.replace('Language: de', 'Language: pt')
+
+
+def test_the_plural_rule_the_browser_uses_is_accepted(tmp_path):
+    path = _po(tmp_path, _entry('Save', 'Guardar'), identifier='pt',
+               header=PT_HEADER.replace('plural=(n != 1);', 'plural=n > 1;'))
+    assert [p.message for p in tmi18n.check_catalogue(path, 'pt')] == [], \
+        'Weblate writes the CLDR rule for pt, which is what Intl.PluralRules applies in the browser'
+
+
+def test_babels_gettext_rule_is_still_accepted(tmp_path):
+    path = _po(tmp_path, _entry('Save', 'Guardar'), identifier='pt', header=PT_HEADER)
+    assert [p.message for p in tmi18n.check_catalogue(path, 'pt')] == []
+
+
+@pytest.mark.parametrize('rule', ['nplurals=2; plural=(n*n > 1);', 'nplurals=2; plural=(n == 0 || n > 1);',
+                                  'nplurals=3; plural=(n > 1);'])
+def test_a_rule_matching_neither_is_refused(tmp_path, rule):
+    path = _po(tmp_path, _entry('Save', 'Guardar'), identifier='pt',
+               header=PT_HEADER.replace('nplurals=2; plural=(n != 1);', rule))
+    assert any('Plural-Forms' in p.message for p in tmi18n.check_catalogue(path, 'pt'))
+
+
 GETTEXT_PLURALS = {
     'de': 'nplurals=2; plural=n != 1;',
     'es': 'nplurals=2; plural=n != 1;',
