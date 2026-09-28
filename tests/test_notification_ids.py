@@ -6,8 +6,10 @@ def _reset():
     N.clear_notifications()
 
 
-def test_two_in_the_same_second_delete_independently(app_module):
+def test_two_in_the_same_second_delete_independently(app_module, monkeypatch):
     _reset()
+    frozen = int(N.time.time()) + 0.5
+    monkeypatch.setattr(N.time, 'time', lambda: frozen)
     N.add_notification('info', 'first in this second', webhook=False)
     N.add_notification('info', 'second in this second', webhook=False)
     rows = N.get_notifications()
