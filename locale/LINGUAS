@@ -1,3 +1,4 @@
-# Languages shipped in a release, one per line. A language is listed once it has a reviewer.
+# Languages shipped in a release, one per line. A language is listed once it has a reviewer or has passed an agent verification.
 en_GB
 en_US
+fr
