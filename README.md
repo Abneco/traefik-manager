@@ -19,6 +19,7 @@ Routes, middlewares, Services, Plugins, certificates, crowdsec and logs, without
 [![Issues](https://img.shields.io/github/issues/chr0nzz/traefik-manager?logo=github)](https://github.com/chr0nzz/traefik-manager/issues)
 [![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/vRQCMrrjtz)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Sponsor-ff5f5f?logo=ko-fi&logoColor=white)](https://ko-fi.com/chr0nzz)
+[![Translation status](https://hosted.weblate.org/widget/traefik-manager/svg-badge.svg)](https://hosted.weblate.org/engage/traefik-manager/)
 
 <sub>Built for homelabbers who love Traefik but hate editing YAML at 2am.</sub>
 
@@ -192,7 +193,7 @@ All JS and CSS is bundled at build time - nothing is fetched from a CDN at runti
 v1.15.0 is the first release that is not English-only. The whole interface is ready for translation - every page, dialog, tooltip, toast and server message - and the work happens on Weblate.
 
 <a href="https://hosted.weblate.org/engage/traefik-manager/">
-<img src="https://hosted.weblate.org/widget/traefik-manager/web-app/multi-auto.svg" alt="Translation status per language" />
+<img src="https://hosted.weblate.org/widget/traefik-manager/matrix-auto.svg" alt="Translation status per language" />
 </a>
 
 v1.15.0 ships in French, German, Spanish, Portuguese (Portugal), Dutch, Chinese (Simplified), Russian, Czech and Danish, plus English spellings for the United States and the United Kingdom. Any other language is added on request.
