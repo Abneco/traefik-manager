@@ -11410,12 +11410,12 @@ msgstr "Traefik fonctionne avec une configuration dynamique vide"
 #. Used in the browser
 #, python-brace-format
 msgid "Traefik log file {leave_empty_for}"
-msgstr "{leave_empty_for}"
+msgstr ""
 
 #. Used in the browser
 #, python-brace-format
 msgid "Traefik must be restarted after adding {accesslog} to traefik.yml."
-msgstr "dans traefik.yml."
+msgstr ""
 
 msgid "Traefik plugin page"
 msgstr "Page des plugins Traefik"
@@ -11439,20 +11439,20 @@ msgstr ""
 
 #. Used in the browser
 msgid "Traefik rejected this router"
-msgstr "routeur"
+msgstr ""
 
 #. Used in the browser
 #, python-brace-format
 msgid "Traefik rejected this router - {message}"
-msgstr "{message}"
+msgstr ""
 
 #. Used in the browser
 msgid "Traefik reports no file provider routes"
-msgstr "routes"
+msgstr ""
 
 #. Used in the browser
 msgid "Traefik reports this router as not enabled"
-msgstr "comme non activé"
+msgstr ""
 
 #. Used in the browser
 #, python-brace-format
@@ -11462,34 +11462,32 @@ msgid ""
 msgid_plural ""
 "Traefik reports {n} file provider routes, all from a file Traefik Manager "
 "manages, so they are on the Routes tab."
-msgstr[0] "(0, 1)"
+msgstr[0] ""
 msgstr[1] ""
 
 msgid "Traefik router rule"
-msgstr "règle"
+msgstr ""
 
 msgid "Traefik security advisory"
 msgstr "Avis de sécurité Traefik"
 
 #. Used in the browser
 msgid "Traefik serves these itself. The dashboard, API and ping live here"
-msgstr ", l’API et le ping se trouvent ici"
+msgstr ""
 
 #, python-format
 msgid ""
 "Traefik strips these from the right of %(x_forwarded_for)s and uses the next "
 "IP. Use when the proxy's own IPs vary. Cannot be combined with a fixed depth."
 msgstr ""
-"et utilise l’adresse IP suivante. À utiliser lorsque les adresses IP du "
-"proxy varient. Ne peut pas être combiné avec une profondeur fixe."
 
 #, python-format
 msgid "Traefik unavailable at %(url)s: %(detail)s"
-msgstr "%(detail)s"
+msgstr ""
 
 #, python-format
 msgid "Traefik unavailable: %(detail)s"
-msgstr "%(detail)s"
+msgstr ""
 
 msgid "Traefik version"
 msgstr "Version de Traefik"
