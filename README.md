@@ -195,12 +195,12 @@ v1.15.0 is the first release that is not English-only. The whole interface is re
 <img src="https://hosted.weblate.org/widget/traefik-manager/web-app/multi-auto.svg" alt="Translation status per language" />
 </a>
 
-German, French, Spanish, Russian and Chinese (Simplified) are open now, and any other language is added on request.
+Shipped: French, German and Spanish, plus English (United States) and English (United Kingdom). More languages are open on Weblate, and any other language is added on request.
 
 | You want to | Where |
 | --- | --- |
 | Translate | [Weblate](https://hosted.weblate.org/projects/traefik-manager/web-app/) - an account is needed to write, not to read. Nothing goes live on its own: Weblate opens a pull request here |
-| Review a language | [LANGUAGE-REVIEWERS.md](https://github.com/chr0nzz/tm-locale/blob/main/LANGUAGE-REVIEWERS.md) - one named reviewer per language, and a language only ships once it has one |
+| Review a language | [LANGUAGE-REVIEWERS.md](https://github.com/chr0nzz/tm-locale/blob/main/LANGUAGE-REVIEWERS.md) - one named reviewer per language, and a language ships once it has a reviewer or passes an agent verification |
 | Ask for a language | [Open a language request](https://github.com/chr0nzz/tm-locale/issues/new?template=language-request.yml) |
 | Read first | [Handbook](https://github.com/chr0nzz/tm-locale/blob/main/HANDBOOK.md) · [Glossary](https://github.com/chr0nzz/tm-locale/blob/main/GLOSSARY.md) · [Do not translate](https://github.com/chr0nzz/tm-locale/blob/main/DO-NOT-TRANSLATE.md) |
 | Report a wrong translation | [Open a translation issue](https://github.com/chr0nzz/tm-locale/issues/new?template=translation-issue.yml) |
