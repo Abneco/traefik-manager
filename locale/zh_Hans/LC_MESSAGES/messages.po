@@ -38,6 +38,15 @@ msgid_plural ""
 msgstr[0] "“{name}”仍被 {shown} 使用。是否将其从 {n} 个路由中移除并删除？"
 
 #, python-format
+msgid "%(agent)s: %(label)s - %(message)s"
+msgstr "%(agent)s：%(label)s - %(message)s"
+
+#, python-format
+msgid "%(agent)s: %(num)d more failure not shown, check the agent log"
+msgid_plural "%(agent)s: %(num)d more failures not shown, check the agent log"
+msgstr[0] "%(agent)s：另有 %(num)d 个失败未显示，请查看 Agent 日志"
+
+#, python-format
 msgid "%(auth_verify)s is appended automatically"
 msgstr "%(auth_verify)s 会自动追加"
 
@@ -106,6 +115,21 @@ msgstr "%(file)s 在保存期间被其他程序重写。请重试。"
 
 #, python-format
 msgid ""
+"%(label)s storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "%(label)s 存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+
+#, python-format
+msgid "%(label)s: %(message)s"
+msgstr "%(label)s：%(message)s"
+
+#, python-format
+msgid "%(label)s: %(num)d event, latest %(message)s"
+msgid_plural "%(label)s: %(num)d events, latest %(message)s"
+msgstr[0] "%(label)s：%(num)d 个事件，最新：%(message)s"
+
+#, python-format
+msgid ""
 "%(line_break)s⚠ A %(buffering)s/%(compress)s middleware is attached - remove "
 "it for smooth streaming and seeking."
 msgstr ""
@@ -155,11 +179,80 @@ msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
 msgstr "%(name)s 仍被 %(users)s 使用。先删除这些中间件"
 
 #, python-format
+msgid "%(names)s and %(num)d more"
+msgid_plural "%(names)s and %(num)d more"
+msgstr[0] "%(names)s 等另外 %(num)d 个"
+
+#, python-format
 msgid ""
 "%(new_in_v1)s Static Config Editor lets you manage your Traefik static "
 "config from the UI. %(set_it_up)s"
 msgstr ""
 "%(new_in_v1)s 静态配置编辑器支持在界面中管理 Traefik 静态配置。%(set_it_up)s"
+
+#, python-format
+msgid "%(num)d certificate removed from acme.json"
+msgid_plural "%(num)d certificates removed from acme.json"
+msgstr[0] "已从 acme.json 移除 %(num)d 个证书"
+
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] "%(num)d 天"
+
+#, python-format
+msgid "%(num)d event"
+msgid_plural "%(num)d events"
+msgstr[0] "%(num)d 个事件"
+
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] "%(num)d 小时"
+
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] "%(num)d 分钟"
+
+#, python-format
+msgid "%(num)d route backend is degraded: %(names)s"
+msgid_plural "%(num)d route backends are degraded: %(names)s"
+msgstr[0] "%(num)d 个路由后端已降级：%(names)s"
+
+#, python-format
+msgid "%(num)d route is reachable again: %(names)s"
+msgid_plural "%(num)d routes are reachable again: %(names)s"
+msgstr[0] "%(num)d 个路由已恢复访问：%(names)s"
+
+#, python-format
+msgid "%(num)d route is unreachable: %(names)s"
+msgid_plural "%(num)d routes are unreachable: %(names)s"
+msgstr[0] "%(num)d 个路由无法访问：%(names)s"
+
+#, python-format
+msgid ""
+"%(num)d route is unreachable: %(names)s, check that Traefik Manager can "
+"reach it"
+msgid_plural ""
+"%(num)d routes are unreachable: %(names)s, check that Traefik Manager can "
+"reach them"
+msgstr[0] "%(num)d 个路由无法访问：%(names)s，请检查 Traefik Manager 能否访问它们"
+
+#, python-format
+msgid "%(num)d scenario"
+msgid_plural "%(num)d scenarios"
+msgstr[0] "%(num)d 个场景"
+
+#, python-format
+msgid "%(num)d second"
+msgid_plural "%(num)d seconds"
+msgstr[0] "%(num)d 秒"
+
+#, python-format
+msgid "%(num)d source"
+msgid_plural "%(num)d sources"
+msgstr[0] "%(num)d 个来源"
 
 #, python-format
 msgid ""
@@ -202,8 +295,54 @@ msgid "%(path)s is part of Traefik Manager's code"
 msgstr "%(path)s 属于 Traefik Manager 的代码"
 
 #, python-format
+msgid "%(product)s v%(version)s is available - update now"
+msgstr "%(product)s v%(version)s 已可用：立即更新"
+
+#, python-format
+msgid "%(provider)s routers found, the %(provider)s tab is now shown"
+msgstr "发现 %(provider)s 路由器，现已显示 %(provider)s 标签页"
+
+#, python-format
+msgid "%(server)s: %(message)s"
+msgstr "%(server)s：%(message)s"
+
+#, python-format
+msgid ""
+"%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s"
+msgstr "%(source)s 在过去 %(window)s 内触发了 %(scenarios)s，共 %(events)s：%(list)s"
+
+#, python-format
+msgid "%(source)s tripped %(scenarios)s, %(events)s: %(list)s"
+msgstr "%(source)s 触发了 %(scenarios)s，共 %(events)s：%(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. Worst: "
+"%(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "%(sources)s 在过去 %(window)s 内触发了 %(scenarios)s，共 %(events)s。最严重：%(source)s，%(scenario)s，%(source_events)s。场景：%(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s. Worst: %(source)s, "
+"%(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "%(sources)s 触发了 %(scenarios)s，共 %(events)s。最严重：%(source)s，%(scenario)s，%(source_events)s。场景：%(list)s"
+
+#, python-format
 msgid "%(status)s is replaced with the response code."
 msgstr "%(status)s 会被替换为响应码。"
+
+#, python-format
+msgid "%(url)s is not an allowed address"
+msgstr "%(url)s 不是允许的地址"
+
+#, python-format
+msgid "%(url)s is not an http(s) address"
+msgstr "%(url)s 不是 http(s) 地址"
+
+#, python-format
+msgid "%(url)s redirected more than %(num)d time"
+msgid_plural "%(url)s redirected more than %(num)d times"
+msgstr[0] "%(url)s 重定向超过 %(num)d 次"
 
 #. Used in the browser
 #, python-brace-format
@@ -519,6 +658,12 @@ msgid ""
 "A personal access token with write access to that one repository. Stored "
 "encrypted, and never shown again after setup."
 msgstr "对该仓库具有写入权限的个人访问令牌。加密存储，设置后不再显示。"
+
+#, python-format
+msgid ""
+"A secret was written to %(files)s in plain text. It has been encrypted in "
+"place and is no longer stored in the clear"
+msgstr "有密钥以明文写入了 %(files)s。已在原位加密，不再以明文存储"
 
 #, python-format
 msgid "A service named '%(name)s' already exists"
@@ -1003,6 +1148,20 @@ msgctxt "setting"
 msgid "Agent"
 msgstr "Agent"
 
+#, python-format
+msgid "Agent %(name)s is back online"
+msgstr "Agent %(name)s 已恢复在线"
+
+#, python-format
+msgid "Agent %(name)s is unreachable"
+msgstr "Agent %(name)s 无法访问"
+
+#, python-format
+msgid ""
+"Agent %(name)s rejected the API key - rotate it in Settings or fix "
+"TMA_API_KEY on the agent"
+msgstr "Agent %(name)s 拒绝了 API 密钥：请在设置中轮换密钥，或修正 Agent 上的 TMA_API_KEY"
+
 msgid "Agent URL"
 msgstr "Agent URL"
 
@@ -1062,6 +1221,10 @@ msgid "Agents"
 msgstr "Agent"
 
 msgctxt "heading"
+msgid "Agents"
+msgstr "Agent"
+
+msgctxt "notification category"
 msgid "Agents"
 msgstr "Agent"
 
@@ -1536,6 +1699,11 @@ msgctxt "setting"
 msgid "Backends"
 msgstr "后端"
 
+#, python-format
+msgid "Backup created (%(num)d file)"
+msgid_plural "Backup created (%(num)d files)"
+msgstr[0] "已创建备份（%(num)d 个文件）"
+
 #. Used in the browser
 #, python-brace-format
 msgid "Backup created ({n} file)"
@@ -1550,6 +1718,10 @@ msgstr "已在 {name} 上创建备份"
 #. Used in the browser
 msgid "Backup deleted"
 msgstr "备份已删除"
+
+#, python-format
+msgid "Backup deleted: %(file)s"
+msgstr "备份已删除：%(file)s"
 
 msgid "Backup dir"
 msgstr "备份目录"
@@ -1583,6 +1755,10 @@ msgid "Backup restored successfully!"
 msgstr "备份已成功恢复"
 
 #, python-format
+msgid "Backup restored: %(file)s"
+msgstr "备份已恢复：%(file)s"
+
+#, python-format
 msgid "Backup retention %(optional)s"
 msgstr "备份保留 %(optional)s"
 
@@ -1603,6 +1779,16 @@ msgstr "备份"
 msgctxt "heading"
 msgid "Backups"
 msgstr "备份"
+
+msgctxt "notification category"
+msgid "Backups"
+msgstr "备份"
+
+#, python-format
+msgid ""
+"Backups storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "备份存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
 
 msgid "Backups → Git"
 msgstr "备份 → Git"
@@ -1883,9 +2069,27 @@ msgstr "证书解析器"
 msgid "Certificate domain"
 msgstr "证书域名"
 
+#, python-format
+msgid "Certificate for %(domain)s expired %(num)d day ago"
+msgid_plural "Certificate for %(domain)s expired %(num)d days ago"
+msgstr[0] "%(domain)s 的证书已于 %(num)d 天前过期"
+
+#, python-format
+msgid "Certificate for %(domain)s expires in %(num)d day"
+msgid_plural "Certificate for %(domain)s expires in %(num)d days"
+msgstr[0] "%(domain)s 的证书将在 %(num)d 天后过期"
+
+#, python-format
+msgid "Certificate for %(domain)s expires today"
+msgstr "%(domain)s 的证书今天过期"
+
 #. Used in the browser
 msgid "Certificate removal stopped partway"
 msgstr "证书移除中途停止"
+
+#, python-format
+msgid "Certificate removal stopped partway: %(error)s"
+msgstr "证书移除中途停止：%(error)s"
 
 msgid "Certificate resolver"
 msgstr "证书解析器"
@@ -1901,6 +2105,10 @@ msgstr "证书解析器"
 msgid "Certificate store backups"
 msgstr "证书存储备份"
 
+#, python-format
+msgid "Certificate store restored: %(file)s"
+msgstr "证书存储已恢复：%(file)s"
+
 #. Used in the browser
 msgid "Certificates"
 msgstr "证书"
@@ -1910,6 +2118,10 @@ msgid "Certificates"
 msgstr "证书"
 
 msgctxt "label"
+msgid "Certificates"
+msgstr "证书"
+
+msgctxt "notification category"
 msgid "Certificates"
 msgstr "证书"
 
@@ -2278,6 +2490,10 @@ msgstr "压缩轮转文件"
 msgid "Config"
 msgstr "配置"
 
+msgctxt "notification category"
+msgid "Config"
+msgstr "配置"
+
 #. Used in the browser
 msgid "Config File"
 msgstr "配置文件"
@@ -2304,6 +2520,12 @@ msgstr "配置（YAML）"
 #. Used in the browser
 msgid "Configuration Schema"
 msgstr "配置结构"
+
+#, python-format
+msgid ""
+"Configuration storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
 
 #, python-format
 msgid "Configure %(access_log_path)s in Settings"
@@ -2685,9 +2907,26 @@ msgstr "凭据"
 msgid "Credentials for endpoints that require authentication."
 msgstr "需要认证的端点所用的凭据。"
 
+msgctxt "notification category"
+msgid "CrowdSec"
+msgstr "CrowdSec"
+
+msgid "CrowdSec LAPI URL, bouncer API key or client certificate is not set"
+msgstr "未设置 CrowdSec LAPI URL、Bouncer API 密钥或客户端证书"
+
+msgid "CrowdSec LAPI is reachable again"
+msgstr "CrowdSec LAPI 已恢复访问"
+
+msgid "CrowdSec LAPI is unreachable"
+msgstr "CrowdSec LAPI 无法访问"
+
 #. Used in the browser
 msgid "CrowdSec LAPI unavailable"
 msgstr "CrowdSec LAPI 不可用"
+
+#, python-format
+msgid "CrowdSec LAPI unreachable: %(error)s"
+msgstr "CrowdSec LAPI 无法访问：%(error)s"
 
 #, python-format
 msgid ""
@@ -2727,6 +2966,11 @@ msgstr[0] "CrowdSec 已 %(num)d 分钟未响应，因此这些决策是最后一
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
 msgstr "CrowdSec 已是最新，自上次读取以来无变化"
+
+msgid ""
+"CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / "
+"CROWDSEC_MACHINE_PASSWORD or the client certificate"
+msgstr "CrowdSec 机器登录失败：请检查 CROWDSEC_MACHINE_ID / CROWDSEC_MACHINE_PASSWORD 或客户端证书"
 
 msgid "CrowdSec not configured"
 msgstr "未配置 CrowdSec"
@@ -2888,6 +3132,10 @@ msgstr "日期"
 #. Used in the browser
 msgid "Debug Mode"
 msgstr "调试模式"
+
+#, python-format
+msgid "Decision %(id)s deleted (IP unbanned)"
+msgstr "决策 %(id)s 已删除（IP 已解除封禁）"
 
 #. Used in the browser
 #, python-brace-format
@@ -3472,6 +3720,12 @@ msgstr "动态配置备份"
 msgid "Dynamic config path"
 msgstr "动态配置路径"
 
+#, python-format
+msgid ""
+"Dynamic config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "动态配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+
 #. Used in the browser
 #, python-brace-format
 msgid "EAB HMAC {optional}"
@@ -3885,6 +4139,10 @@ msgstr "窗口行上的所有筛选条件会同时生效。移除其中一个，
 #. Used in the browser
 msgid "Every other session was signed out"
 msgstr "所有其他会话均已退出登录"
+
+#, python-format
+msgid "Every other session was signed out from %(ip)s"
+msgstr "已从 %(ip)s 将所有其他会话退出登录"
 
 msgid ""
 "Every save writes a timestamped copy of the config first, kept locally. Git "
@@ -4480,10 +4738,22 @@ msgstr "生成条目"
 msgid "Generic JSON"
 msgstr "通用 JSON"
 
+#, python-format
+msgid "GeoIP database is out of date and could not be updated: %(error)s"
+msgstr "GeoIP 数据库已过期且无法更新：%(error)s"
+
+#, python-format
+msgid "GeoIP database updated (DB-IP %(db_month)s)"
+msgstr "GeoIP 数据库已更新（DB-IP %(db_month)s）"
+
 #. Used in the browser
 #, python-brace-format
 msgid "GeoIP database updated (DB-IP {db_month})"
 msgstr "GeoIP 数据库已更新（DB-IP {db_month}）"
+
+#, python-format
+msgid "GeoIP database updated to DB-IP %(version)s"
+msgstr "GeoIP 数据库已更新到 DB-IP %(version)s"
 
 msgid "GeoIP lookup"
 msgstr "GeoIP 查询"
@@ -4527,8 +4797,42 @@ msgstr "Git 恢复"
 msgid "Git backup"
 msgstr "Git 备份"
 
+#, python-format
+msgid "Git backup failed (%(action)s): %(error)s"
+msgstr "Git 备份失败（%(action)s）：%(error)s"
+
+#, python-format
+msgid "Git backup failed (%(agent)s): %(error)s"
+msgstr "Git 备份失败（%(agent)s）：%(error)s"
+
+msgid "Git backup pushed"
+msgstr "Git 备份已推送"
+
+#, python-format
+msgid "Git backup pushed (%(action)s)"
+msgstr "Git 备份已推送（%(action)s）"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s)"
+msgstr "Git 备份已推送（%(agent)s）"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s: %(action)s)"
+msgstr "Git 备份已推送（%(agent)s: %(action)s）"
+
+#, python-format
+msgid "Git push failed: %(error)s"
+msgstr "Git 推送失败：%(error)s"
+
 msgid "Git repo not initialized"
 msgstr "Git 仓库未初始化"
+
+msgid "Git repository reset - re-initialize by pushing again"
+msgstr "Git 仓库已重置：再次推送以重新初始化"
+
+#, python-format
+msgid "Git restore failed: %(error)s"
+msgstr "Git 恢复失败：%(error)s"
 
 #. Used in the browser
 msgid "Git settings saved"
@@ -4632,6 +4936,9 @@ msgstr "HTTP 元数据"
 #. Used in the browser
 msgid "HTTP only"
 msgstr "仅 HTTP"
+
+msgid "HTTP provider"
+msgstr "HTTP 提供者"
 
 #. Used in the browser
 msgid "HTTP routers"
@@ -4972,6 +5279,10 @@ msgctxt "label"
 msgid "Internal"
 msgstr "内部"
 
+msgctxt "provider"
+msgid "Internal"
+msgstr "内部"
+
 msgctxt "setting"
 msgid "Internal"
 msgstr "内部"
@@ -5209,8 +5520,19 @@ msgstr "Kubernetes Gateway"
 msgid "Kubernetes Ingress"
 msgstr "Kubernetes Ingress"
 
+#, python-format
+msgid "LAPI %(status)s: %(error)s"
+msgstr "LAPI %(status)s：%(error)s"
+
 msgid "LAPI Connection"
 msgstr "LAPI 连接"
+
+#, python-format
+msgid "LAPI answered HTTP %(status)s on %(path)s"
+msgstr "LAPI 在 %(path)s 上返回 HTTP %(status)s"
+
+msgid "LAPI stream returned an unexpected payload"
+msgstr "LAPI 流返回了意外的数据"
 
 #. Used in the browser
 msgid "LAPI unreachable"
@@ -5486,6 +5808,10 @@ msgstr "日志记录"
 msgctxt "title"
 msgid "Logging"
 msgstr "日志记录"
+
+#, python-format
+msgid "Login from %(ip)s"
+msgstr "来自 %(ip)s 的登录"
 
 msgid "Logs"
 msgstr "日志"
@@ -6146,6 +6472,9 @@ msgstr "未找到证书"
 msgid "No certificates match these filters"
 msgstr "没有符合这些筛选条件的证书"
 
+msgid "No changes"
+msgstr "无更改"
+
 #. Used in the browser
 msgid "No changes in this commit"
 msgstr "此提交中没有更改"
@@ -6640,6 +6969,10 @@ msgstr "OIDC 登录失败：无法验证提供者的 id_token。"
 
 msgid "OIDC login failed - token exchange error."
 msgstr "OIDC 登录失败：令牌交换出错。"
+
+#, python-format
+msgid "OIDC login: %(email)s from %(ip)s"
+msgstr "OIDC 登录：%(email)s，来自 %(ip)s"
 
 msgid "OIDC provider unavailable."
 msgstr "OIDC 提供者不可用。"
@@ -7286,6 +7619,10 @@ msgstr "插件正在使用中"
 #. Used in the browser
 msgid "Plugin Info"
 msgstr "插件信息"
+
+#, python-format
+msgid "Plugin installed: %(names)s"
+msgstr "已安装插件：%(names)s"
 
 #. Used in the browser
 msgid "Plugin removed - restart Traefik to apply"
@@ -8255,6 +8592,15 @@ msgid ""
 "restore"
 msgstr "恢复在 %(file)s 处停止：%(detail)s。恢复前已创建备份"
 
+#, python-format
+msgid "Restored %(agent)s from git commit %(sha)s (%(num)d file)"
+msgid_plural "Restored %(agent)s from git commit %(sha)s (%(num)d files)"
+msgstr[0] "已从 Git 提交 %(sha)s 恢复 %(agent)s（%(num)d 个文件）"
+
+#, python-format
+msgid "Restored from git commit %(sha)s"
+msgstr "已从 Git 提交 %(sha)s 恢复"
+
 #. Used in the browser
 msgid "Restored successfully"
 msgstr "恢复成功"
@@ -8394,6 +8740,30 @@ msgid "Route \"%(plain_id)s\" not found"
 msgstr "未找到路由“%(plain_id)s”"
 
 #, python-format
+msgid "Route %(name)s backend is degraded, %(up)s of %(num)d server up"
+msgid_plural "Route %(name)s backend is degraded, %(up)s of %(num)d servers up"
+msgstr[0] "路由 %(name)s 的后端已降级，%(num)d 个服务器中 %(up)s 个可用"
+
+#, python-format
+msgid ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d servers up "
+"(%(servers)s)"
+msgstr[0] "路由 %(name)s 的后端已降级，%(num)d 个服务器中 %(up)s 个可用（%(servers)s）"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up"
+msgid_plural "Route %(name)s backend is down, 0 of %(num)d servers up"
+msgstr[0] "路由 %(name)s 的后端不可用，%(num)d 个服务器中 0 个可用"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)"
+msgstr[0] "路由 %(name)s 的后端不可用，%(num)d 个服务器中 0 个可用（%(servers)s）"
+
+#, python-format
 msgid "Route %(name)s created"
 msgstr "路由 %(name)s 已创建"
 
@@ -8402,8 +8772,24 @@ msgid "Route %(name)s deleted"
 msgstr "路由 %(name)s 已删除"
 
 #, python-format
+msgid "Route %(name)s is reachable again"
+msgstr "路由 %(name)s 已恢复访问"
+
+#, python-format
+msgid "Route %(name)s is unreachable"
+msgstr "路由 %(name)s 无法访问"
+
+#, python-format
+msgid "Route %(name)s is unreachable (%(error)s)"
+msgstr "路由 %(name)s 无法访问（%(error)s）"
+
+#, python-format
 msgid "Route %(name)s updated"
 msgstr "路由 %(name)s 已更新"
+
+#, python-format
+msgid "Route '%(name)s' updated"
+msgstr "路由“%(name)s”已更新"
 
 msgid "Route / Service Name"
 msgstr "路由 / 服务名称"
@@ -8963,6 +9349,10 @@ msgctxt "group"
 msgid "Security"
 msgstr "安全"
 
+msgctxt "notification category"
+msgid "Security"
+msgstr "安全"
+
 msgid "Security headers preset"
 msgstr "安全标头预设"
 
@@ -9122,6 +9512,14 @@ msgstr "服务"
 msgctxt "setting"
 msgid "Service"
 msgstr "服务"
+
+#, python-format
+msgid "Service %(name)s deleted"
+msgstr "服务 %(name)s 已删除"
+
+#, python-format
+msgid "Service %(name)s saved"
+msgstr "服务 %(name)s 已保存"
 
 #, python-format
 msgid "Service '%(service)s' does not exist for %(protocol)s routes."
@@ -9662,6 +10060,12 @@ msgstr "静态配置路径：%(problem)s"
 msgid "Static config saved"
 msgstr "静态配置已保存"
 
+#, python-format
+msgid ""
+"Static config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "静态配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+
 #. Used in the browser
 msgctxt "column"
 msgid "Status"
@@ -9760,6 +10164,10 @@ msgstr ""
 "阻止下划线标头别名（例如 {x_auth_user}）绕过 forwardAuth。Traefik 3.7.12 将此"
 "扩展到所有别名。建议使用 {delete}。{learn_more}"
 
+#, python-format
+msgid "Storage at %(path)s is writable again"
+msgstr "存储 %(path)s 已恢复可写"
+
 #. Used in the browser
 msgid "Storage is not writable"
 msgstr "存储不可写"
@@ -9825,6 +10233,10 @@ msgid ""
 "Sum of events_count, the raw log lines that rolled up into these alerts. "
 "Always larger than the alert count"
 msgstr "events_count 的总和，即汇总成这些告警的原始日志行数。始终大于告警数量"
+
+#, python-format
+msgid "Summary %(start)s to %(end)s"
+msgstr "摘要 %(start)s 至 %(end)s"
 
 #, python-format
 msgid ""
@@ -9925,6 +10337,14 @@ msgstr "每个路由器都启用 TLS"
 #, python-brace-format
 msgid "TLS options {options}"
 msgstr "TLS 选项 {options}"
+
+#, python-format
+msgid "TLS profile '%(name)s' deleted"
+msgstr "TLS 配置档“%(name)s”已删除"
+
+#, python-format
+msgid "TLS profile '%(name)s' saved"
+msgstr "TLS 配置档“%(name)s”已保存"
 
 #. Used in the browser
 msgid "TLS profile deleted"
@@ -10126,6 +10546,12 @@ msgstr ""
 "%(hp_custom_name)s 中间件的手动修改已超出这些开关的覆盖范围，因此显示为自定义"
 "并保持原样。在中间件标签页中编辑它，或将该预设关闭后再开启，以开关默认值替换"
 "它。关闭即可将其移除。"
+
+msgid "The CrowdSec alert cache is being refreshed"
+msgstr "正在刷新 CrowdSec 告警缓存"
+
+msgid "The CrowdSec decision cache is being refreshed"
+msgstr "正在刷新 CrowdSec 决策缓存"
 
 msgid ""
 "The CrowdSec fields on this server in Settings only build the compose "
@@ -10404,6 +10830,64 @@ msgstr ""
 #. Used in the browser
 msgid "The primary view"
 msgstr "主视图"
+
+#, python-format
+msgid "The proxy answered %(code)s, the backend is not reachable"
+msgstr "代理返回了 %(code)s，后端无法访问"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend answered %(code)s"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端返回了 %(code)s"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend closed the connection without answering"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端未响应即关闭了连接"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend could not be reached from Traefik Manager (%(error)s)"
+msgstr "代理在到达后端前重定向到了 %(host)s，Traefik Manager 无法访问后端（%(error)s）"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend has no address to check"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端没有可检查的地址"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端无法访问"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (network unreachable)"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端无法访问（网络不可达）"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (no route to host)"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端无法访问（没有到主机的路由）"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend refused the connection"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端拒绝了连接"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend reset the connection"
+msgstr "代理在到达后端前重定向到了 %(host)s，后端重置了连接"
 
 msgid "The public address where TMA is running on the remote server."
 msgstr "TMA 在远程服务器上运行的公开地址。"
@@ -10868,6 +11352,9 @@ msgstr ""
 msgid "Time left on this decision, counting down live"
 msgstr "此决策的剩余时间，实时倒计时"
 
+msgid "Timeout"
+msgstr "超时"
+
 msgctxt "setting"
 msgid "Timeout"
 msgstr "超时"
@@ -10939,6 +11426,10 @@ msgstr "拓扑连接图（入口点 - 路由 - 中间件 - 服务）"
 msgid "Tracing {otlp}"
 msgstr "追踪 {otlp}"
 
+msgctxt "notification category"
+msgid "Traefik"
+msgstr "Traefik"
+
 #. Used in the browser
 msgid "Traefik API URL must start with http:// or https://"
 msgstr "Traefik API URL 必须以 http:// 或 https:// 开头"
@@ -10946,6 +11437,12 @@ msgstr "Traefik API URL 必须以 http:// 或 https:// 开头"
 #, python-format
 msgid "Traefik API basic auth %(optional)s"
 msgstr "Traefik API Basic Auth %(optional)s"
+
+msgid "Traefik API is reachable again"
+msgstr "Traefik API 已恢复访问"
+
+msgid "Traefik API is unreachable"
+msgstr "Traefik API 无法访问"
 
 #. Used in the browser
 msgid "Traefik API not answering"
@@ -11120,6 +11617,10 @@ msgstr "Traefik 日志文件 {leave_empty_for}"
 msgid "Traefik must be restarted after adding {accesslog} to traefik.yml."
 msgstr "在 traefik.yml 中添加 {accesslog} 后必须重启 Traefik。"
 
+#, python-format
+msgid "Traefik on %(agent)s v%(version)s is available - update now"
+msgstr "%(agent)s 上的 Traefik v%(version)s 已可用：立即更新"
+
 msgid "Traefik plugin page"
 msgstr "Traefik 插件页面"
 
@@ -11166,6 +11667,9 @@ msgid_plural ""
 msgstr[0] ""
 "Traefik 报告了 {n} 个文件提供者路由，全部来自 Traefik Manager 管理的文件，因"
 "此显示在路由标签页中。"
+
+msgid "Traefik restarted"
+msgstr "Traefik 已重启"
 
 msgid "Traefik router rule"
 msgstr "Traefik 路由器规则"
@@ -11449,6 +11953,10 @@ msgid "Update password"
 msgstr "更新密码"
 
 #. Used in the browser
+msgid "Updates"
+msgstr "更新"
+
+msgctxt "notification category"
 msgid "Updates"
 msgstr "更新"
 
@@ -11964,6 +12472,10 @@ msgstr "为此入口点添加 {http3}"
 msgid "adds {http_tls} so routers here get TLS by default"
 msgstr "添加 {http_tls}，使此处的路由器默认启用 TLS"
 
+msgctxt "agent event"
+msgid "agent"
+msgstr "Agent"
+
 #. Used in the browser
 msgctxt "label"
 msgid "agent"
@@ -12044,6 +12556,11 @@ msgstr "全部低于 100 ms"
 msgid "all {n} server down"
 msgid_plural "all {n} servers down"
 msgstr[0] "全部 {n} 台服务器不可用"
+
+#, python-format
+msgid "and %(num)d more"
+msgid_plural "and %(num)d more"
+msgstr[0] "另外 %(num)d 个"
 
 #. Used in the browser
 msgid "another entry point"
@@ -12135,6 +12652,10 @@ msgstr "后端无法访问，{error}"
 #, python-brace-format
 msgid "backend {target}"
 msgstr "后端 {target}"
+
+msgctxt "agent event"
+msgid "backup"
+msgstr "备份"
 
 #. Used in the browser
 msgctxt "label"
@@ -12649,6 +13170,10 @@ msgstr "GeoIP 开启"
 #. Used in the browser
 msgid "geoip-enrich not installed on the reporting machine"
 msgstr "上报机器上未安装 geoip-enrich"
+
+msgctxt "agent event"
+msgid "git backup"
+msgstr "Git 备份"
 
 #. Used in the browser
 msgid ""
@@ -13686,6 +14211,10 @@ msgstr "响应标头（0）"
 msgid "response"
 msgstr "响应"
 
+msgctxt "agent event"
+msgid "restart"
+msgstr "重启"
+
 msgid "restore it under Dashboard settings"
 msgstr "在仪表盘设置中恢复"
 
@@ -13885,6 +14414,10 @@ msgstr "状态 {codes}"
 #. Used in the browser
 msgid "sticky"
 msgstr "粘性会话"
+
+msgctxt "agent event"
+msgid "storage"
+msgstr "存储"
 
 #. Used in the browser
 msgid "stream route, nothing to open"

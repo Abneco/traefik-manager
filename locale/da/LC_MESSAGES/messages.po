@@ -39,6 +39,16 @@ msgstr[0] "\"{name}\" bruges stadig af {shown}. Fjern den fra {n} rute og slet d
 msgstr[1] "\"{name}\" bruges stadig af {shown}. Fjern den fra {n} ruter og slet den?"
 
 #, python-format
+msgid "%(agent)s: %(label)s - %(message)s"
+msgstr "%(agent)s: %(label)s - %(message)s"
+
+#, python-format
+msgid "%(agent)s: %(num)d more failure not shown, check the agent log"
+msgid_plural "%(agent)s: %(num)d more failures not shown, check the agent log"
+msgstr[0] "%(agent)s: %(num)d fejl mere vises ikke, tjek agentens log"
+msgstr[1] "%(agent)s: %(num)d fejl mere vises ikke, tjek agentens log"
+
+#, python-format
 msgid "%(auth_verify)s is appended automatically"
 msgstr "%(auth_verify)s tilføjes automatisk"
 
@@ -112,6 +122,22 @@ msgstr "%(file)s blev omskrevet af noget andet, mens den blev gemt. Prøv igen."
 
 #, python-format
 msgid ""
+"%(label)s storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "%(label)s-lageret på %(path)s er ikke skrivbart, så indstillinger, backupper og planlagte tjek overlever ikke en genstart (%(error)s)"
+
+#, python-format
+msgid "%(label)s: %(message)s"
+msgstr "%(label)s: %(message)s"
+
+#, python-format
+msgid "%(label)s: %(num)d event, latest %(message)s"
+msgid_plural "%(label)s: %(num)d events, latest %(message)s"
+msgstr[0] "%(label)s: %(num)d hændelse, seneste %(message)s"
+msgstr[1] "%(label)s: %(num)d hændelser, seneste %(message)s"
+
+#, python-format
+msgid ""
 "%(line_break)s⚠ A %(buffering)s/%(compress)s middleware is attached - "
 "remove it for smooth streaming and seeking."
 msgstr ""
@@ -163,12 +189,94 @@ msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
 msgstr "%(name)s bruges stadig af %(users)s. Slet de middlewares først"
 
 #, python-format
+msgid "%(names)s and %(num)d more"
+msgid_plural "%(names)s and %(num)d more"
+msgstr[0] "%(names)s og %(num)d mere"
+msgstr[1] "%(names)s og %(num)d mere"
+
+#, python-format
 msgid ""
 "%(new_in_v1)s Static Config Editor lets you manage your Traefik static "
 "config from the UI. %(set_it_up)s"
 msgstr ""
 "%(new_in_v1)s Med editoren til statisk konfiguration kan du administrere din "
 "statiske Traefik-konfiguration fra brugerfladen. %(set_it_up)s"
+
+#, python-format
+msgid "%(num)d certificate removed from acme.json"
+msgid_plural "%(num)d certificates removed from acme.json"
+msgstr[0] "%(num)d certifikat fjernet fra acme.json"
+msgstr[1] "%(num)d certifikater fjernet fra acme.json"
+
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] "%(num)d dag"
+msgstr[1] "%(num)d dage"
+
+#, python-format
+msgid "%(num)d event"
+msgid_plural "%(num)d events"
+msgstr[0] "%(num)d hændelse"
+msgstr[1] "%(num)d hændelser"
+
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] "%(num)d time"
+msgstr[1] "%(num)d timer"
+
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] "%(num)d minut"
+msgstr[1] "%(num)d minutter"
+
+#, python-format
+msgid "%(num)d route backend is degraded: %(names)s"
+msgid_plural "%(num)d route backends are degraded: %(names)s"
+msgstr[0] "%(num)d rute-backend er forringet: %(names)s"
+msgstr[1] "%(num)d rute-backends er forringet: %(names)s"
+
+#, python-format
+msgid "%(num)d route is reachable again: %(names)s"
+msgid_plural "%(num)d routes are reachable again: %(names)s"
+msgstr[0] "%(num)d rute kan nås igen: %(names)s"
+msgstr[1] "%(num)d ruter kan nås igen: %(names)s"
+
+#, python-format
+msgid "%(num)d route is unreachable: %(names)s"
+msgid_plural "%(num)d routes are unreachable: %(names)s"
+msgstr[0] "%(num)d rute kan ikke nås: %(names)s"
+msgstr[1] "%(num)d ruter kan ikke nås: %(names)s"
+
+#, python-format
+msgid ""
+"%(num)d route is unreachable: %(names)s, check that Traefik Manager can "
+"reach it"
+msgid_plural ""
+"%(num)d routes are unreachable: %(names)s, check that Traefik Manager can "
+"reach them"
+msgstr[0] "%(num)d rute kan ikke nås: %(names)s, tjek at Traefik Manager kan nå den"
+msgstr[1] "%(num)d ruter kan ikke nås: %(names)s, tjek at Traefik Manager kan nå dem"
+
+#, python-format
+msgid "%(num)d scenario"
+msgid_plural "%(num)d scenarios"
+msgstr[0] "%(num)d scenarie"
+msgstr[1] "%(num)d scenarier"
+
+#, python-format
+msgid "%(num)d second"
+msgid_plural "%(num)d seconds"
+msgstr[0] "%(num)d sekund"
+msgstr[1] "%(num)d sekunder"
+
+#, python-format
+msgid "%(num)d source"
+msgid_plural "%(num)d sources"
+msgstr[0] "%(num)d kilde"
+msgstr[1] "%(num)d kilder"
 
 #, python-format
 msgid ""
@@ -215,8 +323,55 @@ msgid "%(path)s is part of Traefik Manager's code"
 msgstr "%(path)s er en del af Traefik Managers kode"
 
 #, python-format
+msgid "%(product)s v%(version)s is available - update now"
+msgstr "%(product)s v%(version)s er tilgængelig - opdater nu"
+
+#, python-format
+msgid "%(provider)s routers found, the %(provider)s tab is now shown"
+msgstr "%(provider)s-routere fundet, fanen %(provider)s vises nu"
+
+#, python-format
+msgid "%(server)s: %(message)s"
+msgstr "%(server)s: %(message)s"
+
+#, python-format
+msgid ""
+"%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s"
+msgstr "%(source)s udløste %(scenarios)s, %(events)s inden for de seneste %(window)s: %(list)s"
+
+#, python-format
+msgid "%(source)s tripped %(scenarios)s, %(events)s: %(list)s"
+msgstr "%(source)s udløste %(scenarios)s, %(events)s: %(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. Worst: "
+"%(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "%(sources)s udløste %(scenarios)s, %(events)s inden for de seneste %(window)s. Værste: %(source)s, %(scenario)s, %(source_events)s. Scenarier: %(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s. Worst: %(source)s, "
+"%(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "%(sources)s udløste %(scenarios)s, %(events)s. Værste: %(source)s, %(scenario)s, %(source_events)s. Scenarier: %(list)s"
+
+#, python-format
 msgid "%(status)s is replaced with the response code."
 msgstr "%(status)s erstattes med svarkoden."
+
+#, python-format
+msgid "%(url)s is not an allowed address"
+msgstr "%(url)s er ikke en tilladt adresse"
+
+#, python-format
+msgid "%(url)s is not an http(s) address"
+msgstr "%(url)s er ikke en http(s)-adresse"
+
+#, python-format
+msgid "%(url)s redirected more than %(num)d time"
+msgid_plural "%(url)s redirected more than %(num)d times"
+msgstr[0] "%(url)s omdirigerede mere end %(num)d gang"
+msgstr[1] "%(url)s omdirigerede mere end %(num)d gange"
 
 #. Used in the browser
 #, python-brace-format
@@ -548,6 +703,12 @@ msgid ""
 msgstr ""
 "Et personligt adgangstoken med skriveadgang til netop det ene repository. "
 "Gemmes krypteret og vises aldrig igen efter opsætningen."
+
+#, python-format
+msgid ""
+"A secret was written to %(files)s in plain text. It has been encrypted in "
+"place and is no longer stored in the clear"
+msgstr "En hemmelighed blev skrevet til %(files)s i klartekst. Den er krypteret på stedet og gemmes ikke længere i klartekst"
 
 #, python-format
 msgid "A service named '%(name)s' already exists"
@@ -1055,6 +1216,20 @@ msgctxt "setting"
 msgid "Agent"
 msgstr "Agent"
 
+#, python-format
+msgid "Agent %(name)s is back online"
+msgstr "Agenten %(name)s er online igen"
+
+#, python-format
+msgid "Agent %(name)s is unreachable"
+msgstr "Agenten %(name)s kan ikke nås"
+
+#, python-format
+msgid ""
+"Agent %(name)s rejected the API key - rotate it in Settings or fix "
+"TMA_API_KEY on the agent"
+msgstr "Agenten %(name)s afviste API-nøglen - rotér den i Indstillinger, eller ret TMA_API_KEY på agenten"
+
 msgid "Agent URL"
 msgstr "Agent-URL"
 
@@ -1114,6 +1289,10 @@ msgid "Agents"
 msgstr "Agenter"
 
 msgctxt "heading"
+msgid "Agents"
+msgstr "Agenter"
+
+msgctxt "notification category"
 msgid "Agents"
 msgstr "Agenter"
 
@@ -1620,6 +1799,12 @@ msgctxt "setting"
 msgid "Backends"
 msgstr "Backends"
 
+#, python-format
+msgid "Backup created (%(num)d file)"
+msgid_plural "Backup created (%(num)d files)"
+msgstr[0] "Backup oprettet (%(num)d fil)"
+msgstr[1] "Backup oprettet (%(num)d filer)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "Backup created ({n} file)"
@@ -1635,6 +1820,10 @@ msgstr "Backup oprettet på {name}"
 #. Used in the browser
 msgid "Backup deleted"
 msgstr "Backup slettet"
+
+#, python-format
+msgid "Backup deleted: %(file)s"
+msgstr "Backup slettet: %(file)s"
 
 msgid "Backup dir"
 msgstr "Backupmappe"
@@ -1668,6 +1857,10 @@ msgid "Backup restored successfully!"
 msgstr "Backup gendannet."
 
 #, python-format
+msgid "Backup restored: %(file)s"
+msgstr "Backup gendannet: %(file)s"
+
+#, python-format
 msgid "Backup retention %(optional)s"
 msgstr "Opbevaring af backupper %(optional)s"
 
@@ -1690,6 +1883,16 @@ msgstr "Backupper"
 msgctxt "heading"
 msgid "Backups"
 msgstr "Backupper"
+
+msgctxt "notification category"
+msgid "Backups"
+msgstr "Backupper"
+
+#, python-format
+msgid ""
+"Backups storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Backup-lageret på %(path)s er ikke skrivbart, så indstillinger, backupper og planlagte tjek overlever ikke en genstart (%(error)s)"
 
 msgid "Backups → Git"
 msgstr "Backupper → Git"
@@ -1984,9 +2187,29 @@ msgstr "Certifikat-resolver"
 msgid "Certificate domain"
 msgstr "Certifikatdomæne"
 
+#, python-format
+msgid "Certificate for %(domain)s expired %(num)d day ago"
+msgid_plural "Certificate for %(domain)s expired %(num)d days ago"
+msgstr[0] "Certifikatet for %(domain)s udløb for %(num)d dag siden"
+msgstr[1] "Certifikatet for %(domain)s udløb for %(num)d dage siden"
+
+#, python-format
+msgid "Certificate for %(domain)s expires in %(num)d day"
+msgid_plural "Certificate for %(domain)s expires in %(num)d days"
+msgstr[0] "Certifikatet for %(domain)s udløber om %(num)d dag"
+msgstr[1] "Certifikatet for %(domain)s udløber om %(num)d dage"
+
+#, python-format
+msgid "Certificate for %(domain)s expires today"
+msgstr "Certifikatet for %(domain)s udløber i dag"
+
 #. Used in the browser
 msgid "Certificate removal stopped partway"
 msgstr "Fjernelse af certifikat stoppede halvvejs"
+
+#, python-format
+msgid "Certificate removal stopped partway: %(error)s"
+msgstr "Fjernelse af certifikat stoppede halvvejs: %(error)s"
 
 msgid "Certificate resolver"
 msgstr "Certifikat-resolver"
@@ -2002,6 +2225,10 @@ msgstr "Certifikat-resolvere"
 msgid "Certificate store backups"
 msgstr "Backupper af certifikatlager"
 
+#, python-format
+msgid "Certificate store restored: %(file)s"
+msgstr "Certifikatlager gendannet: %(file)s"
+
 #. Used in the browser
 msgid "Certificates"
 msgstr "Certifikater"
@@ -2011,6 +2238,10 @@ msgid "Certificates"
 msgstr "Certifikater"
 
 msgctxt "label"
+msgid "Certificates"
+msgstr "Certifikater"
+
+msgctxt "notification category"
 msgid "Certificates"
 msgstr "Certifikater"
 
@@ -2397,6 +2628,10 @@ msgstr "Komprimer roterede filer"
 msgid "Config"
 msgstr "Konfiguration"
 
+msgctxt "notification category"
+msgid "Config"
+msgstr "Konfiguration"
+
 #. Used in the browser
 msgid "Config File"
 msgstr "Konfigurationsfil"
@@ -2423,6 +2658,12 @@ msgstr "Konfiguration (YAML)"
 #. Used in the browser
 msgid "Configuration Schema"
 msgstr "Konfigurationsskema"
+
+#, python-format
+msgid ""
+"Configuration storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Konfigurationslageret på %(path)s er ikke skrivbart, så indstillinger, backupper og planlagte tjek overlever ikke en genstart (%(error)s)"
 
 #, python-format
 msgid "Configure %(access_log_path)s in Settings"
@@ -2817,9 +3058,26 @@ msgstr "Legitimationsoplysninger"
 msgid "Credentials for endpoints that require authentication."
 msgstr "Legitimationsoplysninger til endpoints, der kræver godkendelse."
 
+msgctxt "notification category"
+msgid "CrowdSec"
+msgstr "CrowdSec"
+
+msgid "CrowdSec LAPI URL, bouncer API key or client certificate is not set"
+msgstr "CrowdSec LAPI-URL, bouncer-API-nøgle eller klientcertifikat er ikke angivet"
+
+msgid "CrowdSec LAPI is reachable again"
+msgstr "CrowdSec LAPI kan nås igen"
+
+msgid "CrowdSec LAPI is unreachable"
+msgstr "CrowdSec LAPI kan ikke nås"
+
 #. Used in the browser
 msgid "CrowdSec LAPI unavailable"
 msgstr "CrowdSec LAPI utilgængelig"
+
+#, python-format
+msgid "CrowdSec LAPI unreachable: %(error)s"
+msgstr "CrowdSec LAPI kan ikke nås: %(error)s"
 
 #, python-format
 msgid ""
@@ -2865,6 +3123,11 @@ msgstr[1] "CrowdSec har ikke svaret i %(num)d minutter, så disse decisions er d
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
 msgstr "CrowdSec er opdateret, intet er ændret siden sidste læsning"
+
+msgid ""
+"CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / "
+"CROWDSEC_MACHINE_PASSWORD or the client certificate"
+msgstr "CrowdSec-maskinlogin mislykkedes - tjek CROWDSEC_MACHINE_ID / CROWDSEC_MACHINE_PASSWORD eller klientcertifikatet"
 
 msgid "CrowdSec not configured"
 msgstr "CrowdSec ikke konfigureret"
@@ -3029,6 +3292,10 @@ msgstr "Dato"
 #. Used in the browser
 msgid "Debug Mode"
 msgstr "Debug-tilstand"
+
+#, python-format
+msgid "Decision %(id)s deleted (IP unbanned)"
+msgstr "Decision %(id)s slettet (IP-blokering ophævet)"
 
 #. Used in the browser
 #, python-brace-format
@@ -3640,6 +3907,12 @@ msgstr "Backupper af dynamisk konfiguration"
 msgid "Dynamic config path"
 msgstr "Sti til dynamisk konfiguration"
 
+#, python-format
+msgid ""
+"Dynamic config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Lageret til dynamisk konfiguration på %(path)s er ikke skrivbart, så indstillinger, backupper og planlagte tjek overlever ikke en genstart (%(error)s)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "EAB HMAC {optional}"
@@ -4068,6 +4341,10 @@ msgstr ""
 #. Used in the browser
 msgid "Every other session was signed out"
 msgstr "Alle andre sessioner blev logget ud"
+
+#, python-format
+msgid "Every other session was signed out from %(ip)s"
+msgstr "Alle andre sessioner blev logget ud fra %(ip)s"
 
 msgid ""
 "Every save writes a timestamped copy of the config first, kept locally. "
@@ -4686,10 +4963,22 @@ msgstr "Generér post"
 msgid "Generic JSON"
 msgstr "Generisk JSON"
 
+#, python-format
+msgid "GeoIP database is out of date and could not be updated: %(error)s"
+msgstr "GeoIP-databasen er forældet og kunne ikke opdateres: %(error)s"
+
+#, python-format
+msgid "GeoIP database updated (DB-IP %(db_month)s)"
+msgstr "GeoIP-database opdateret (DB-IP %(db_month)s)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "GeoIP database updated (DB-IP {db_month})"
 msgstr "GeoIP-database opdateret (DB-IP {db_month})"
+
+#, python-format
+msgid "GeoIP database updated to DB-IP %(version)s"
+msgstr "GeoIP-database opdateret til DB-IP %(version)s"
 
 msgid "GeoIP lookup"
 msgstr "GeoIP-opslag"
@@ -4733,8 +5022,42 @@ msgstr "Git-gendannelse"
 msgid "Git backup"
 msgstr "Git-backup"
 
+#, python-format
+msgid "Git backup failed (%(action)s): %(error)s"
+msgstr "Git-backup mislykkedes (%(action)s): %(error)s"
+
+#, python-format
+msgid "Git backup failed (%(agent)s): %(error)s"
+msgstr "Git-backup mislykkedes (%(agent)s): %(error)s"
+
+msgid "Git backup pushed"
+msgstr "Git-backup pushet"
+
+#, python-format
+msgid "Git backup pushed (%(action)s)"
+msgstr "Git-backup pushet (%(action)s)"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s)"
+msgstr "Git-backup pushet (%(agent)s)"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s: %(action)s)"
+msgstr "Git-backup pushet (%(agent)s: %(action)s)"
+
+#, python-format
+msgid "Git push failed: %(error)s"
+msgstr "Git-push mislykkedes: %(error)s"
+
 msgid "Git repo not initialized"
 msgstr "Git-repo ikke initialiseret"
+
+msgid "Git repository reset - re-initialize by pushing again"
+msgstr "Git-repository nulstillet - geninitialiser ved at pushe igen"
+
+#, python-format
+msgid "Git restore failed: %(error)s"
+msgstr "Git-gendannelse mislykkedes: %(error)s"
 
 #. Used in the browser
 msgid "Git settings saved"
@@ -4839,6 +5162,9 @@ msgstr "HTTP-meta"
 #. Used in the browser
 msgid "HTTP only"
 msgstr "Kun HTTP"
+
+msgid "HTTP provider"
+msgstr "HTTP-provider"
 
 #. Used in the browser
 msgid "HTTP routers"
@@ -5193,6 +5519,10 @@ msgctxt "label"
 msgid "Internal"
 msgstr "Intern"
 
+msgctxt "provider"
+msgid "Internal"
+msgstr "Intern"
+
 msgctxt "setting"
 msgid "Internal"
 msgstr "Intern"
@@ -5440,8 +5770,19 @@ msgstr "Kubernetes Gateway"
 msgid "Kubernetes Ingress"
 msgstr "Kubernetes Ingress"
 
+#, python-format
+msgid "LAPI %(status)s: %(error)s"
+msgstr "LAPI %(status)s: %(error)s"
+
 msgid "LAPI Connection"
 msgstr "LAPI-forbindelse"
+
+#, python-format
+msgid "LAPI answered HTTP %(status)s on %(path)s"
+msgstr "LAPI svarede HTTP %(status)s på %(path)s"
+
+msgid "LAPI stream returned an unexpected payload"
+msgstr "LAPI-streamen returnerede et uventet indhold"
 
 #. Used in the browser
 msgid "LAPI unreachable"
@@ -5723,6 +6064,10 @@ msgstr "Logning"
 msgctxt "title"
 msgid "Logging"
 msgstr "Logning"
+
+#, python-format
+msgid "Login from %(ip)s"
+msgstr "Login fra %(ip)s"
 
 msgid "Logs"
 msgstr "Logs"
@@ -6398,6 +6743,9 @@ msgstr "Ingen certifikater fundet"
 msgid "No certificates match these filters"
 msgstr "Ingen certifikater matcher disse filtre"
 
+msgid "No changes"
+msgstr "Ingen ændringer"
+
 #. Used in the browser
 msgid "No changes in this commit"
 msgstr "Ingen ændringer i denne commit"
@@ -6921,6 +7269,10 @@ msgstr "OIDC-login mislykkedes - providerens id_token kunne ikke verificeres."
 
 msgid "OIDC login failed - token exchange error."
 msgstr "OIDC-login mislykkedes - fejl ved token-udveksling."
+
+#, python-format
+msgid "OIDC login: %(email)s from %(ip)s"
+msgstr "OIDC-login: %(email)s fra %(ip)s"
 
 msgid "OIDC provider unavailable."
 msgstr "OIDC-provider utilgængelig."
@@ -7610,6 +7962,10 @@ msgstr "Plugin i brug"
 #. Used in the browser
 msgid "Plugin Info"
 msgstr "Plugin-info"
+
+#, python-format
+msgid "Plugin installed: %(names)s"
+msgstr "Plugin installeret: %(names)s"
 
 #. Used in the browser
 msgid "Plugin removed - restart Traefik to apply"
@@ -8628,6 +8984,16 @@ msgstr ""
 "Gendannelsen stoppede ved %(file)s: %(detail)s. Der blev taget en backup før "
 "gendannelsen"
 
+#, python-format
+msgid "Restored %(agent)s from git commit %(sha)s (%(num)d file)"
+msgid_plural "Restored %(agent)s from git commit %(sha)s (%(num)d files)"
+msgstr[0] "%(agent)s gendannet fra git-commit %(sha)s (%(num)d fil)"
+msgstr[1] "%(agent)s gendannet fra git-commit %(sha)s (%(num)d filer)"
+
+#, python-format
+msgid "Restored from git commit %(sha)s"
+msgstr "Gendannet fra git-commit %(sha)s"
+
 #. Used in the browser
 msgid "Restored successfully"
 msgstr "Gendannet"
@@ -8775,6 +9141,34 @@ msgid "Route \"%(plain_id)s\" not found"
 msgstr "Ruten \"%(plain_id)s\" blev ikke fundet"
 
 #, python-format
+msgid "Route %(name)s backend is degraded, %(up)s of %(num)d server up"
+msgid_plural "Route %(name)s backend is degraded, %(up)s of %(num)d servers up"
+msgstr[0] "Backenden for ruten %(name)s er forringet, %(up)s af %(num)d server oppe"
+msgstr[1] "Backenden for ruten %(name)s er forringet, %(up)s af %(num)d servere oppe"
+
+#, python-format
+msgid ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d servers up "
+"(%(servers)s)"
+msgstr[0] "Backenden for ruten %(name)s er forringet, %(up)s af %(num)d server oppe (%(servers)s)"
+msgstr[1] "Backenden for ruten %(name)s er forringet, %(up)s af %(num)d servere oppe (%(servers)s)"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up"
+msgid_plural "Route %(name)s backend is down, 0 of %(num)d servers up"
+msgstr[0] "Backenden for ruten %(name)s er nede, 0 af %(num)d server oppe"
+msgstr[1] "Backenden for ruten %(name)s er nede, 0 af %(num)d servere oppe"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)"
+msgstr[0] "Backenden for ruten %(name)s er nede, 0 af %(num)d server oppe (%(servers)s)"
+msgstr[1] "Backenden for ruten %(name)s er nede, 0 af %(num)d servere oppe (%(servers)s)"
+
+#, python-format
 msgid "Route %(name)s created"
 msgstr "Rute %(name)s oprettet"
 
@@ -8783,8 +9177,24 @@ msgid "Route %(name)s deleted"
 msgstr "Rute %(name)s slettet"
 
 #, python-format
+msgid "Route %(name)s is reachable again"
+msgstr "Ruten %(name)s kan nås igen"
+
+#, python-format
+msgid "Route %(name)s is unreachable"
+msgstr "Ruten %(name)s kan ikke nås"
+
+#, python-format
+msgid "Route %(name)s is unreachable (%(error)s)"
+msgstr "Ruten %(name)s kan ikke nås (%(error)s)"
+
+#, python-format
 msgid "Route %(name)s updated"
 msgstr "Rute %(name)s opdateret"
+
+#, python-format
+msgid "Route '%(name)s' updated"
+msgstr "Ruten '%(name)s' opdateret"
 
 msgid "Route / Service Name"
 msgstr "Rute-/servicenavn"
@@ -9358,6 +9768,10 @@ msgctxt "group"
 msgid "Security"
 msgstr "Sikkerhed"
 
+msgctxt "notification category"
+msgid "Security"
+msgstr "Sikkerhed"
+
 msgid "Security headers preset"
 msgstr "Forudindstilling for sikkerhedsheaders"
 
@@ -9522,6 +9936,14 @@ msgstr "Service"
 msgctxt "setting"
 msgid "Service"
 msgstr "Service"
+
+#, python-format
+msgid "Service %(name)s deleted"
+msgstr "Servicen %(name)s er slettet"
+
+#, python-format
+msgid "Service %(name)s saved"
+msgstr "Servicen %(name)s er gemt"
 
 #, python-format
 msgid "Service '%(service)s' does not exist for %(protocol)s routes."
@@ -10087,6 +10509,12 @@ msgstr "Sti til statisk konfiguration: %(problem)s"
 msgid "Static config saved"
 msgstr "Statisk konfiguration gemt"
 
+#, python-format
+msgid ""
+"Static config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Lageret til statisk konfiguration på %(path)s er ikke skrivbart, så indstillinger, backupper og planlagte tjek overlever ikke en genstart (%(error)s)"
+
 #. Used in the browser
 msgctxt "column"
 msgid "Status"
@@ -10187,6 +10615,10 @@ msgstr ""
 "omgå forwardAuth. Traefik 3.7.12 udvider dette til alle aliaserede navne. "
 "{delete} anbefales. {learn_more}"
 
+#, python-format
+msgid "Storage at %(path)s is writable again"
+msgstr "Lageret på %(path)s er skrivbart igen"
+
 #. Used in the browser
 msgid "Storage is not writable"
 msgstr "Lageret er ikke skrivbart"
@@ -10254,6 +10686,10 @@ msgid ""
 msgstr ""
 "Summen af events_count, de rå loglinjer, der blev samlet i disse alerts. "
 "Altid større end antallet af alerts"
+
+#, python-format
+msgid "Summary %(start)s to %(end)s"
+msgstr "Opsummering %(start)s til %(end)s"
 
 #, python-format
 msgid ""
@@ -10356,6 +10792,14 @@ msgstr "TLS på alle routere"
 #, python-brace-format
 msgid "TLS options {options}"
 msgstr "TLS-indstillinger {options}"
+
+#, python-format
+msgid "TLS profile '%(name)s' deleted"
+msgstr "TLS-profilen '%(name)s' slettet"
+
+#, python-format
+msgid "TLS profile '%(name)s' saved"
+msgstr "TLS-profilen '%(name)s' gemt"
 
 #. Used in the browser
 msgid "TLS profile deleted"
@@ -10562,6 +11006,12 @@ msgstr ""
 "den under fanen Middlewares, eller slå forudindstillingen fra og til igen "
 "for at erstatte den med kontakternes standardværdier. Slå den fra for at "
 "fjerne den."
+
+msgid "The CrowdSec alert cache is being refreshed"
+msgstr "CrowdSec-alert-cachen bliver opdateret"
+
+msgid "The CrowdSec decision cache is being refreshed"
+msgstr "CrowdSec-decision-cachen bliver opdateret"
 
 msgid ""
 "The CrowdSec fields on this server in Settings only build the compose "
@@ -10883,6 +11333,64 @@ msgstr ""
 #. Used in the browser
 msgid "The primary view"
 msgstr "Den primære visning"
+
+#, python-format
+msgid "The proxy answered %(code)s, the backend is not reachable"
+msgstr "Proxyen svarede %(code)s, backenden kan ikke nås"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend answered %(code)s"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden svarede %(code)s"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend closed the connection without answering"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden lukkede forbindelsen uden at svare"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend could not be reached from Traefik Manager (%(error)s)"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og Traefik Manager kunne ikke nå backenden (%(error)s)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend has no address to check"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden har ingen adresse at tjekke"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden kan ikke nås"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (network unreachable)"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden kan ikke nås (netværket kan ikke nås)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (no route to host)"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden kan ikke nås (ingen rute til værten)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend refused the connection"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden afviste forbindelsen"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend reset the connection"
+msgstr "Proxyen omdirigerede til %(host)s, før backenden blev nået, og backenden nulstillede forbindelsen"
 
 msgid "The public address where TMA is running on the remote server."
 msgstr "Den offentlige adresse, hvor TMA kører på fjernserveren."
@@ -11418,6 +11926,9 @@ msgstr ""
 msgid "Time left on this decision, counting down live"
 msgstr "Resterende tid på denne decision, tæller live ned"
 
+msgid "Timeout"
+msgstr "Timeout"
+
 msgctxt "setting"
 msgid "Timeout"
 msgstr "Timeout"
@@ -11489,6 +12000,10 @@ msgstr ""
 msgid "Tracing {otlp}"
 msgstr "Tracing {otlp}"
 
+msgctxt "notification category"
+msgid "Traefik"
+msgstr "Traefik"
+
 #. Used in the browser
 msgid "Traefik API URL must start with http:// or https://"
 msgstr "Traefik API-URL'en skal starte med http:// eller https://"
@@ -11496,6 +12011,12 @@ msgstr "Traefik API-URL'en skal starte med http:// eller https://"
 #, python-format
 msgid "Traefik API basic auth %(optional)s"
 msgstr "Basic auth til Traefik-API'et %(optional)s"
+
+msgid "Traefik API is reachable again"
+msgstr "Traefik-API'et kan nås igen"
+
+msgid "Traefik API is unreachable"
+msgstr "Traefik-API'et kan ikke nås"
 
 #. Used in the browser
 msgid "Traefik API not answering"
@@ -11687,6 +12208,10 @@ msgid "Traefik must be restarted after adding {accesslog} to traefik.yml."
 msgstr ""
 "Traefik skal genstartes efter tilføjelse af {accesslog} til traefik.yml."
 
+#, python-format
+msgid "Traefik on %(agent)s v%(version)s is available - update now"
+msgstr "Traefik på %(agent)s v%(version)s er tilgængelig - opdater nu"
+
 msgid "Traefik plugin page"
 msgstr "Traefik-pluginside"
 
@@ -11737,6 +12262,9 @@ msgstr[0] ""
 msgstr[1] ""
 "Traefik rapporterer {n} ruter fra filprovideren, alle fra en fil som Traefik "
 "Manager administrerer, så de findes på fanen Ruter."
+
+msgid "Traefik restarted"
+msgstr "Traefik genstartet"
 
 msgid "Traefik router rule"
 msgstr "Traefik-routerregel"
@@ -12028,6 +12556,10 @@ msgid "Update password"
 msgstr "Opdater adgangskode"
 
 #. Used in the browser
+msgid "Updates"
+msgstr "Opdateringer"
+
+msgctxt "notification category"
 msgid "Updates"
 msgstr "Opdateringer"
 
@@ -12572,6 +13104,10 @@ msgstr "tilføjer {http3} til dette entrypoint"
 msgid "adds {http_tls} so routers here get TLS by default"
 msgstr "tilføjer {http_tls}, så routere her får TLS som standard"
 
+msgctxt "agent event"
+msgid "agent"
+msgstr "agent"
+
 #. Used in the browser
 msgctxt "label"
 msgid "agent"
@@ -12653,6 +13189,12 @@ msgid "all {n} server down"
 msgid_plural "all {n} servers down"
 msgstr[0] "alle {n} server nede"
 msgstr[1] "alle {n} servere nede"
+
+#, python-format
+msgid "and %(num)d more"
+msgid_plural "and %(num)d more"
+msgstr[0] "og %(num)d mere"
+msgstr[1] "og %(num)d mere"
 
 #. Used in the browser
 msgid "another entry point"
@@ -12746,6 +13288,10 @@ msgstr "backend kan ikke nås, {error}"
 #, python-brace-format
 msgid "backend {target}"
 msgstr "backend {target}"
+
+msgctxt "agent event"
+msgid "backup"
+msgstr "backup"
 
 #. Used in the browser
 msgctxt "label"
@@ -13271,6 +13817,10 @@ msgstr "geoip til"
 #. Used in the browser
 msgid "geoip-enrich not installed on the reporting machine"
 msgstr "geoip-enrich er ikke installeret på den rapporterende maskine"
+
+msgctxt "agent event"
+msgid "git backup"
+msgstr "git-backup"
 
 #. Used in the browser
 msgid ""
@@ -14322,6 +14872,10 @@ msgstr "resp header (0)"
 msgid "response"
 msgstr "svar"
 
+msgctxt "agent event"
+msgid "restart"
+msgstr "genstart"
+
 msgid "restore it under Dashboard settings"
 msgstr "gendan det under Dashboard-indstillinger"
 
@@ -14523,6 +15077,10 @@ msgstr "status {codes}"
 #. Used in the browser
 msgid "sticky"
 msgstr "sticky"
+
+msgctxt "agent event"
+msgid "storage"
+msgstr "lager"
 
 #. Used in the browser
 msgid "stream route, nothing to open"

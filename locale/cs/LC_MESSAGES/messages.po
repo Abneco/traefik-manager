@@ -40,6 +40,17 @@ msgstr[1] "„{name}“ stále používá {shown}. Odebrat ho z {n} tras a smaza
 msgstr[2] "„{name}“ stále používá {shown}. Odebrat ho z {n} tras a smazat?"
 
 #, python-format
+msgid "%(agent)s: %(label)s - %(message)s"
+msgstr "%(agent)s: %(label)s - %(message)s"
+
+#, python-format
+msgid "%(agent)s: %(num)d more failure not shown, check the agent log"
+msgid_plural "%(agent)s: %(num)d more failures not shown, check the agent log"
+msgstr[0] "%(agent)s: další %(num)d selhání se nezobrazuje, zkontrolujte log agenta"
+msgstr[1] "%(agent)s: další %(num)d selhání se nezobrazují, zkontrolujte log agenta"
+msgstr[2] "%(agent)s: dalších %(num)d selhání se nezobrazuje, zkontrolujte log agenta"
+
+#, python-format
 msgid "%(auth_verify)s is appended automatically"
 msgstr "%(auth_verify)s se připojí automaticky"
 
@@ -115,6 +126,23 @@ msgstr "Soubor %(file)s během ukládání přepsalo něco jiného. Zkuste to zn
 
 #, python-format
 msgid ""
+"%(label)s storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Do úložiště %(label)s v %(path)s nelze zapisovat, takže se nastavení, zálohy a plánované kontroly po restartu ztratí (%(error)s)"
+
+#, python-format
+msgid "%(label)s: %(message)s"
+msgstr "%(label)s: %(message)s"
+
+#, python-format
+msgid "%(label)s: %(num)d event, latest %(message)s"
+msgid_plural "%(label)s: %(num)d events, latest %(message)s"
+msgstr[0] "%(label)s: %(num)d událost, poslední: %(message)s"
+msgstr[1] "%(label)s: %(num)d události, poslední: %(message)s"
+msgstr[2] "%(label)s: %(num)d událostí, poslední: %(message)s"
+
+#, python-format
+msgid ""
 "%(line_break)s⚠ A %(buffering)s/%(compress)s middleware is attached - remove "
 "it for smooth streaming and seeking."
 msgstr ""
@@ -166,12 +194,107 @@ msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
 msgstr "%(name)s stále používá %(users)s. Nejprve smažte tato middleware"
 
 #, python-format
+msgid "%(names)s and %(num)d more"
+msgid_plural "%(names)s and %(num)d more"
+msgstr[0] "%(names)s a %(num)d další"
+msgstr[1] "%(names)s a %(num)d další"
+msgstr[2] "%(names)s a %(num)d dalších"
+
+#, python-format
 msgid ""
 "%(new_in_v1)s Static Config Editor lets you manage your Traefik static "
 "config from the UI. %(set_it_up)s"
 msgstr ""
 "%(new_in_v1)s Editor statické konfigurace umožňuje spravovat statickou "
 "konfiguraci Traefiku z UI. %(set_it_up)s"
+
+#, python-format
+msgid "%(num)d certificate removed from acme.json"
+msgid_plural "%(num)d certificates removed from acme.json"
+msgstr[0] "Z acme.json odebrán %(num)d certifikát"
+msgstr[1] "Z acme.json odebrány %(num)d certifikáty"
+msgstr[2] "Z acme.json odebráno %(num)d certifikátů"
+
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] "%(num)d den"
+msgstr[1] "%(num)d dny"
+msgstr[2] "%(num)d dní"
+
+#, python-format
+msgid "%(num)d event"
+msgid_plural "%(num)d events"
+msgstr[0] "%(num)d událost"
+msgstr[1] "%(num)d události"
+msgstr[2] "%(num)d událostí"
+
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] "%(num)d hodina"
+msgstr[1] "%(num)d hodiny"
+msgstr[2] "%(num)d hodin"
+
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] "%(num)d minuta"
+msgstr[1] "%(num)d minuty"
+msgstr[2] "%(num)d minut"
+
+#, python-format
+msgid "%(num)d route backend is degraded: %(names)s"
+msgid_plural "%(num)d route backends are degraded: %(names)s"
+msgstr[0] "%(num)d trasa má omezený backend: %(names)s"
+msgstr[1] "%(num)d trasy mají omezený backend: %(names)s"
+msgstr[2] "%(num)d tras má omezený backend: %(names)s"
+
+#, python-format
+msgid "%(num)d route is reachable again: %(names)s"
+msgid_plural "%(num)d routes are reachable again: %(names)s"
+msgstr[0] "%(num)d trasa je znovu dostupná: %(names)s"
+msgstr[1] "%(num)d trasy jsou znovu dostupné: %(names)s"
+msgstr[2] "%(num)d tras je znovu dostupných: %(names)s"
+
+#, python-format
+msgid "%(num)d route is unreachable: %(names)s"
+msgid_plural "%(num)d routes are unreachable: %(names)s"
+msgstr[0] "%(num)d trasa je nedostupná: %(names)s"
+msgstr[1] "%(num)d trasy jsou nedostupné: %(names)s"
+msgstr[2] "%(num)d tras je nedostupných: %(names)s"
+
+#, python-format
+msgid ""
+"%(num)d route is unreachable: %(names)s, check that Traefik Manager can "
+"reach it"
+msgid_plural ""
+"%(num)d routes are unreachable: %(names)s, check that Traefik Manager can "
+"reach them"
+msgstr[0] "%(num)d trasa je nedostupná: %(names)s, ověřte, zda k ní má Traefik Manager přístup"
+msgstr[1] "%(num)d trasy jsou nedostupné: %(names)s, ověřte, zda k nim má Traefik Manager přístup"
+msgstr[2] "%(num)d tras je nedostupných: %(names)s, ověřte, zda k nim má Traefik Manager přístup"
+
+#, python-format
+msgid "%(num)d scenario"
+msgid_plural "%(num)d scenarios"
+msgstr[0] "%(num)d scénář"
+msgstr[1] "%(num)d scénáře"
+msgstr[2] "%(num)d scénářů"
+
+#, python-format
+msgid "%(num)d second"
+msgid_plural "%(num)d seconds"
+msgstr[0] "%(num)d sekunda"
+msgstr[1] "%(num)d sekundy"
+msgstr[2] "%(num)d sekund"
+
+#, python-format
+msgid "%(num)d source"
+msgid_plural "%(num)d sources"
+msgstr[0] "%(num)d zdroj"
+msgstr[1] "%(num)d zdroje"
+msgstr[2] "%(num)d zdrojů"
 
 #, python-format
 msgid ""
@@ -218,8 +341,56 @@ msgid "%(path)s is part of Traefik Manager's code"
 msgstr "%(path)s je součástí kódu Traefik Manageru"
 
 #, python-format
+msgid "%(product)s v%(version)s is available - update now"
+msgstr "%(product)s: je k dispozici verze v%(version)s, aktualizujte nyní"
+
+#, python-format
+msgid "%(provider)s routers found, the %(provider)s tab is now shown"
+msgstr "Nalezeny routery %(provider)s, karta %(provider)s se nyní zobrazuje"
+
+#, python-format
+msgid "%(server)s: %(message)s"
+msgstr "%(server)s: %(message)s"
+
+#, python-format
+msgid ""
+"%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s"
+msgstr "Zdroj %(source)s spustil scénáře (%(scenarios)s, %(events)s) za %(window)s: %(list)s"
+
+#, python-format
+msgid "%(source)s tripped %(scenarios)s, %(events)s: %(list)s"
+msgstr "Zdroj %(source)s spustil scénáře (%(scenarios)s, %(events)s): %(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. Worst: "
+"%(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "Zdroje (%(sources)s) spustily scénáře (%(scenarios)s, %(events)s) za %(window)s. Nejaktivnější: %(source)s, %(scenario)s, %(source_events)s. Scénáře: %(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s. Worst: %(source)s, "
+"%(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "Zdroje (%(sources)s) spustily scénáře (%(scenarios)s, %(events)s). Nejaktivnější: %(source)s, %(scenario)s, %(source_events)s. Scénáře: %(list)s"
+
+#, python-format
 msgid "%(status)s is replaced with the response code."
 msgstr "%(status)s se nahradí kódem odpovědi."
+
+#, python-format
+msgid "%(url)s is not an allowed address"
+msgstr "%(url)s není povolená adresa"
+
+#, python-format
+msgid "%(url)s is not an http(s) address"
+msgstr "%(url)s není adresa http(s)"
+
+#, python-format
+msgid "%(url)s redirected more than %(num)d time"
+msgid_plural "%(url)s redirected more than %(num)d times"
+msgstr[0] "%(url)s: více než %(num)d přesměrování"
+msgstr[1] "%(url)s: více než %(num)d přesměrování"
+msgstr[2] "%(url)s: více než %(num)d přesměrování"
 
 #. Used in the browser
 #, python-brace-format
@@ -556,6 +727,12 @@ msgid ""
 msgstr ""
 "Osobní přístupový token s právem zápisu do tohoto jednoho repozitáře. Uloží "
 "se šifrovaně a po nastavení se už nikdy nezobrazí."
+
+#, python-format
+msgid ""
+"A secret was written to %(files)s in plain text. It has been encrypted in "
+"place and is no longer stored in the clear"
+msgstr "Tajný údaj byl zapsán do %(files)s jako prostý text. Byl na místě zašifrován a už není uložen nešifrovaně"
 
 #, python-format
 msgid "A service named '%(name)s' already exists"
@@ -1059,6 +1236,20 @@ msgctxt "setting"
 msgid "Agent"
 msgstr "Agent"
 
+#, python-format
+msgid "Agent %(name)s is back online"
+msgstr "Agent %(name)s je znovu online"
+
+#, python-format
+msgid "Agent %(name)s is unreachable"
+msgstr "Agent %(name)s je nedostupný"
+
+#, python-format
+msgid ""
+"Agent %(name)s rejected the API key - rotate it in Settings or fix "
+"TMA_API_KEY on the agent"
+msgstr "Agent %(name)s odmítl API klíč: rotujte ho v Nastavení nebo opravte TMA_API_KEY na agentovi"
+
 msgid "Agent URL"
 msgstr "URL agenta"
 
@@ -1118,6 +1309,10 @@ msgid "Agents"
 msgstr "Agenti"
 
 msgctxt "heading"
+msgid "Agents"
+msgstr "Agenti"
+
+msgctxt "notification category"
 msgid "Agents"
 msgstr "Agenti"
 
@@ -1630,6 +1825,13 @@ msgctxt "setting"
 msgid "Backends"
 msgstr "Backendy"
 
+#, python-format
+msgid "Backup created (%(num)d file)"
+msgid_plural "Backup created (%(num)d files)"
+msgstr[0] "Záloha vytvořena (%(num)d soubor)"
+msgstr[1] "Záloha vytvořena (%(num)d soubory)"
+msgstr[2] "Záloha vytvořena (%(num)d souborů)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "Backup created ({n} file)"
@@ -1646,6 +1848,10 @@ msgstr "Záloha vytvořena na {name}"
 #. Used in the browser
 msgid "Backup deleted"
 msgstr "Záloha smazána"
+
+#, python-format
+msgid "Backup deleted: %(file)s"
+msgstr "Záloha smazána: %(file)s"
 
 msgid "Backup dir"
 msgstr "Adresář záloh"
@@ -1679,6 +1885,10 @@ msgid "Backup restored successfully!"
 msgstr "Záloha byla úspěšně obnovena"
 
 #, python-format
+msgid "Backup restored: %(file)s"
+msgstr "Záloha obnovena: %(file)s"
+
+#, python-format
 msgid "Backup retention %(optional)s"
 msgstr "Uchovávání záloh %(optional)s"
 
@@ -1701,6 +1911,16 @@ msgstr "Zálohy"
 msgctxt "heading"
 msgid "Backups"
 msgstr "Zálohy"
+
+msgctxt "notification category"
+msgid "Backups"
+msgstr "Zálohy"
+
+#, python-format
+msgid ""
+"Backups storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Do úložiště záloh v %(path)s nelze zapisovat, takže se nastavení, zálohy a plánované kontroly po restartu ztratí (%(error)s)"
 
 msgid "Backups → Git"
 msgstr "Zálohy → Git"
@@ -1991,9 +2211,31 @@ msgstr "Resolver certifikátů"
 msgid "Certificate domain"
 msgstr "Doména certifikátu"
 
+#, python-format
+msgid "Certificate for %(domain)s expired %(num)d day ago"
+msgid_plural "Certificate for %(domain)s expired %(num)d days ago"
+msgstr[0] "Certifikát pro %(domain)s vypršel před %(num)d dnem"
+msgstr[1] "Certifikát pro %(domain)s vypršel před %(num)d dny"
+msgstr[2] "Certifikát pro %(domain)s vypršel před %(num)d dny"
+
+#, python-format
+msgid "Certificate for %(domain)s expires in %(num)d day"
+msgid_plural "Certificate for %(domain)s expires in %(num)d days"
+msgstr[0] "Certifikát pro %(domain)s vyprší za %(num)d den"
+msgstr[1] "Certifikát pro %(domain)s vyprší za %(num)d dny"
+msgstr[2] "Certifikát pro %(domain)s vyprší za %(num)d dní"
+
+#, python-format
+msgid "Certificate for %(domain)s expires today"
+msgstr "Certifikát pro %(domain)s vyprší dnes"
+
 #. Used in the browser
 msgid "Certificate removal stopped partway"
 msgstr "Odebírání certifikátů se v průběhu zastavilo"
+
+#, python-format
+msgid "Certificate removal stopped partway: %(error)s"
+msgstr "Odebírání certifikátů se v průběhu zastavilo: %(error)s"
 
 msgid "Certificate resolver"
 msgstr "Resolver certifikátů"
@@ -2009,6 +2251,10 @@ msgstr "Resolvery certifikátů"
 msgid "Certificate store backups"
 msgstr "Zálohy úložiště certifikátů"
 
+#, python-format
+msgid "Certificate store restored: %(file)s"
+msgstr "Úložiště certifikátů obnoveno: %(file)s"
+
 #. Used in the browser
 msgid "Certificates"
 msgstr "Certifikáty"
@@ -2018,6 +2264,10 @@ msgid "Certificates"
 msgstr "Certifikáty"
 
 msgctxt "label"
+msgid "Certificates"
+msgstr "Certifikáty"
+
+msgctxt "notification category"
 msgid "Certificates"
 msgstr "Certifikáty"
 
@@ -2401,6 +2651,10 @@ msgstr "Komprimovat rotované soubory"
 msgid "Config"
 msgstr "Konfigurace"
 
+msgctxt "notification category"
+msgid "Config"
+msgstr "Konfigurace"
+
 #. Used in the browser
 msgid "Config File"
 msgstr "Konfigurační soubor"
@@ -2427,6 +2681,12 @@ msgstr "Konfigurace (YAML)"
 #. Used in the browser
 msgid "Configuration Schema"
 msgstr "Schéma konfigurace"
+
+#, python-format
+msgid ""
+"Configuration storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Do úložiště konfigurace v %(path)s nelze zapisovat, takže se nastavení, zálohy a plánované kontroly po restartu ztratí (%(error)s)"
 
 #, python-format
 msgid "Configure %(access_log_path)s in Settings"
@@ -2819,9 +3079,26 @@ msgstr "Přihlašovací údaje"
 msgid "Credentials for endpoints that require authentication."
 msgstr "Přihlašovací údaje pro endpointy, které vyžadují ověření."
 
+msgctxt "notification category"
+msgid "CrowdSec"
+msgstr "CrowdSec"
+
+msgid "CrowdSec LAPI URL, bouncer API key or client certificate is not set"
+msgstr "Není nastavena URL CrowdSec LAPI, API klíč bounceru nebo klientský certifikát"
+
+msgid "CrowdSec LAPI is reachable again"
+msgstr "CrowdSec LAPI je znovu dostupné"
+
+msgid "CrowdSec LAPI is unreachable"
+msgstr "CrowdSec LAPI je nedostupné"
+
 #. Used in the browser
 msgid "CrowdSec LAPI unavailable"
 msgstr "CrowdSec LAPI nedostupné"
+
+#, python-format
+msgid "CrowdSec LAPI unreachable: %(error)s"
+msgstr "CrowdSec LAPI nedostupné: %(error)s"
 
 #, python-format
 msgid ""
@@ -2869,6 +3146,11 @@ msgstr[2] "CrowdSec neodpovídá %(num)d minut, takže tyto decisions jsou napos
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
 msgstr "CrowdSec je aktuální, od posledního čtení se nic nezměnilo"
+
+msgid ""
+"CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / "
+"CROWDSEC_MACHINE_PASSWORD or the client certificate"
+msgstr "Přihlášení stroje CrowdSec se nezdařilo: zkontrolujte CROWDSEC_MACHINE_ID / CROWDSEC_MACHINE_PASSWORD nebo klientský certifikát"
 
 msgid "CrowdSec not configured"
 msgstr "CrowdSec není nastaven"
@@ -3032,6 +3314,10 @@ msgstr "Datum"
 #. Used in the browser
 msgid "Debug Mode"
 msgstr "Režim ladění"
+
+#, python-format
+msgid "Decision %(id)s deleted (IP unbanned)"
+msgstr "Decision %(id)s smazáno (blokace IP zrušena)"
 
 #. Used in the browser
 #, python-brace-format
@@ -3645,6 +3931,12 @@ msgstr "Zálohy dynamické konfigurace"
 msgid "Dynamic config path"
 msgstr "Cesta k dynamické konfiguraci"
 
+#, python-format
+msgid ""
+"Dynamic config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Do úložiště dynamické konfigurace v %(path)s nelze zapisovat, takže se nastavení, zálohy a plánované kontroly po restartu ztratí (%(error)s)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "EAB HMAC {optional}"
@@ -4072,6 +4364,10 @@ msgstr ""
 #. Used in the browser
 msgid "Every other session was signed out"
 msgstr "Všechny ostatní relace byly odhlášeny"
+
+#, python-format
+msgid "Every other session was signed out from %(ip)s"
+msgstr "Všechny ostatní relace byly odhlášeny z %(ip)s"
 
 msgid ""
 "Every save writes a timestamped copy of the config first, kept locally. Git "
@@ -4692,10 +4988,22 @@ msgstr "Vygenerovat záznam"
 msgid "Generic JSON"
 msgstr "Obecný JSON"
 
+#, python-format
+msgid "GeoIP database is out of date and could not be updated: %(error)s"
+msgstr "Databáze GeoIP je zastaralá a nepodařilo se ji aktualizovat: %(error)s"
+
+#, python-format
+msgid "GeoIP database updated (DB-IP %(db_month)s)"
+msgstr "Databáze GeoIP aktualizována (DB-IP %(db_month)s)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "GeoIP database updated (DB-IP {db_month})"
 msgstr "Databáze GeoIP aktualizována (DB-IP {db_month})"
+
+#, python-format
+msgid "GeoIP database updated to DB-IP %(version)s"
+msgstr "Databáze GeoIP aktualizována na DB-IP %(version)s"
 
 msgid "GeoIP lookup"
 msgstr "Vyhledání GeoIP"
@@ -4739,8 +5047,42 @@ msgstr "Obnova z Gitu"
 msgid "Git backup"
 msgstr "Záloha do Gitu"
 
+#, python-format
+msgid "Git backup failed (%(action)s): %(error)s"
+msgstr "Záloha do Gitu se nezdařila (%(action)s): %(error)s"
+
+#, python-format
+msgid "Git backup failed (%(agent)s): %(error)s"
+msgstr "Záloha do Gitu se nezdařila (%(agent)s): %(error)s"
+
+msgid "Git backup pushed"
+msgstr "Záloha do Gitu odeslána"
+
+#, python-format
+msgid "Git backup pushed (%(action)s)"
+msgstr "Záloha do Gitu odeslána (%(action)s)"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s)"
+msgstr "Záloha do Gitu odeslána (%(agent)s)"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s: %(action)s)"
+msgstr "Záloha do Gitu odeslána (%(agent)s: %(action)s)"
+
+#, python-format
+msgid "Git push failed: %(error)s"
+msgstr "Push do Gitu se nezdařil: %(error)s"
+
 msgid "Git repo not initialized"
 msgstr "Git repozitář není inicializován"
+
+msgid "Git repository reset - re-initialize by pushing again"
+msgstr "Repozitář Git resetován: pro novou inicializaci znovu odešlete (push)"
+
+#, python-format
+msgid "Git restore failed: %(error)s"
+msgstr "Obnovení z Gitu se nezdařilo: %(error)s"
 
 #. Used in the browser
 msgid "Git settings saved"
@@ -4845,6 +5187,9 @@ msgstr "HTTP meta"
 #. Used in the browser
 msgid "HTTP only"
 msgstr "Pouze HTTP"
+
+msgid "HTTP provider"
+msgstr "HTTP poskytovatel"
 
 #. Used in the browser
 msgid "HTTP routers"
@@ -5198,6 +5543,10 @@ msgctxt "label"
 msgid "Internal"
 msgstr "Interní"
 
+msgctxt "provider"
+msgid "Internal"
+msgstr "Interní"
+
 msgctxt "setting"
 msgid "Internal"
 msgstr "Interní"
@@ -5442,8 +5791,19 @@ msgstr "Kubernetes Gateway"
 msgid "Kubernetes Ingress"
 msgstr "Kubernetes Ingress"
 
+#, python-format
+msgid "LAPI %(status)s: %(error)s"
+msgstr "LAPI %(status)s: %(error)s"
+
 msgid "LAPI Connection"
 msgstr "Připojení k LAPI"
+
+#, python-format
+msgid "LAPI answered HTTP %(status)s on %(path)s"
+msgstr "LAPI odpovědělo HTTP %(status)s na %(path)s"
+
+msgid "LAPI stream returned an unexpected payload"
+msgstr "Stream LAPI vrátil neočekávaná data"
 
 #. Used in the browser
 msgid "LAPI unreachable"
@@ -5724,6 +6084,10 @@ msgstr "Logování"
 msgctxt "title"
 msgid "Logging"
 msgstr "Logování"
+
+#, python-format
+msgid "Login from %(ip)s"
+msgstr "Přihlášení z %(ip)s"
 
 msgid "Logs"
 msgstr "Logy"
@@ -6398,6 +6762,9 @@ msgstr "Nenalezeny žádné certifikáty"
 msgid "No certificates match these filters"
 msgstr "Těmto filtrům neodpovídají žádné certifikáty"
 
+msgid "No changes"
+msgstr "Žádné změny"
+
 #. Used in the browser
 msgid "No changes in this commit"
 msgstr "V tomto commitu nejsou žádné změny"
@@ -6917,6 +7284,10 @@ msgstr "Přihlášení přes OIDC se nezdařilo: id_token poskytovatele nelze ov
 
 msgid "OIDC login failed - token exchange error."
 msgstr "Přihlášení přes OIDC se nezdařilo: chyba výměny tokenu."
+
+#, python-format
+msgid "OIDC login: %(email)s from %(ip)s"
+msgstr "Přihlášení přes OIDC: %(email)s z %(ip)s"
 
 msgid "OIDC provider unavailable."
 msgstr "Poskytovatel OIDC je nedostupný."
@@ -7607,6 +7978,10 @@ msgstr "Plugin se používá"
 #. Used in the browser
 msgid "Plugin Info"
 msgstr "Informace o pluginu"
+
+#, python-format
+msgid "Plugin installed: %(names)s"
+msgstr "Nainstalován plugin: %(names)s"
 
 #. Used in the browser
 msgid "Plugin removed - restart Traefik to apply"
@@ -8631,6 +9006,17 @@ msgstr ""
 "Obnovení se zastavilo u %(file)s: %(detail)s. Před obnovením byla vytvořena "
 "záloha"
 
+#, python-format
+msgid "Restored %(agent)s from git commit %(sha)s (%(num)d file)"
+msgid_plural "Restored %(agent)s from git commit %(sha)s (%(num)d files)"
+msgstr[0] "Agent %(agent)s obnoven z commitu Git %(sha)s (%(num)d soubor)"
+msgstr[1] "Agent %(agent)s obnoven z commitu Git %(sha)s (%(num)d soubory)"
+msgstr[2] "Agent %(agent)s obnoven z commitu Git %(sha)s (%(num)d souborů)"
+
+#, python-format
+msgid "Restored from git commit %(sha)s"
+msgstr "Obnoveno z commitu Git %(sha)s"
+
 #. Used in the browser
 msgid "Restored successfully"
 msgstr "Úspěšně obnoveno"
@@ -8779,6 +9165,38 @@ msgid "Route \"%(plain_id)s\" not found"
 msgstr "Trasa „%(plain_id)s“ nenalezena"
 
 #, python-format
+msgid "Route %(name)s backend is degraded, %(up)s of %(num)d server up"
+msgid_plural "Route %(name)s backend is degraded, %(up)s of %(num)d servers up"
+msgstr[0] "Trasa %(name)s: backend omezený, dostupné servery %(up)s z %(num)d"
+msgstr[1] "Trasa %(name)s: backend omezený, dostupné servery %(up)s z %(num)d"
+msgstr[2] "Trasa %(name)s: backend omezený, dostupné servery %(up)s z %(num)d"
+
+#, python-format
+msgid ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d servers up "
+"(%(servers)s)"
+msgstr[0] "Trasa %(name)s: backend omezený, dostupné servery %(up)s z %(num)d (%(servers)s)"
+msgstr[1] "Trasa %(name)s: backend omezený, dostupné servery %(up)s z %(num)d (%(servers)s)"
+msgstr[2] "Trasa %(name)s: backend omezený, dostupné servery %(up)s z %(num)d (%(servers)s)"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up"
+msgid_plural "Route %(name)s backend is down, 0 of %(num)d servers up"
+msgstr[0] "Trasa %(name)s: backend nedostupný, dostupné servery 0 z %(num)d"
+msgstr[1] "Trasa %(name)s: backend nedostupný, dostupné servery 0 z %(num)d"
+msgstr[2] "Trasa %(name)s: backend nedostupný, dostupné servery 0 z %(num)d"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)"
+msgstr[0] "Trasa %(name)s: backend nedostupný, dostupné servery 0 z %(num)d (%(servers)s)"
+msgstr[1] "Trasa %(name)s: backend nedostupný, dostupné servery 0 z %(num)d (%(servers)s)"
+msgstr[2] "Trasa %(name)s: backend nedostupný, dostupné servery 0 z %(num)d (%(servers)s)"
+
+#, python-format
 msgid "Route %(name)s created"
 msgstr "Trasa %(name)s vytvořena"
 
@@ -8787,8 +9205,24 @@ msgid "Route %(name)s deleted"
 msgstr "Trasa %(name)s smazána"
 
 #, python-format
+msgid "Route %(name)s is reachable again"
+msgstr "Trasa %(name)s je znovu dostupná"
+
+#, python-format
+msgid "Route %(name)s is unreachable"
+msgstr "Trasa %(name)s je nedostupná"
+
+#, python-format
+msgid "Route %(name)s is unreachable (%(error)s)"
+msgstr "Trasa %(name)s je nedostupná (%(error)s)"
+
+#, python-format
 msgid "Route %(name)s updated"
 msgstr "Trasa %(name)s aktualizována"
+
+#, python-format
+msgid "Route '%(name)s' updated"
+msgstr "Trasa „%(name)s“ aktualizována"
 
 msgid "Route / Service Name"
 msgstr "Název trasy / služby"
@@ -9363,6 +9797,10 @@ msgctxt "group"
 msgid "Security"
 msgstr "Zabezpečení"
 
+msgctxt "notification category"
+msgid "Security"
+msgstr "Zabezpečení"
+
 msgid "Security headers preset"
 msgstr "Předvolba bezpečnostních hlaviček"
 
@@ -9526,6 +9964,14 @@ msgstr "Služba"
 msgctxt "setting"
 msgid "Service"
 msgstr "Služba"
+
+#, python-format
+msgid "Service %(name)s deleted"
+msgstr "Služba %(name)s smazána"
+
+#, python-format
+msgid "Service %(name)s saved"
+msgstr "Služba %(name)s uložena"
 
 #, python-format
 msgid "Service '%(service)s' does not exist for %(protocol)s routes."
@@ -10098,6 +10544,12 @@ msgstr "Cesta ke statické konfiguraci: %(problem)s"
 msgid "Static config saved"
 msgstr "Statická konfigurace uložena"
 
+#, python-format
+msgid ""
+"Static config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Do úložiště statické konfigurace v %(path)s nelze zapisovat, takže se nastavení, zálohy a plánované kontroly po restartu ztratí (%(error)s)"
+
 #. Used in the browser
 msgctxt "column"
 msgid "Status"
@@ -10197,6 +10649,10 @@ msgstr ""
 "forwardAuth. Traefik 3.7.12 to rozšiřuje na všechny aliasované názvy. "
 "Doporučeno: {delete}. {learn_more}"
 
+#, python-format
+msgid "Storage at %(path)s is writable again"
+msgstr "Do úložiště v %(path)s lze znovu zapisovat"
+
 #. Used in the browser
 msgid "Storage is not writable"
 msgstr "Do úložiště nelze zapisovat"
@@ -10264,6 +10720,10 @@ msgid ""
 msgstr ""
 "Součet events_count, tedy surových řádků logu, které se sloučily do těchto "
 "alertů. Vždy větší než počet alertů"
+
+#, python-format
+msgid "Summary %(start)s to %(end)s"
+msgstr "Souhrn od %(start)s do %(end)s"
 
 #, python-format
 msgid ""
@@ -10366,6 +10826,14 @@ msgstr "TLS na každém routeru"
 #, python-brace-format
 msgid "TLS options {options}"
 msgstr "Možnosti TLS {options}"
+
+#, python-format
+msgid "TLS profile '%(name)s' deleted"
+msgstr "Profil TLS „%(name)s“ smazán"
+
+#, python-format
+msgid "TLS profile '%(name)s' saved"
+msgstr "Profil TLS „%(name)s“ uložen"
 
 #. Used in the browser
 msgid "TLS profile deleted"
@@ -10571,6 +11039,12 @@ msgstr ""
 "přepínačů, proto je zobrazeno jako vlastní a ponecháno beze změny. Upravte "
 "ho na kartě Middleware, nebo předvolbu vypněte a znovu zapněte, čímž ho "
 "nahradíte výchozími hodnotami přepínačů. Vypnutím ho odeberete."
+
+msgid "The CrowdSec alert cache is being refreshed"
+msgstr "Mezipaměť alertů CrowdSec se obnovuje"
+
+msgid "The CrowdSec decision cache is being refreshed"
+msgstr "Mezipaměť decisions CrowdSec se obnovuje"
 
 msgid ""
 "The CrowdSec fields on this server in Settings only build the compose "
@@ -10888,6 +11362,64 @@ msgstr ""
 #. Used in the browser
 msgid "The primary view"
 msgstr "Hlavní zobrazení"
+
+#, python-format
+msgid "The proxy answered %(code)s, the backend is not reachable"
+msgstr "Proxy odpověděla %(code)s, backend není dostupný"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend answered %(code)s"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend odpověděl %(code)s"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend closed the connection without answering"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend zavřel spojení bez odpovědi"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend could not be reached from Traefik Manager (%(error)s)"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend není z Traefik Manageru dostupný (%(error)s)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend has no address to check"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend nemá adresu ke kontrole"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend je nedostupný"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (network unreachable)"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend je nedostupný (síť je nedostupná)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (no route to host)"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend je nedostupný (žádná cesta k hostiteli)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend refused the connection"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend odmítl spojení"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend reset the connection"
+msgstr "Proxy přesměrovala na %(host)s dříve, než dosáhla backendu, a backend resetoval spojení"
 
 msgid "The public address where TMA is running on the remote server."
 msgstr "Veřejná adresa, na které na vzdáleném serveru běží TMA."
@@ -11429,6 +11961,9 @@ msgstr ""
 msgid "Time left on this decision, counting down live"
 msgstr "Zbývající čas této decision, odpočítávaný živě"
 
+msgid "Timeout"
+msgstr "Časový limit"
+
 msgctxt "setting"
 msgid "Timeout"
 msgstr "Časový limit"
@@ -11500,6 +12035,10 @@ msgstr "Mapa propojení topologie (vstupní body - trasy - middleware - služby)
 msgid "Tracing {otlp}"
 msgstr "Trasování {otlp}"
 
+msgctxt "notification category"
+msgid "Traefik"
+msgstr "Traefik"
+
 #. Used in the browser
 msgid "Traefik API URL must start with http:// or https://"
 msgstr "URL Traefik API musí začínat http:// nebo https://"
@@ -11507,6 +12046,12 @@ msgstr "URL Traefik API musí začínat http:// nebo https://"
 #, python-format
 msgid "Traefik API basic auth %(optional)s"
 msgstr "Basic auth pro Traefik API %(optional)s"
+
+msgid "Traefik API is reachable again"
+msgstr "Traefik API je znovu dostupné"
+
+msgid "Traefik API is unreachable"
+msgstr "Traefik API je nedostupné"
 
 #. Used in the browser
 msgid "Traefik API not answering"
@@ -11695,6 +12240,10 @@ msgstr "Soubor logu Traefiku {leave_empty_for}"
 msgid "Traefik must be restarted after adding {accesslog} to traefik.yml."
 msgstr "Po přidání {accesslog} do traefik.yml je nutné Traefik restartovat."
 
+#, python-format
+msgid "Traefik on %(agent)s v%(version)s is available - update now"
+msgstr "Traefik na %(agent)s: je k dispozici verze v%(version)s, aktualizujte nyní"
+
 msgid "Traefik plugin page"
 msgstr "Stránka pluginu Traefik"
 
@@ -11748,6 +12297,9 @@ msgstr[1] ""
 msgstr[2] ""
 "Traefik hlásí {n} tras z file poskytovatele, všechny ze souboru, který "
 "spravuje Traefik Manager, takže jsou na kartě Trasy."
+
+msgid "Traefik restarted"
+msgstr "Traefik restartován"
 
 msgid "Traefik router rule"
 msgstr "Pravidlo routeru Traefik"
@@ -12039,6 +12591,10 @@ msgid "Update password"
 msgstr "Změnit heslo"
 
 #. Used in the browser
+msgid "Updates"
+msgstr "Aktualizace"
+
+msgctxt "notification category"
 msgid "Updates"
 msgstr "Aktualizace"
 
@@ -12579,6 +13135,10 @@ msgstr "přidá {http3} k tomuto vstupnímu bodu"
 msgid "adds {http_tls} so routers here get TLS by default"
 msgstr "přidá {http_tls}, takže routery zde ve výchozím stavu dostanou TLS"
 
+msgctxt "agent event"
+msgid "agent"
+msgstr "agent"
+
 #. Used in the browser
 msgctxt "label"
 msgid "agent"
@@ -12661,6 +13221,13 @@ msgid_plural "all {n} servers down"
 msgstr[0] "všechny servery ({n}) nedostupné"
 msgstr[1] "všechny servery ({n}) nedostupné"
 msgstr[2] "všechny servery ({n}) nedostupné"
+
+#, python-format
+msgid "and %(num)d more"
+msgid_plural "and %(num)d more"
+msgstr[0] "a %(num)d další"
+msgstr[1] "a %(num)d další"
+msgstr[2] "a %(num)d dalších"
 
 #. Used in the browser
 msgid "another entry point"
@@ -12756,6 +13323,10 @@ msgstr "backend nedostupný, {error}"
 #, python-brace-format
 msgid "backend {target}"
 msgstr "backend {target}"
+
+msgctxt "agent event"
+msgid "backup"
+msgstr "záloha"
 
 #. Used in the browser
 msgctxt "label"
@@ -13282,6 +13853,10 @@ msgstr "geoip zapnut"
 #. Used in the browser
 msgid "geoip-enrich not installed on the reporting machine"
 msgstr "geoip-enrich není na hlásícím stroji nainstalován"
+
+msgctxt "agent event"
+msgid "git backup"
+msgstr "záloha do Gitu"
 
 #. Used in the browser
 msgid ""
@@ -14338,6 +14913,10 @@ msgstr "resp header (0)"
 msgid "response"
 msgstr "odpověď"
 
+msgctxt "agent event"
+msgid "restart"
+msgstr "restart"
+
 msgid "restore it under Dashboard settings"
 msgstr "obnovte ho v nastavení přehledu"
 
@@ -14541,6 +15120,10 @@ msgstr "status {codes}"
 #. Used in the browser
 msgid "sticky"
 msgstr "sticky"
+
+msgctxt "agent event"
+msgid "storage"
+msgstr "úložiště"
 
 #. Used in the browser
 msgid "stream route, nothing to open"

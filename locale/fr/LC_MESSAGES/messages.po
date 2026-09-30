@@ -40,6 +40,16 @@ msgstr[0] "\"{name}\" est encore utilisé par {shown}. L’enlever de {n} route 
 msgstr[1] "\"{name}\" est encore utilisé par {shown}. L’enlever de {n} routes et le supprimer ?"
 
 #, python-format
+msgid "%(agent)s: %(label)s - %(message)s"
+msgstr "%(agent)s : %(label)s - %(message)s"
+
+#, python-format
+msgid "%(agent)s: %(num)d more failure not shown, check the agent log"
+msgid_plural "%(agent)s: %(num)d more failures not shown, check the agent log"
+msgstr[0] "%(agent)s : %(num)d autre échec non affiché, consultez le journal de l’agent"
+msgstr[1] "%(agent)s : %(num)d autres échecs non affichés, consultez le journal de l’agent"
+
+#, python-format
 msgid "%(auth_verify)s is appended automatically"
 msgstr "%(auth_verify)s est automatiquement ajouté"
 
@@ -114,6 +124,22 @@ msgstr "%(file)s a été réécrit par un autre processus pendant l’enregistre
 
 #, python-format
 msgid ""
+"%(label)s storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Le stockage %(label)s dans %(path)s n’est pas accessible en écriture, les paramètres, sauvegardes et vérifications planifiées ne seront donc pas conservés après un redémarrage (%(error)s)"
+
+#, python-format
+msgid "%(label)s: %(message)s"
+msgstr "%(label)s : %(message)s"
+
+#, python-format
+msgid "%(label)s: %(num)d event, latest %(message)s"
+msgid_plural "%(label)s: %(num)d events, latest %(message)s"
+msgstr[0] "%(label)s : %(num)d événement, dernier : %(message)s"
+msgstr[1] "%(label)s : %(num)d événements, dernier : %(message)s"
+
+#, python-format
+msgid ""
 "%(line_break)s⚠ A %(buffering)s/%(compress)s middleware is attached - remove "
 "it for smooth streaming and seeking."
 msgstr ""
@@ -168,12 +194,94 @@ msgstr ""
 "d’abord"
 
 #, python-format
+msgid "%(names)s and %(num)d more"
+msgid_plural "%(names)s and %(num)d more"
+msgstr[0] "%(names)s et %(num)d autre"
+msgstr[1] "%(names)s et %(num)d autres"
+
+#, python-format
 msgid ""
 "%(new_in_v1)s Static Config Editor lets you manage your Traefik static "
 "config from the UI. %(set_it_up)s"
 msgstr ""
 "%(new_in_v1)s l’éditeur de configuration statique permet de gérer votre "
 "configuration statique Traefik depuis l’interface utilisateur. %(set_it_up)s"
+
+#, python-format
+msgid "%(num)d certificate removed from acme.json"
+msgid_plural "%(num)d certificates removed from acme.json"
+msgstr[0] "%(num)d certificat supprimé de acme.json"
+msgstr[1] "%(num)d certificats supprimés de acme.json"
+
+#, python-format
+msgid "%(num)d day"
+msgid_plural "%(num)d days"
+msgstr[0] "%(num)d jour"
+msgstr[1] "%(num)d jours"
+
+#, python-format
+msgid "%(num)d event"
+msgid_plural "%(num)d events"
+msgstr[0] "%(num)d événement"
+msgstr[1] "%(num)d événements"
+
+#, python-format
+msgid "%(num)d hour"
+msgid_plural "%(num)d hours"
+msgstr[0] "%(num)d heure"
+msgstr[1] "%(num)d heures"
+
+#, python-format
+msgid "%(num)d minute"
+msgid_plural "%(num)d minutes"
+msgstr[0] "%(num)d minute"
+msgstr[1] "%(num)d minutes"
+
+#, python-format
+msgid "%(num)d route backend is degraded: %(names)s"
+msgid_plural "%(num)d route backends are degraded: %(names)s"
+msgstr[0] "%(num)d backend de route est dégradé : %(names)s"
+msgstr[1] "%(num)d backends de route sont dégradés : %(names)s"
+
+#, python-format
+msgid "%(num)d route is reachable again: %(names)s"
+msgid_plural "%(num)d routes are reachable again: %(names)s"
+msgstr[0] "%(num)d route est de nouveau accessible : %(names)s"
+msgstr[1] "%(num)d routes sont de nouveau accessibles : %(names)s"
+
+#, python-format
+msgid "%(num)d route is unreachable: %(names)s"
+msgid_plural "%(num)d routes are unreachable: %(names)s"
+msgstr[0] "%(num)d route est inaccessible : %(names)s"
+msgstr[1] "%(num)d routes sont inaccessibles : %(names)s"
+
+#, python-format
+msgid ""
+"%(num)d route is unreachable: %(names)s, check that Traefik Manager can "
+"reach it"
+msgid_plural ""
+"%(num)d routes are unreachable: %(names)s, check that Traefik Manager can "
+"reach them"
+msgstr[0] "%(num)d route est inaccessible : %(names)s, vérifiez que Traefik Manager peut la joindre"
+msgstr[1] "%(num)d routes sont inaccessibles : %(names)s, vérifiez que Traefik Manager peut les joindre"
+
+#, python-format
+msgid "%(num)d scenario"
+msgid_plural "%(num)d scenarios"
+msgstr[0] "%(num)d scénario"
+msgstr[1] "%(num)d scénarios"
+
+#, python-format
+msgid "%(num)d second"
+msgid_plural "%(num)d seconds"
+msgstr[0] "%(num)d seconde"
+msgstr[1] "%(num)d secondes"
+
+#, python-format
+msgid "%(num)d source"
+msgid_plural "%(num)d sources"
+msgstr[0] "%(num)d source"
+msgstr[1] "%(num)d sources"
 
 #, python-format
 msgid ""
@@ -220,8 +328,55 @@ msgid "%(path)s is part of Traefik Manager's code"
 msgstr "%(path)s fait partie du code de Traefik Manager"
 
 #, python-format
+msgid "%(product)s v%(version)s is available - update now"
+msgstr "%(product)s v%(version)s est disponible - mettez à jour maintenant"
+
+#, python-format
+msgid "%(provider)s routers found, the %(provider)s tab is now shown"
+msgstr "Routeurs %(provider)s détectés, l’onglet %(provider)s est désormais affiché"
+
+#, python-format
+msgid "%(server)s: %(message)s"
+msgstr "%(server)s : %(message)s"
+
+#, python-format
+msgid ""
+"%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s"
+msgstr "%(source)s a déclenché %(scenarios)s, %(events)s en %(window)s : %(list)s"
+
+#, python-format
+msgid "%(source)s tripped %(scenarios)s, %(events)s: %(list)s"
+msgstr "%(source)s a déclenché %(scenarios)s, %(events)s : %(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. Worst: "
+"%(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "%(sources)s ont déclenché %(scenarios)s, %(events)s en %(window)s. Pire : %(source)s, %(scenario)s, %(source_events)s. Scénarios : %(list)s"
+
+#, python-format
+msgid ""
+"%(sources)s tripped %(scenarios)s, %(events)s. Worst: %(source)s, "
+"%(scenario)s, %(source_events)s. Scenarios: %(list)s"
+msgstr "%(sources)s ont déclenché %(scenarios)s, %(events)s. Pire : %(source)s, %(scenario)s, %(source_events)s. Scénarios : %(list)s"
+
+#, python-format
 msgid "%(status)s is replaced with the response code."
 msgstr "%(status)s est remplacé par le code de réponse."
+
+#, python-format
+msgid "%(url)s is not an allowed address"
+msgstr "%(url)s n’est pas une adresse autorisée"
+
+#, python-format
+msgid "%(url)s is not an http(s) address"
+msgstr "%(url)s n’est pas une adresse http(s)"
+
+#, python-format
+msgid "%(url)s redirected more than %(num)d time"
+msgid_plural "%(url)s redirected more than %(num)d times"
+msgstr[0] "%(url)s a redirigé plus de %(num)d fois"
+msgstr[1] "%(url)s a redirigé plus de %(num)d fois"
 
 #. Used in the browser
 #, python-brace-format
@@ -555,6 +710,12 @@ msgstr ""
 "Un jeton d’accès personnel disposant d’un droit d’écriture sur ce dépôt "
 "spécifique. Il est stocké de manière chiffrée et n’est plus jamais affiché "
 "après sa configuration."
+
+#, python-format
+msgid ""
+"A secret was written to %(files)s in plain text. It has been encrypted in "
+"place and is no longer stored in the clear"
+msgstr "Un secret a été écrit en clair dans %(files)s. Il a été chiffré sur place et n’est plus stocké en clair"
 
 #, python-format
 msgid "A service named '%(name)s' already exists"
@@ -1071,6 +1232,20 @@ msgctxt "setting"
 msgid "Agent"
 msgstr "Agent"
 
+#, python-format
+msgid "Agent %(name)s is back online"
+msgstr "L’agent %(name)s est de nouveau en ligne"
+
+#, python-format
+msgid "Agent %(name)s is unreachable"
+msgstr "L’agent %(name)s est inaccessible"
+
+#, python-format
+msgid ""
+"Agent %(name)s rejected the API key - rotate it in Settings or fix "
+"TMA_API_KEY on the agent"
+msgstr "L’agent %(name)s a rejeté la clé d’API - renouvelez-la dans les paramètres ou corrigez TMA_API_KEY sur l’agent"
+
 msgid "Agent URL"
 msgstr "URL de l’agent"
 
@@ -1134,6 +1309,10 @@ msgid "Agents"
 msgstr "Agents"
 
 msgctxt "heading"
+msgid "Agents"
+msgstr "Agents"
+
+msgctxt "notification category"
 msgid "Agents"
 msgstr "Agents"
 
@@ -1649,6 +1828,12 @@ msgctxt "setting"
 msgid "Backends"
 msgstr "Backends"
 
+#, python-format
+msgid "Backup created (%(num)d file)"
+msgid_plural "Backup created (%(num)d files)"
+msgstr[0] "Sauvegarde créée (%(num)d fichier)"
+msgstr[1] "Sauvegarde créée (%(num)d fichiers)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "Backup created ({n} file)"
@@ -1664,6 +1849,10 @@ msgstr "Sauvegarde créée sur {name}"
 #. Used in the browser
 msgid "Backup deleted"
 msgstr "Sauvegarde supprimée"
+
+#, python-format
+msgid "Backup deleted: %(file)s"
+msgstr "Sauvegarde supprimée : %(file)s"
 
 msgid "Backup dir"
 msgstr "Répertoire de sauvegarde"
@@ -1697,6 +1886,10 @@ msgid "Backup restored successfully!"
 msgstr "Sauvegarde restaurée avec succès !"
 
 #, python-format
+msgid "Backup restored: %(file)s"
+msgstr "Sauvegarde restaurée : %(file)s"
+
+#, python-format
 msgid "Backup retention %(optional)s"
 msgstr "Conservation des sauvegardes %(optional)s"
 
@@ -1719,6 +1912,16 @@ msgstr "Sauvegardes"
 msgctxt "heading"
 msgid "Backups"
 msgstr "Sauvegardes"
+
+msgctxt "notification category"
+msgid "Backups"
+msgstr "Sauvegardes"
+
+#, python-format
+msgid ""
+"Backups storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Le stockage des sauvegardes dans %(path)s n’est pas accessible en écriture, les paramètres, sauvegardes et vérifications planifiées ne seront donc pas conservés après un redémarrage (%(error)s)"
 
 msgid "Backups → Git"
 msgstr "Sauvegardes → Git"
@@ -2018,9 +2221,29 @@ msgstr "Résolveur de certificats"
 msgid "Certificate domain"
 msgstr "Domaine du certificat"
 
+#, python-format
+msgid "Certificate for %(domain)s expired %(num)d day ago"
+msgid_plural "Certificate for %(domain)s expired %(num)d days ago"
+msgstr[0] "Le certificat de %(domain)s a expiré il y a %(num)d jour"
+msgstr[1] "Le certificat de %(domain)s a expiré il y a %(num)d jours"
+
+#, python-format
+msgid "Certificate for %(domain)s expires in %(num)d day"
+msgid_plural "Certificate for %(domain)s expires in %(num)d days"
+msgstr[0] "Le certificat de %(domain)s expire dans %(num)d jour"
+msgstr[1] "Le certificat de %(domain)s expire dans %(num)d jours"
+
+#, python-format
+msgid "Certificate for %(domain)s expires today"
+msgstr "Le certificat de %(domain)s expire aujourd’hui"
+
 #. Used in the browser
 msgid "Certificate removal stopped partway"
 msgstr "La suppression du certificat s’est interrompue en cours de route"
+
+#, python-format
+msgid "Certificate removal stopped partway: %(error)s"
+msgstr "La suppression du certificat s’est interrompue en cours de route : %(error)s"
 
 msgid "Certificate resolver"
 msgstr "Résolveur de certificats"
@@ -2036,6 +2259,10 @@ msgstr "Résolveurs de certificats"
 msgid "Certificate store backups"
 msgstr "Sauvegardes du magasin de certificats"
 
+#, python-format
+msgid "Certificate store restored: %(file)s"
+msgstr "Magasin de certificats restauré : %(file)s"
+
 #. Used in the browser
 msgid "Certificates"
 msgstr "Certificats"
@@ -2045,6 +2272,10 @@ msgid "Certificates"
 msgstr "Certificats"
 
 msgctxt "label"
+msgid "Certificates"
+msgstr "Certificats"
+
+msgctxt "notification category"
 msgid "Certificates"
 msgstr "Certificats"
 
@@ -2438,6 +2669,10 @@ msgstr "Compresser les fichiers après rotation"
 msgid "Config"
 msgstr "Configuration"
 
+msgctxt "notification category"
+msgid "Config"
+msgstr "Configuration"
+
 #. Used in the browser
 msgid "Config File"
 msgstr "Fichier de configuration"
@@ -2464,6 +2699,12 @@ msgstr "Configuration (YAML)"
 #. Used in the browser
 msgid "Configuration Schema"
 msgstr "Schéma de configuration"
+
+#, python-format
+msgid ""
+"Configuration storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Le stockage de la configuration dans %(path)s n’est pas accessible en écriture, les paramètres, sauvegardes et vérifications planifiées ne seront donc pas conservés après un redémarrage (%(error)s)"
 
 #, python-format
 msgid "Configure %(access_log_path)s in Settings"
@@ -2864,9 +3105,26 @@ msgid "Credentials for endpoints that require authentication."
 msgstr ""
 "Identifiants pour les points de terminaison nécessitant une authentification."
 
+msgctxt "notification category"
+msgid "CrowdSec"
+msgstr "CrowdSec"
+
+msgid "CrowdSec LAPI URL, bouncer API key or client certificate is not set"
+msgstr "URL de la LAPI CrowdSec, clé d’API du bouncer ou certificat client non défini"
+
+msgid "CrowdSec LAPI is reachable again"
+msgstr "La LAPI CrowdSec est de nouveau accessible"
+
+msgid "CrowdSec LAPI is unreachable"
+msgstr "La LAPI CrowdSec est inaccessible"
+
 #. Used in the browser
 msgid "CrowdSec LAPI unavailable"
 msgstr "LAPI CrowdSec indisponible"
+
+#, python-format
+msgid "CrowdSec LAPI unreachable: %(error)s"
+msgstr "LAPI CrowdSec inaccessible : %(error)s"
 
 #, python-format
 msgid ""
@@ -2911,6 +3169,11 @@ msgstr[1] "CrowdSec ne répond plus depuis %(num)d minutes : ces décisions son
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
 msgstr "CrowdSec est à jour ; aucun changement depuis la dernière lecture"
+
+msgid ""
+"CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / "
+"CROWDSEC_MACHINE_PASSWORD or the client certificate"
+msgstr "Échec de la connexion machine CrowdSec - vérifiez CROWDSEC_MACHINE_ID / CROWDSEC_MACHINE_PASSWORD ou le certificat client"
 
 msgid "CrowdSec not configured"
 msgstr "CrowdSec non configuré"
@@ -3079,6 +3342,10 @@ msgstr "Date"
 #. Used in the browser
 msgid "Debug Mode"
 msgstr "Mode débogage"
+
+#, python-format
+msgid "Decision %(id)s deleted (IP unbanned)"
+msgstr "Décision %(id)s supprimée (IP débannie)"
 
 #. Used in the browser
 #, python-brace-format
@@ -3700,6 +3967,12 @@ msgstr "Sauvegardes de la configuration dynamique"
 msgid "Dynamic config path"
 msgstr "Chemin de la configuration dynamique"
 
+#, python-format
+msgid ""
+"Dynamic config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Le stockage de la configuration dynamique dans %(path)s n’est pas accessible en écriture, les paramètres, sauvegardes et vérifications planifiées ne seront donc pas conservés après un redémarrage (%(error)s)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "EAB HMAC {optional}"
@@ -4138,6 +4411,10 @@ msgstr ""
 #. Used in the browser
 msgid "Every other session was signed out"
 msgstr "Toutes les autres sessions ont été déconnectées"
+
+#, python-format
+msgid "Every other session was signed out from %(ip)s"
+msgstr "Toutes les autres sessions ont été déconnectées depuis %(ip)s"
 
 msgid ""
 "Every save writes a timestamped copy of the config first, kept locally. Git "
@@ -4764,10 +5041,22 @@ msgstr "Générer l’entrée"
 msgid "Generic JSON"
 msgstr "JSON générique"
 
+#, python-format
+msgid "GeoIP database is out of date and could not be updated: %(error)s"
+msgstr "La base de données GeoIP est obsolète et n’a pas pu être mise à jour : %(error)s"
+
+#, python-format
+msgid "GeoIP database updated (DB-IP %(db_month)s)"
+msgstr "Base de données GeoIP mise à jour (DB-IP %(db_month)s)"
+
 #. Used in the browser
 #, python-brace-format
 msgid "GeoIP database updated (DB-IP {db_month})"
 msgstr "Base de données GeoIP mise à jour (DB-IP {db_month})"
+
+#, python-format
+msgid "GeoIP database updated to DB-IP %(version)s"
+msgstr "Base de données GeoIP mise à jour vers DB-IP %(version)s"
 
 msgid "GeoIP lookup"
 msgstr "Recherche GeoIP"
@@ -4811,8 +5100,42 @@ msgstr "Restauration Git"
 msgid "Git backup"
 msgstr "Sauvegarde Git"
 
+#, python-format
+msgid "Git backup failed (%(action)s): %(error)s"
+msgstr "Échec de la sauvegarde Git (%(action)s) : %(error)s"
+
+#, python-format
+msgid "Git backup failed (%(agent)s): %(error)s"
+msgstr "Échec de la sauvegarde Git (%(agent)s) : %(error)s"
+
+msgid "Git backup pushed"
+msgstr "Sauvegarde Git envoyée"
+
+#, python-format
+msgid "Git backup pushed (%(action)s)"
+msgstr "Sauvegarde Git envoyée (%(action)s)"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s)"
+msgstr "Sauvegarde Git envoyée (%(agent)s)"
+
+#, python-format
+msgid "Git backup pushed (%(agent)s: %(action)s)"
+msgstr "Sauvegarde Git envoyée (%(agent)s : %(action)s)"
+
+#, python-format
+msgid "Git push failed: %(error)s"
+msgstr "Échec de l’envoi Git : %(error)s"
+
 msgid "Git repo not initialized"
 msgstr "Dépôt Git non initialisé"
+
+msgid "Git repository reset - re-initialize by pushing again"
+msgstr "Dépôt Git réinitialisé : effectuez un nouvel envoi pour le réinitialiser"
+
+#, python-format
+msgid "Git restore failed: %(error)s"
+msgstr "Échec de la restauration Git : %(error)s"
 
 #. Used in the browser
 msgid "Git settings saved"
@@ -4920,6 +5243,9 @@ msgstr "Métadonnées HTTP"
 #. Used in the browser
 msgid "HTTP only"
 msgstr "HTTP uniquement"
+
+msgid "HTTP provider"
+msgstr "Fournisseur HTTP"
 
 #. Used in the browser
 msgid "HTTP routers"
@@ -5278,6 +5604,10 @@ msgctxt "label"
 msgid "Internal"
 msgstr "Interne"
 
+msgctxt "provider"
+msgid "Internal"
+msgstr "Interne"
+
 msgctxt "setting"
 msgid "Internal"
 msgstr "Interne"
@@ -5532,8 +5862,19 @@ msgstr "Kubernetes Gateway"
 msgid "Kubernetes Ingress"
 msgstr "Ingress Kubernetes"
 
+#, python-format
+msgid "LAPI %(status)s: %(error)s"
+msgstr "LAPI %(status)s : %(error)s"
+
 msgid "LAPI Connection"
 msgstr "Connexion à la LAPI"
+
+#, python-format
+msgid "LAPI answered HTTP %(status)s on %(path)s"
+msgstr "La LAPI a répondu HTTP %(status)s sur %(path)s"
+
+msgid "LAPI stream returned an unexpected payload"
+msgstr "Le flux de la LAPI a renvoyé des données inattendues"
 
 #. Used in the browser
 msgid "LAPI unreachable"
@@ -5818,6 +6159,10 @@ msgstr "Journalisation"
 msgctxt "title"
 msgid "Logging"
 msgstr "Journalisation"
+
+#, python-format
+msgid "Login from %(ip)s"
+msgstr "Connexion depuis %(ip)s"
 
 msgid "Logs"
 msgstr "Journaux"
@@ -6511,6 +6856,9 @@ msgstr "Aucun certificat trouvé"
 msgid "No certificates match these filters"
 msgstr "Aucun certificat ne correspond à ces filtres"
 
+msgid "No changes"
+msgstr "Aucune modification"
+
 #. Used in the browser
 msgid "No changes in this commit"
 msgstr "Aucune modification dans ce commit"
@@ -7050,6 +7398,10 @@ msgstr ""
 
 msgid "OIDC login failed - token exchange error."
 msgstr "Échec de la connexion OIDC : erreur lors de l’échange du jeton."
+
+#, python-format
+msgid "OIDC login: %(email)s from %(ip)s"
+msgstr "Connexion OIDC : %(email)s depuis %(ip)s"
 
 msgid "OIDC provider unavailable."
 msgstr "Fournisseur OIDC indisponible."
@@ -7763,6 +8115,10 @@ msgstr "Plugin utilisé"
 #. Used in the browser
 msgid "Plugin Info"
 msgstr "Informations sur le plugin"
+
+#, python-format
+msgid "Plugin installed: %(names)s"
+msgstr "Plugin installé : %(names)s"
 
 #. Used in the browser
 msgid "Plugin removed - restart Traefik to apply"
@@ -8799,6 +9155,16 @@ msgstr ""
 "Restauration interrompue à %(file)s : %(detail)s. Une sauvegarde a été créée "
 "avant la restauration"
 
+#, python-format
+msgid "Restored %(agent)s from git commit %(sha)s (%(num)d file)"
+msgid_plural "Restored %(agent)s from git commit %(sha)s (%(num)d files)"
+msgstr[0] "%(agent)s restauré depuis le commit Git %(sha)s (%(num)d fichier)"
+msgstr[1] "%(agent)s restauré depuis le commit Git %(sha)s (%(num)d fichiers)"
+
+#, python-format
+msgid "Restored from git commit %(sha)s"
+msgstr "Restauré depuis le commit Git %(sha)s"
+
 #. Used in the browser
 msgid "Restored successfully"
 msgstr "Restauration réussie"
@@ -8949,6 +9315,34 @@ msgid "Route \"%(plain_id)s\" not found"
 msgstr "Route « %(plain_id)s » introuvable"
 
 #, python-format
+msgid "Route %(name)s backend is degraded, %(up)s of %(num)d server up"
+msgid_plural "Route %(name)s backend is degraded, %(up)s of %(num)d servers up"
+msgstr[0] "Le backend de la route %(name)s est dégradé : %(up)s sur %(num)d serveur actif"
+msgstr[1] "Le backend de la route %(name)s est dégradé : %(up)s sur %(num)d serveurs actifs"
+
+#, python-format
+msgid ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is degraded, %(up)s of %(num)d servers up "
+"(%(servers)s)"
+msgstr[0] "Le backend de la route %(name)s est dégradé : %(up)s sur %(num)d serveur actif (%(servers)s)"
+msgstr[1] "Le backend de la route %(name)s est dégradé : %(up)s sur %(num)d serveurs actifs (%(servers)s)"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up"
+msgid_plural "Route %(name)s backend is down, 0 of %(num)d servers up"
+msgstr[0] "Le backend de la route %(name)s est indisponible : 0 sur %(num)d serveur actif"
+msgstr[1] "Le backend de la route %(name)s est indisponible : 0 sur %(num)d serveurs actifs"
+
+#, python-format
+msgid "Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)"
+msgid_plural ""
+"Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)"
+msgstr[0] "Le backend de la route %(name)s est indisponible : 0 sur %(num)d serveur actif (%(servers)s)"
+msgstr[1] "Le backend de la route %(name)s est indisponible : 0 sur %(num)d serveurs actifs (%(servers)s)"
+
+#, python-format
 msgid "Route %(name)s created"
 msgstr "Route %(name)s créée"
 
@@ -8957,8 +9351,24 @@ msgid "Route %(name)s deleted"
 msgstr "Route %(name)s supprimée"
 
 #, python-format
+msgid "Route %(name)s is reachable again"
+msgstr "La route %(name)s est de nouveau accessible"
+
+#, python-format
+msgid "Route %(name)s is unreachable"
+msgstr "La route %(name)s est inaccessible"
+
+#, python-format
+msgid "Route %(name)s is unreachable (%(error)s)"
+msgstr "La route %(name)s est inaccessible (%(error)s)"
+
+#, python-format
 msgid "Route %(name)s updated"
 msgstr "Route %(name)s mise à jour"
+
+#, python-format
+msgid "Route '%(name)s' updated"
+msgstr "Route '%(name)s' mise à jour"
 
 msgid "Route / Service Name"
 msgstr "Nom de la route ou du service"
@@ -9555,6 +9965,10 @@ msgctxt "group"
 msgid "Security"
 msgstr "Sécurité"
 
+msgctxt "notification category"
+msgid "Security"
+msgstr "Sécurité"
+
 msgid "Security headers preset"
 msgstr "Préréglage des en-têtes de sécurité"
 
@@ -9724,6 +10138,14 @@ msgstr "Service"
 msgctxt "setting"
 msgid "Service"
 msgstr "Service"
+
+#, python-format
+msgid "Service %(name)s deleted"
+msgstr "Service %(name)s supprimé"
+
+#, python-format
+msgid "Service %(name)s saved"
+msgstr "Service %(name)s enregistré"
 
 #, python-format
 msgid "Service '%(service)s' does not exist for %(protocol)s routes."
@@ -10305,6 +10727,12 @@ msgstr "Chemin de la configuration statique : %(problem)s"
 msgid "Static config saved"
 msgstr "Configuration statique enregistrée"
 
+#, python-format
+msgid ""
+"Static config storage at %(path)s is not writable, so settings, backups and "
+"scheduled checks will not survive a restart (%(error)s)"
+msgstr "Le stockage de la configuration statique dans %(path)s n’est pas accessible en écriture, les paramètres, sauvegardes et vérifications planifiées ne seront donc pas conservés après un redémarrage (%(error)s)"
+
 #. Used in the browser
 msgctxt "column"
 msgid "Status"
@@ -10411,6 +10839,10 @@ msgstr ""
 "exemple {x_auth_user}) de contourner forwardAuth. Traefik 3.7.12 étend cette "
 "protection à tous les noms avec alias. {delete} recommandé. {learn_more}"
 
+#, python-format
+msgid "Storage at %(path)s is writable again"
+msgstr "Le stockage dans %(path)s est de nouveau accessible en écriture"
+
 #. Used in the browser
 msgid "Storage is not writable"
 msgstr "Le stockage n’est pas accessible en écriture"
@@ -10479,6 +10911,10 @@ msgid ""
 msgstr ""
 "Somme de events_count, c’est-à-dire des lignes de journal brutes regroupées "
 "dans ces alertes. Toujours supérieure au nombre d’alertes"
+
+#, python-format
+msgid "Summary %(start)s to %(end)s"
+msgstr "Résumé du %(start)s au %(end)s"
 
 #, python-format
 msgid ""
@@ -10581,6 +11017,14 @@ msgstr "TLS sur chaque routeur"
 #, python-brace-format
 msgid "TLS options {options}"
 msgstr "Options TLS {options}"
+
+#, python-format
+msgid "TLS profile '%(name)s' deleted"
+msgstr "Profil TLS '%(name)s' supprimé"
+
+#, python-format
+msgid "TLS profile '%(name)s' saved"
+msgstr "Profil TLS '%(name)s' enregistré"
 
 #. Used in the browser
 msgid "TLS profile deleted"
@@ -10788,6 +11232,12 @@ msgstr ""
 "personnalisé et conservé tel quel. Modifiez-le dans l’onglet Middlewares ou "
 "désactivez puis réactivez le préréglage pour le remplacer par les valeurs "
 "par défaut des interrupteurs. Désactivez-le pour le supprimer."
+
+msgid "The CrowdSec alert cache is being refreshed"
+msgstr "Le cache des alertes CrowdSec est en cours d’actualisation"
+
+msgid "The CrowdSec decision cache is being refreshed"
+msgstr "Le cache des décisions CrowdSec est en cours d’actualisation"
 
 msgid ""
 "The CrowdSec fields on this server in Settings only build the compose "
@@ -11123,6 +11573,64 @@ msgstr ""
 #. Used in the browser
 msgid "The primary view"
 msgstr "Vue principale"
+
+#, python-format
+msgid "The proxy answered %(code)s, the backend is not reachable"
+msgstr "Le proxy a répondu %(code)s, le backend est inaccessible"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend answered %(code)s"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend a répondu %(code)s"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend closed the connection without answering"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend a fermé la connexion sans répondre"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend could not be reached from Traefik Manager (%(error)s)"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend n’a pas pu être joint depuis Traefik Manager (%(error)s)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend has no address to check"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend n’a aucune adresse à vérifier"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend est inaccessible"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (network unreachable)"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend est inaccessible (réseau inaccessible)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend is unreachable (no route to host)"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend est inaccessible (aucune route vers l’hôte)"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend refused the connection"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend a refusé la connexion"
+
+#, python-format
+msgid ""
+"The proxy redirected to %(host)s before reaching the backend, and the "
+"backend reset the connection"
+msgstr "Le proxy a redirigé vers %(host)s avant d’atteindre le backend, et le backend a réinitialisé la connexion"
 
 msgid "The public address where TMA is running on the remote server."
 msgstr "Adresse publique à laquelle TMA s’exécute sur le serveur distant."
@@ -11671,6 +12179,9 @@ msgstr ""
 msgid "Time left on this decision, counting down live"
 msgstr "Temps restant pour cette décision, avec décompte en temps réel"
 
+msgid "Timeout"
+msgstr "Délai d’attente dépassé"
+
 msgctxt "setting"
 msgid "Timeout"
 msgstr "Délai d’expiration"
@@ -11744,6 +12255,10 @@ msgstr ""
 msgid "Tracing {otlp}"
 msgstr "Traçage {otlp}"
 
+msgctxt "notification category"
+msgid "Traefik"
+msgstr "Traefik"
+
 #. Used in the browser
 msgid "Traefik API URL must start with http:// or https://"
 msgstr "L’URL de l’API Traefik doit commencer par http:// ou https://"
@@ -11751,6 +12266,12 @@ msgstr "L’URL de l’API Traefik doit commencer par http:// ou https://"
 #, python-format
 msgid "Traefik API basic auth %(optional)s"
 msgstr "Authentification de base de l’API Traefik %(optional)s"
+
+msgid "Traefik API is reachable again"
+msgstr "L’API Traefik est de nouveau accessible"
+
+msgid "Traefik API is unreachable"
+msgstr "L’API Traefik est inaccessible"
 
 #. Used in the browser
 msgid "Traefik API not answering"
@@ -11946,6 +12467,10 @@ msgid "Traefik must be restarted after adding {accesslog} to traefik.yml."
 msgstr ""
 "Traefik doit être redémarré après l’ajout de {accesslog} dans traefik.yml."
 
+#, python-format
+msgid "Traefik on %(agent)s v%(version)s is available - update now"
+msgstr "Traefik v%(version)s est disponible sur %(agent)s - mettez à jour maintenant"
+
 msgid "Traefik plugin page"
 msgstr "Page des plugins Traefik"
 
@@ -11998,6 +12523,9 @@ msgstr[1] ""
 "Traefik signale {n} routes du fournisseur de fichiers, toutes issues d’un "
 "fichier géré par Traefik Manager, elles se trouvent donc dans l’onglet "
 "Routes."
+
+msgid "Traefik restarted"
+msgstr "Traefik redémarré"
 
 msgid "Traefik router rule"
 msgstr "Règle du routeur Traefik"
@@ -12301,6 +12829,10 @@ msgid "Update password"
 msgstr "Mettre à jour le mot de passe"
 
 #. Used in the browser
+msgid "Updates"
+msgstr "Mises à jour"
+
+msgctxt "notification category"
 msgid "Updates"
 msgstr "Mises à jour"
 
@@ -12862,6 +13394,10 @@ msgid "adds {http_tls} so routers here get TLS by default"
 msgstr ""
 "ajoute {http_tls} pour que les routeurs ici bénéficient du TLS par défaut"
 
+msgctxt "agent event"
+msgid "agent"
+msgstr "agent"
+
 #. Used in the browser
 msgctxt "label"
 msgid "agent"
@@ -12943,6 +13479,12 @@ msgid "all {n} server down"
 msgid_plural "all {n} servers down"
 msgstr[0] "{n} serveur indisponible sur {n}"
 msgstr[1] "les {n} serveurs indisponibles"
+
+#, python-format
+msgid "and %(num)d more"
+msgid_plural "and %(num)d more"
+msgstr[0] "et %(num)d autre"
+msgstr[1] "et %(num)d autres"
 
 #. Used in the browser
 msgid "another entry point"
@@ -13036,6 +13578,10 @@ msgstr ""
 #, python-brace-format
 msgid "backend {target}"
 msgstr ""
+
+msgctxt "agent event"
+msgid "backup"
+msgstr "sauvegarde"
 
 #. Used in the browser
 msgctxt "label"
@@ -13553,6 +14099,10 @@ msgstr ""
 #. Used in the browser
 msgid "geoip-enrich not installed on the reporting machine"
 msgstr ""
+
+msgctxt "agent event"
+msgid "git backup"
+msgstr "sauvegarde Git"
 
 #. Used in the browser
 msgid ""
@@ -14605,6 +15155,10 @@ msgstr ""
 msgid "response"
 msgstr "réponse"
 
+msgctxt "agent event"
+msgid "restart"
+msgstr "redémarrage"
+
 msgid "restore it under Dashboard settings"
 msgstr "le restaurer dans les paramètres du tableau de bord"
 
@@ -14806,6 +15360,10 @@ msgstr ""
 #. Used in the browser
 msgid "sticky"
 msgstr ""
+
+msgctxt "agent event"
+msgid "storage"
+msgstr "stockage"
 
 #. Used in the browser
 msgid "stream route, nothing to open"
