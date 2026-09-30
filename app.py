@@ -758,7 +758,7 @@ _monitor.register('notify-flush', _noti.FLUSH_INTERVAL, _noti.flush_due)
 def _route_health_sources():
     out = []
     try:
-        apps, _mws = _build_all_apps(include_external=True)
+        apps, _mws = _build_all_apps(include_external=True, include_internal=True)
         out.append((_monitor.HOST_SERVER, '', apps,
                     {'http': traefik_api_get_all('/api/http/services') or []}))
     except Exception:
