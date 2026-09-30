@@ -49,6 +49,11 @@ def with_languages(monkeypatch):
 
 
 @pytest.fixture
+def english_only(monkeypatch):
+    monkeypatch.setattr(i18n, 'available_tags', lambda locale_dir=None: ('en',))
+
+
+@pytest.fixture
 def with_english_variants(monkeypatch):
     monkeypatch.setattr(i18n, 'available_tags', lambda locale_dir=None: ('en', 'en-GB', 'en-US', 'de'))
 
@@ -92,11 +97,11 @@ def test_unknown_prefix_is_not_a_language(client):
     assert client.get('/xx/').status_code == 404
 
 
-def test_disabled_language_prefix_is_not_served(client):
+def test_disabled_language_prefix_is_not_served(client, english_only):
     assert client.get('/de/').status_code == 404
 
 
-def test_lang_query_accepts_only_available(client):
+def test_lang_query_accepts_only_available(client, english_only):
     html = client.get('/?lang=de').get_data(as_text=True)
     assert '<html lang="en"' in html
 
@@ -287,7 +292,7 @@ def test_text_direction():
     assert i18n.text_direction('not a locale') == 'ltr'
 
 
-def test_save_language_rejects_unavailable(client):
+def test_save_language_rejects_unavailable(client, english_only):
     resp = client.post('/api/settings/language', json={'default_language': 'de'}, headers=HDR)
     assert resp.status_code == 400
     assert settings_mod.load_settings()['default_language'] == ''
@@ -365,7 +370,7 @@ def test_settings_lists_every_language_and_follow_system(client, with_languages)
     section = _between(html, 'id="languageSection"', 'id="geoipSection"')
     assert section.count('class="sc-set lang-row') == 4
     assert 'lang-row active" data-lang="de"' in section
-    assert 'Follow system' in section
+    assert 'onclick="setLanguage(\'\')"' in section, 'Follow system is the first choice'
     assert section.count('tm-lang-flag') == 4, \
         'Settings shows the same flags as the navbar picker, not language codes, plus one on the dropdown button'
     button = _between(section, 'id="langSelectBtn"', 'id="langSelectMenu"')
