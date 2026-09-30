@@ -36,8 +36,12 @@ msgid ""
 "\"{name}\" is still used by {shown}. Remove it from {n} route and delete it?"
 msgid_plural ""
 "\"{name}\" is still used by {shown}. Remove it from {n} routes and delete it?"
-msgstr[0] "“{name}” wordt nog gebruikt door {shown}. Eerst uit {n} route verwijderen en daarna verwijderen?"
-msgstr[1] "“{name}” wordt nog gebruikt door {shown}. Eerst uit {n} routes verwijderen en daarna verwijderen?"
+msgstr[0] ""
+"“{name}” wordt nog gebruikt door {shown}. Eerst uit {n} route verwijderen en "
+"daarna verwijderen?"
+msgstr[1] ""
+"“{name}” wordt nog gebruikt door {shown}. Eerst uit {n} routes verwijderen "
+"en daarna verwijderen?"
 
 #, python-format
 msgid "%(agent)s: %(label)s - %(message)s"
@@ -62,7 +66,8 @@ msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s wordt nog gebruikt door %(users)s"
 
 #, python-format
-msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgid ""
+"%(child)s is still used by %(users)s and is still a backend of %(parents)s"
 msgstr ""
 "%(child)s wordt nog gebruikt door %(users)s en is nog een backend van "
 "%(parents)s"
@@ -83,13 +88,18 @@ msgstr ""
 msgid ""
 "%(file)s changed while it was being edited, most likely Traefik renewing a "
 "certificate. Nothing was written, try again."
-msgstr "%(file)s is gewijzigd terwijl het werd bewerkt, waarschijnlijk doordat Traefik een certificaat vernieuwde. Er is niets geschreven, probeer het opnieuw."
+msgstr ""
+"%(file)s is gewijzigd terwijl het werd bewerkt, waarschijnlijk doordat "
+"Traefik een certificaat vernieuwde. Er is niets geschreven, probeer het "
+"opnieuw."
 
 #, python-format
 msgid ""
 "%(file)s did not read back as valid JSON after writing, the previous copy "
 "was put back"
-msgstr "%(file)s was na het schrijven geen geldige JSON, de vorige kopie is teruggezet"
+msgstr ""
+"%(file)s was na het schrijven geen geldige JSON, de vorige kopie is "
+"teruggezet"
 
 #, python-format
 msgid "%(file)s does not hold a resolver map, nothing was changed"
@@ -119,13 +129,17 @@ msgstr "%(file)s is geen geldige UTF-8, er is niets gewijzigd"
 #, python-format
 msgid ""
 "%(file)s was rewritten by something else while it was being saved. Try again."
-msgstr "%(file)s is door iets anders herschreven terwijl het werd opgeslagen. Probeer het opnieuw."
+msgstr ""
+"%(file)s is door iets anders herschreven terwijl het werd opgeslagen. "
+"Probeer het opnieuw."
 
 #, python-format
 msgid ""
 "%(label)s storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "Opslag %(label)s op %(path)s is niet beschrijfbaar, dus instellingen, back-ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
+msgstr ""
+"Opslag %(label)s op %(path)s is niet beschrijfbaar, dus instellingen, back-"
+"ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
 
 #, python-format
 msgid "%(label)s: %(message)s"
@@ -259,8 +273,12 @@ msgid ""
 msgid_plural ""
 "%(num)d routes are unreachable: %(names)s, check that Traefik Manager can "
 "reach them"
-msgstr[0] "%(num)d route is onbereikbaar: %(names)s, controleer of Traefik Manager deze kan bereiken"
-msgstr[1] "%(num)d routes zijn onbereikbaar: %(names)s, controleer of Traefik Manager ze kan bereiken"
+msgstr[0] ""
+"%(num)d route is onbereikbaar: %(names)s, controleer of Traefik Manager deze "
+"kan bereiken"
+msgstr[1] ""
+"%(num)d routes zijn onbereikbaar: %(names)s, controleer of Traefik Manager "
+"ze kan bereiken"
 
 #, python-format
 msgid "%(num)d scenario"
@@ -330,7 +348,8 @@ msgstr "%(product)s v%(version)s is beschikbaar - werk nu bij"
 
 #, python-format
 msgid "%(provider)s routers found, the %(provider)s tab is now shown"
-msgstr "%(provider)s-routers gevonden, het tabblad %(provider)s wordt nu getoond"
+msgstr ""
+"%(provider)s-routers gevonden, het tabblad %(provider)s wordt nu getoond"
 
 #, python-format
 msgid "%(server)s: %(message)s"
@@ -339,7 +358,9 @@ msgstr "%(server)s: %(message)s"
 #, python-format
 msgid ""
 "%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s"
-msgstr "%(source)s heeft %(scenarios)s geactiveerd, %(events)s in de afgelopen %(window)s: %(list)s"
+msgstr ""
+"%(source)s heeft %(scenarios)s geactiveerd, %(events)s in de afgelopen "
+"%(window)s: %(list)s"
 
 #, python-format
 msgid "%(source)s tripped %(scenarios)s, %(events)s: %(list)s"
@@ -349,13 +370,18 @@ msgstr "%(source)s heeft %(scenarios)s geactiveerd, %(events)s: %(list)s"
 msgid ""
 "%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. Worst: "
 "%(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s"
-msgstr "%(sources)s hebben %(scenarios)s geactiveerd, %(events)s in de afgelopen %(window)s. Ergste: %(source)s, %(scenario)s, %(source_events)s. Scenario’s: %(list)s"
+msgstr ""
+"%(sources)s hebben %(scenarios)s geactiveerd, %(events)s in de afgelopen "
+"%(window)s. Ergste: %(source)s, %(scenario)s, %(source_events)s. Scenario’s: "
+"%(list)s"
 
 #, python-format
 msgid ""
 "%(sources)s tripped %(scenarios)s, %(events)s. Worst: %(source)s, "
 "%(scenario)s, %(source_events)s. Scenarios: %(list)s"
-msgstr "%(sources)s hebben %(scenarios)s geactiveerd, %(events)s. Ergste: %(source)s, %(scenario)s, %(source_events)s. Scenario’s: %(list)s"
+msgstr ""
+"%(sources)s hebben %(scenarios)s geactiveerd, %(events)s. Ergste: "
+"%(source)s, %(scenario)s, %(source_events)s. Scenario’s: %(list)s"
 
 #, python-format
 msgid "%(status)s is replaced with the response code."
@@ -627,13 +653,17 @@ msgstr "7 dagen"
 msgid ""
 "A backend host is required for %(protocol)s routes. Send targetIp (repeated "
 "per protocol, index %(index)s) or %(field)s."
-msgstr "Voor %(protocol)s-routes is een backendhost vereist. Stuur targetIp (herhaald per protocol, index %(index)s) of %(field)s."
+msgstr ""
+"Voor %(protocol)s-routes is een backendhost vereist. Stuur targetIp "
+"(herhaald per protocol, index %(index)s) of %(field)s."
 
 #, python-format
 msgid ""
 "A backend port is required for %(protocol)s routes. Send targetPort "
 "(repeated per protocol, index %(index)s) or %(field)s."
-msgstr "Voor %(protocol)s-routes is een backendpoort vereist. Stuur targetPort (herhaald per protocol, index %(index)s) of %(field)s."
+msgstr ""
+"Voor %(protocol)s-routes is een backendpoort vereist. Stuur targetPort "
+"(herhaald per protocol, index %(index)s) of %(field)s."
 
 #, python-format
 msgid ""
@@ -694,7 +724,10 @@ msgstr "Een label voor het apparaat waar deze sleutel bij hoort."
 msgid ""
 "A middleware named '%(name)s' already exists and wasn't created by the route "
 "presets. Rename or remove it first, then re-save."
-msgstr "Er bestaat al een middleware met de naam “%(name)s” die niet door de routepresets is aangemaakt. Hernoem of verwijder die eerst en sla daarna opnieuw op."
+msgstr ""
+"Er bestaat al een middleware met de naam “%(name)s” die niet door de "
+"routepresets is aangemaakt. Hernoem of verwijder die eerst en sla daarna "
+"opnieuw op."
 
 #, python-format
 msgid "A name cannot contain any of these characters: %(chars)s"
@@ -711,7 +744,9 @@ msgstr ""
 msgid ""
 "A secret was written to %(files)s in plain text. It has been encrypted in "
 "place and is no longer stored in the clear"
-msgstr "Er is een geheim in platte tekst naar %(files)s geschreven. Het is ter plekke versleuteld en wordt niet langer onversleuteld opgeslagen"
+msgstr ""
+"Er is een geheim in platte tekst naar %(files)s geschreven. Het is ter "
+"plekke versleuteld en wordt niet langer onversleuteld opgeslagen"
 
 #, python-format
 msgid "A service named '%(name)s' already exists"
@@ -751,7 +786,9 @@ msgstr "ACME_JSON_PATH is niet ingesteld op deze agent"
 msgid ""
 "ADMIN_PASSWORD is set, so a password saved here would never be used. Change "
 "that variable and restart instead."
-msgstr "ADMIN_PASSWORD is ingesteld, dus een hier opgeslagen wachtwoord zou nooit worden gebruikt. Wijzig die variabele en herstart in plaats daarvan."
+msgstr ""
+"ADMIN_PASSWORD is ingesteld, dus een hier opgeslagen wachtwoord zou nooit "
+"worden gebruikt. Wijzig die variabele en herstart in plaats daarvan."
 
 #. Used in the browser
 msgid "ALPN Protocols"
@@ -1235,7 +1272,9 @@ msgstr "Agent %(name)s is onbereikbaar"
 msgid ""
 "Agent %(name)s rejected the API key - rotate it in Settings or fix "
 "TMA_API_KEY on the agent"
-msgstr "Agent %(name)s heeft de API-sleutel afgewezen - roteer deze in Instellingen of corrigeer TMA_API_KEY op de agent"
+msgstr ""
+"Agent %(name)s heeft de API-sleutel afgewezen - roteer deze in Instellingen "
+"of corrigeer TMA_API_KEY op de agent"
 
 msgid "Agent URL"
 msgstr "Agent-URL"
@@ -1250,7 +1289,9 @@ msgstr "Agent-URL mag niet leeg zijn."
 msgid ""
 "Agent URL must start with http:// or https:// - without a scheme the agent "
 "cannot be reached."
-msgstr "Agent-URL moet beginnen met http:// of https:// - zonder schema is de agent niet bereikbaar."
+msgstr ""
+"Agent-URL moet beginnen met http:// of https:// - zonder schema is de agent "
+"niet bereikbaar."
 
 #, python-format
 msgid "Agent branch \"%(branch)s\" must differ from the Host branch"
@@ -1740,8 +1781,12 @@ msgstr[1] "Backend gedegradeerd - {up} van {n} servers bereikbaar"
 msgid "Backend degraded - {up} of {n} server up ({servers} down) · {ago}"
 msgid_plural ""
 "Backend degraded - {up} of {n} servers up ({servers} down) · {ago}"
-msgstr[0] "Backend gedegradeerd - {up} van {n} server bereikbaar ({servers} onbereikbaar) · {ago}"
-msgstr[1] "Backend gedegradeerd - {up} van {n} servers bereikbaar ({servers} onbereikbaar) · {ago}"
+msgstr[0] ""
+"Backend gedegradeerd - {up} van {n} server bereikbaar ({servers} "
+"onbereikbaar) · {ago}"
+msgstr[1] ""
+"Backend gedegradeerd - {up} van {n} servers bereikbaar ({servers} "
+"onbereikbaar) · {ago}"
 
 #. Used in the browser
 #, python-brace-format
@@ -1755,8 +1800,12 @@ msgstr[1] "Backend gedegradeerd - {up} van {n} servers bereikbaar · {ago}"
 msgid "Backend degraded, {up} of {n} server up ({servers} down) · {when}"
 msgid_plural ""
 "Backend degraded, {up} of {n} servers up ({servers} down) · {when}"
-msgstr[0] "Backend gedegradeerd, {up} van {n} server bereikbaar ({servers} onbereikbaar) · {when}"
-msgstr[1] "Backend gedegradeerd, {up} van {n} servers bereikbaar ({servers} onbereikbaar) · {when}"
+msgstr[0] ""
+"Backend gedegradeerd, {up} van {n} server bereikbaar ({servers} "
+"onbereikbaar) · {when}"
+msgstr[1] ""
+"Backend gedegradeerd, {up} van {n} servers bereikbaar ({servers} "
+"onbereikbaar) · {when}"
 
 #. Used in the browser
 #, python-brace-format
@@ -1900,7 +1949,9 @@ msgstr "Back-ups"
 msgid ""
 "Backups storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "Back-upopslag op %(path)s is niet beschrijfbaar, dus instellingen, back-ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
+msgstr ""
+"Back-upopslag op %(path)s is niet beschrijfbaar, dus instellingen, back-ups "
+"en geplande controles blijven niet bewaard na een herstart (%(error)s)"
 
 msgid "Backups → Git"
 msgstr "Back-ups → Git"
@@ -2475,8 +2526,10 @@ msgstr "Klik om elke kaart tot deze provider te beperken."
 #, python-brace-format
 msgid "Click to see the {count} subscribed ban that was excluded."
 msgid_plural "Click to see the {count} subscribed bans that were excluded."
-msgstr[0] "Klik om de {count} geabonneerde blokkade te zien die is uitgesloten."
-msgstr[1] "Klik om de {count} geabonneerde blokkades te zien die zijn uitgesloten."
+msgstr[0] ""
+"Klik om de {count} geabonneerde blokkade te zien die is uitgesloten."
+msgstr[1] ""
+"Klik om de {count} geabonneerde blokkades te zien die zijn uitgesloten."
 
 #. Used in the browser
 #, python-brace-format
@@ -2668,7 +2721,9 @@ msgstr "Configuratieschema"
 msgid ""
 "Configuration storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "Configuratieopslag op %(path)s is niet beschrijfbaar, dus instellingen, back-ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
+msgstr ""
+"Configuratieopslag op %(path)s is niet beschrijfbaar, dus instellingen, back-"
+"ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
 
 #, python-format
 msgid "Configure %(access_log_path)s in Settings"
@@ -3070,7 +3125,8 @@ msgid "CrowdSec"
 msgstr "CrowdSec"
 
 msgid "CrowdSec LAPI URL, bouncer API key or client certificate is not set"
-msgstr "CrowdSec-LAPI-URL, bouncer-API-sleutel of clientcertificaat is niet ingesteld"
+msgstr ""
+"CrowdSec-LAPI-URL, bouncer-API-sleutel of clientcertificaat is niet ingesteld"
 
 msgid "CrowdSec LAPI is reachable again"
 msgstr "CrowdSec-LAPI is weer bereikbaar"
@@ -3103,8 +3159,12 @@ msgid ""
 msgid_plural ""
 "CrowdSec has not answered for %(num)d days, so these decisions are the last "
 "ones read and may be out of date. %(reason)s"
-msgstr[0] "CrowdSec heeft al %(num)d dag niet geantwoord, dus deze decisions zijn de laatst gelezen en kunnen verouderd zijn. %(reason)s"
-msgstr[1] "CrowdSec heeft al %(num)d dagen niet geantwoord, dus deze decisions zijn de laatst gelezen en kunnen verouderd zijn. %(reason)s"
+msgstr[0] ""
+"CrowdSec heeft al %(num)d dag niet geantwoord, dus deze decisions zijn de "
+"laatst gelezen en kunnen verouderd zijn. %(reason)s"
+msgstr[1] ""
+"CrowdSec heeft al %(num)d dagen niet geantwoord, dus deze decisions zijn de "
+"laatst gelezen en kunnen verouderd zijn. %(reason)s"
 
 #, python-format
 msgid ""
@@ -3113,8 +3173,12 @@ msgid ""
 msgid_plural ""
 "CrowdSec has not answered for %(num)d hours, so these decisions are the last "
 "ones read and may be out of date. %(reason)s"
-msgstr[0] "CrowdSec heeft al %(num)d uur niet geantwoord, dus deze decisions zijn de laatst gelezen en kunnen verouderd zijn. %(reason)s"
-msgstr[1] "CrowdSec heeft al %(num)d uur niet geantwoord, dus deze decisions zijn de laatst gelezen en kunnen verouderd zijn. %(reason)s"
+msgstr[0] ""
+"CrowdSec heeft al %(num)d uur niet geantwoord, dus deze decisions zijn de "
+"laatst gelezen en kunnen verouderd zijn. %(reason)s"
+msgstr[1] ""
+"CrowdSec heeft al %(num)d uur niet geantwoord, dus deze decisions zijn de "
+"laatst gelezen en kunnen verouderd zijn. %(reason)s"
 
 #, python-format
 msgid ""
@@ -3123,8 +3187,12 @@ msgid ""
 msgid_plural ""
 "CrowdSec has not answered for %(num)d minutes, so these decisions are the "
 "last ones read and may be out of date. %(reason)s"
-msgstr[0] "CrowdSec heeft al %(num)d minuut niet geantwoord, dus deze decisions zijn de laatst gelezen en kunnen verouderd zijn. %(reason)s"
-msgstr[1] "CrowdSec heeft al %(num)d minuten niet geantwoord, dus deze decisions zijn de laatst gelezen en kunnen verouderd zijn. %(reason)s"
+msgstr[0] ""
+"CrowdSec heeft al %(num)d minuut niet geantwoord, dus deze decisions zijn de "
+"laatst gelezen en kunnen verouderd zijn. %(reason)s"
+msgstr[1] ""
+"CrowdSec heeft al %(num)d minuten niet geantwoord, dus deze decisions zijn "
+"de laatst gelezen en kunnen verouderd zijn. %(reason)s"
 
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
@@ -3133,7 +3201,9 @@ msgstr "CrowdSec is actueel, niets gewijzigd sinds de laatste keer lezen"
 msgid ""
 "CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / "
 "CROWDSEC_MACHINE_PASSWORD or the client certificate"
-msgstr "CrowdSec-machinelogin mislukt - controleer CROWDSEC_MACHINE_ID / CROWDSEC_MACHINE_PASSWORD of het clientcertificaat"
+msgstr ""
+"CrowdSec-machinelogin mislukt - controleer CROWDSEC_MACHINE_ID / "
+"CROWDSEC_MACHINE_PASSWORD of het clientcertificaat"
 
 msgid "CrowdSec not configured"
 msgstr "CrowdSec niet geconfigureerd"
@@ -3798,7 +3868,9 @@ msgstr "Docker-host"
 msgid ""
 "Docker restart failed - check DOCKER_HOST and TRAEFIK_CONTAINER "
 "(%(container)s)"
-msgstr "Docker-herstart mislukt - controleer DOCKER_HOST en TRAEFIK_CONTAINER (%(container)s)"
+msgstr ""
+"Docker-herstart mislukt - controleer DOCKER_HOST en TRAEFIK_CONTAINER "
+"(%(container)s)"
 
 #, python-format
 msgid "Docker restart failed: %(detail)s"
@@ -3921,7 +3993,10 @@ msgstr "Pad van dynamische configuratie"
 msgid ""
 "Dynamic config storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "Opslag voor dynamische configuratie op %(path)s is niet beschrijfbaar, dus instellingen, back-ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
+msgstr ""
+"Opslag voor dynamische configuratie op %(path)s is niet beschrijfbaar, dus "
+"instellingen, back-ups en geplande controles blijven niet bewaard na een "
+"herstart (%(error)s)"
 
 #. Used in the browser
 #, python-brace-format
@@ -4174,8 +4249,12 @@ msgid ""
 msgid_plural ""
 "Entry point middlewares {mws} are prepended into every router on this entry "
 "point"
-msgstr[0] "Entrypoint-middleware {mws} wordt vooraan toegevoegd aan elke router op dit entrypoint"
-msgstr[1] "Entrypoint-middlewares {mws} worden vooraan toegevoegd aan elke router op dit entrypoint"
+msgstr[0] ""
+"Entrypoint-middleware {mws} wordt vooraan toegevoegd aan elke router op dit "
+"entrypoint"
+msgstr[1] ""
+"Entrypoint-middlewares {mws} worden vooraan toegevoegd aan elke router op "
+"dit entrypoint"
 
 #. Used in the browser
 msgid "Entry points"
@@ -4299,8 +4378,20 @@ msgid_plural ""
 "of retention, not the start of activity, and CrowdSec does not report how "
 "many it pruned. Subscribed blocklist rows are left out on purpose because "
 "they describe the internet rather than your host."
-msgstr[0] "Elke kaart hierboven vat de {retained} alert samen die de LAPI nog bewaart, niet elke aanval die deze host ooit heeft gezien. De oudste alert hier is de grens van de bewaartermijn, niet het begin van de activiteit, en CrowdSec meldt niet hoeveel er zijn opgeschoond. Rijen uit geabonneerde blocklists zijn bewust weggelaten, omdat ze het internet beschrijven in plaats van je host."
-msgstr[1] "Elke kaart hierboven vat de {retained} alerts samen die de LAPI nog bewaart, niet elke aanval die deze host ooit heeft gezien. De oudste alert hier is de grens van de bewaartermijn, niet het begin van de activiteit, en CrowdSec meldt niet hoeveel er zijn opgeschoond. Rijen uit geabonneerde blocklists zijn bewust weggelaten, omdat ze het internet beschrijven in plaats van je host."
+msgstr[0] ""
+"Elke kaart hierboven vat de {retained} alert samen die de LAPI nog bewaart, "
+"niet elke aanval die deze host ooit heeft gezien. De oudste alert hier is de "
+"grens van de bewaartermijn, niet het begin van de activiteit, en CrowdSec "
+"meldt niet hoeveel er zijn opgeschoond. Rijen uit geabonneerde blocklists "
+"zijn bewust weggelaten, omdat ze het internet beschrijven in plaats van je "
+"host."
+msgstr[1] ""
+"Elke kaart hierboven vat de {retained} alerts samen die de LAPI nog bewaart, "
+"niet elke aanval die deze host ooit heeft gezien. De oudste alert hier is de "
+"grens van de bewaartermijn, niet het begin van de activiteit, en CrowdSec "
+"meldt niet hoeveel er zijn opgeschoond. Rijen uit geabonneerde blocklists "
+"zijn bewust weggelaten, omdat ze het internet beschrijven in plaats van je "
+"host."
 
 #. Used in the browser
 #, python-brace-format
@@ -5139,7 +5230,9 @@ msgstr ""
 msgid ""
 "HTTP %(status_code)s - the saved password is only sent to the saved API URL, "
 "enter it to test this one"
-msgstr "HTTP %(status_code)s - het opgeslagen wachtwoord wordt alleen naar de opgeslagen API-URL gestuurd, voer het in om deze te testen"
+msgstr ""
+"HTTP %(status_code)s - het opgeslagen wachtwoord wordt alleen naar de "
+"opgeslagen API-URL gestuurd, voer het in om deze te testen"
 
 #, python-format
 msgid "HTTP %(status_code)s from %(url)s/api/version"
@@ -6054,7 +6147,9 @@ msgstr ""
 
 msgid ""
 "Local password login is turned off. Sign in with your identity provider."
-msgstr "Inloggen met een lokaal wachtwoord is uitgeschakeld. Log in met je identiteitsprovider."
+msgstr ""
+"Inloggen met een lokaal wachtwoord is uitgeschakeld. Log in met je "
+"identiteitsprovider."
 
 #. Used in the browser
 msgid "Local plugin"
@@ -6592,7 +6687,10 @@ msgstr "Nieuw wachtwoord (min. 8 tekens)"
 msgid ""
 "New password must be 72 bytes or fewer, which is the bcrypt limit. Accented "
 "and non-Latin characters take more than one byte each."
-msgstr "Het nieuwe wachtwoord mag maximaal 72 bytes zijn, de limiet van bcrypt. Tekens met accenten en niet-Latijnse tekens nemen elk meer dan één byte in beslag."
+msgstr ""
+"Het nieuwe wachtwoord mag maximaal 72 bytes zijn, de limiet van bcrypt. "
+"Tekens met accenten en niet-Latijnse tekens nemen elk meer dan één byte in "
+"beslag."
 
 msgid "New password must be at least 8 characters and at most 72 bytes."
 msgstr ""
@@ -6897,7 +6995,9 @@ msgstr "Nog geen meldingen"
 #, python-brace-format
 msgid ""
 "No object list for: {objects}. The strips and provider counts are incomplete."
-msgstr "Geen objectlijst voor: {objects}. De stroken en de tellingen per provider zijn onvolledig."
+msgstr ""
+"Geen objectlijst voor: {objects}. De stroken en de tellingen per provider "
+"zijn onvolledig."
 
 #. Used in the browser
 msgid "No one has tripped a scenario"
@@ -7757,7 +7857,9 @@ msgstr "Wachtwoord & 2FA"
 msgid ""
 "Password must be 72 bytes or fewer, which is the bcrypt limit. Accented and "
 "non-Latin characters take more than one byte each."
-msgstr "Wachtwoord mag maximaal 72 bytes zijn, de limiet van bcrypt. Tekens met accenten en niet-Latijnse tekens nemen elk meer dan één byte in beslag."
+msgstr ""
+"Wachtwoord mag maximaal 72 bytes zijn, de limiet van bcrypt. Tekens met "
+"accenten en niet-Latijnse tekens nemen elk meer dan één byte in beslag."
 
 #. Used in the browser
 msgid "Password must be at least 8 characters."
@@ -7777,7 +7879,8 @@ msgstr "Wachtwoorden komen niet overeen."
 msgid ""
 "Paste the middleware body, or a full http:/tcp: block holding a single "
 "middleware"
-msgstr "Plak de middleware-body, of een volledig http:/tcp:-blok met één middleware"
+msgstr ""
+"Plak de middleware-body, of een volledig http:/tcp:-blok met één middleware"
 
 #. Used in the browser
 msgid "Paste the static config snippet"
@@ -8012,12 +8115,15 @@ msgstr "Plug-in opgeslagen - herstart Traefik om toe te passen"
 
 #, python-format
 msgid "Plugin saved but middleware could not be written: %(error)s"
-msgstr "Plug-in opgeslagen maar middleware kon niet worden geschreven: %(error)s"
+msgstr ""
+"Plug-in opgeslagen maar middleware kon niet worden geschreven: %(error)s"
 
 msgid ""
 "Plugin saved, but the middleware was not written - no config directory is "
 "configured, so there is no file to write it to"
-msgstr "Plug-in opgeslagen, maar de middleware is niet geschreven - er is geen configuratiemap ingesteld, dus er is geen bestand om naar te schrijven"
+msgstr ""
+"Plug-in opgeslagen, maar de middleware is niet geschreven - er is geen "
+"configuratiemap ingesteld, dus er is geen bestand om naar te schrijven"
 
 msgid ""
 "Plugin versions come from your static config. The latest version is checked "
@@ -8217,7 +8323,8 @@ msgstr ""
 "gecontroleerd als je inlogt."
 
 msgid "Provider reachable. Credentials are not verified until you sign in."
-msgstr "Provider bereikbaar. Inloggegevens worden pas gecontroleerd als je inlogt."
+msgstr ""
+"Provider bereikbaar. Inloggegevens worden pas gecontroleerd als je inlogt."
 
 msgid "Provider tabs"
 msgstr "Providertabbladen"
@@ -8778,8 +8885,12 @@ msgid ""
 msgid_plural ""
 "Removed {n} certificates, but Traefik did not restart. The change is undone "
 "until it does."
-msgstr[0] "{n} certificaat verwijderd, maar Traefik is niet herstart. De wijziging werkt pas na de herstart."
-msgstr[1] "{n} certificaten verwijderd, maar Traefik is niet herstart. De wijziging werkt pas na de herstart."
+msgstr[0] ""
+"{n} certificaat verwijderd, maar Traefik is niet herstart. De wijziging "
+"werkt pas na de herstart."
+msgstr[1] ""
+"{n} certificaten verwijderd, maar Traefik is niet herstart. De wijziging "
+"werkt pas na de herstart."
 
 #. Used in the browser
 #, python-brace-format
@@ -8789,8 +8900,12 @@ msgid ""
 msgid_plural ""
 "Removed {n} certificates, but Traefik did not restart: {error}. The change "
 "is undone until it does."
-msgstr[0] "{n} certificaat verwijderd, maar Traefik is niet herstart: {error}. De wijziging werkt pas na de herstart."
-msgstr[1] "{n} certificaten verwijderd, maar Traefik is niet herstart: {error}. De wijziging werkt pas na de herstart."
+msgstr[0] ""
+"{n} certificaat verwijderd, maar Traefik is niet herstart: {error}. De "
+"wijziging werkt pas na de herstart."
+msgstr[1] ""
+"{n} certificaten verwijderd, maar Traefik is niet herstart: {error}. De "
+"wijziging werkt pas na de herstart."
 
 #. Used in the browser
 msgid "Rename it everywhere, or copy it for this route?"
@@ -9188,8 +9303,12 @@ msgstr "Route “%(plain_id)s” niet gevonden"
 #, python-format
 msgid "Route %(name)s backend is degraded, %(up)s of %(num)d server up"
 msgid_plural "Route %(name)s backend is degraded, %(up)s of %(num)d servers up"
-msgstr[0] "Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d server bereikbaar"
-msgstr[1] "Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d servers bereikbaar"
+msgstr[0] ""
+"Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d server "
+"bereikbaar"
+msgstr[1] ""
+"Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d servers "
+"bereikbaar"
 
 #, python-format
 msgid ""
@@ -9197,21 +9316,31 @@ msgid ""
 msgid_plural ""
 "Route %(name)s backend is degraded, %(up)s of %(num)d servers up "
 "(%(servers)s)"
-msgstr[0] "Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d server bereikbaar (%(servers)s)"
-msgstr[1] "Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d servers bereikbaar (%(servers)s)"
+msgstr[0] ""
+"Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d server "
+"bereikbaar (%(servers)s)"
+msgstr[1] ""
+"Backend van route %(name)s is gedegradeerd, %(up)s van %(num)d servers "
+"bereikbaar (%(servers)s)"
 
 #, python-format
 msgid "Route %(name)s backend is down, 0 of %(num)d server up"
 msgid_plural "Route %(name)s backend is down, 0 of %(num)d servers up"
-msgstr[0] "Backend van route %(name)s is onbereikbaar, 0 van %(num)d server bereikbaar"
-msgstr[1] "Backend van route %(name)s is onbereikbaar, 0 van %(num)d servers bereikbaar"
+msgstr[0] ""
+"Backend van route %(name)s is onbereikbaar, 0 van %(num)d server bereikbaar"
+msgstr[1] ""
+"Backend van route %(name)s is onbereikbaar, 0 van %(num)d servers bereikbaar"
 
 #, python-format
 msgid "Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)"
 msgid_plural ""
 "Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)"
-msgstr[0] "Backend van route %(name)s is onbereikbaar, 0 van %(num)d server bereikbaar (%(servers)s)"
-msgstr[1] "Backend van route %(name)s is onbereikbaar, 0 van %(num)d servers bereikbaar (%(servers)s)"
+msgstr[0] ""
+"Backend van route %(name)s is onbereikbaar, 0 van %(num)d server bereikbaar "
+"(%(servers)s)"
+msgstr[1] ""
+"Backend van route %(name)s is onbereikbaar, 0 van %(num)d servers bereikbaar "
+"(%(servers)s)"
 
 #, python-format
 msgid "Route %(name)s created"
@@ -10340,8 +10469,12 @@ msgstr[1] "Nog {n} apps tonen in {name}, {down} daarvan onbereikbaar"
 msgid "Show {n} more app in {name}, {down} of them down and {warn} degraded"
 msgid_plural ""
 "Show {n} more apps in {name}, {down} of them down and {warn} degraded"
-msgstr[0] "Nog {n} app tonen in {name}, {down} daarvan onbereikbaar en {warn} gedegradeerd"
-msgstr[1] "Nog {n} apps tonen in {name}, {down} daarvan onbereikbaar en {warn} gedegradeerd"
+msgstr[0] ""
+"Nog {n} app tonen in {name}, {down} daarvan onbereikbaar en {warn} "
+"gedegradeerd"
+msgstr[1] ""
+"Nog {n} apps tonen in {name}, {down} daarvan onbereikbaar en {warn} "
+"gedegradeerd"
 
 #. Used in the browser
 #, python-brace-format
@@ -10369,8 +10502,12 @@ msgstr[1] "Nog {n} routes tonen in {name}, {down} daarvan onbereikbaar"
 msgid "Show {n} more route in {name}, {down} of them down and {warn} degraded"
 msgid_plural ""
 "Show {n} more routes in {name}, {down} of them down and {warn} degraded"
-msgstr[0] "Nog {n} route tonen in {name}, {down} daarvan onbereikbaar en {warn} gedegradeerd"
-msgstr[1] "Nog {n} routes tonen in {name}, {down} daarvan onbereikbaar en {warn} gedegradeerd"
+msgstr[0] ""
+"Nog {n} route tonen in {name}, {down} daarvan onbereikbaar en {warn} "
+"gedegradeerd"
+msgstr[1] ""
+"Nog {n} routes tonen in {name}, {down} daarvan onbereikbaar en {warn} "
+"gedegradeerd"
 
 #. Used in the browser
 #, python-brace-format
@@ -10438,7 +10575,9 @@ msgstr "Pad naar signaalbestand"
 
 #, python-format
 msgid "Signal file write failed - check SIGNAL_FILE_PATH (%(path)s)"
-msgstr "Schrijven naar signaalbestand mislukt - controleer SIGNAL_FILE_PATH (%(path)s)"
+msgstr ""
+"Schrijven naar signaalbestand mislukt - controleer SIGNAL_FILE_PATH "
+"(%(path)s)"
 
 msgctxt "button"
 msgid "Simple"
@@ -10574,7 +10713,10 @@ msgstr "Statische configuratie opgeslagen"
 msgid ""
 "Static config storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "Opslag voor statische configuratie op %(path)s is niet beschrijfbaar, dus instellingen, back-ups en geplande controles blijven niet bewaard na een herstart (%(error)s)"
+msgstr ""
+"Opslag voor statische configuratie op %(path)s is niet beschrijfbaar, dus "
+"instellingen, back-ups en geplande controles blijven niet bewaard na een "
+"herstart (%(error)s)"
 
 #. Used in the browser
 msgctxt "column"
@@ -10906,7 +11048,9 @@ msgstr ""
 msgid ""
 "TLS verification failed - the agent certificate is not trusted by Traefik "
 "Manager (%(error)s)"
-msgstr "TLS-verificatie mislukt - het agentcertificaat wordt niet vertrouwd door Traefik Manager (%(error)s)"
+msgstr ""
+"TLS-verificatie mislukt - het agentcertificaat wordt niet vertrouwd door "
+"Traefik Manager (%(error)s)"
 
 #. Used in the browser
 msgid "TLS, no certResolver"
@@ -11411,55 +11555,73 @@ msgstr "De proxy antwoordde %(code)s, de backend is niet bereikbaar"
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend answered %(code)s"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend antwoordde %(code)s"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend antwoordde %(code)s"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend closed the connection without answering"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend sloot de verbinding zonder te antwoorden"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend sloot de verbinding zonder te antwoorden"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend could not be reached from Traefik Manager (%(error)s)"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend kon niet worden bereikt vanuit Traefik Manager (%(error)s)"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend kon niet worden bereikt vanuit Traefik Manager (%(error)s)"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend has no address to check"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend heeft geen adres om te controleren"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend heeft geen adres om te controleren"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend is unreachable"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend is onbereikbaar"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend is onbereikbaar"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend is unreachable (network unreachable)"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend is onbereikbaar (netwerk onbereikbaar)"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend is onbereikbaar (netwerk onbereikbaar)"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend is unreachable (no route to host)"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend is onbereikbaar (geen route naar host)"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend is onbereikbaar (geen route naar host)"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend refused the connection"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend weigerde de verbinding"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend weigerde de verbinding"
 
 #, python-format
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend reset the connection"
-msgstr "De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de backend heeft de verbinding gereset"
+msgstr ""
+"De proxy leidde om naar %(host)s voordat de backend werd bereikt, en de "
+"backend heeft de verbinding gereset"
 
 msgid "The public address where TMA is running on the remote server."
 msgstr "Het openbare adres waarop TMA draait op de externe server."
@@ -11468,13 +11630,17 @@ msgstr "Het openbare adres waarop TMA draait op de externe server."
 msgid ""
 "The requests selected right now carry no router name. Clear the filters to "
 "rank the whole window."
-msgstr "De nu geselecteerde verzoeken bevatten geen routernaam. Wis de filters om het hele venster te rangschikken."
+msgstr ""
+"De nu geselecteerde verzoeken bevatten geen routernaam. Wis de filters om "
+"het hele venster te rangschikken."
 
 #. Used in the browser
 msgid ""
 "The requests selected right now carry no service name. Clear the filters to "
 "rank the whole window."
-msgstr "De nu geselecteerde verzoeken bevatten geen servicenaam. Wis de filters om het hele venster te rangschikken."
+msgstr ""
+"De nu geselecteerde verzoeken bevatten geen servicenaam. Wis de filters om "
+"het hele venster te rangschikken."
 
 #. Used in the browser
 #, python-brace-format
@@ -11503,8 +11669,14 @@ msgid_plural ""
 "The retained window holds {retained} alerts, and every filter on the window "
 "row is applied together, so this card has nothing left to rank. That is the "
 "filter talking, not the host."
-msgstr[0] "Het bewaarde venster bevat {retained} alert, en elk filter op de vensterrij wordt tegelijk toegepast, dus heeft deze kaart niets meer om te rangschikken. Dat komt door het filter, niet door de host."
-msgstr[1] "Het bewaarde venster bevat {retained} alerts, en elk filter op de vensterrij wordt tegelijk toegepast, dus heeft deze kaart niets meer om te rangschikken. Dat komt door het filter, niet door de host."
+msgstr[0] ""
+"Het bewaarde venster bevat {retained} alert, en elk filter op de vensterrij "
+"wordt tegelijk toegepast, dus heeft deze kaart niets meer om te "
+"rangschikken. Dat komt door het filter, niet door de host."
+msgstr[1] ""
+"Het bewaarde venster bevat {retained} alerts, en elk filter op de vensterrij "
+"wordt tegelijk toegepast, dus heeft deze kaart niets meer om te "
+"rangschikken. Dat komt door het filter, niet door de host."
 
 msgid ""
 "The route list could not be read. Names, icons and launch links all come "
@@ -11522,8 +11694,12 @@ msgid ""
 msgid_plural ""
 "The search {search} and the {proto} protocol filter together match none of "
 "them."
-msgstr[0] "De zoekopdracht {search} en het protocolfilter {proto} komen er samen niet mee overeen."
-msgstr[1] "De zoekopdracht {search} en het protocolfilter {proto} komen samen met geen ervan overeen."
+msgstr[0] ""
+"De zoekopdracht {search} en het protocolfilter {proto} komen er samen niet "
+"mee overeen."
+msgstr[1] ""
+"De zoekopdracht {search} en het protocolfilter {proto} komen samen met geen "
+"ervan overeen."
 
 #. Used in the browser
 #, python-brace-format
@@ -11533,8 +11709,12 @@ msgid ""
 msgid_plural ""
 "The search {search} and the {provider} provider filter together match none "
 "of them."
-msgstr[0] "De zoekopdracht {search} en het providerfilter {provider} komen er samen niet mee overeen."
-msgstr[1] "De zoekopdracht {search} en het providerfilter {provider} komen samen met geen ervan overeen."
+msgstr[0] ""
+"De zoekopdracht {search} en het providerfilter {provider} komen er samen "
+"niet mee overeen."
+msgstr[1] ""
+"De zoekopdracht {search} en het providerfilter {provider} komen samen met "
+"geen ervan overeen."
 
 #. Used in the browser
 #, python-brace-format
@@ -11551,8 +11731,12 @@ msgid ""
 msgid_plural ""
 "The search {search}, the {proto} protocol filter and the {provider} provider "
 "filter together match none of them."
-msgstr[0] "De zoekopdracht {search}, het protocolfilter {proto} en het providerfilter {provider} komen er samen niet mee overeen."
-msgstr[1] "De zoekopdracht {search}, het protocolfilter {proto} en het providerfilter {provider} komen samen met geen ervan overeen."
+msgstr[0] ""
+"De zoekopdracht {search}, het protocolfilter {proto} en het providerfilter "
+"{provider} komen er samen niet mee overeen."
+msgstr[1] ""
+"De zoekopdracht {search}, het protocolfilter {proto} en het providerfilter "
+"{provider} komen samen met geen ervan overeen."
 
 #. Used in the browser
 msgid "The server changed, reload the list and select again"
@@ -11592,8 +11776,12 @@ msgid ""
 msgid_plural ""
 "The {proto} protocol filter and the {provider} provider filter together "
 "match none of them."
-msgstr[0] "Het protocolfilter {proto} en het providerfilter {provider} komen er samen niet mee overeen."
-msgstr[1] "Het protocolfilter {proto} en het providerfilter {provider} komen samen met geen ervan overeen."
+msgstr[0] ""
+"Het protocolfilter {proto} en het providerfilter {provider} komen er samen "
+"niet mee overeen."
+msgstr[1] ""
+"Het protocolfilter {proto} en het providerfilter {provider} komen samen met "
+"geen ervan overeen."
 
 #. Used in the browser
 #, python-brace-format
@@ -11685,8 +11873,18 @@ msgid_plural ""
 "traffic. The oldest line here is the edge of the fetched window, not the "
 "start of activity. Traefik does not report the file total, so the share of "
 "overall traffic is unknown. {parsed} of {fetched} lines parsed."
-msgstr[0] "Deze cijfers vatten de laatste {fetched} regel van de toegangslog samen, niet al het verkeer. De oudste regel hier is de rand van het opgehaalde venster, niet het begin van de activiteit. Traefik meldt het totaal van het bestand niet, dus het aandeel in het totale verkeer is onbekend. {parsed} van {fetched} regel geparset."
-msgstr[1] "Deze cijfers vatten de laatste {fetched} regels van de toegangslog samen, niet al het verkeer. De oudste regel hier is de rand van het opgehaalde venster, niet het begin van de activiteit. Traefik meldt het totaal van het bestand niet, dus het aandeel in het totale verkeer is onbekend. {parsed} van {fetched} regels geparset."
+msgstr[0] ""
+"Deze cijfers vatten de laatste {fetched} regel van de toegangslog samen, "
+"niet al het verkeer. De oudste regel hier is de rand van het opgehaalde "
+"venster, niet het begin van de activiteit. Traefik meldt het totaal van het "
+"bestand niet, dus het aandeel in het totale verkeer is onbekend. {parsed} "
+"van {fetched} regel geparset."
+msgstr[1] ""
+"Deze cijfers vatten de laatste {fetched} regels van de toegangslog samen, "
+"niet al het verkeer. De oudste regel hier is de rand van het opgehaalde "
+"venster, niet het begin van de activiteit. Traefik meldt het totaal van het "
+"bestand niet, dus het aandeel in het totale verkeer is onbekend. {parsed} "
+"van {fetched} regels geparset."
 
 #, python-format
 msgid ""
@@ -11927,8 +12125,14 @@ msgid ""
 msgid_plural ""
 "This panel refetches every {seconds} seconds while the Logs tab is open and "
 "the browser tab is visible. It pauses while you are typing in the filter box."
-msgstr[0] "Dit paneel haalt elke {seconds} seconde opnieuw op zolang het tabblad Logs open is en het browsertabblad zichtbaar is. Het pauzeert terwijl je in het filterveld typt."
-msgstr[1] "Dit paneel haalt elke {seconds} seconden opnieuw op zolang het tabblad Logs open is en het browsertabblad zichtbaar is. Het pauzeert terwijl je in het filterveld typt."
+msgstr[0] ""
+"Dit paneel haalt elke {seconds} seconde opnieuw op zolang het tabblad Logs "
+"open is en het browsertabblad zichtbaar is. Het pauzeert terwijl je in het "
+"filterveld typt."
+msgstr[1] ""
+"Dit paneel haalt elke {seconds} seconden opnieuw op zolang het tabblad Logs "
+"open is en het browsertabblad zichtbaar is. Het pauzeert terwijl je in het "
+"filterveld typt."
 
 #. Used in the browser
 #, python-brace-format
@@ -13075,15 +13279,21 @@ msgstr "Uitzoomen"
 
 msgid ""
 "a catch-all router can be served any certificate, so nothing is called unused"
-msgstr "een catch-all-router kan elk certificaat krijgen, dus niets wordt als ongebruikt aangemerkt"
+msgstr ""
+"een catch-all-router kan elk certificaat krijgen, dus niets wordt als "
+"ongebruikt aangemerkt"
 
 msgid "a config file could not be read, so nothing is called unused"
-msgstr "een configuratiebestand kon niet worden gelezen, dus niets wordt als ongebruikt aangemerkt"
+msgstr ""
+"een configuratiebestand kon niet worden gelezen, dus niets wordt als "
+"ongebruikt aangemerkt"
 
 msgid ""
 "a router matches hosts by regular expression, so its certificates cannot be "
 "worked out"
-msgstr "een router matcht hosts via een reguliere expressie, dus de certificaten ervan zijn niet te bepalen"
+msgstr ""
+"een router matcht hosts via een reguliere expressie, dus de certificaten "
+"ervan zijn niet te bepalen"
 
 #. Used in the browser
 msgid "access log off"
@@ -13926,7 +14136,9 @@ msgstr "helper hierboven kan Cloudflare-ranges in bulk toevoegen."
 
 #. Used in the browser
 msgid "highest random weight service, health lives on its children"
-msgstr "highest-random-weight-service, de gezondheid hangt af van de onderliggende services"
+msgstr ""
+"highest-random-weight-service, de gezondheid hangt af van de onderliggende "
+"services"
 
 #. Used in the browser
 msgctxt "label"
@@ -14203,7 +14415,8 @@ msgstr "minimale tijd tussen config-herladingen (standaard 2s)"
 
 #. Used in the browser
 msgid "mirroring service, health lives on its children"
-msgstr "mirroring-service, de gezondheid hangt af van de onderliggende services"
+msgstr ""
+"mirroring-service, de gezondheid hangt af van de onderliggende services"
 
 #. Used in the browser
 #, python-brace-format
@@ -14454,7 +14667,9 @@ msgstr "geen resolver"
 
 msgid ""
 "no restart method is configured, and Traefik only reads acme.json at startup"
-msgstr "er is geen herstartmethode geconfigureerd en Traefik leest acme.json alleen bij het opstarten"
+msgstr ""
+"er is geen herstartmethode geconfigureerd en Traefik leest acme.json alleen "
+"bij het opstarten"
 
 #. Used in the browser
 msgid "no router binds this entry point"
@@ -14590,8 +14805,12 @@ msgid ""
 "none of the {fetched} fetched line could be parsed as a Traefik access log"
 msgid_plural ""
 "none of the {fetched} fetched lines could be parsed as a Traefik access log"
-msgstr[0] "de {fetched} opgehaalde regel kon niet als Traefik-toegangslog worden geparset"
-msgstr[1] "geen van de {fetched} opgehaalde regels kon als Traefik-toegangslog worden geparset"
+msgstr[0] ""
+"de {fetched} opgehaalde regel kon niet als Traefik-toegangslog worden "
+"geparset"
+msgstr[1] ""
+"geen van de {fetched} opgehaalde regels kon als Traefik-toegangslog worden "
+"geparset"
 
 #. Used in the browser
 msgid "not configured"
@@ -15246,14 +15465,17 @@ msgid "the remote host"
 msgstr "de externe host"
 
 msgid "the router list is incomplete, so nothing is called unused"
-msgstr "de routerlijst is onvolledig, dus niets wordt als ongebruikt aangemerkt"
+msgstr ""
+"de routerlijst is onvolledig, dus niets wordt als ongebruikt aangemerkt"
 
 #. Used in the browser
 msgid "the server did not say why"
 msgstr "de server gaf geen reden"
 
 msgid "the static config is not readable, so resolvers cannot be checked"
-msgstr "de statische configuratie is niet leesbaar, dus resolvers kunnen niet worden gecontroleerd"
+msgstr ""
+"de statische configuratie is niet leesbaar, dus resolvers kunnen niet worden "
+"gecontroleerd"
 
 #. Used in the browser
 msgid "this access log format carries no duration"
@@ -15309,7 +15531,8 @@ msgstr "tools"
 
 #. Used in the browser
 msgid "total from /api/overview, the HTTP router list is unavailable"
-msgstr "totaal uit /api/overview, de lijst met HTTP-routers is niet beschikbaar"
+msgstr ""
+"totaal uit /api/overview, de lijst met HTTP-routers is niet beschikbaar"
 
 #. Used in the browser
 msgid "total from /api/overview, the middleware list is unavailable"
@@ -15321,7 +15544,8 @@ msgstr "totaal uit /api/overview, de lijst met services is niet beschikbaar"
 
 #. Used in the browser
 msgid "total from /api/overview, the stream router list is unavailable"
-msgstr "totaal uit /api/overview, de lijst met streamrouters is niet beschikbaar"
+msgstr ""
+"totaal uit /api/overview, de lijst met streamrouters is niet beschikbaar"
 
 #. Used in the browser
 msgid "tracing off"
@@ -15706,8 +15930,12 @@ msgid ""
 msgid_plural ""
 "{banned_count} sources hold an active ban raised by your own scenarios. "
 "Nothing to do about these"
-msgstr[0] "{banned_count} bron heeft een actieve blokkade die door je eigen scenario’s is opgelegd. Hier hoef je niets mee te doen"
-msgstr[1] "{banned_count} bronnen hebben een actieve blokkade die door je eigen scenario’s is opgelegd. Hier hoef je niets mee te doen"
+msgstr[0] ""
+"{banned_count} bron heeft een actieve blokkade die door je eigen scenario’s "
+"is opgelegd. Hier hoef je niets mee te doen"
+msgstr[1] ""
+"{banned_count} bronnen hebben een actieve blokkade die door je eigen "
+"scenario’s is opgelegd. Hier hoef je niets mee te doen"
 
 #. Used in the browser
 #, python-brace-format
@@ -15717,8 +15945,12 @@ msgid ""
 msgid_plural ""
 "{bots_count} agents name a tool outright. The rest are copied browser "
 "strings, which tells you the operator bothered to lie"
-msgstr[0] "{bots_count} user agent noemt een tool bij naam. De rest zijn gekopieerde browserstrings, waaruit blijkt dat de operator de moeite nam om te liegen"
-msgstr[1] "{bots_count} user agents noemen een tool bij naam. De rest zijn gekopieerde browserstrings, waaruit blijkt dat de operator de moeite nam om te liegen"
+msgstr[0] ""
+"{bots_count} user agent noemt een tool bij naam. De rest zijn gekopieerde "
+"browserstrings, waaruit blijkt dat de operator de moeite nam om te liegen"
+msgstr[1] ""
+"{bots_count} user agents noemen een tool bij naam. De rest zijn gekopieerde "
+"browserstrings, waaruit blijkt dat de operator de moeite nam om te liegen"
 
 #. Used in the browser
 #, python-brace-format
@@ -15981,8 +16213,12 @@ msgid ""
 msgid_plural ""
 "{count} of the {n} requests to {path} returned {status} {lgStatusName} ({pct}"
 "%). Click to filter the log list to just those."
-msgstr[0] "{count} van het {n} verzoek naar {path} gaf {status} {lgStatusName} ({pct}%). Klik om de loglijst tot alleen die te filteren."
-msgstr[1] "{count} van de {n} verzoeken naar {path} gaven {status} {lgStatusName} ({pct}%). Klik om de loglijst tot alleen die te filteren."
+msgstr[0] ""
+"{count} van het {n} verzoek naar {path} gaf {status} {lgStatusName} ({pct}"
+"%). Klik om de loglijst tot alleen die te filteren."
+msgstr[1] ""
+"{count} van de {n} verzoeken naar {path} gaven {status} {lgStatusName} ({pct}"
+"%). Klik om de loglijst tot alleen die te filteren."
 
 #. Used in the browser
 #, python-brace-format
@@ -15992,8 +16228,12 @@ msgid ""
 msgid_plural ""
 "{count} of them match every filter on this row at once. Click to drop the "
 "filters."
-msgstr[0] "{count} daarvan voldoet tegelijk aan elk filter in deze rij. Klik om de filters te wissen."
-msgstr[1] "{count} daarvan voldoen tegelijk aan elk filter in deze rij. Klik om de filters te wissen."
+msgstr[0] ""
+"{count} daarvan voldoet tegelijk aan elk filter in deze rij. Klik om de "
+"filters te wissen."
+msgstr[1] ""
+"{count} daarvan voldoen tegelijk aan elk filter in deze rij. Klik om de "
+"filters te wissen."
 
 #. Used in the browser
 #, python-brace-format
@@ -16532,8 +16772,12 @@ msgid ""
 msgid_plural ""
 "{loose_count} sources tripped a scenario and hold no active decision right "
 "now. Usually an expired ban rather than a miss"
-msgstr[0] "{loose_count} bron heeft een scenario geactiveerd en heeft nu geen actieve decision. Meestal een verlopen blokkade in plaats van een misser"
-msgstr[1] "{loose_count} bronnen hebben een scenario geactiveerd en hebben nu geen actieve decision. Meestal een verlopen blokkade in plaats van een misser"
+msgstr[0] ""
+"{loose_count} bron heeft een scenario geactiveerd en heeft nu geen actieve "
+"decision. Meestal een verlopen blokkade in plaats van een misser"
+msgstr[1] ""
+"{loose_count} bronnen hebben een scenario geactiveerd en hebben nu geen "
+"actieve decision. Meestal een verlopen blokkade in plaats van een misser"
 
 #. Used in the browser
 #, python-brace-format
@@ -16584,8 +16828,10 @@ msgstr[1] "{name} - {n} alerts, {pct}%, elke bron geblokkeerd."
 msgid "{name} - {n} alert, {pct}%, {open} from sources with no active ban."
 msgid_plural ""
 "{name} - {n} alerts, {pct}%, {open} from sources with no active ban."
-msgstr[0] "{name} - {n} alert, {pct}%, {open} uit bronnen zonder actieve blokkade."
-msgstr[1] "{name} - {n} alerts, {pct}%, {open} uit bronnen zonder actieve blokkade."
+msgstr[0] ""
+"{name} - {n} alert, {pct}%, {open} uit bronnen zonder actieve blokkade."
+msgstr[1] ""
+"{name} - {n} alerts, {pct}%, {open} uit bronnen zonder actieve blokkade."
 
 #. Used in the browser
 #, python-brace-format
@@ -16599,8 +16845,10 @@ msgstr[1] "{name} - {n} hits, {pct}%, elke bron geblokkeerd."
 msgid "{name} - {n} hit, {pct}%, {open} from sources with no active ban."
 msgid_plural ""
 "{name} - {n} hits, {pct}%, {open} from sources with no active ban."
-msgstr[0] "{name} - {n} hit, {pct}%, {open} uit bronnen zonder actieve blokkade."
-msgstr[1] "{name} - {n} hits, {pct}%, {open} uit bronnen zonder actieve blokkade."
+msgstr[0] ""
+"{name} - {n} hit, {pct}%, {open} uit bronnen zonder actieve blokkade."
+msgstr[1] ""
+"{name} - {n} hits, {pct}%, {open} uit bronnen zonder actieve blokkade."
 
 #. Used in the browser
 #, python-brace-format
@@ -16667,8 +16915,12 @@ msgstr ""
 msgid "{name}, defined in {file}, used by {count} route including {routes}"
 msgid_plural ""
 "{name}, defined in {file}, used by {count} routes including {routes}"
-msgstr[0] "{name}, gedefinieerd in {file}, gebruikt door {count} route waaronder {routes}"
-msgstr[1] "{name}, gedefinieerd in {file}, gebruikt door {count} routes waaronder {routes}"
+msgstr[0] ""
+"{name}, gedefinieerd in {file}, gebruikt door {count} route waaronder "
+"{routes}"
+msgstr[1] ""
+"{name}, gedefinieerd in {file}, gebruikt door {count} routes waaronder "
+"{routes}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16685,8 +16937,10 @@ msgid ""
 "{name}: {count} of {n} request in this window ({pct}%), {failed} failed."
 msgid_plural ""
 "{name}: {count} of {n} requests in this window ({pct}%), {failed} failed."
-msgstr[0] "{name}: {count} van {n} verzoek in dit venster ({pct}%), {failed} mislukt."
-msgstr[1] "{name}: {count} van {n} verzoeken in dit venster ({pct}%), {failed} mislukt."
+msgstr[0] ""
+"{name}: {count} van {n} verzoek in dit venster ({pct}%), {failed} mislukt."
+msgstr[1] ""
+"{name}: {count} van {n} verzoeken in dit venster ({pct}%), {failed} mislukt."
 
 #. Used in the browser
 #, python-brace-format
@@ -16715,8 +16969,12 @@ msgid ""
 "{n} HTTP router reported by /api/overview, the object list could not be read"
 msgid_plural ""
 "{n} HTTP routers reported by /api/overview, the object list could not be read"
-msgstr[0] "{n} HTTP-router gemeld door /api/overview, de objectlijst kon niet worden gelezen"
-msgstr[1] "{n} HTTP-routers gemeld door /api/overview, de objectlijst kon niet worden gelezen"
+msgstr[0] ""
+"{n} HTTP-router gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
+msgstr[1] ""
+"{n} HTTP-routers gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
 
 #. Used in the browser
 #, python-brace-format
@@ -16772,7 +17030,8 @@ msgstr[1] "{n} alerts leesbaar"
 msgid "{n} alert used {key}. Click to filter the evidence below"
 msgid_plural "{n} alerts used {key}. Click to filter the evidence below"
 msgstr[0] "{n} alert gebruikte {key}. Klik om het bewijs hieronder te filteren"
-msgstr[1] "{n} alerts gebruikten {key}. Klik om het bewijs hieronder te filteren"
+msgstr[1] ""
+"{n} alerts gebruikten {key}. Klik om het bewijs hieronder te filteren"
 
 #. Used in the browser
 #, python-brace-format
@@ -16913,8 +17172,12 @@ msgid ""
 "{n} middleware reported by /api/overview, the object list could not be read"
 msgid_plural ""
 "{n} middlewares reported by /api/overview, the object list could not be read"
-msgstr[0] "{n} middleware gemeld door /api/overview, de objectlijst kon niet worden gelezen"
-msgstr[1] "{n} middlewares gemeld door /api/overview, de objectlijst kon niet worden gelezen"
+msgstr[0] ""
+"{n} middleware gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
+msgstr[1] ""
+"{n} middlewares gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
 
 #. Used in the browser
 #, python-brace-format
@@ -16973,8 +17236,12 @@ msgid ""
 msgid_plural ""
 "{n} objects are counted in the totals but were not returned by the list "
 "endpoint, so they are missing from the strips and provider counts."
-msgstr[0] "{n} object telt mee in de totalen maar is niet teruggegeven door het list-endpoint, dus het ontbreekt in de stroken en de tellingen per provider."
-msgstr[1] "{n} objecten tellen mee in de totalen maar zijn niet teruggegeven door het list-endpoint, dus ze ontbreken in de stroken en de tellingen per provider."
+msgstr[0] ""
+"{n} object telt mee in de totalen maar is niet teruggegeven door het list-"
+"endpoint, dus het ontbreekt in de stroken en de tellingen per provider."
+msgstr[1] ""
+"{n} objecten tellen mee in de totalen maar zijn niet teruggegeven door het "
+"list-endpoint, dus ze ontbreken in de stroken en de tellingen per provider."
 
 #. Used in the browser
 #, python-brace-format
@@ -17044,8 +17311,10 @@ msgstr[1] "{n} verzoeken van cgnat-adressen. Klik om de loglijst te filteren."
 msgid "{n} request from link local addresses. Click to filter the log list."
 msgid_plural ""
 "{n} requests from link local addresses. Click to filter the log list."
-msgstr[0] "{n} verzoek van link-local-adressen. Klik om de loglijst te filteren."
-msgstr[1] "{n} verzoeken van link-local-adressen. Klik om de loglijst te filteren."
+msgstr[0] ""
+"{n} verzoek van link-local-adressen. Klik om de loglijst te filteren."
+msgstr[1] ""
+"{n} verzoeken van link-local-adressen. Klik om de loglijst te filteren."
 
 #. Used in the browser
 #, python-brace-format
@@ -17053,7 +17322,8 @@ msgid "{n} request from loopback addresses. Click to filter the log list."
 msgid_plural ""
 "{n} requests from loopback addresses. Click to filter the log list."
 msgstr[0] "{n} verzoek van loopbackadressen. Klik om de loglijst te filteren."
-msgstr[1] "{n} verzoeken van loopbackadressen. Klik om de loglijst te filteren."
+msgstr[1] ""
+"{n} verzoeken van loopbackadressen. Klik om de loglijst te filteren."
 
 #. Used in the browser
 #, python-brace-format
@@ -17069,23 +17339,30 @@ msgid "{n} request from public addresses. Click to filter the log list."
 msgid_plural ""
 "{n} requests from public addresses. Click to filter the log list."
 msgstr[0] "{n} verzoek van openbare adressen. Klik om de loglijst te filteren."
-msgstr[1] "{n} verzoeken van openbare adressen. Klik om de loglijst te filteren."
+msgstr[1] ""
+"{n} verzoeken van openbare adressen. Klik om de loglijst te filteren."
 
 #. Used in the browser
 #, python-brace-format
 msgid "{n} request from unknown addresses. Click to filter the log list."
 msgid_plural ""
 "{n} requests from unknown addresses. Click to filter the log list."
-msgstr[0] "{n} verzoek van onbekende adressen. Klik om de loglijst te filteren."
-msgstr[1] "{n} verzoeken van onbekende adressen. Klik om de loglijst te filteren."
+msgstr[0] ""
+"{n} verzoek van onbekende adressen. Klik om de loglijst te filteren."
+msgstr[1] ""
+"{n} verzoeken van onbekende adressen. Klik om de loglijst te filteren."
 
 #. Used in the browser
 #, python-brace-format
 msgid "{n} request handled by the {p} provider. Click to filter the log list."
 msgid_plural ""
 "{n} requests handled by the {p} provider. Click to filter the log list."
-msgstr[0] "{n} verzoek afgehandeld door de provider {p}. Klik om de loglijst te filteren."
-msgstr[1] "{n} verzoeken afgehandeld door de provider {p}. Klik om de loglijst te filteren."
+msgstr[0] ""
+"{n} verzoek afgehandeld door de provider {p}. Klik om de loglijst te "
+"filteren."
+msgstr[1] ""
+"{n} verzoeken afgehandeld door de provider {p}. Klik om de loglijst te "
+"filteren."
 
 #. Used in the browser
 #, python-brace-format
@@ -17093,8 +17370,10 @@ msgid ""
 "{n} request returned {code} {lgStatusName}. Click to filter the log list."
 msgid_plural ""
 "{n} requests returned {code} {lgStatusName}. Click to filter the log list."
-msgstr[0] "{n} verzoek gaf {code} {lgStatusName}. Klik om de loglijst te filteren."
-msgstr[1] "{n} verzoeken gaven {code} {lgStatusName}. Klik om de loglijst te filteren."
+msgstr[0] ""
+"{n} verzoek gaf {code} {lgStatusName}. Klik om de loglijst te filteren."
+msgstr[1] ""
+"{n} verzoeken gaven {code} {lgStatusName}. Klik om de loglijst te filteren."
 
 #. Used in the browser
 #, python-brace-format
@@ -17221,8 +17500,11 @@ msgid ""
 "{n} service reported by /api/overview, the object list could not be read"
 msgid_plural ""
 "{n} services reported by /api/overview, the object list could not be read"
-msgstr[0] "{n} service gemeld door /api/overview, de objectlijst kon niet worden gelezen"
-msgstr[1] "{n} services gemeld door /api/overview, de objectlijst kon niet worden gelezen"
+msgstr[0] ""
+"{n} service gemeld door /api/overview, de objectlijst kon niet worden gelezen"
+msgstr[1] ""
+"{n} services gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
 
 #. Used in the browser
 #, python-brace-format
@@ -17274,8 +17556,12 @@ msgid ""
 msgid_plural ""
 "{n} stream routers reported by /api/overview, the object list could not be "
 "read"
-msgstr[0] "{n} streamrouter gemeld door /api/overview, de objectlijst kon niet worden gelezen"
-msgstr[1] "{n} streamrouters gemeld door /api/overview, de objectlijst kon niet worden gelezen"
+msgstr[0] ""
+"{n} streamrouter gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
+msgstr[1] ""
+"{n} streamrouters gemeld door /api/overview, de objectlijst kon niet worden "
+"gelezen"
 
 #. Used in the browser
 #, python-brace-format
@@ -17367,8 +17653,12 @@ msgid ""
 msgid_plural ""
 "{once} paths were requested exactly once in this window, so the ranked rows "
 "are not the whole distribution"
-msgstr[0] "{once} pad is in dit venster precies één keer opgevraagd, dus de gerangschikte rijen zijn niet de hele verdeling"
-msgstr[1] "{once} paden zijn in dit venster precies één keer opgevraagd, dus de gerangschikte rijen zijn niet de hele verdeling"
+msgstr[0] ""
+"{once} pad is in dit venster precies één keer opgevraagd, dus de "
+"gerangschikte rijen zijn niet de hele verdeling"
+msgstr[1] ""
+"{once} paden zijn in dit venster precies één keer opgevraagd, dus de "
+"gerangschikte rijen zijn niet de hele verdeling"
 
 #. Used in the browser
 #, python-brace-format
@@ -17377,8 +17667,12 @@ msgid ""
 msgid_plural ""
 "{open} of {n} alerts here came from a source that holds no active decision "
 "now"
-msgstr[0] "{open} van {n} alert hier kwam van een bron die nu geen actieve decision heeft"
-msgstr[1] "{open} van {n} alerts hier kwamen van een bron die nu geen actieve decision heeft"
+msgstr[0] ""
+"{open} van {n} alert hier kwam van een bron die nu geen actieve decision "
+"heeft"
+msgstr[1] ""
+"{open} van {n} alerts hier kwamen van een bron die nu geen actieve decision "
+"heeft"
 
 #. Used in the browser
 #, python-brace-format
@@ -17386,8 +17680,11 @@ msgid ""
 "{open} of {n} hit here came from a source that holds no active decision now"
 msgid_plural ""
 "{open} of {n} hits here came from a source that holds no active decision now"
-msgstr[0] "{open} van {n} hit hier kwam van een bron die nu geen actieve decision heeft"
-msgstr[1] "{open} van {n} hits hier kwamen van een bron die nu geen actieve decision heeft"
+msgstr[0] ""
+"{open} van {n} hit hier kwam van een bron die nu geen actieve decision heeft"
+msgstr[1] ""
+"{open} van {n} hits hier kwamen van een bron die nu geen actieve decision "
+"heeft"
 
 #. Used in the browser
 #, python-brace-format
@@ -17407,8 +17704,12 @@ msgid ""
 msgid_plural ""
 "{own} decisions in force did not come from a subscription. Their alerts are "
 "outside the retention window, or the decision was added by hand"
-msgstr[0] "{own} actieve decision kwam niet uit een abonnement. De alerts ervan vallen buiten de bewaartermijn, of de decision is handmatig toegevoegd"
-msgstr[1] "{own} actieve decisions kwamen niet uit een abonnement. Hun alerts vallen buiten de bewaartermijn, of de decision is handmatig toegevoegd"
+msgstr[0] ""
+"{own} actieve decision kwam niet uit een abonnement. De alerts ervan vallen "
+"buiten de bewaartermijn, of de decision is handmatig toegevoegd"
+msgstr[1] ""
+"{own} actieve decisions kwamen niet uit een abonnement. Hun alerts vallen "
+"buiten de bewaartermijn, of de decision is handmatig toegevoegd"
 
 #. Used in the browser
 #, python-brace-format
@@ -17418,8 +17719,12 @@ msgid ""
 msgid_plural ""
 "{own} of them were raised here rather than subscribed, but no alert in the "
 "retained window explains them"
-msgstr[0] "{own} daarvan is hier opgelegd in plaats van via een abonnement, maar geen alert in het bewaarde venster verklaart het"
-msgstr[1] "{own} daarvan zijn hier opgelegd in plaats van via een abonnement, maar geen alert in het bewaarde venster verklaart ze"
+msgstr[0] ""
+"{own} daarvan is hier opgelegd in plaats van via een abonnement, maar geen "
+"alert in het bewaarde venster verklaart het"
+msgstr[1] ""
+"{own} daarvan zijn hier opgelegd in plaats van via een abonnement, maar geen "
+"alert in het bewaarde venster verklaart ze"
 
 #. Used in the browser
 #, python-brace-format
@@ -17467,8 +17772,12 @@ msgid ""
 msgid_plural ""
 "{repeat_count} sources tripped a scenario more than once, so they came back "
 "after the first ban"
-msgstr[0] "{repeat_count} bron heeft meer dan eens een scenario geactiveerd, dus die kwam terug na de eerste blokkade"
-msgstr[1] "{repeat_count} bronnen hebben meer dan eens een scenario geactiveerd, dus ze kwamen terug na de eerste blokkade"
+msgstr[0] ""
+"{repeat_count} bron heeft meer dan eens een scenario geactiveerd, dus die "
+"kwam terug na de eerste blokkade"
+msgstr[1] ""
+"{repeat_count} bronnen hebben meer dan eens een scenario geactiveerd, dus ze "
+"kwamen terug na de eerste blokkade"
 
 #. Used in the browser
 #, python-brace-format
@@ -17495,8 +17804,12 @@ msgid ""
 msgid_plural ""
 "{retries} upstream retry attempts. The client never saw these, but a backend "
 "was flapping."
-msgstr[0] "{retries} upstream-herhaalpoging. De client heeft deze nooit gezien, maar een backend was instabiel."
-msgstr[1] "{retries} upstream-herhaalpogingen. De client heeft deze nooit gezien, maar een backend was instabiel."
+msgstr[0] ""
+"{retries} upstream-herhaalpoging. De client heeft deze nooit gezien, maar "
+"een backend was instabiel."
+msgstr[1] ""
+"{retries} upstream-herhaalpogingen. De client heeft deze nooit gezien, maar "
+"een backend was instabiel."
 
 #. Used in the browser
 #, python-brace-format
@@ -17579,8 +17892,12 @@ msgid ""
 msgid_plural ""
 "{size} distinct source ranges, from source.range. A subnet with several "
 "sources is usually one operator, not several"
-msgstr[0] "{size} uniek bronbereik, uit source.range. Een subnet met meerdere bronnen is meestal één operator, niet meerdere"
-msgstr[1] "{size} verschillende bronbereiken, uit source.range. Een subnet met meerdere bronnen is meestal één operator, niet meerdere"
+msgstr[0] ""
+"{size} uniek bronbereik, uit source.range. Een subnet met meerdere bronnen "
+"is meestal één operator, niet meerdere"
+msgstr[1] ""
+"{size} verschillende bronbereiken, uit source.range. Een subnet met meerdere "
+"bronnen is meestal één operator, niet meerdere"
 
 #. Used in the browser
 #, python-brace-format
@@ -17590,8 +17907,12 @@ msgid ""
 msgid_plural ""
 "{size} path patterns collapse a numeric, date or hex segment. Only patterns "
 "that merge two or more real paths are folded."
-msgstr[0] "{size} padpatroon voegt een numeriek, datum- of hexsegment samen. Alleen patronen die twee of meer echte paden samenvoegen, worden samengevouwen."
-msgstr[1] "{size} padpatronen voegen een numeriek, datum- of hexsegment samen. Alleen patronen die twee of meer echte paden samenvoegen, worden samengevouwen."
+msgstr[0] ""
+"{size} padpatroon voegt een numeriek, datum- of hexsegment samen. Alleen "
+"patronen die twee of meer echte paden samenvoegen, worden samengevouwen."
+msgstr[1] ""
+"{size} padpatronen voegen een numeriek, datum- of hexsegment samen. Alleen "
+"patronen die twee of meer echte paden samenvoegen, worden samengevouwen."
 
 #. Used in the browser
 #, python-brace-format
@@ -17610,8 +17931,10 @@ msgstr[1] "{slow} verzoeken duurden langer dan 500 ms"
 msgid "{slow} request took longer than 500ms. Click to filter the log list."
 msgid_plural ""
 "{slow} requests took longer than 500ms. Click to filter the log list."
-msgstr[0] "{slow} verzoek duurde langer dan 500 ms. Klik om de loglijst te filteren."
-msgstr[1] "{slow} verzoeken duurden langer dan 500 ms. Klik om de loglijst te filteren."
+msgstr[0] ""
+"{slow} verzoek duurde langer dan 500 ms. Klik om de loglijst te filteren."
+msgstr[1] ""
+"{slow} verzoeken duurden langer dan 500 ms. Klik om de loglijst te filteren."
 
 #. Used in the browser
 #, python-brace-format
@@ -17621,8 +17944,12 @@ msgid ""
 msgid_plural ""
 "{sources} distinct addresses tripped at least one scenario in the retained "
 "window"
-msgstr[0] "{sources} uniek adres heeft in het bewaarde venster minstens één scenario geactiveerd"
-msgstr[1] "{sources} verschillende adressen hebben in het bewaarde venster minstens één scenario geactiveerd"
+msgstr[0] ""
+"{sources} uniek adres heeft in het bewaarde venster minstens één scenario "
+"geactiveerd"
+msgstr[1] ""
+"{sources} verschillende adressen hebben in het bewaarde venster minstens één "
+"scenario geactiveerd"
 
 #. Used in the browser
 #, python-brace-format
@@ -17655,7 +17982,8 @@ msgstr "{status} op {sdShort}, {pct}% op dat pad"
 #, python-brace-format
 msgid ""
 "{status} {name} {method} {path} (traefik answered, backend said {origin})"
-msgstr "{status} {name} {method} {path} (traefik antwoordde, backend meldde {origin})"
+msgstr ""
+"{status} {name} {method} {path} (traefik antwoordde, backend meldde {origin})"
 
 #. Used in the browser
 #, python-brace-format
@@ -17667,7 +17995,9 @@ msgstr "{status} {name} {method} {path} van {ip}"
 msgid ""
 "{status} {name} {method} {path} from {ip} (traefik answered, backend said "
 "{origin})"
-msgstr "{status} {name} {method} {path} van {ip} (traefik antwoordde, backend meldde {origin})"
+msgstr ""
+"{status} {name} {method} {path} van {ip} (traefik antwoordde, backend meldde "
+"{origin})"
 
 #. Used in the browser
 #, python-brace-format
@@ -17796,8 +18126,12 @@ msgid ""
 msgid_plural ""
 "{total} requests. Server errors: {s5}, client errors: {s4}, redirects: "
 "{v3xx}, ok: {v2xx}"
-msgstr[0] "{total} verzoek. Serverfouten: {s5}, clientfouten: {s4}, doorverwijzingen: {v3xx}, ok: {v2xx}"
-msgstr[1] "{total} verzoeken. Serverfouten: {s5}, clientfouten: {s4}, doorverwijzingen: {v3xx}, ok: {v2xx}"
+msgstr[0] ""
+"{total} verzoek. Serverfouten: {s5}, clientfouten: {s4}, doorverwijzingen: "
+"{v3xx}, ok: {v2xx}"
+msgstr[1] ""
+"{total} verzoeken. Serverfouten: {s5}, clientfouten: {s4}, doorverwijzingen: "
+"{v3xx}, ok: {v2xx}"
 
 #. Used in the browser
 #, python-brace-format
@@ -17807,8 +18141,12 @@ msgid ""
 msgid_plural ""
 "{total} requests drawn as {drawn} cells, so each cell stands for about {n} "
 "requests"
-msgstr[0] "{total} verzoeken getekend als {drawn} cellen, dus elke cel staat voor ongeveer {n} verzoek"
-msgstr[1] "{total} verzoeken getekend als {drawn} cellen, dus elke cel staat voor ongeveer {n} verzoeken"
+msgstr[0] ""
+"{total} verzoeken getekend als {drawn} cellen, dus elke cel staat voor "
+"ongeveer {n} verzoek"
+msgstr[1] ""
+"{total} verzoeken getekend als {drawn} cellen, dus elke cel staat voor "
+"ongeveer {n} verzoeken"
 
 #. Used in the browser
 #, python-brace-format
@@ -17865,8 +18203,16 @@ msgid_plural ""
 "{wide} decisions are Range or Country scoped, so they cover far more "
 "addresses than one row suggests. The loose and banned split above matches on "
 "the exact address, so a source covered only by one of these reads as loose"
-msgstr[0] "{wide} decision heeft een Range- of Country-scope, dus die dekt veel meer adressen dan één rij doet vermoeden. De splitsing vrij/geblokkeerd hierboven matcht op het exacte adres, dus een bron die alleen door een van deze wordt gedekt, telt als vrij"
-msgstr[1] "{wide} decisions hebben een Range- of Country-scope, dus ze dekken veel meer adressen dan één rij doet vermoeden. De splitsing vrij/geblokkeerd hierboven matcht op het exacte adres, dus een bron die alleen door een van deze wordt gedekt, telt als vrij"
+msgstr[0] ""
+"{wide} decision heeft een Range- of Country-scope, dus die dekt veel meer "
+"adressen dan één rij doet vermoeden. De splitsing vrij/geblokkeerd hierboven "
+"matcht op het exacte adres, dus een bron die alleen door een van deze wordt "
+"gedekt, telt als vrij"
+msgstr[1] ""
+"{wide} decisions hebben een Range- of Country-scope, dus ze dekken veel meer "
+"adressen dan één rij doet vermoeden. De splitsing vrij/geblokkeerd hierboven "
+"matcht op het exacte adres, dus een bron die alleen door een van deze wordt "
+"gedekt, telt als vrij"
 
 #. Used in the browser
 #, python-brace-format
@@ -17911,8 +18257,12 @@ msgid ""
 msgid_plural ""
 "{writes_count} write requests (POST, PUT, PATCH or DELETE). Click to filter "
 "to {method}."
-msgstr[0] "{writes_count} schrijfverzoek (POST, PUT, PATCH of DELETE). Klik om te filteren op {method}."
-msgstr[1] "{writes_count} schrijfverzoeken (POST, PUT, PATCH of DELETE). Klik om te filteren op {method}."
+msgstr[0] ""
+"{writes_count} schrijfverzoek (POST, PUT, PATCH of DELETE). Klik om te "
+"filteren op {method}."
+msgstr[1] ""
+"{writes_count} schrijfverzoeken (POST, PUT, PATCH of DELETE). Klik om te "
+"filteren op {method}."
 
 #. Used in the browser
 #, python-brace-format

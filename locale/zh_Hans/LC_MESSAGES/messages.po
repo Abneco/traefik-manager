@@ -59,7 +59,8 @@ msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s 仍被 %(users)s 使用"
 
 #, python-format
-msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgid ""
+"%(child)s is still used by %(users)s and is still a backend of %(parents)s"
 msgstr "%(child)s 仍被 %(users)s 使用，且仍是 %(parents)s 的后端"
 
 #, python-format
@@ -76,7 +77,9 @@ msgstr "%(file)s 在此编辑器打开后已在磁盘上更改。重新打开它
 msgid ""
 "%(file)s changed while it was being edited, most likely Traefik renewing a "
 "certificate. Nothing was written, try again."
-msgstr "%(file)s 在编辑期间被更改，很可能是 Traefik 正在续期证书。未写入任何内容，请重试。"
+msgstr ""
+"%(file)s 在编辑期间被更改，很可能是 Traefik 正在续期证书。未写入任何内容，请"
+"重试。"
 
 #, python-format
 msgid ""
@@ -117,7 +120,9 @@ msgstr "%(file)s 在保存期间被其他程序重写。请重试。"
 msgid ""
 "%(label)s storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "%(label)s 存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+msgstr ""
+"%(label)s 存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失"
+"（%(error)s）"
 
 #, python-format
 msgid "%(label)s: %(message)s"
@@ -237,7 +242,8 @@ msgid ""
 msgid_plural ""
 "%(num)d routes are unreachable: %(names)s, check that Traefik Manager can "
 "reach them"
-msgstr[0] "%(num)d 个路由无法访问：%(names)s，请检查 Traefik Manager 能否访问它们"
+msgstr[0] ""
+"%(num)d 个路由无法访问：%(names)s，请检查 Traefik Manager 能否访问它们"
 
 #, python-format
 msgid "%(num)d scenario"
@@ -309,7 +315,8 @@ msgstr "%(server)s：%(message)s"
 #, python-format
 msgid ""
 "%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s"
-msgstr "%(source)s 在过去 %(window)s 内触发了 %(scenarios)s，共 %(events)s：%(list)s"
+msgstr ""
+"%(source)s 在过去 %(window)s 内触发了 %(scenarios)s，共 %(events)s：%(list)s"
 
 #, python-format
 msgid "%(source)s tripped %(scenarios)s, %(events)s: %(list)s"
@@ -319,13 +326,17 @@ msgstr "%(source)s 触发了 %(scenarios)s，共 %(events)s：%(list)s"
 msgid ""
 "%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. Worst: "
 "%(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s"
-msgstr "%(sources)s 在过去 %(window)s 内触发了 %(scenarios)s，共 %(events)s。最严重：%(source)s，%(scenario)s，%(source_events)s。场景：%(list)s"
+msgstr ""
+"%(sources)s 在过去 %(window)s 内触发了 %(scenarios)s，共 %(events)s。最严重："
+"%(source)s，%(scenario)s，%(source_events)s。场景：%(list)s"
 
 #, python-format
 msgid ""
 "%(sources)s tripped %(scenarios)s, %(events)s. Worst: %(source)s, "
 "%(scenario)s, %(source_events)s. Scenarios: %(list)s"
-msgstr "%(sources)s 触发了 %(scenarios)s，共 %(events)s。最严重：%(source)s，%(scenario)s，%(source_events)s。场景：%(list)s"
+msgstr ""
+"%(sources)s 触发了 %(scenarios)s，共 %(events)s。最严重：%(source)s，"
+"%(scenario)s，%(source_events)s。场景：%(list)s"
 
 #, python-format
 msgid "%(status)s is replaced with the response code."
@@ -589,13 +600,17 @@ msgstr "7 天"
 msgid ""
 "A backend host is required for %(protocol)s routes. Send targetIp (repeated "
 "per protocol, index %(index)s) or %(field)s."
-msgstr "%(protocol)s 路由需要后端主机。请发送 targetIp（按协议重复，索引 %(index)s）或 %(field)s。"
+msgstr ""
+"%(protocol)s 路由需要后端主机。请发送 targetIp（按协议重复，索引 %(index)s）"
+"或 %(field)s。"
 
 #, python-format
 msgid ""
 "A backend port is required for %(protocol)s routes. Send targetPort "
 "(repeated per protocol, index %(index)s) or %(field)s."
-msgstr "%(protocol)s 路由需要后端端口。请发送 targetPort（按协议重复，索引 %(index)s）或 %(field)s。"
+msgstr ""
+"%(protocol)s 路由需要后端端口。请发送 targetPort（按协议重复，索引 "
+"%(index)s）或 %(field)s。"
 
 #, python-format
 msgid ""
@@ -648,7 +663,9 @@ msgstr "此密钥所属设备的标签。"
 msgid ""
 "A middleware named '%(name)s' already exists and wasn't created by the route "
 "presets. Rename or remove it first, then re-save."
-msgstr "名为“%(name)s”的中间件已存在，且并非由路由预设创建。请先重命名或移除它，然后重新保存。"
+msgstr ""
+"名为“%(name)s”的中间件已存在，且并非由路由预设创建。请先重命名或移除它，然后"
+"重新保存。"
 
 #, python-format
 msgid "A name cannot contain any of these characters: %(chars)s"
@@ -700,7 +717,9 @@ msgstr "此 Agent 上未设置 ACME_JSON_PATH"
 msgid ""
 "ADMIN_PASSWORD is set, so a password saved here would never be used. Change "
 "that variable and restart instead."
-msgstr "ADMIN_PASSWORD 已设置，因此在此处保存的密码永远不会被使用。请更改该变量并重启。"
+msgstr ""
+"ADMIN_PASSWORD 已设置，因此在此处保存的密码永远不会被使用。请更改该变量并重"
+"启。"
 
 #. Used in the browser
 msgid "ALPN Protocols"
@@ -1160,7 +1179,9 @@ msgstr "Agent %(name)s 无法访问"
 msgid ""
 "Agent %(name)s rejected the API key - rotate it in Settings or fix "
 "TMA_API_KEY on the agent"
-msgstr "Agent %(name)s 拒绝了 API 密钥：请在设置中轮换密钥，或修正 Agent 上的 TMA_API_KEY"
+msgstr ""
+"Agent %(name)s 拒绝了 API 密钥：请在设置中轮换密钥，或修正 Agent 上的 "
+"TMA_API_KEY"
 
 msgid "Agent URL"
 msgstr "Agent URL"
@@ -1175,7 +1196,8 @@ msgstr "Agent URL 不能为空。"
 msgid ""
 "Agent URL must start with http:// or https:// - without a scheme the agent "
 "cannot be reached."
-msgstr "Agent URL 必须以 http:// 或 https:// 开头：没有协议方案就无法访问 Agent。"
+msgstr ""
+"Agent URL 必须以 http:// 或 https:// 开头：没有协议方案就无法访问 Agent。"
 
 #, python-format
 msgid "Agent branch \"%(branch)s\" must differ from the Host branch"
@@ -1788,7 +1810,8 @@ msgstr "备份"
 msgid ""
 "Backups storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "备份存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+msgstr ""
+"备份存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
 
 msgid "Backups → Git"
 msgstr "备份 → Git"
@@ -2525,7 +2548,8 @@ msgstr "配置结构"
 msgid ""
 "Configuration storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+msgstr ""
+"配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
 
 #, python-format
 msgid "Configure %(access_log_path)s in Settings"
@@ -2943,7 +2967,9 @@ msgid ""
 msgid_plural ""
 "CrowdSec has not answered for %(num)d days, so these decisions are the last "
 "ones read and may be out of date. %(reason)s"
-msgstr[0] "CrowdSec 已 %(num)d 天未响应，因此这些决策是最后一次读取的结果，可能已过时。%(reason)s"
+msgstr[0] ""
+"CrowdSec 已 %(num)d 天未响应，因此这些决策是最后一次读取的结果，可能已过时。"
+"%(reason)s"
 
 #, python-format
 msgid ""
@@ -2952,7 +2978,9 @@ msgid ""
 msgid_plural ""
 "CrowdSec has not answered for %(num)d hours, so these decisions are the last "
 "ones read and may be out of date. %(reason)s"
-msgstr[0] "CrowdSec 已 %(num)d 小时未响应，因此这些决策是最后一次读取的结果，可能已过时。%(reason)s"
+msgstr[0] ""
+"CrowdSec 已 %(num)d 小时未响应，因此这些决策是最后一次读取的结果，可能已过"
+"时。%(reason)s"
 
 #, python-format
 msgid ""
@@ -2961,7 +2989,9 @@ msgid ""
 msgid_plural ""
 "CrowdSec has not answered for %(num)d minutes, so these decisions are the "
 "last ones read and may be out of date. %(reason)s"
-msgstr[0] "CrowdSec 已 %(num)d 分钟未响应，因此这些决策是最后一次读取的结果，可能已过时。%(reason)s"
+msgstr[0] ""
+"CrowdSec 已 %(num)d 分钟未响应，因此这些决策是最后一次读取的结果，可能已过"
+"时。%(reason)s"
 
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
@@ -2970,7 +3000,9 @@ msgstr "CrowdSec 已是最新，自上次读取以来无变化"
 msgid ""
 "CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / "
 "CROWDSEC_MACHINE_PASSWORD or the client certificate"
-msgstr "CrowdSec 机器登录失败：请检查 CROWDSEC_MACHINE_ID / CROWDSEC_MACHINE_PASSWORD 或客户端证书"
+msgstr ""
+"CrowdSec 机器登录失败：请检查 CROWDSEC_MACHINE_ID / "
+"CROWDSEC_MACHINE_PASSWORD 或客户端证书"
 
 msgid "CrowdSec not configured"
 msgstr "未配置 CrowdSec"
@@ -3602,7 +3634,8 @@ msgstr "Docker 主机"
 msgid ""
 "Docker restart failed - check DOCKER_HOST and TRAEFIK_CONTAINER "
 "(%(container)s)"
-msgstr "Docker 重启失败：请检查 DOCKER_HOST 和 TRAEFIK_CONTAINER（%(container)s）"
+msgstr ""
+"Docker 重启失败：请检查 DOCKER_HOST 和 TRAEFIK_CONTAINER（%(container)s）"
 
 #, python-format
 msgid "Docker restart failed: %(detail)s"
@@ -3724,7 +3757,8 @@ msgstr "动态配置路径"
 msgid ""
 "Dynamic config storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "动态配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+msgstr ""
+"动态配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
 
 #. Used in the browser
 #, python-brace-format
@@ -4092,7 +4126,11 @@ msgid_plural ""
 "of retention, not the start of activity, and CrowdSec does not report how "
 "many it pruned. Subscribed blocklist rows are left out on purpose because "
 "they describe the internet rather than your host."
-msgstr[0] "上方每张卡片汇总的是 LAPI 仍保留的 {retained} 条告警，而不是本主机遇到过的所有攻击。此处最早的告警是保留期限的边界，而非活动的开始，且 CrowdSec 不会报告清理了多少条。订阅的黑名单条目被有意排除，因为它们描述的是整个互联网，而非您的主机。"
+msgstr[0] ""
+"上方每张卡片汇总的是 LAPI 仍保留的 {retained} 条告警，而不是本主机遇到过的所"
+"有攻击。此处最早的告警是保留期限的边界，而非活动的开始，且 CrowdSec 不会报告"
+"清理了多少条。订阅的黑名单条目被有意排除，因为它们描述的是整个互联网，而非您"
+"的主机。"
 
 #. Used in the browser
 #, python-brace-format
@@ -4900,7 +4938,9 @@ msgstr "HTTP %(status_code)s：请检查 API 用户名和密码"
 msgid ""
 "HTTP %(status_code)s - the saved password is only sent to the saved API URL, "
 "enter it to test this one"
-msgstr "HTTP %(status_code)s：已保存的密码只会发送到已保存的 API URL，请输入密码以测试此 URL"
+msgstr ""
+"HTTP %(status_code)s：已保存的密码只会发送到已保存的 API URL，请输入密码以测"
+"试此 URL"
 
 #, python-format
 msgid "HTTP %(status_code)s from %(url)s/api/version"
@@ -6305,7 +6345,9 @@ msgstr "新密码（至少 8 个字符）"
 msgid ""
 "New password must be 72 bytes or fewer, which is the bcrypt limit. Accented "
 "and non-Latin characters take more than one byte each."
-msgstr "新密码不能超过 72 字节，这是 bcrypt 的限制。带重音的字符和非拉丁字符每个占用多个字节。"
+msgstr ""
+"新密码不能超过 72 字节，这是 bcrypt 的限制。带重音的字符和非拉丁字符每个占用"
+"多个字节。"
 
 msgid "New password must be at least 8 characters and at most 72 bytes."
 msgstr "新密码必须至少 8 个字符，且不超过 72 字节。"
@@ -7397,7 +7439,9 @@ msgstr "密码和 2FA"
 msgid ""
 "Password must be 72 bytes or fewer, which is the bcrypt limit. Accented and "
 "non-Latin characters take more than one byte each."
-msgstr "密码不能超过 72 字节，这是 bcrypt 的限制。带重音的字符和非拉丁字符每个占用多个字节。"
+msgstr ""
+"密码不能超过 72 字节，这是 bcrypt 的限制。带重音的字符和非拉丁字符每个占用多"
+"个字节。"
 
 #. Used in the browser
 msgid "Password must be at least 8 characters."
@@ -8356,7 +8400,8 @@ msgid ""
 msgid_plural ""
 "Removed {n} certificates, but Traefik did not restart. The change is undone "
 "until it does."
-msgstr[0] "已移除 {n} 个证书，但 Traefik 未重启。在 Traefik 重启之前，此更改不会生效。"
+msgstr[0] ""
+"已移除 {n} 个证书，但 Traefik 未重启。在 Traefik 重启之前，此更改不会生效。"
 
 #. Used in the browser
 #, python-brace-format
@@ -8366,7 +8411,9 @@ msgid ""
 msgid_plural ""
 "Removed {n} certificates, but Traefik did not restart: {error}. The change "
 "is undone until it does."
-msgstr[0] "已移除 {n} 个证书，但 Traefik 未重启：{error}。在 Traefik 重启之前，此更改不会生效。"
+msgstr[0] ""
+"已移除 {n} 个证书，但 Traefik 未重启：{error}。在 Traefik 重启之前，此更改不"
+"会生效。"
 
 #. Used in the browser
 msgid "Rename it everywhere, or copy it for this route?"
@@ -8750,7 +8797,8 @@ msgid ""
 msgid_plural ""
 "Route %(name)s backend is degraded, %(up)s of %(num)d servers up "
 "(%(servers)s)"
-msgstr[0] "路由 %(name)s 的后端已降级，%(num)d 个服务器中 %(up)s 个可用（%(servers)s）"
+msgstr[0] ""
+"路由 %(name)s 的后端已降级，%(num)d 个服务器中 %(up)s 个可用（%(servers)s）"
 
 #, python-format
 msgid "Route %(name)s backend is down, 0 of %(num)d server up"
@@ -8761,7 +8809,8 @@ msgstr[0] "路由 %(name)s 的后端不可用，%(num)d 个服务器中 0 个可
 msgid "Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)"
 msgid_plural ""
 "Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)"
-msgstr[0] "路由 %(name)s 的后端不可用，%(num)d 个服务器中 0 个可用（%(servers)s）"
+msgstr[0] ""
+"路由 %(name)s 的后端不可用，%(num)d 个服务器中 0 个可用（%(servers)s）"
 
 #, python-format
 msgid "Route %(name)s created"
@@ -10064,7 +10113,8 @@ msgstr "静态配置已保存"
 msgid ""
 "Static config storage at %(path)s is not writable, so settings, backups and "
 "scheduled checks will not survive a restart (%(error)s)"
-msgstr "静态配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
+msgstr ""
+"静态配置存储 %(path)s 不可写，设置、备份和计划检查在重启后将丢失（%(error)s）"
 
 #. Used in the browser
 msgctxt "column"
@@ -10851,7 +10901,9 @@ msgstr "代理在到达后端前重定向到了 %(host)s，后端未响应即关
 msgid ""
 "The proxy redirected to %(host)s before reaching the backend, and the "
 "backend could not be reached from Traefik Manager (%(error)s)"
-msgstr "代理在到达后端前重定向到了 %(host)s，Traefik Manager 无法访问后端（%(error)s）"
+msgstr ""
+"代理在到达后端前重定向到了 %(host)s，Traefik Manager 无法访问后端"
+"（%(error)s）"
 
 #, python-format
 msgid ""
@@ -10927,7 +10979,9 @@ msgid_plural ""
 "The retained window holds {retained} alerts, and every filter on the window "
 "row is applied together, so this card has nothing left to rank. That is the "
 "filter talking, not the host."
-msgstr[0] "保留的时间窗口中有 {retained} 条告警，且窗口行上的所有筛选条件同时生效，因此此卡片没有可排名的内容。这是筛选条件造成的，并非主机的问题。"
+msgstr[0] ""
+"保留的时间窗口中有 {retained} 条告警，且窗口行上的所有筛选条件同时生效，因此"
+"此卡片没有可排名的内容。这是筛选条件造成的，并非主机的问题。"
 
 msgid ""
 "The route list could not be read. Names, icons and launch links all come "
@@ -10970,7 +11024,8 @@ msgid ""
 msgid_plural ""
 "The search {search}, the {proto} protocol filter and the {provider} provider "
 "filter together match none of them."
-msgstr[0] "搜索 {search}、{proto} 协议筛选和 {provider} 提供者筛选组合后无匹配项。"
+msgstr[0] ""
+"搜索 {search}、{proto} 协议筛选和 {provider} 提供者筛选组合后无匹配项。"
 
 #. Used in the browser
 msgid "The server changed, reload the list and select again"
@@ -11087,7 +11142,10 @@ msgid_plural ""
 "traffic. The oldest line here is the edge of the fetched window, not the "
 "start of activity. Traefik does not report the file total, so the share of "
 "overall traffic is unknown. {parsed} of {fetched} lines parsed."
-msgstr[0] "这些数字汇总的是访问日志的最后 {fetched} 行，而非全部流量。此处最早的一行是获取窗口的边界，而非活动的开始。Traefik 不报告文件总行数，因此无法得知其占总流量的比例。已解析 {fetched} 行中的 {parsed} 行。"
+msgstr[0] ""
+"这些数字汇总的是访问日志的最后 {fetched} 行，而非全部流量。此处最早的一行是获"
+"取窗口的边界，而非活动的开始。Traefik 不报告文件总行数，因此无法得知其占总流"
+"量的比例。已解析 {fetched} 行中的 {parsed} 行。"
 
 #, python-format
 msgid ""
@@ -11293,7 +11351,9 @@ msgid ""
 msgid_plural ""
 "This panel refetches every {seconds} seconds while the Logs tab is open and "
 "the browser tab is visible. It pauses while you are typing in the filter box."
-msgstr[0] "当日志标签页打开且浏览器标签页可见时，此面板每 {seconds} 秒重新获取一次。在筛选框中输入时会暂停。"
+msgstr[0] ""
+"当日志标签页打开且浏览器标签页可见时，此面板每 {seconds} 秒重新获取一次。在筛"
+"选框中输入时会暂停。"
 
 #. Used in the browser
 #, python-brace-format
@@ -14956,7 +15016,9 @@ msgid ""
 msgid_plural ""
 "{bots_count} agents name a tool outright. The rest are copied browser "
 "strings, which tells you the operator bothered to lie"
-msgstr[0] "{bots_count} 个用户代理直接标明了工具。其余是复制的浏览器字符串，说明操作者特意做了伪装"
+msgstr[0] ""
+"{bots_count} 个用户代理直接标明了工具。其余是复制的浏览器字符串，说明操作者特"
+"意做了伪装"
 
 #. Used in the browser
 #, python-brace-format
@@ -15181,7 +15243,9 @@ msgid ""
 msgid_plural ""
 "{count} of the {n} requests to {path} returned {status} {lgStatusName} ({pct}"
 "%). Click to filter the log list to just those."
-msgstr[0] "发往 {path} 的 {n} 个请求中有 {count} 个返回 {status} {lgStatusName}（{pct}%）。点击以将日志列表筛选为仅这些请求。"
+msgstr[0] ""
+"发往 {path} 的 {n} 个请求中有 {count} 个返回 {status} {lgStatusName}（{pct}"
+"%）。点击以将日志列表筛选为仅这些请求。"
 
 #. Used in the browser
 #, python-brace-format
@@ -15668,7 +15732,9 @@ msgid ""
 msgid_plural ""
 "{loose_count} sources tripped a scenario and hold no active decision right "
 "now. Usually an expired ban rather than a miss"
-msgstr[0] "{loose_count} 个来源触发了场景，但目前没有有效决策。通常是封禁已过期，而非漏检"
+msgstr[0] ""
+"{loose_count} 个来源触发了场景，但目前没有有效决策。通常是封禁已过期，而非漏"
+"检"
 
 #. Used in the browser
 #, python-brace-format
@@ -15805,7 +15871,8 @@ msgid ""
 "{name}: {count} of {n} request in this window ({pct}%), {failed} failed."
 msgid_plural ""
 "{name}: {count} of {n} requests in this window ({pct}%), {failed} failed."
-msgstr[0] "{name}：此窗口内 {n} 个请求中的 {count} 个（{pct}%），{failed} 个失败。"
+msgstr[0] ""
+"{name}：此窗口内 {n} 个请求中的 {count} 个（{pct}%），{failed} 个失败。"
 
 #. Used in the browser
 #, python-brace-format
@@ -16053,7 +16120,9 @@ msgid ""
 msgid_plural ""
 "{n} objects are counted in the totals but were not returned by the list "
 "endpoint, so they are missing from the strips and provider counts."
-msgstr[0] "{n} 个对象计入了总数，但列表端点未返回它们，因此状态条和提供者计数中缺少这些对象。"
+msgstr[0] ""
+"{n} 个对象计入了总数，但列表端点未返回它们，因此状态条和提供者计数中缺少这些"
+"对象。"
 
 #. Used in the browser
 #, python-brace-format
@@ -16431,7 +16500,8 @@ msgid ""
 msgid_plural ""
 "{own} decisions in force did not come from a subscription. Their alerts are "
 "outside the retention window, or the decision was added by hand"
-msgstr[0] "{own} 个有效决策并非来自订阅。其告警已超出保留窗口，或者决策是手动添加的"
+msgstr[0] ""
+"{own} 个有效决策并非来自订阅。其告警已超出保留窗口，或者决策是手动添加的"
 
 #. Used in the browser
 #, python-brace-format
@@ -16587,7 +16657,9 @@ msgid ""
 msgid_plural ""
 "{size} distinct source ranges, from source.range. A subnet with several "
 "sources is usually one operator, not several"
-msgstr[0] "{size} 个不同的来源范围，取自 source.range。包含多个来源的子网通常属于同一个操作者，而非多个"
+msgstr[0] ""
+"{size} 个不同的来源范围，取自 source.range。包含多个来源的子网通常属于同一个"
+"操作者，而非多个"
 
 #. Used in the browser
 #, python-brace-format
@@ -16597,7 +16669,9 @@ msgid ""
 msgid_plural ""
 "{size} path patterns collapse a numeric, date or hex segment. Only patterns "
 "that merge two or more real paths are folded."
-msgstr[0] "{size} 个路径模式折叠了数字、日期或十六进制段。只有合并了两个或以上真实路径的模式才会被折叠。"
+msgstr[0] ""
+"{size} 个路径模式折叠了数字、日期或十六进制段。只有合并了两个或以上真实路径的"
+"模式才会被折叠。"
 
 #. Used in the browser
 #, python-brace-format
@@ -16669,7 +16743,9 @@ msgstr "{status} {name} {method} {path}，来自 {ip}"
 msgid ""
 "{status} {name} {method} {path} from {ip} (traefik answered, backend said "
 "{origin})"
-msgstr "{status} {name} {method} {path}，来自 {ip}（Traefik 已应答，后端返回 {origin}）"
+msgstr ""
+"{status} {name} {method} {path}，来自 {ip}（Traefik 已应答，后端返回 "
+"{origin}）"
 
 #. Used in the browser
 #, python-brace-format
@@ -16790,7 +16866,9 @@ msgid ""
 msgid_plural ""
 "{total} requests. Server errors: {s5}, client errors: {s4}, redirects: "
 "{v3xx}, ok: {v2xx}"
-msgstr[0] "{total} 个请求。服务器错误：{s5}，客户端错误：{s4}，重定向：{v3xx}，成功：{v2xx}"
+msgstr[0] ""
+"{total} 个请求。服务器错误：{s5}，客户端错误：{s4}，重定向：{v3xx}，成功："
+"{v2xx}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16851,7 +16929,10 @@ msgid_plural ""
 "{wide} decisions are Range or Country scoped, so they cover far more "
 "addresses than one row suggests. The loose and banned split above matches on "
 "the exact address, so a source covered only by one of these reads as loose"
-msgstr[0] "{wide} 个决策的范围为 Range 或 Country，因此覆盖的地址远多于一行所显示的。上方的未封禁与已封禁划分按精确地址匹配，因此仅被其中某个决策覆盖的来源会显示为未封禁"
+msgstr[0] ""
+"{wide} 个决策的范围为 Range 或 Country，因此覆盖的地址远多于一行所显示的。上"
+"方的未封禁与已封禁划分按精确地址匹配，因此仅被其中某个决策覆盖的来源会显示为"
+"未封禁"
 
 #. Used in the browser
 #, python-brace-format
@@ -16891,7 +16972,9 @@ msgid ""
 msgid_plural ""
 "{writes_count} write requests (POST, PUT, PATCH or DELETE). Click to filter "
 "to {method}."
-msgstr[0] "{writes_count} 个写入请求（POST、PUT、PATCH 或 DELETE）。点击以筛选为 {method}。"
+msgstr[0] ""
+"{writes_count} 个写入请求（POST、PUT、PATCH 或 DELETE）。点击以筛选为 "
+"{method}。"
 
 #. Used in the browser
 #, python-brace-format
