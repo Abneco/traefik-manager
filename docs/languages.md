@@ -30,6 +30,8 @@ The source text is Canadian English. The United Kingdom and United States varian
 
 - **Language button** in the nav bar, left of the docs link. Hide it in **Settings - Interface - Navbar**.
 - **Settings - Interface - General - Language**.
+- **Setup wizard**: the Welcome step has the same list, so setup runs in your language and saves it when you finish.
+- **Sign-in page**: the flag button in the top right corner switches the page for that visit, without changing the setting.
 - **Follow system** (the default) uses each browser's language, and English when Traefik Manager does not have it.
 
 The choice is saved in [`manager.yml`](/manager-yml#default-language) as `default_language`, so it follows you across browsers and devices.
