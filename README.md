@@ -196,7 +196,7 @@ v1.15.0 is the first release that is not English-only. The whole interface is re
 <img src="https://hosted.weblate.org/widget/traefik-manager/matrix-auto.svg" alt="Translation status per language" />
 </a>
 
-v1.15.0 ships in French, German, Spanish, Portuguese (Portugal), Portuguese (Brazil), Dutch, Chinese (Simplified), Russian, Czech and Danish, plus English spellings for the United States and the United Kingdom. Any other language is added on request.
+v1.15.0 ships in French, French (Canada), German, Spanish, Portuguese (Portugal), Portuguese (Brazil), Dutch, Chinese (Simplified), Russian, Czech and Danish, plus English spellings for the United States and the United Kingdom. Any other language is added on request.
 
 | You want to | Where |
 | --- | --- |
