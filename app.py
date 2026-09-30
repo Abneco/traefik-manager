@@ -1186,6 +1186,8 @@ def setup():
             theme = request.form.get('default_theme', '').strip().lower()
             if theme in ('dark', 'light', 'system'):
                 extra['default_theme'] = theme
+            if 'default_language' in request.form:
+                extra['default_language'] = _i18n.normalize(request.form.get('default_language', '')) or ''
             save_settings(
                 domains=domains,
                 cert_resolver=resolver,

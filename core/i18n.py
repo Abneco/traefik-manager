@@ -2,6 +2,7 @@ import os
 import re
 import unicodedata
 from functools import lru_cache
+from urllib.parse import urlencode
 
 from babel import Locale, UnknownLocaleError
 from babel.messages.pofile import read_po
@@ -305,6 +306,11 @@ class LocalePrefixMiddleware:
         return self.wsgi_app(environ, start_response)
 
 
+def language_href(tag, base_path=''):
+    query = urlencode([(k, v) for k, v in request.args.items(multi=True) if k != 'lang'])
+    return (base_path or '') + ('/' + tag if tag else '') + request.path + ('?' + query if query else '')
+
+
 def inline_tag(name, text='', **attrs):
     if name not in INLINE_TAGS:
         raise ValueError(f'tag() does not build <{name}>')
@@ -352,6 +358,7 @@ def init_app(app, default_language):
     babel.domain_instance = _Domain(domain=DOMAIN)
     install_escaped_gettext(app.jinja_env)
     app.jinja_env.globals['tag'] = inline_tag
+    app.jinja_env.globals['language_href'] = language_href
     app.jinja_env.filters['flag'] = flag_emoji
 
     @app.context_processor
@@ -365,6 +372,7 @@ def init_app(app, default_language):
             'i18n_catalog': client_catalog(tag),
             'language_options': language_options(),
             'language_setting': _saved(),
+            'url_language': request.environ.get(URL_LOCALE_KEY, '') if has_request_context() else '',
         }
 
     return babel

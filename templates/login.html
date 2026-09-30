@@ -200,6 +200,8 @@
 </style>
 </head>
 <body>
+{% import 'sections/lang_menu.html' as langmenu with context %}
+{% if not setup_mode or reset_mode %}{{ langmenu.corner(html_lang) }}{% endif %}
 
 {% if force_change_mode %}
 
@@ -484,6 +486,11 @@
                     <div class="wz-lede">
                         <h1 class="wz-title">{{ _('Welcome to Traefik Manager') }}</h1>
                         <p class="wz-sub">{{ _('A web interface for the routes, middlewares and services Traefik already serves. This setup takes about a minute: point it at your Traefik API, pick the views you want, and set a password. Everything here can be changed later in Settings.') }}</p>
+                    </div>
+
+                    <div class="wz-lang">
+                        <div class="sc-sec-head"><i class="ph-bold ph-translate sc-sec-icon" style="color:var(--blue)"></i><span class="sc-sec-label">{{ _('Language') }}</span><span class="sc-sec-rule"></span></div>
+                        {{ langmenu.field(url_language) }}
                     </div>
 
                     <div class="wz-cards">
@@ -920,6 +927,7 @@
         <input type="hidden" name="notify_password" id="f_notify_pw">
         <input type="hidden" name="geoip_enabled" id="f_geoip">
         <input type="hidden" name="default_theme" id="f_default_theme">
+        <input type="hidden" name="default_language" value="{{ url_language }}">
     </form>
 
     <div class="footer">
@@ -1336,5 +1344,6 @@ function checkForcePwMatch() {
 }
 {% endif %}
 </script>
+{{ langmenu.script() }}
 </body>
 </html>

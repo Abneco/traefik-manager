@@ -1638,6 +1638,14 @@ html.tm-nav-collapsed .drawer-srv-head:hover .drawer-srv-mark { color: var(--tex
 .lang-select-menu.open { display: block; }
 .lang-select-menu.up { top: auto; bottom: calc(100% + 4px); }
 #settingsModal .sc-root .lang-select-menu .sc-set { align-items: center; padding: 6px 8px; }
+.lang-link { display: flex; align-items: center; gap: 8px; padding: 7px 8px; border-radius: 6px; color: var(--text); text-decoration: none; font: 600 12px/1.35 'JetBrains Mono', monospace; }
+.lang-link:hover, .lang-link.active { background: var(--input-bg); }
+.lang-link-icon { width: 22px; display: inline-block; text-align: center; flex-shrink: 0; }
+.lang-link-name { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.lang-corner { position: fixed; top: 16px; right: 16px; z-index: 60; }
+.lang-corner-btn { display: inline-flex; align-items: center; gap: 6px; font: 600 11px/1 'JetBrains Mono', monospace; }
+.lang-corner-menu { left: auto; right: 0; width: 250px; }
+.wz-lang { margin-bottom: 22px; }
 .lang-select-menu .lang-row.active { background: var(--input-bg); }
 @media (min-width: 1024px) { #pwaInstallBtn { display: none !important; } }
 .static-state-bar { display: flex; align-items: center; gap: 10px; margin-bottom: 16px; padding: 10px 14px; border-radius: 8px; font-size: 12px; }
