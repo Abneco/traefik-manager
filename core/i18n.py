@@ -360,3 +360,24 @@ def init_app(app, default_language):
         }
 
     return babel
+
+
+class Message(str):
+    def __new__(cls, english, translate=None):
+        obj = super().__new__(cls, english)
+        obj.translate = translate
+        return obj
+
+    def shown(self) -> str:
+        return self.translate() if self.translate else str(self)
+
+
+def shown(value):
+    return value.shown() if isinstance(value, Message) else value
+
+
+def shown_error(exc) -> str:
+    args = getattr(exc, 'args', ())
+    if len(args) == 1 and isinstance(args[0], Message):
+        return args[0].shown()
+    return str(exc)

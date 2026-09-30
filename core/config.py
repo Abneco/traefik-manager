@@ -8,9 +8,10 @@ import threading
 from io import StringIO
 from urllib.parse import urlsplit
 
+from flask_babel import gettext
 from ruamel.yaml import YAML
 
-from core import env, locks
+from core import env, i18n, locks
 from core.env import logger
 
 
@@ -183,26 +184,33 @@ def _settings_part_problem(kind: str, part: str) -> str:
     real = os.path.realpath(part)
     for base in _KERNEL_DIRS:
         if _inside(real, base):
-            return f'{part} is inside {base}'
+            return i18n.Message(f'{part} is inside {base}',
+                                lambda: gettext('%(path)s is inside %(base)s', path=part, base=base))
     config_dir = os.path.realpath(env.CONFIG_DIR)
     if (env.is_own_state(real)
             or real in (os.path.realpath(env.SECRET_KEY_PATH), os.path.realpath(env.OTP_KEY_PATH))
             or (os.path.dirname(real) == config_dir and os.path.basename(real).startswith('.'))):
-        return f"{part} is one of Traefik Manager's own files"
+        return i18n.Message(f"{part} is one of Traefik Manager's own files",
+                            lambda: gettext("%(path)s is one of Traefik Manager's own files", path=part))
     app_dir = os.path.realpath(_APP_DIR)
     if (real == app_dir or any(_inside(real, os.path.join(app_dir, d)) for d in _CODE_DIRS)
             or (os.path.dirname(real) == app_dir and real.endswith('.py'))):
-        return f"{part} is part of Traefik Manager's code"
+        return i18n.Message(f"{part} is part of Traefik Manager's code",
+                            lambda: gettext("%(path)s is part of Traefik Manager's code", path=part))
     if kind == 'static':
         if os.path.splitext(real)[1].lower() not in ('.yml', '.yaml', '.toml'):
-            return f'{part} is not a .yml, .yaml or .toml file'
+            return i18n.Message(f'{part} is not a .yml, .yaml or .toml file',
+                                lambda: gettext('%(path)s is not a .yml, .yaml or .toml file', path=part))
         if not os.path.isfile(real):
-            return f'{part} is not an existing file'
+            return i18n.Message(f'{part} is not an existing file',
+                                lambda: gettext('%(path)s is not an existing file', path=part))
     elif kind == 'acme':
         if not os.path.isdir(real) and not real.lower().endswith('.json'):
-            return f'{part} is not a .json file or a directory'
+            return i18n.Message(f'{part} is not a .json file or a directory',
+                                lambda: gettext('%(path)s is not a .json file or a directory', path=part))
     elif os.path.isdir(real):
-        return f'{part} is a directory, not a file'
+        return i18n.Message(f'{part} is a directory, not a file',
+                            lambda: gettext('%(path)s is a directory, not a file', path=part))
     return ''
 
 

@@ -5,7 +5,9 @@ import re
 import stat
 import time
 
-from core import env, locks
+from flask_babel import gettext, ngettext
+
+from core import env, i18n, locks
 from core.env import logger
 
 SAFE_MODE = 0o600
@@ -15,6 +17,9 @@ ATTEMPTS = 3
 
 class AcmeStoreError(Exception):
     status = 500
+
+    def shown(self) -> str:
+        return i18n.shown(self.args[0]) if self.args else str(self)
 
 
 class AcmeStoreReadOnly(AcmeStoreError):
@@ -79,7 +84,10 @@ def snapshot(path):
         with open(path, 'rb') as fh:
             return fh.read()
     except OSError as e:
-        raise AcmeStoreError(f'Could not read {os.path.basename(path)}: {e}') from e
+        name, detail = os.path.basename(path), str(e)
+        raise AcmeStoreError(i18n.Message(
+            f'Could not read {name}: {detail}',
+            lambda: gettext('Could not read %(file)s: %(detail)s', file=name, detail=detail))) from e
 
 
 def _parse(path, raw):
@@ -87,15 +95,23 @@ def _parse(path, raw):
     try:
         text = raw.decode('utf-8').strip()
     except UnicodeDecodeError as e:
-        raise AcmeStoreError(f'{name} is not valid UTF-8, nothing was changed') from e
+        raise AcmeStoreError(i18n.Message(
+            f'{name} is not valid UTF-8, nothing was changed',
+            lambda: gettext('%(file)s is not valid UTF-8, nothing was changed', file=name))) from e
     if not text:
         return {}
     try:
         data = json.loads(text)
     except ValueError as e:
-        raise AcmeStoreError(f'{name} is not valid JSON, nothing was changed: {e}') from e
+        detail = str(e)
+        raise AcmeStoreError(i18n.Message(
+            f'{name} is not valid JSON, nothing was changed: {detail}',
+            lambda: gettext('%(file)s is not valid JSON, nothing was changed: %(detail)s',
+                            file=name, detail=detail))) from e
     if not isinstance(data, dict):
-        raise AcmeStoreError(f'{name} does not hold a resolver map, nothing was changed')
+        raise AcmeStoreError(i18n.Message(
+            f'{name} does not hold a resolver map, nothing was changed',
+            lambda: gettext('%(file)s does not hold a resolver map, nothing was changed', file=name)))
     return data
 
 
@@ -152,7 +168,9 @@ def backup(path, raw=None, key=None):
             os.close(fd)
         os.chmod(dest, SAFE_MODE)
         return dest
-    raise AcmeStoreError(f'Could not create a unique backup of {base}, nothing was changed')
+    raise AcmeStoreError(i18n.Message(
+        f'Could not create a unique backup of {base}, nothing was changed',
+        lambda: gettext('Could not create a unique backup of %(file)s, nothing was changed', file=base)))
 
 
 def write_in_place(path, data):
@@ -211,14 +229,24 @@ def _verify(path, body, restore):
         with open(path, 'rb') as fh:
             got = fh.read()
     except OSError as e:
-        raise AcmeStoreError(f'Could not read {name} back after writing: {e}') from e
+        detail = str(e)
+        raise AcmeStoreError(i18n.Message(
+            f'Could not read {name} back after writing: {detail}',
+            lambda: gettext('Could not read %(file)s back after writing: %(detail)s',
+                            file=name, detail=detail))) from e
     if got == body:
         return
     if _is_json(got):
-        raise AcmeStoreChanged(f'{name} was rewritten by something else while it was being saved. Try again.')
+        raise AcmeStoreChanged(i18n.Message(
+            f'{name} was rewritten by something else while it was being saved. Try again.',
+            lambda: gettext('%(file)s was rewritten by something else while it was being saved. Try again.',
+                            file=name)))
     if restore is not None:
         _put_back(path, restore)
-    raise AcmeStoreError(f'{name} did not read back as valid JSON after writing, the previous copy was put back')
+    raise AcmeStoreError(i18n.Message(
+        f'{name} did not read back as valid JSON after writing, the previous copy was put back',
+        lambda: gettext('%(file)s did not read back as valid JSON after writing, the previous copy was put back',
+                        file=name)))
 
 
 def remove(path, wanted, key=None):
@@ -253,9 +281,12 @@ def plan(path, wanted, raw):
 
 def commit(path, raw, body, key=None):
     if snapshot(path) != raw:
-        raise AcmeStoreChanged(
-            f'{os.path.basename(path)} changed while it was being edited, most likely Traefik renewing a '
-            'certificate. Nothing was written, try again.')
+        name = os.path.basename(path)
+        raise AcmeStoreChanged(i18n.Message(
+            f'{name} changed while it was being edited, most likely Traefik renewing a '
+            'certificate. Nothing was written, try again.',
+            lambda: gettext('%(file)s changed while it was being edited, most likely Traefik renewing a '
+                            'certificate. Nothing was written, try again.', file=name)))
     saved = backup(path, raw, key)
     write_bytes_in_place(path, body, restore=raw)
     return saved
@@ -277,11 +308,24 @@ def _apply(path, wanted, raw=None, key=None):
     return 0, None
 
 
+def _partial(total, name, err, saved):
+    english = (f'Removed {total} certificate, then stopped at {name}: {err}' if total == 1
+               else f'Removed {total} certificates, then stopped at {name}: {err}')
+    detail = err.shown if isinstance(err, AcmeStoreError) else (lambda: str(err))
+    return AcmeStorePartial(i18n.Message(english, lambda: ngettext(
+        'Removed %(num)d certificate, then stopped at %(file)s: %(detail)s',
+        'Removed %(num)d certificates, then stopped at %(file)s: %(detail)s',
+        total, file=name, detail=detail())), total, saved)
+
+
 def remove_many(paths, wanted):
     with store_lock():
         for path in paths:
             if not writable(path):
-                raise AcmeStoreReadOnly(f'{os.path.basename(path)} is mounted read only, nothing was changed')
+                name = os.path.basename(path)
+                raise AcmeStoreReadOnly(i18n.Message(
+                    f'{name} is mounted read only, nothing was changed',
+                    lambda: gettext('%(file)s is mounted read only, nothing was changed', file=name)))
         planned = []
         for path in paths:
             raw = snapshot(path)
@@ -295,9 +339,7 @@ def remove_many(paths, wanted):
                 count, backup_path = _apply(path, wanted, raw, keys.get(path))
             except (AcmeStoreError, OSError) as e:
                 if total:
-                    raise AcmeStorePartial(
-                        f'Removed {total} certificate(s), then stopped at {os.path.basename(path)}: {e}',
-                        total, saved) from e
+                    raise _partial(total, os.path.basename(path), e, saved) from e
                 raise
             total += count
             saved = backup_path or saved

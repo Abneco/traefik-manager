@@ -80,7 +80,7 @@ from core import agent_errors as _agent_err
 from core import git as _git
 from core import auth as _auth
 from core import routes_build as _rb
-from flask_babel import gettext
+from flask_babel import gettext, ngettext
 from core import i18n as _i18n
 from core import crowdsec as _crowd
 from core import certs as _certs
@@ -363,13 +363,13 @@ _login_failure_limit = limiter.shared_limit(
     lambda: env.LOGIN_FAILURE_LIMIT or env.DEFAULT_LOGIN_FAILURE_LIMIT, scope='login-failures',
     key_func=lambda: 'account', methods=['POST'], deduct_when=_failed_sign_in,
     exempt_when=lambda: not env.LOGIN_FAILURE_LIMIT,
-    error_message='Too many failed sign-in attempts. Try again later.')
+    error_message=lambda: gettext('Too many failed sign-in attempts. Try again later.'))
 
 _otp_failure_limit = limiter.shared_limit(
     lambda: env.OTP_FAILURE_LIMIT or env.DEFAULT_OTP_FAILURE_LIMIT, scope='otp-failures',
     key_func=lambda: 'account', methods=['POST'], deduct_when=_failed_sign_in,
     exempt_when=lambda: not env.OTP_FAILURE_LIMIT,
-    error_message='Too many failed two-factor codes. Try again later.')
+    error_message=lambda: gettext('Too many failed two-factor codes. Try again later.'))
 
 
 def _setup_checks_a_code() -> bool:
@@ -386,7 +386,7 @@ _setup_otp_failure_limit = limiter.shared_limit(
     lambda: env.OTP_FAILURE_LIMIT or env.DEFAULT_OTP_FAILURE_LIMIT, scope='otp-failures',
     key_func=lambda: 'account', methods=['POST'], deduct_when=_failed_sign_in,
     exempt_when=lambda: not env.OTP_FAILURE_LIMIT or not _setup_checks_a_code(),
-    error_message='Too many failed two-factor codes. Try again later.')
+    error_message=lambda: gettext('Too many failed two-factor codes. Try again later.'))
 
 
 BACKUP_DIR         = env.BACKUP_DIR
@@ -536,12 +536,17 @@ def _detect_setup_self_route() -> tuple[str, str]:
     return _detect_self_route_from_own_labels()
 
 
-def _password_error(pw: str, label: str = 'Password') -> str | None:
+def _password_error(pw: str, new: bool = False) -> str | None:
     if len(pw) < 8:
-        return label + ' must be at least 8 characters.'
+        if new:
+            return gettext('New password must be at least 8 characters.')
+        return gettext('Password must be at least 8 characters.')
     if len(pw.encode('utf-8')) > 72:
-        return (label + ' must be 72 bytes or fewer, which is the bcrypt limit. '
-                'Accented and non-Latin characters take more than one byte each.')
+        if new:
+            return gettext('New password must be 72 bytes or fewer, which is the bcrypt limit. '
+                           'Accented and non-Latin characters take more than one byte each.')
+        return gettext('Password must be 72 bytes or fewer, which is the bcrypt limit. '
+                       'Accented and non-Latin characters take more than one byte each.')
     return None
 
 
@@ -1047,21 +1052,23 @@ def setup():
 
     if reset_mode and request.method == 'POST':
         _check_csrf()
-        refusal = None
+        refusal = shown = None
         if os.environ.get('ADMIN_PASSWORD', '').strip():
             refusal = 'ADMIN_PASSWORD is set, so a password saved here would never be used. Change that variable and restart instead.'
+            shown = gettext('ADMIN_PASSWORD is set, so a password saved here would never be used. Change that variable and restart instead.')
         elif not _auth_enabled():
             refusal = 'Local password login is turned off. Sign in with your identity provider.'
+            shown = gettext('Local password login is turned off. Sign in with your identity provider.')
         if refusal:
             update_settings(setup_password_reset=False)
             logger.warning(f"Password reset refused from {request.remote_addr}: {refusal}")
-            flash(refusal, 'error')
+            flash(shown, 'error')
             return redirect(url_for('login'))
         new_pw  = request.form.get('password', '')
         confirm = request.form.get('confirm', '')
         err = _password_error(new_pw)
         if not err and new_pw != confirm:
-            err = 'Passwords do not match.'
+            err = gettext('Passwords do not match.')
         if not err and otp_required:
             code = request.form.get('code', '').strip()
             try:
@@ -1071,7 +1078,7 @@ def setup():
                 logger.exception("OTP verify error during a password reset")
                 code_ok = False
             if not code_ok:
-                err = 'Enter the current code from your authenticator app.'
+                err = gettext('Enter the current code from your authenticator app.')
                 logger.warning(f"Password reset with a wrong two-factor code from {request.remote_addr}")
         if err:
             return render_template('login.html', setup_mode=True, reset_mode=True,
@@ -1270,7 +1277,7 @@ def setup_test_git():
     if rc == 0:
         return jsonify({'ok': True})
     safe = err.replace(token, '***') if token else err
-    return jsonify({'ok': False, 'error': (safe or 'Could not reach repository')[:160]})
+    return jsonify({'ok': False, 'error': safe[:160] if safe else gettext('Could not reach repository')})
 
 
 @app.route('/logout', methods=['POST'])
@@ -1390,7 +1397,7 @@ def api_change_password():
     new_pw      = (data or {}).get('new_password', '')
     confirm_pw  = (data or {}).get('confirm_password', '')
 
-    pw_error = _password_error(new_pw, 'New password')
+    pw_error = _password_error(new_pw, new=True)
     if pw_error:
         return jsonify({'error': pw_error}), 400
     if new_pw != confirm_pw:
@@ -2175,6 +2182,29 @@ def _cs_age_text(seconds: int) -> str:
     return f"{minutes} minute{'s' if minutes != 1 else ''}"
 
 
+def _cs_stale_note(seconds: int, why: str) -> str:
+    english = (f'CrowdSec has not answered for {_cs_age_text(seconds)}, so these '
+               f'decisions are the last ones read and may be out of date. {why}')
+
+    def shown():
+        if seconds >= 86400:
+            return ngettext('CrowdSec has not answered for %(num)d day, so these decisions are the last ones '
+                            'read and may be out of date. %(reason)s',
+                            'CrowdSec has not answered for %(num)d days, so these decisions are the last ones '
+                            'read and may be out of date. %(reason)s', seconds // 86400, reason=why)
+        if seconds >= 3600:
+            return ngettext('CrowdSec has not answered for %(num)d hour, so these decisions are the last ones '
+                            'read and may be out of date. %(reason)s',
+                            'CrowdSec has not answered for %(num)d hours, so these decisions are the last ones '
+                            'read and may be out of date. %(reason)s', seconds // 3600, reason=why)
+        return ngettext('CrowdSec has not answered for %(num)d minute, so these decisions are the last ones '
+                        'read and may be out of date. %(reason)s',
+                        'CrowdSec has not answered for %(num)d minutes, so these decisions are the last ones '
+                        'read and may be out of date. %(reason)s', max(1, seconds // 60), reason=why)
+
+    return _i18n.Message(english, shown)
+
+
 def _cs_decisions_gate():
     lapi = _cs_lapi_url()
     key  = _cs_api_key()
@@ -2195,8 +2225,7 @@ def _cs_active_decisions(force_full: bool = False):
             all_decisions, _mode = _crowd.cs_decisions_stream(force_full=force_full)
             if str(_mode).startswith('stale:'):
                 _, _age, _why = str(_mode).split(':', 2)
-                stale_note = (f'CrowdSec has not answered for {_cs_age_text(int(_age))}, so these '
-                              f'decisions are the last ones read and may be out of date. {_why}')
+                stale_note = _cs_stale_note(int(_age), _why)
         except CrowdSecUnavailable as e:
             if 'HTTP 404' in str(e) or 'HTTP 405' in str(e):
                 logger.info("CrowdSec LAPI has no /v1/decisions/stream, falling back to the paged walk")
@@ -2375,12 +2404,11 @@ def api_cs_summary():
     active = []
     if not key and not _cs_has_cert():
         decisions_block['ok'] = False
-        decisions_block['error'] = ('No bouncer API key or client certificate. CrowdSec only accepts a bouncer key '
-                                    'or a TLS client certificate on /v1/decisions, the machine token is refused there')
+        decisions_block['error'] = gettext('No bouncer API key or client certificate. CrowdSec only accepts a bouncer key or a TLS client certificate on /v1/decisions, the machine token is refused there')
     else:
         try:
             active, stale_note = _cs_active_decisions(force_full)
-            decisions_block['stale'] = stale_note
+            decisions_block['stale'] = _i18n.shown(stale_note)
         except CrowdSecUnavailable as e:
             decisions_block['ok'] = False
             decisions_block['error'] = str(e)
@@ -2628,7 +2656,7 @@ def api_manager_version():
         "latest": mgr.get('tag', ''),
         "release_url": mgr.get('url', ''),
         "release_notes": mgr.get('notes', ''),
-        "release_error": mgr.get('error', ''),
+        "release_error": _i18n.shown(mgr.get('error', '')),
         "traefik_latest": tfk.get('tag', ''),
         "traefik_release_url": tfk.get('url', ''),
         "traefik_running": _updates.running_traefik_version(),
@@ -2707,10 +2735,12 @@ def trigger_traefik_restart() -> tuple:
     method = _get_restart_method()
     if method in ('proxy', 'socket'):
         ok = _restart_via_docker()
-        return ok, ('' if ok else f'Docker restart failed - check DOCKER_HOST and TRAEFIK_CONTAINER ({_get_traefik_container()!r})')
+        return ok, ('' if ok else gettext('Docker restart failed - check DOCKER_HOST and TRAEFIK_CONTAINER (%(container)s)',
+                                          container=repr(_get_traefik_container())))
     if method == 'poison-pill':
         ok = _restart_via_signal_file()
-        return ok, ('' if ok else f'Signal file write failed - check SIGNAL_FILE_PATH ({_get_signal_file_path()!r})')
+        return ok, ('' if ok else gettext('Signal file write failed - check SIGNAL_FILE_PATH (%(path)s)',
+                                          path=repr(_get_signal_file_path())))
     return False, gettext('Unknown RESTART_METHOD: %(method)s', method=repr(method))
 
 
@@ -2737,7 +2767,7 @@ def api_static_config_get():
                 msg = _agent_err.localize(resp.json() or {}).get('error', '')
             except Exception:
                 msg = ''
-            return jsonify({'error': msg or 'Static config not available on this agent'}), resp.status_code
+            return jsonify({'error': msg or gettext('Static config not available on this agent')}), resp.status_code
         body = resp.json() or {}
         raw = body.get('content', '')
         try:
@@ -2750,7 +2780,7 @@ def api_static_config_get():
     if not path or not os.path.exists(path):
         refused = _settings.refused_path('static')
         if refused:
-            return jsonify({'error': gettext('Static config path refused: %(refused)s', refused=refused)}), 404
+            return jsonify({'error': gettext('Static config path refused: %(refused)s', refused=_i18n.shown(refused))}), 404
         return jsonify({'error': gettext('Static config not found or STATIC_CONFIG_PATH not set')}), 404
     try:
         with open(path, 'r') as f:
@@ -2771,7 +2801,7 @@ def api_static_config_save():
     if not path:
         refused = _settings.refused_path('static')
         if refused:
-            return jsonify({'error': gettext('Static config path refused: %(refused)s', refused=refused)}), 400
+            return jsonify({'error': gettext('Static config path refused: %(refused)s', refused=_i18n.shown(refused))}), 400
         return jsonify({'error': gettext('STATIC_CONFIG_PATH not configured')}), 400
     safe_path = _safe_file_path(path)
     if not safe_path:
@@ -2822,7 +2852,7 @@ def api_static_restart():
         logger.info(f"Traefik restarted via static config by {request.remote_addr}")
         add_notification('warning', 'Traefik restarted', category='traefik')
         return jsonify({'ok': True})
-    logger.error(f"Traefik restart failed for {request.remote_addr}: {err}")
+    logger.error(f"Traefik restart failed for {request.remote_addr} (RESTART_METHOD {_get_restart_method()!r})")
     return jsonify({'ok': False, 'error': err}), 500
 
 @app.route('/api/static/status')
@@ -3762,7 +3792,7 @@ def api_plugins_install():
     warning = None
     mw_written = None
     if middleware_yaml and not agent and not ACTIVE_CONFIG_DIR:
-        warning = 'Plugin saved, but the middleware was not written - no config directory is configured, so there is no file to write it to'
+        warning = gettext('Plugin saved, but the middleware was not written - no config directory is configured, so there is no file to write it to')
     if middleware_yaml and (agent or ACTIVE_CONFIG_DIR):
         if '{{' in middleware_yaml:
             return jsonify({'ok': False, 'error': gettext('The middleware snippet contains template placeholders (%(example)s) that must be replaced with real values before saving. Edit the middleware in the editor and replace all %(marker)s placeholders.', example='{{ ... }}', marker='{{ }}')}), 400
@@ -3781,7 +3811,8 @@ def api_plugins_install():
                 if agent:
                     mw_name = os.path.basename(mw_choice) or 'plugin-middlewares.yml'
                     if '..' in mw_name:
-                        raise ValueError('invalid middleware file name')
+                        raise ValueError(_i18n.Message('invalid middleware file name',
+                                                       lambda: gettext('invalid middleware file name')))
                     if not mw_name.endswith(('.yml', '.yaml')):
                         mw_name += '.yml'
                     mw_label = mw_name
@@ -3797,7 +3828,9 @@ def api_plugins_install():
                     if mw_choice:
                         mw_file = _resolve_config_path(mw_choice)
                         if not mw_file:
-                            raise ValueError(f'middleware file not allowed: {mw_choice!r}')
+                            raise ValueError(_i18n.Message(
+                                f'middleware file not allowed: {mw_choice!r}',
+                                lambda: gettext('middleware file not allowed: %(file)s', file=repr(mw_choice))))
                     else:
                         mw_file = os.path.join(ACTIVE_CONFIG_DIR, 'plugin-middlewares.yml')
                     mw_label = os.path.basename(mw_file)
@@ -3814,7 +3847,8 @@ def api_plugins_install():
                 if agent:
                     mresp = _agent_request(agent, 'POST', '/api/configs', json={'name': mw_name, 'content': stream.getvalue()})
                     if mresp.status_code != 200:
-                        raise RuntimeError('agent rejected the middleware file write')
+                        raise RuntimeError(_i18n.Message('agent rejected the middleware file write',
+                                                         lambda: gettext('agent rejected the middleware file write')))
                 else:
                     if os.path.exists(mw_file):
                         create_backup(mw_file)
@@ -3823,7 +3857,8 @@ def api_plugins_install():
                 mw_written = mw_label
         except Exception as e:
             logger.exception("Failed to save middleware")
-            warning = f'Plugin saved but middleware could not be written: {e}'
+            warning = gettext('Plugin saved but middleware could not be written: %(error)s',
+                              error=_i18n.shown_error(e))
     plugin_names = list(plugins_block.keys())
     add_notification('success', f'Plugin installed: {", ".join(plugin_names)}')
     result = {'ok': True, 'plugins': plugin_names}
@@ -3939,12 +3974,13 @@ def _host_cert_manage_state():
     method   = _get_restart_method()
     restart  = method in ('proxy', 'socket', 'poison-pill')
     if not resolved:
-        reason = (f"acme.json path refused: {_settings.refused_path('acme')}" if _settings.refused_path('acme')
-                  else 'acme.json is not mounted')
+        _acme_refused = _settings.refused_path('acme')
+        reason = (gettext('acme.json path refused: %(refused)s', refused=_i18n.shown(_acme_refused)) if _acme_refused
+                  else gettext('acme.json is not mounted'))
     elif not writable:
-        reason = 'acme.json is mounted read only'
+        reason = gettext('acme.json is mounted read only')
     elif not restart:
-        reason = 'no restart method is configured, and Traefik only reads acme.json at startup'
+        reason = gettext('no restart method is configured, and Traefik only reads acme.json at startup')
     else:
         reason = ''
     return {'available': writable and restart, 'writable': writable,
@@ -3964,7 +4000,7 @@ def api_certs_manage():
         resp = _agent_request(agent, 'GET', '/api/traefik/certs/status')
         if resp.status_code != 200:
             return jsonify({'available': False, 'writable': False, 'restart_method': '',
-                            'reason': 'this agent is too old to manage certificates', 'paths': []})
+                            'reason': gettext('this agent is too old to manage certificates'), 'paths': []})
         state = _agent_err.localize(resp.json() or {})
     except Exception as e:
         return jsonify({'available': False, 'writable': False, 'restart_method': '',
@@ -3996,7 +4032,7 @@ def api_certs_delete():
 
     state = _host_cert_manage_state()
     if not state['available']:
-        return jsonify({'error': state['reason'] or 'Certificates cannot be edited here'}), 403
+        return jsonify({'error': state['reason'] or gettext('Certificates cannot be edited here')}), 403
 
     try:
         removed, saved = _acme.remove_many(state['paths'], wanted)
@@ -4004,11 +4040,11 @@ def api_certs_delete():
         ok, err = trigger_traefik_restart()
         logger.error(f"Certificate removal stopped partway: {e}")
         add_notification('error', f"Certificate removal stopped partway: {e}", category='traefik')
-        return jsonify({'error': str(e), 'removed': e.removed, 'partial': True,
+        return jsonify({'error': e.shown(), 'removed': e.removed, 'partial': True,
                         'backup': os.path.basename(e.backup or ''),
                         'restarted': ok, 'restart_error': '' if ok else err}), 500
     except _acme.AcmeStoreError as e:
-        return jsonify({'error': str(e)}), e.status
+        return jsonify({'error': e.shown()}), e.status
     except OSError as e:
         logger.exception("acme.json write failed")
         return jsonify({'error': gettext('Could not write acme.json: %(error)s', error=e)}), 500
@@ -4054,7 +4090,7 @@ def api_logs():
     if not log_path or not os.path.exists(log_path):
         refused = _settings.refused_path('log')
         if refused:
-            return jsonify({'error': gettext('Access log path refused: %(refused)s', refused=refused), 'lines': []})
+            return jsonify({'error': gettext('Access log path refused: %(refused)s', refused=_i18n.shown(refused)), 'lines': []})
         return jsonify({'error': gettext('Access log not found. Set ACCESS_LOG_PATH env var or configure the path in Settings.'), 'lines': []})
     try:
         lines = []
@@ -4172,7 +4208,7 @@ def api_git_backup_push():
                          category='backup')
         return jsonify({'ok': True})
     add_notification('error', f'Git push failed: {err}', category='backup')
-    return jsonify({'ok': False, 'error': err}), 400
+    return jsonify({'ok': False, 'error': _i18n.shown(err)}), 400
 
 def _same_git_remote(a: str, b: str) -> bool:
     a, b = (a or '').strip().rstrip('/'), (b or '').strip().rstrip('/')
@@ -4204,7 +4240,7 @@ def api_git_backup_test():
     if rc == 0:
         return jsonify({'ok': True})
     safe_err = err.replace(token, '***') if token else err
-    return jsonify({'ok': False, 'error': safe_err or 'Could not reach repository'}), 400
+    return jsonify({'ok': False, 'error': safe_err or gettext('Could not reach repository')}), 400
 
 @app.route('/api/backup/git/commits')
 @login_required
@@ -4802,7 +4838,7 @@ def api_restore(filename):
         if acme_target:
             state = _host_cert_manage_state()
             if not state['available']:
-                return jsonify({'error': state['reason'] or 'acme.json cannot be written here'}), 403
+                return jsonify({'error': state['reason'] or gettext('acme.json cannot be written here')}), 403
             with open(path, 'rb') as fh:
                 body = fh.read()
             with _acme.store_lock():
@@ -4824,7 +4860,7 @@ def api_restore(filename):
         add_notification('warning', f"Backup restored: {filename}", category='backup')
         return jsonify({'success': True})
     except _acme.AcmeStoreError as e:
-        return jsonify({'error': str(e)}), e.status
+        return jsonify({'error': e.shown()}), e.status
     except Exception as e:
         logger.exception("Restore error")
         return jsonify({'error': str(e)}), 500
@@ -4955,12 +4991,16 @@ def api_save_settings():
         acme_json_path    = str(data.get('acme_json_path', '')).strip()
         access_log_path   = str(data.get('access_log_path', '')).strip()
         static_config_path = str(data.get('static_config_path', '')).strip()
-        for _kind, _label, _value in (('static', 'Static config path', static_config_path),
-                                      ('log', 'Access log path', access_log_path),
-                                      ('acme', 'acme.json path', acme_json_path)):
+        _path_errors = {
+            'static': lambda p: gettext('Static config path: %(problem)s', problem=p),
+            'log':    lambda p: gettext('Access log path: %(problem)s', problem=p),
+            'acme':   lambda p: gettext('acme.json path: %(problem)s', problem=p),
+        }
+        for _kind, _value in (('static', static_config_path), ('log', access_log_path),
+                              ('acme', acme_json_path)):
             _problem = _settings.saved_path_problem(_kind, _value)
             if _problem:
-                return jsonify({'error': f'{_label}: {_problem}'}), 400
+                return jsonify({'error': _path_errors[_kind](_i18n.shown(_problem))}), 400
         webhook_url          = str(data.get('webhook_url', '')).strip()
         webhook_type         = str(data.get('webhook_type', 'discord')).strip()
         webhook_username     = str(data.get('webhook_username', '')).strip()
@@ -5106,9 +5146,13 @@ def api_settings_test_connection():
             info = resp.json()
             return jsonify({'ok': True, 'version': info.get('Version', '?')})
         if resp.status_code in (401, 403):
-            hint = (' - the saved password is only sent to the saved API URL, enter it to test this one'
-                    if withheld else ' - check the API username and password')
-            return jsonify({'ok': False, 'error': gettext('HTTP %(status_code)s%(hint)s', status_code=resp.status_code, hint=hint)})
+            if withheld:
+                err = gettext('HTTP %(status_code)s - the saved password is only sent to the saved API URL, '
+                              'enter it to test this one', status_code=resp.status_code)
+            else:
+                err = gettext('HTTP %(status_code)s - check the API username and password',
+                              status_code=resp.status_code)
+            return jsonify({'ok': False, 'error': err})
         return jsonify({'ok': False, 'error': gettext('HTTP %(status_code)s from %(url)s/api/version', status_code=resp.status_code, url=url)})
     except requests.exceptions.SSLError as e:
         return jsonify({'ok': False, 'error': gettext('TLS verification failed - the API certificate is not trusted. Mount your CA into /etc/ssl/certs/ca-certificates.crt or set TRAEFIK_INSECURE_SKIP_VERIFY=true. (%(error)s)', error=str(e)[:120])})
@@ -5234,7 +5278,8 @@ def api_save_route_health():
     except (TypeError, ValueError):
         return jsonify({'error': gettext('Interval must be a number of seconds')}), 400
     if interval not in _rh.INTERVALS:
-        return jsonify({'error': 'Interval must be one of %s seconds' % ', '.join(str(i) for i in _rh.INTERVALS)}), 400
+        return jsonify({'error': gettext('Interval must be one of %(intervals)s seconds',
+                                         intervals=', '.join(str(i) for i in _rh.INTERVALS))}), 400
     update_settings(route_check_enabled=enabled,
                     route_check_interval=interval)
     return jsonify({'ok': True, 'enabled': enabled, 'interval': interval})
@@ -6524,7 +6569,7 @@ def save_entry():
         service_ref         = request.form.get('serviceRef', '').strip()
         _service_ref_posted = 'serviceRef' in request.form
         if _service_ref_posted and not service_ref:
-            _msg = "Select a service to reference, or switch the backend to Manual."
+            _msg = gettext('Select a service to reference, or switch the backend to Manual.')
             if fetch:
                 return jsonify({'ok': False, 'message': _msg}), 400
             flash(_msg, "error")
@@ -6533,9 +6578,10 @@ def save_entry():
             request.form.get('originalName', '').strip() or svc_name, agent)
         if not target_ip and not _has_backends_json and not service_ref \
                 and not _existing_is_composite:
-            _msg = (f"A backend host is required for {protocol.upper()} routes. "
-                    f"Send targetIp (repeated per protocol, index "
-                    f"{ {'http': 0, 'tcp': 1, 'udp': 2}[protocol] }) or {_backends_field}.")
+            _msg = gettext('A backend host is required for %(protocol)s routes. '
+                           'Send targetIp (repeated per protocol, index %(index)s) or %(field)s.',
+                           protocol=protocol.upper(), index={'http': 0, 'tcp': 1, 'udp': 2}[protocol],
+                           field=_backends_field)
             if fetch:
                 return jsonify({'ok': False, 'message': _msg}), 400
             flash(_msg, "error")
@@ -6546,9 +6592,10 @@ def save_entry():
             if _sep and _tail.isdigit() and (':' not in _host or _host.endswith(']')):
                 target_ip, target_port = _host, _tail
             else:
-                _msg = (f"A backend port is required for {protocol.upper()} routes. "
-                        f"Send targetPort (repeated per protocol, index "
-                        f"{ {'tcp': 1, 'udp': 2}[protocol] }) or {_backends_field}.")
+                _msg = gettext('A backend port is required for %(protocol)s routes. '
+                               'Send targetPort (repeated per protocol, index %(index)s) or %(field)s.',
+                               protocol=protocol.upper(), index={'tcp': 1, 'udp': 2}[protocol],
+                               field=_backends_field)
                 if fetch:
                     return jsonify({'ok': False, 'message': _msg}), 400
                 flash(_msg, "error")
@@ -6580,7 +6627,8 @@ def save_entry():
             _hdr_foreign  = _existing_hdr is not None and (
                 hdr_ledger_key not in _ledger or (is_edit and orig_cfg_file != cfg_filename))
             if _hdr_foreign:
-                _msg = f"A middleware named '{hdr_name}' already exists and wasn't created by the route presets. Rename or remove it first, then re-save."
+                _msg = gettext("A middleware named '%(name)s' already exists and wasn't created by the route presets. "
+                               "Rename or remove it first, then re-save.", name=hdr_name)
                 if fetch:
                     return jsonify({'ok': False, 'message': _msg}), 409
                 flash(_msg, "error")
@@ -6624,7 +6672,8 @@ def save_entry():
                 else:
                     _ref_cfgs = [load_config(_p) for _p in env.CONFIG_PATHS]
                 if not any(service_ref in ((_c.get(protocol) or {}).get('services') or {}) for _c in _ref_cfgs):
-                    _msg = f"Service '{service_ref}' does not exist for {protocol.upper()} routes."
+                    _msg = gettext("Service '%(service)s' does not exist for %(protocol)s routes.",
+                                   service=service_ref, protocol=protocol.upper())
                     if fetch:
                         return jsonify({'ok': False, 'message': _msg}), 400
                     flash(_msg, "error")
@@ -6764,8 +6813,7 @@ def save_entry():
                 _composite_type = str((_be or {}).get('compositeType') or 'weighted').strip()
                 if _composite_posted and _composite_type == 'failover' \
                         and len(_composite.normalise_children(_be.get('children'))) > 2:
-                    _fo_msg = ('Failover takes two backends: the one that serves '
-                               'and the one that takes over')
+                    _fo_msg = gettext('Failover takes two backends: the one that serves and the one that takes over')
                     if fetch:
                         return jsonify({'ok': False, 'message': _fo_msg}), 400
                     flash(_fo_msg, "error")
@@ -6830,9 +6878,10 @@ def save_entry():
                 if _composite_posted:
                     _loop = _composite.find_cycle(_svc_section, service_name, _be.get('children'))
                     if _loop:
-                        _loop_msg = (f"{service_name} cannot use itself as a backend" if _loop == service_name
-                                     else f"{_loop} already routes back to {service_name}, which would "
-                                          f"make a cycle Traefik cannot load")
+                        _loop_msg = (gettext('%(name)s cannot use itself as a backend', name=service_name)
+                                     if _loop == service_name
+                                     else gettext('%(loop)s already routes back to %(name)s, which would make a cycle Traefik cannot load',
+                                                  loop=_loop, name=service_name))
                         if fetch:
                             return jsonify({'ok': False, 'message': _loop_msg}), 400
                         flash(_loop_msg, "error")
@@ -6963,8 +7012,9 @@ def save_entry():
             _register_config_path(target_path)
             threading.Thread(target=lambda: _git_push_if_enabled('route save'), daemon=True).start()
         action = "updated" if is_edit else "created"
-        msg = f"Route {svc_name} {action}"
-        add_notification('success', msg)
+        add_notification('success', f"Route {svc_name} {action}")
+        msg = (gettext('Route %(name)s updated', name=svc_name) if is_edit
+               else gettext('Route %(name)s created', name=svc_name))
         if fetch:
             return jsonify({'ok': True, 'message': msg})
         flash(msg, "success")
@@ -7086,8 +7136,8 @@ def delete_entry(router_id):
             threading.Thread(target=lambda: _git_push_if_enabled('route delete'), daemon=True).start()
         if _del_ledger_changed:
             _save_edit_dicts(managed_middlewares=_del_ledger)
-        msg = f"Route {plain_id} deleted"
-        add_notification('warning', msg)
+        add_notification('warning', f"Route {plain_id} deleted")
+        msg = gettext('Route %(name)s deleted', name=plain_id)
         if fetch:
             return jsonify({'ok': True, 'message': msg})
         flash(msg, "success")
@@ -7141,7 +7191,7 @@ def save_middleware():
         try:
             parsed_mw = SafeYAML(typ='safe').load(mw_content)
         except Exception as ye:
-            msg = f'Invalid YAML: {ye}'
+            msg = gettext('Invalid YAML: %(error)s', error=ye)
             if fetch:
                 return jsonify({'ok': False, 'message': msg}), 400
             flash(msg, "error")
@@ -7156,20 +7206,20 @@ def save_middleware():
             section = parsed_mw.get(wrapper)
             inner = section.get('middlewares') if isinstance(section, dict) else None
             if wrapper == 'udp' or len(parsed_mw) != 1 or not isinstance(inner, dict) or not inner:
-                msg = 'Paste the middleware body, or a full http:/tcp: block holding a single middleware'
+                msg = gettext('Paste the middleware body, or a full http:/tcp: block holding a single middleware')
                 if fetch:
                     return jsonify({'ok': False, 'message': msg}), 400
                 flash(msg, "error")
                 return redirect(url_for('index'))
             if len(inner) > 1:
-                msg = 'That block defines several middlewares - paste one at a time'
+                msg = gettext('That block defines several middlewares - paste one at a time')
                 if fetch:
                     return jsonify({'ok': False, 'message': msg}), 400
                 flash(msg, "error")
                 return redirect(url_for('index'))
             body = next(iter(inner.values()))
             if not isinstance(body, dict) or not body:
-                msg = 'The middleware in that block has no configuration'
+                msg = gettext('The middleware in that block has no configuration')
                 if fetch:
                     return jsonify({'ok': False, 'message': msg}), 400
                 flash(msg, "error")
@@ -7177,7 +7227,7 @@ def save_middleware():
             parsed_mw = body
             mw_protocol = wrapper
         if mw_protocol == 'tcp' and not set(parsed_mw.keys()) <= {'ipAllowList', 'ipWhiteList', 'inFlightConn'}:
-            msg = 'TCP middlewares support only ipAllowList and inFlightConn'
+            msg = gettext('TCP middlewares support only ipAllowList and inFlightConn')
             if fetch:
                 return jsonify({'ok': False, 'message': msg}), 400
             flash(msg, "error")
@@ -7210,8 +7260,9 @@ def save_middleware():
             _register_config_path(target_path)
             threading.Thread(target=lambda: _git_push_if_enabled('middleware save'), daemon=True).start()
         action = "updated" if is_edit else "created"
-        msg = f"Middleware {mw_name} {action}"
-        add_notification('success', msg)
+        add_notification('success', f"Middleware {mw_name} {action}")
+        msg = (gettext('Middleware %(name)s updated', name=mw_name) if is_edit
+               else gettext('Middleware %(name)s created', name=mw_name))
         if fetch:
             return jsonify({'ok': True, 'message': msg})
         flash(msg, "success")
@@ -7443,8 +7494,8 @@ def delete_middleware(mw_name):
             threading.Thread(target=lambda: _git_push_agent_if_enabled(agent, 'middleware delete'), daemon=True).start()
         else:
             threading.Thread(target=lambda: _git_push_if_enabled('middleware delete'), daemon=True).start()
-        msg = f"Middleware {mw_name} deleted"
-        add_notification('warning', msg)
+        add_notification('warning', f"Middleware {mw_name} deleted")
+        msg = gettext('Middleware %(name)s deleted', name=mw_name)
         if fetch:
             return jsonify({'ok': True, 'message': msg})
         flash(msg, "success")
@@ -7777,7 +7828,7 @@ def api_test_oidc():
             'ok': True,
             'issuer': cfg.get('issuer', url),
             'checked': 'discovery only',
-            'note': 'Provider reachable. Credentials are not verified until you sign in.',
+            'note': gettext('Provider reachable. Credentials are not verified until you sign in.'),
         })
     except Exception as e:
         return jsonify({'ok': False, 'error': str(e)})
@@ -7963,8 +8014,8 @@ def api_agent_routes(agent_id):
         payload.pop('traefikServices', None)
         return jsonify(payload)
     except requests.exceptions.SSLError as e:
-        return jsonify({'error': 'TLS verification failed - the agent certificate is not trusted '
-                                 'by Traefik Manager (%s)' % str(e)[:100]}), 502
+        return jsonify({'error': gettext('TLS verification failed - the agent certificate is not trusted '
+                                         'by Traefik Manager (%(error)s)', error=str(e)[:100])}), 502
     except requests.exceptions.ConnectionError:
         return jsonify({'error': gettext('Cannot reach agent')}), 502
     except Exception as e:
@@ -8088,12 +8139,12 @@ def api_agents_create():
 def _agent_url_error(url: str) -> str:
     value = str(url or '').strip()
     if not value:
-        return 'Agent URL must not be empty.'
+        return gettext('Agent URL must not be empty.')
     if not value.startswith(('http://', 'https://')):
-        return 'Agent URL must start with http:// or https:// - without a scheme the agent cannot be reached.'
+        return gettext('Agent URL must start with http:// or https:// - without a scheme the agent cannot be reached.')
     rest = value.split('://', 1)[1]
     if not rest or rest.startswith('/'):
-        return 'Agent URL must include a host, for example http://10.0.0.5:8090'
+        return gettext('Agent URL must include a host, for example %(example)s', example='http://10.0.0.5:8090')
     return ''
 
 
@@ -8260,8 +8311,8 @@ def api_agents_health(agent_id):
         return jsonify({'ok': resp.status_code == 200, 'latency_ms': ms, 'version': body.get('version', ''), 'status': resp.status_code})
     except requests.exceptions.SSLError as e:
         return jsonify({'ok': False, 'latency_ms': -1,
-                        'error': 'TLS verification failed - the agent certificate is not trusted '
-                                 'by Traefik Manager (%s)' % str(e)[:100]})
+                        'error': gettext('TLS verification failed - the agent certificate is not trusted '
+                                         'by Traefik Manager (%(error)s)', error=str(e)[:100])})
     except requests.exceptions.ConnectionError:
         return jsonify({'ok': False, 'latency_ms': -1, 'error': gettext('Connection refused')})
     except Exception as e:
@@ -8301,8 +8352,8 @@ def api_agents_proxy(agent_id, path):
                 out_headers[key] = value
         return _agent_err.localize_bytes(resp.content, content_type), resp.status_code, out_headers
     except requests.exceptions.SSLError as e:
-        return jsonify({'error': 'TLS verification failed - the agent certificate is not trusted '
-                                 'by Traefik Manager (%s)' % str(e)[:100]}), 502
+        return jsonify({'error': gettext('TLS verification failed - the agent certificate is not trusted '
+                                         'by Traefik Manager (%(error)s)', error=str(e)[:100])}), 502
     except requests.exceptions.ConnectionError:
         return jsonify({'error': gettext('Cannot reach agent - check URL and network')}), 502
     except requests.exceptions.Timeout:

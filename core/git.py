@@ -6,7 +6,9 @@ import shutil
 import subprocess
 import time
 
-from core import agents_http, backups, env, notifications
+from flask_babel import gettext
+
+from core import agents_http, backups, env, i18n, notifications
 from core import settings as settings_mod
 from core.env import logger
 
@@ -118,10 +120,21 @@ def _git_lock():
         finally:
             f.close()
 
+def _failed(step, detail):
+    if step == 'init':
+        return i18n.Message(f'Repo init failed: {detail}',
+                            lambda: gettext('Repo init failed: %(error)s', error=detail))
+    if step == 'commit':
+        return i18n.Message(f'Commit failed: {detail}',
+                            lambda: gettext('Commit failed: %(error)s', error=detail))
+    return i18n.Message(f'Push failed: {detail}',
+                        lambda: gettext('Push failed: %(error)s', error=detail))
+
+
 def _git_push_configs(action='backup', custom_message=None):
     s = settings_mod.load_settings()
     if not s.get('git_backup_repo', '').strip():
-        return False, 'No repository configured'
+        return False, i18n.Message('No repository configured', lambda: gettext('No repository configured'))
     branch = _safe_git_branch(s.get('git_backup_branch', 'main'))
     token  = s.get('git_backup_token', '').strip()
     creds  = {'username': s.get('git_backup_username', '').strip(), 'token': token} if token else None
@@ -134,7 +147,7 @@ def _git_push_configs(action='backup', custom_message=None):
         try:
             repo_dir = _git_ensure_repo()
         except Exception as e:
-            return False, f'Repo init failed: {_redact(str(e))}'
+            return False, _failed('init', _redact(str(e)))
         dyn_dir    = os.path.join(repo_dir, 'dynamic')
         static_dir = os.path.join(repo_dir, 'static')
         ts  = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -170,12 +183,12 @@ def _git_push_configs(action='backup', custom_message=None):
                 return True, 'No changes'
             _, err, rc = _git_run(['commit', '-m', msg])
             if rc != 0:
-                return False, f'Commit failed: {_redact(err)}'
+                return False, _failed('commit', _redact(err))
             _, err, rc = _git_run(['push', 'origin', f'HEAD:{branch}'], credentials=creds)
             if rc == 0:
                 logger.info(f"Git backup: {msg}")
                 return True, ''
-        return False, f'Push failed: {_redact(err)}'
+        return False, _failed('push', _redact(err))
 
 def _git_push_if_enabled(action='backup'):
     try:
@@ -209,13 +222,17 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
     s        = settings_mod.load_settings()
     repo_url = s.get('git_backup_repo', '').strip()
     if not repo_url:
-        return False, 'No repository configured on the Host'
+        return False, i18n.Message('No repository configured on the Host',
+                                   lambda: gettext('No repository configured on the Host'))
     if not _valid_git_url(repo_url):
-        return False, 'Unsupported git repository URL scheme'
+        return False, i18n.Message('Unsupported git repository URL scheme',
+                                   lambda: gettext('Unsupported git repository URL scheme'))
     branch      = _agent_git_branch(agent)
     host_branch = _safe_git_branch(s.get('git_backup_branch', 'main'))
     if branch == host_branch:
-        return False, f'Agent branch "{branch}" must differ from the Host branch'
+        return False, i18n.Message(f'Agent branch "{branch}" must differ from the Host branch',
+                                   lambda: gettext('Agent branch "%(branch)s" must differ from the Host branch',
+                                                   branch=branch))
     token = s.get('git_backup_token', '').strip()
     creds = {'username': s.get('git_backup_username', '').strip(), 'token': token} if token else None
     tmpl  = s.get('git_backup_commit_message', 'traefik-manager: {action} at {timestamp}')
@@ -228,7 +245,9 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
         resp.raise_for_status()
         files = (resp.json() or {}).get('files') or []
     except Exception as e:
-        return False, f'Could not read agent configs: {e}'
+        detail = str(e)
+        return False, i18n.Message(f'Could not read agent configs: {detail}',
+                                   lambda: gettext('Could not read agent configs: %(error)s', error=detail))
     static_content = ''
     static_name    = ''
     try:
@@ -249,7 +268,7 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
         try:
             _git_ensure_repo_at(repo_dir, repo_url, branch, creds)
         except Exception as e:
-            return False, f'Repo init failed: {_redact(str(e))}'
+            return False, _failed('init', _redact(str(e)))
         dyn_dir    = os.path.join(repo_dir, 'dynamic')
         static_dir = os.path.join(repo_dir, 'static')
         err = ''
@@ -274,12 +293,12 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
                 return True, 'No changes'
             _, err, rc = _git_run(['commit', '-m', msg], cwd=repo_dir)
             if rc != 0:
-                return False, f'Commit failed: {_redact(err)}'
+                return False, _failed('commit', _redact(err))
             _, err, rc = _git_run(['push', 'origin', f'HEAD:{branch}'], cwd=repo_dir, credentials=creds)
             if rc == 0:
                 logger.info(f"Git backup ({agent.get('name')}): {msg}")
                 return True, ''
-        return False, f'Push failed: {_redact(err)}'
+        return False, _failed('push', _redact(err))
 
 def _git_push_agent_if_enabled(agent, action='backup'):
     try:

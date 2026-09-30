@@ -1,8 +1,9 @@
 import time
 
 import requests
+from flask_babel import gettext
 
-from core import env
+from core import env, i18n
 from core import monitor as monitor_mod
 from core import traefik as traefik_mod
 from core.env import logger
@@ -74,9 +75,12 @@ def release_info(repo: str) -> dict:
             info['url'] = str(data.get('html_url') or '')
             info['notes'] = str(data.get('body') or '')
         elif resp.status_code in (403, 429):
-            info['error'] = 'rate limited by GitHub, retrying later'
+            info['error'] = i18n.Message('rate limited by GitHub, retrying later',
+                                         lambda: gettext('rate limited by GitHub, retrying later'))
         else:
-            info['error'] = 'GitHub returned HTTP %d' % resp.status_code
+            code = resp.status_code
+            info['error'] = i18n.Message('GitHub returned HTTP %d' % code,
+                                         lambda: gettext('GitHub returned HTTP %(status_code)d', status_code=code))
             ttl = RELEASE_RETRY_TTL
     except Exception as e:
         info['error'] = str(e)[:120]
