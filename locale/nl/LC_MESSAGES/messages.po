@@ -51,8 +51,11 @@ msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s wordt nog gebruikt door %(users)s"
 
 #, python-format
-msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
-msgstr "%(child)s wordt nog gebruikt door %(users)s en is nog een backend van %(parents)s"
+msgid ""
+"%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgstr ""
+"%(child)s wordt nog gebruikt door %(users)s en is nog een backend van "
+"%(parents)s"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -68,7 +71,8 @@ msgstr ""
 
 #, python-format
 msgid "%(file)s is mounted read only on this agent, nothing was changed"
-msgstr "%(file)s is alleen-lezen gekoppeld op deze agent, er is niets gewijzigd"
+msgstr ""
+"%(file)s is alleen-lezen gekoppeld op deze agent, er is niets gewijzigd"
 
 #, python-format
 msgid "%(file)s is mounted read only on this agent, nothing was restored"
@@ -124,7 +128,8 @@ msgstr "%(name)s is gedefinieerd in %(file)s, dat hier alleen-lezen is."
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s wordt nog gebruikt door %(users)s. Verwijder die middlewares eerst"
+msgstr ""
+"%(name)s wordt nog gebruikt door %(users)s. Verwijder die middlewares eerst"
 
 #, python-format
 msgid ""
@@ -884,8 +889,8 @@ msgid ""
 "%(ip_allow_list)s and the login limiter - check what reaches the app first "
 "with the %(ip_diagnostic)s."
 msgstr ""
-"Voegt %(trusted_ips)s toe aan een entrypoint, zodat Traefik %"
-"(x_forwarded_for)s van je proxy’s gelooft. Dit vertrouwen voedt logs, "
+"Voegt %(trusted_ips)s toe aan een entrypoint, zodat Traefik "
+"%(x_forwarded_for)s van je proxy’s gelooft. Dit vertrouwen voedt logs, "
 "CrowdSec, %(ip_allow_list)s en de inlogbegrenzer - controleer eerst wat de "
 "app bereikt met de %(ip_diagnostic)s."
 
@@ -1545,8 +1550,8 @@ msgid ""
 "Backup retention on this agent is set via the %(backup_keep_count)s "
 "environment variable."
 msgstr ""
-"Back-upbewaring op deze agent wordt ingesteld via de omgevingsvariabele %"
-"(backup_keep_count)s."
+"Back-upbewaring op deze agent wordt ingesteld via de omgevingsvariabele "
+"%(backup_keep_count)s."
 
 #. Used in the browser
 msgid "Backups"
@@ -1596,7 +1601,8 @@ msgid "Bans visible, attacks are not"
 msgstr "Blokkades zichtbaar, aanvallen niet"
 
 msgid "Base URL of the Traefik API used for live stats."
-msgstr "Basis-URL van de Traefik-API die voor live statistieken wordt gebruikt."
+msgstr ""
+"Basis-URL van de Traefik-API die voor live statistieken wordt gebruikt."
 
 #. Used in the browser
 msgid "Base URL of your Gotify server."
@@ -1812,8 +1818,8 @@ msgid ""
 "Capture groups are %(n1)s, %(n2)s and so on. In a compose file %(code)s must "
 "be written %(code2)s."
 msgstr ""
-"Capturegroepen zijn %(n1)s, %(n2)s enzovoort. In een compose-bestand moet %"
-"(code)s geschreven worden als %(code2)s."
+"Capturegroepen zijn %(n1)s, %(n2)s enzovoort. In een compose-bestand moet "
+"%(code)s geschreven worden als %(code2)s."
 
 #. Used in the browser
 msgid "Card settings"
@@ -2014,8 +2020,8 @@ msgid ""
 "Claim name that contains groups. Keycloak: %(groups)s, some providers: "
 "%(roles)s."
 msgstr ""
-"Claimnaam die de groepen bevat. Keycloak: %(groups)s, sommige providers: %"
-"(roles)s."
+"Claimnaam die de groepen bevat. Keycloak: %(groups)s, sommige providers: "
+"%(roles)s."
 
 #. Used in the browser
 msgctxt "button"
@@ -2100,7 +2106,8 @@ msgstr "Klik om elke kaart tot deze provider te beperken."
 #. Used in the browser
 #, python-brace-format
 msgid "Click to see the {count} subscribed bans that were excluded."
-msgstr "Klik om de {count} geabonneerde blokkades te zien die zijn uitgesloten."
+msgstr ""
+"Klik om de {count} geabonneerde blokkades te zien die zijn uitgesloten."
 
 #. Used in the browser
 #, python-brace-format
@@ -2657,8 +2664,8 @@ msgstr "CrowdSec-LAPI niet beschikbaar"
 msgid ""
 "CrowdSec Local API URL. Leave blank to use the %(crowdsec_lapi_url)s env var."
 msgstr ""
-"URL van de CrowdSec Local API. Laat leeg om de omgevingsvariabele %"
-"(crowdsec_lapi_url)s te gebruiken."
+"URL van de CrowdSec Local API. Laat leeg om de omgevingsvariabele "
+"%(crowdsec_lapi_url)s te gebruiken."
 
 msgid "CrowdSec credentials saved"
 msgstr "CrowdSec-inloggegevens opgeslagen"
@@ -3005,7 +3012,8 @@ msgstr "Sjabloon verwijderen"
 #. Used in the browser
 #, python-brace-format
 msgid "Delete the service {name}? Its own backends are removed with it."
-msgstr "De service {name} verwijderen? De eigen backends worden mee verwijderd."
+msgstr ""
+"De service {name} verwijderen? De eigen backends worden mee verwijderd."
 
 #. Used in the browser
 msgid "Delete this template?"
@@ -3456,9 +3464,9 @@ msgid ""
 "tab is just noise. All of them can be toggled later under Settings, so "
 "nothing here is a commitment."
 msgstr ""
-"Elk hiervan voegt een tabblad toe aan de navigatie. Zet aan wat je "
-"gebruikt - een ongebruikt tabblad is alleen ruis. Alles kan later worden "
-"aangepast onder Instellingen, dus niets hiervan ligt vast."
+"Elk hiervan voegt een tabblad toe aan de navigatie. Zet aan wat je gebruikt "
+"- een ongebruikt tabblad is alleen ruis. Alles kan later worden aangepast "
+"onder Instellingen, dus niets hiervan ligt vast."
 
 #. Used in the browser
 msgid "Early Hints"
@@ -4329,8 +4337,8 @@ msgid ""
 "%(transport)s. Entry-point %(responding_timeouts)s are global and static - "
 "adjust them in the Static Config editor if long transcodes still cut off."
 msgstr ""
-"Forceert %(pass_host_header)s en stelt lange %(forwarding_timeouts)s in op %"
-"(transport)s. %(responding_timeouts)s van entrypoints zijn globaal en "
+"Forceert %(pass_host_header)s en stelt lange %(forwarding_timeouts)s in op "
+"%(transport)s. %(responding_timeouts)s van entrypoints zijn globaal en "
 "statisch - pas ze aan in de editor voor statische configuratie als lange "
 "transcodes nog steeds worden afgebroken."
 
@@ -4527,9 +4535,9 @@ msgid ""
 "yourself."
 msgstr ""
 "Geef deze interface een eigen hostnaam via Traefik, zodat je die via TLS "
-"bereikt in plaats van via een gepubliceerde poort. Schrijft een %"
-"(traefik_manager_self)s naar je configuratiemap. Sla dit over als je al zelf "
-"naar deze container routeert."
+"bereikt in plaats van via een gepubliceerde poort. Schrijft een "
+"%(traefik_manager_self)s naar je configuratiemap. Sla dit over als je al "
+"zelf naar deze container routeert."
 
 #. Used in the browser
 msgid "Go back to the attack evidence, the primary view"
@@ -5098,13 +5106,17 @@ msgstr "Het neemt een bestaande installatie over"
 #. Used in the browser
 #, python-brace-format
 msgid "It is also removed from {names}, and any left empty are deleted too."
-msgstr "Het wordt ook uit {names} verwijderd, en die daardoor leeg raken, worden ook verwijderd."
+msgstr ""
+"Het wordt ook uit {names} verwijderd, en die daardoor leeg raken, worden ook "
+"verwijderd."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
 "It is also removed from {names}, which is deleted if nothing is left in it."
-msgstr "Het wordt ook uit {names} verwijderd, dat wordt verwijderd als er niets meer in zit."
+msgstr ""
+"Het wordt ook uit {names} verwijderd, dat wordt verwijderd als er niets meer "
+"in zit."
 
 msgid "It will not be shown again."
 msgstr "Deze wordt niet opnieuw getoond."
@@ -5138,8 +5150,8 @@ msgid ""
 "Keep only the last N %(bak)s files per config file (%(backup_keep_count)s). "
 "0 = keep all."
 msgstr ""
-"Bewaar alleen de laatste N %(bak)s-bestanden per configuratiebestand (%"
-"(backup_keep_count)s). 0 = alles bewaren."
+"Bewaar alleen de laatste N %(bak)s-bestanden per configuratiebestand "
+"(%(backup_keep_count)s). 0 = alles bewaren."
 
 #. Used in the browser
 msgid "Key copied"
@@ -6927,7 +6939,8 @@ msgstr "Tabblad Statische configuratie openen"
 
 #. Used in the browser
 msgid "Open the Static Config tab to change accessLog.format"
-msgstr "Open het tabblad Statische configuratie om accessLog.format te wijzigen"
+msgstr ""
+"Open het tabblad Statische configuratie om accessLog.format te wijzigen"
 
 #. Used in the browser
 msgid "Open the Static Config tab to change the accessLog block"
@@ -6944,7 +6957,8 @@ msgstr ""
 
 #. Used in the browser
 msgid "Open the decisions view, the secondary table behind the alert stream"
-msgstr "De decisions-weergave openen, de secundaire tabel achter de alertstroom"
+msgstr ""
+"De decisions-weergave openen, de secundaire tabel achter de alertstroom"
 
 #. Used in the browser
 msgid "Open this route"
@@ -7246,8 +7260,8 @@ msgid ""
 "one."
 msgstr ""
 "Permissions-Policy - wie elke browserfunctie mag gebruiken. %(self)s = "
-"alleen je eigen site · %(all)s = elke site, ook ingesloten iframes · %(block)"
-"s = niemand."
+"alleen je eigen site · %(all)s = elke site, ook ingesloten iframes · "
+"%(block)s = niemand."
 
 #. Used in the browser
 msgid "Pick an entrypoint"
@@ -7771,8 +7785,8 @@ msgid ""
 "Reads active decisions - the bans in force. Generate one with "
 "%(cscli_bouncers_add)s."
 msgstr ""
-"Leest actieve decisions - de blokkades die gelden. Genereer er een met %"
-"(cscli_bouncers_add)s."
+"Leest actieve decisions - de blokkades die gelden. Genereer er een met "
+"%(cscli_bouncers_add)s."
 
 msgid ""
 "Reads alerts, which is where scenarios, targeted paths and attacking "
@@ -7978,8 +7992,8 @@ msgid ""
 "Remove agent \"{name}\"? This only removes it from TM settings - the agent "
 "service on the remote server is unaffected."
 msgstr ""
-"Agent “{name}” verwijderen? Dit verwijdert hem alleen uit de TM-"
-"instellingen - de agentservice op de externe server blijft ongewijzigd."
+"Agent “{name}” verwijderen? Dit verwijdert hem alleen uit de TM-instellingen "
+"- de agentservice op de externe server blijft ongewijzigd."
 
 #. Used in the browser
 msgid "Remove and delete"
@@ -8048,7 +8062,8 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid "Remove {list_count} certificates from acme.json on {agent}: {shown}?"
-msgstr "{list_count} certificaten uit acme.json op {agent} verwijderen: {shown}?"
+msgstr ""
+"{list_count} certificaten uit acme.json op {agent} verwijderen: {shown}?"
 
 #. Used in the browser
 #, python-brace-format
@@ -8069,7 +8084,8 @@ msgstr "{shown} uit acme.json verwijderen?"
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
 msgid_plural ""
 "Removed %(num)d certificates, then stopped at %(file)s: %(detail)s"
-msgstr[0] "%(num)d certificaat verwijderd, daarna gestopt bij %(file)s: %(detail)s"
+msgstr[0] ""
+"%(num)d certificaat verwijderd, daarna gestopt bij %(file)s: %(detail)s"
 msgstr[1] ""
 "%(num)d certificaten verwijderd, daarna gestopt bij %(file)s: %(detail)s"
 
@@ -8349,7 +8365,8 @@ msgstr "Herstellen vervangt elk certificaat in acme.json"
 msgid "Result: {count} trusted range on {entrypoint} (was {before})."
 msgid_plural "Result: {count} trusted ranges on {entrypoint} (was {before})."
 msgstr[0] "Resultaat: {count} vertrouwd bereik op {entrypoint} (was {before})."
-msgstr[1] "Resultaat: {count} vertrouwde bereiken op {entrypoint} (was {before})."
+msgstr[1] ""
+"Resultaat: {count} vertrouwde bereiken op {entrypoint} (was {before})."
 
 msgid ""
 "Retention is one setting for both kinds of backup. Change it under Dynamic "
@@ -8385,8 +8402,8 @@ msgid ""
 "in the middleware form. Templates are shared across every server, not just "
 "the one selected here."
 msgstr ""
-"Herbruikbare YAML om een middleware mee te beginnen. Kies er een onder %"
-"(template)s in het middlewareformulier. Sjablonen worden gedeeld met elke "
+"Herbruikbare YAML om een middleware mee te beginnen. Kies er een onder "
+"%(template)s in het middlewareformulier. Sjablonen worden gedeeld met elke "
 "server, niet alleen met de server die hier is geselecteerd."
 
 #. Used in the browser
@@ -8749,8 +8766,8 @@ msgid ""
 "Run this command to disable 2FA: %(docker_exec_it)s %(podman_exec_it)s "
 "%(flask_reset_password)s"
 msgstr ""
-"Voer dit commando uit om 2FA uit te schakelen: %(docker_exec_it)s %"
-"(podman_exec_it)s %(flask_reset_password)s"
+"Voer dit commando uit om 2FA uit te schakelen: %(docker_exec_it)s "
+"%(podman_exec_it)s %(flask_reset_password)s"
 
 #, python-format
 msgid ""
@@ -9773,8 +9790,8 @@ msgstr "Status: {entry}"
 msgid ""
 "Step 1 - Paste the static config snippet from the %(traefik_plugin_page)s"
 msgstr ""
-"Stap 1 - Plak het fragment voor de statische configuratie van de %"
-"(traefik_plugin_page)s"
+"Stap 1 - Plak het fragment voor de statische configuratie van de "
+"%(traefik_plugin_page)s"
 
 msgid ""
 "Step 2 - Paste the middleware snippet and edit the settings for your needs"
@@ -9904,8 +9921,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Ondersteunde functies: %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Ondersteunde functies: %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -10210,8 +10227,8 @@ msgstr ""
 "De Host kan in plaats daarvan een back-up van deze agent maken in zijn eigen "
 "repository, op een aparte branch, met de inloggegevens van de Host. Er wordt "
 "niets op de agent ingesteld en er wordt geen token op opgeslagen. Selecteer "
-"deze server in de switcher en zet daarna %(use_host_repository)s aan onder %"
-"(backups_git)s."
+"deze server in de switcher en zet daarna %(use_host_repository)s aan onder "
+"%(backups_git)s."
 
 #. Used in the browser
 msgid "The LAPI did not answer"
@@ -10617,7 +10634,8 @@ msgstr ""
 #. Used in the browser
 msgid ""
 "These alerts ran in simulation mode. CrowdSec saw them and enforced nothing"
-msgstr "Deze alerts liepen in simulatiemodus. CrowdSec zag ze en dwong niets af"
+msgstr ""
+"Deze alerts liepen in simulatiemodus. CrowdSec zag ze en dwong niets af"
 
 #. Used in the browser
 msgid ""
@@ -11564,7 +11582,8 @@ msgstr "Werk Traefik bij naar {version}."
 
 #. Used in the browser
 msgid "Update available: change the version in traefik.yml and restart Traefik"
-msgstr "Update beschikbaar: wijzig de versie in traefik.yml en herstart Traefik"
+msgstr ""
+"Update beschikbaar: wijzig de versie in traefik.yml en herstart Traefik"
 
 #. Used in the browser
 #, python-brace-format
@@ -11983,8 +12002,8 @@ msgid ""
 "Your password was reset. Choose a new one to get back in - nothing else "
 "about your configuration has changed."
 msgstr ""
-"Je wachtwoord is gereset. Kies een nieuw wachtwoord om weer binnen te "
-"komen - verder is er niets aan je configuratie veranderd."
+"Je wachtwoord is gereset. Kies een nieuw wachtwoord om weer binnen te komen "
+"- verder is er niets aan je configuratie veranderd."
 
 msgid "Your sign-in expired. Enter your password again."
 msgstr "Je inlogsessie is verlopen. Voer je wachtwoord opnieuw in."
@@ -14858,8 +14877,10 @@ msgstr ""
 #, python-brace-format
 msgid "{count} of them was simulated, so CrowdSec enforced nothing"
 msgid_plural "{count} of them were simulated, so CrowdSec enforced nothing"
-msgstr[0] "{count} daarvan was gesimuleerd, dus CrowdSec heeft niets afgedwongen"
-msgstr[1] "{count} daarvan waren gesimuleerd, dus CrowdSec heeft niets afgedwongen"
+msgstr[0] ""
+"{count} daarvan was gesimuleerd, dus CrowdSec heeft niets afgedwongen"
+msgstr[1] ""
+"{count} daarvan waren gesimuleerd, dus CrowdSec heeft niets afgedwongen"
 
 #. Used in the browser
 #, python-brace-format
@@ -14965,8 +14986,10 @@ msgstr[1] "{count} routers op {name}, allemaal live"
 msgid "{count} router on {name}: {disabled}, {down}, {degraded}, {warnings}"
 msgid_plural ""
 "{count} routers on {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[0] "{count} router op {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[1] "{count} routers op {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[0] ""
+"{count} router op {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[1] ""
+"{count} routers op {name}: {disabled}, {down}, {degraded}, {warnings}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15468,8 +15491,10 @@ msgstr ""
 #, python-brace-format
 msgid "{name}, defined in {file}, used by {count} route: {routes}"
 msgid_plural "{name}, defined in {file}, used by {count} routes: {routes}"
-msgstr[0] "{name}, gedefinieerd in {file}, gebruikt door {count} route: {routes}"
-msgstr[1] "{name}, gedefinieerd in {file}, gebruikt door {count} routes: {routes}"
+msgstr[0] ""
+"{name}, gedefinieerd in {file}, gebruikt door {count} route: {routes}"
+msgstr[1] ""
+"{name}, gedefinieerd in {file}, gebruikt door {count} routes: {routes}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15722,7 +15747,8 @@ msgstr "{s5} serverfouten. Klik om de loglijst te filteren."
 #. Used in the browser
 #, python-brace-format
 msgid "{scenario} - leaky bucket, capacity {capacity}, leaks every {leakspeed}"
-msgstr "{scenario} - leaky bucket, capaciteit {capacity}, lekt elke {leakspeed}"
+msgstr ""
+"{scenario} - leaky bucket, capaciteit {capacity}, lekt elke {leakspeed}"
 
 #. Used in the browser
 #, python-brace-format
