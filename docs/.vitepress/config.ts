@@ -140,6 +140,7 @@ export default defineConfig({
           { text: 'Environment Variables', link: '/env-vars' },
           { text: 'manager.yml', link: '/manager-yml' },
           { text: 'OIDC / SSO Login', link: '/oidc' },
+          { text: 'Languages', link: '/languages' },
           { text: 'Notification Webhooks', link: '/webhooks' },
           { text: 'Git Repository Backup', link: '/git-backup' },
         ],

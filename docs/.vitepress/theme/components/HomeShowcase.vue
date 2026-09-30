@@ -60,6 +60,13 @@ const sections = [
     link: '/tab-certs',
   },
   {
+    kicker: 'Languages',
+    title: 'Speaks your language',
+    desc: 'The whole interface in 14 languages, from Čeština to 中文, with numbers, dates and notifications to match. Each person picks their own, and Follow system uses the browser language.',
+    img: 'multilingual',
+    link: '/languages',
+  },
+  {
     kicker: 'Static Config',
     title: 'traefik.yml as editable cards',
     desc: 'Entry points, certificate resolvers, providers, logging and observability as forms, with raw YAML one click away and a Traefik restart button when you need it.',
