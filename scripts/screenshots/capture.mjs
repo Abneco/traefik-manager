@@ -1,13 +1,23 @@
 import puppeteer from 'puppeteer';
 const BASE = 'http://tmshot-app:5000';
 const sleep = ms => new Promise(r => setTimeout(r, ms));
-const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-dev-shm-usage', '--force-color-profile=srgb'] });
+const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-dev-shm-usage', '--force-color-profile=srgb', '--lang=en'] });
 const missing = [];
+const LANGUAGES = ['fr-CA', 'de', 'zh-Hans', 'es'];
+const HIDE_POPUPS = '#translateInvitePopup, #securityAdvisoryPopup, #tmUpdatePopup { display: none !important; }';
 
 async function capture(theme) {
     const ctx  = await browser.createBrowserContext();
     const page = await ctx.newPage();
     await page.setViewport({ width: 1920, height: 1080, deviceScaleFactor: 2 });
+    await page.setExtraHTTPHeaders({ 'Accept-Language': 'en' });
+    await page.evaluateOnNewDocument(css => {
+        document.addEventListener('DOMContentLoaded', () => {
+            const style = document.createElement('style');
+            style.textContent = css;
+            document.head.appendChild(style);
+        });
+    }, HIDE_POPUPS);
     const shot = async name => { await sleep(600); await page.screenshot({ path: `/out/${theme}/${name}.png` }); console.log(`${theme}/${name}`); };
     const js = code => page.evaluate(code);
     const tab = async (t, ms=1800) => { await js(`switchTab('${t}')`); await sleep(ms); };
@@ -163,6 +173,16 @@ async function capture(theme) {
     await shot('dashboard-icons');
     await js(`setDashPodDensity('list')`);
     await sleep(1500);
+
+    for (const tag of LANGUAGES) {
+        await page.goto(`${BASE}/${tag}/`, { waitUntil: 'domcontentloaded', timeout: 60000 });
+        await sleep(4500);
+        const lang = await js(`document.documentElement.lang`);
+        if (lang !== tag) { missing.push(`${theme}/lang-${tag}: the page opened in ${lang}`); continue; }
+        await js(`document.querySelectorAll('body > div[style*="--red"]').forEach(b => b.remove())`);
+        await tab('dashboard', 3000);
+        await shot(`lang-${tag}`);
+    }
 
     await page.close(); await ctx.close();
 }
