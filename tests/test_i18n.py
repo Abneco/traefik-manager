@@ -264,18 +264,25 @@ def test_untranslated_plurals_follow_the_english_rule_on_the_server(locale_dir, 
 
 def test_language_options_use_native_names(with_languages):
     assert i18n.language_options() == [
-        {'tag': 'en', 'name': 'English (Canada)', 'code': 'EN', 'region': 'CA'},
         {'tag': 'de', 'name': 'Deutsch', 'code': 'DE', 'region': 'DE'},
+        {'tag': 'en', 'name': 'English (Canada)', 'code': 'EN', 'region': 'CA'},
         {'tag': 'zh-Hans', 'name': '中文 (简体)', 'code': 'ZH', 'region': 'CN'},
     ]
 
 
 def test_english_variants_name_the_canadian_source(with_english_variants):
-    assert i18n.language_options()[:3] == [
+    assert i18n.language_options()[1:4] == [
         {'tag': 'en', 'name': 'English (Canada)', 'code': 'EN-CA', 'region': 'CA'},
         {'tag': 'en-GB', 'name': 'English (United Kingdom)', 'code': 'EN-GB', 'region': 'GB'},
         {'tag': 'en-US', 'name': 'English (United States)', 'code': 'EN-US', 'region': 'US'},
     ]
+
+
+def test_the_picker_lists_languages_alphabetically_by_their_own_name(monkeypatch):
+    tags = ('en', 'zh-Hans', 'ru', 'fr', 'cs', 'da', 'pt-BR', 'fr-CA', 'pt', 'de')
+    monkeypatch.setattr(i18n, 'available_tags', lambda locale_dir=None: tags)
+    assert [o['tag'] for o in i18n.language_options()] == [
+        'cs', 'da', 'de', 'en', 'fr', 'fr-CA', 'pt', 'pt-BR', 'ru', 'zh-Hans']
 
 
 def test_save_language_accepts_the_canadian_source_tag(client, with_english_variants):
@@ -308,7 +315,7 @@ def test_save_language_round_trip(client, with_languages):
 
     data = client.get('/api/settings').get_json()
     assert data['default_language'] == 'zh-Hans'
-    assert [o['tag'] for o in data['available_languages']] == ['en', 'de', 'zh-Hans']
+    assert [o['tag'] for o in data['available_languages']] == ['de', 'en', 'zh-Hans']
 
     resp = client.post('/api/settings/language', json={'default_language': ''}, headers=HDR)
     assert resp.get_json()['default_language'] == ''

@@ -1,5 +1,6 @@
 import os
 import re
+import unicodedata
 from functools import lru_cache
 
 from babel import Locale, UnknownLocaleError
@@ -166,7 +167,12 @@ def language_options() -> list:
             name = tag
         options.append({'tag': tag, 'name': name[:1].upper() + name[1:],
                         'code': code_for(tag, tags), 'region': region_for(tag)})
-    return options
+    return sorted(options, key=_name_order)
+
+
+def _name_order(option):
+    plain = ''.join(ch for ch in unicodedata.normalize('NFKD', option['name']) if not unicodedata.combining(ch))
+    return (not plain[:1].isascii(), plain.casefold(), option['tag'])
 
 
 def current_tag() -> str:
