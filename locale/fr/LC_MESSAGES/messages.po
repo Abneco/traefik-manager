@@ -13721,7 +13721,7 @@ msgstr ""
 #, python-brace-format
 msgid "all {n} server down"
 msgid_plural "all {n} servers down"
-msgstr[0] "{n} serveur indisponible sur {n}"
+msgstr[0] "{n} serveur indisponible"
 msgstr[1] "les {n} serveurs indisponibles"
 
 #, python-format

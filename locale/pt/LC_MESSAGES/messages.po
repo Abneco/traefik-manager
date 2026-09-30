@@ -13499,7 +13499,7 @@ msgstr "todos abaixo de 100 ms"
 #, python-brace-format
 msgid "all {n} server down"
 msgid_plural "all {n} servers down"
-msgstr[0] "{n} de {n} servidor em baixo"
+msgstr[0] "{n} servidor em baixo"
 msgstr[1] "todos os {n} servidores em baixo"
 
 #, python-format
