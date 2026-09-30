@@ -2,12 +2,14 @@ import ast
 import json
 import os
 
+from babel.support import NullTranslations
+
 from core import i18n as _i18n
 from core import notifications as N
 from tests.conftest import post_json, tm
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-GERMAN = _i18n.translations_for('de')
+UNTRANSLATED = NullTranslations()
 
 
 def _capture(monkeypatch):
@@ -39,7 +41,7 @@ def test_the_update_notification_keeps_its_english_and_renders_per_viewer(client
     assert msg == 'Traefik Manager v9.9.9 is available - update now'
     stored = json.loads(json.dumps(_i18n.to_stored(msg)))
     assert stored == msg.spec
-    assert _i18n.render(stored, GERMAN) == 'Traefik Manager v9.9.9 is available - update now'
+    assert _i18n.render(stored, UNTRANSLATED) == 'Traefik Manager v9.9.9 is available - update now'
     assert _i18n.revive(stored) == msg
 
 
@@ -50,7 +52,7 @@ def test_the_bell_stores_a_route_save_notification_as_a_spec(monkeypatch):
     assert N.add_notification('success', msg, category='backup', webhook=False)
     entry = next(e for e in N.get_notifications() if e.get('msg') == 'Backup created (2 files)')
     assert json.loads(json.dumps(entry['i18n'])) == msg.spec
-    assert _i18n.render(entry['i18n'], GERMAN) == 'Backup created (2 files)'
+    assert _i18n.render(entry['i18n'], UNTRANSLATED) == 'Backup created (2 files)'
 
 
 def test_the_stale_crowdsec_note_is_a_whole_sentence_with_a_reason():

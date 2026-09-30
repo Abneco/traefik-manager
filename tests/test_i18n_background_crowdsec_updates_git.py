@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from babel.support import NullTranslations
 
 from core import crowdsec as C
 from core import git, notifications
@@ -8,8 +9,11 @@ from core import i18n as _i18n
 from core import updates
 
 
+_UNTRANSLATED = NullTranslations()
+
+
 def _german(msg):
-    return _i18n.render(json.loads(json.dumps(_i18n.to_stored(msg))), _i18n.translations_for('de'))
+    return _i18n.render(json.loads(json.dumps(_i18n.to_stored(msg))), _UNTRANSLATED)
 
 
 def _alert(ip, scenario, events, cn=None):

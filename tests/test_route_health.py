@@ -1,6 +1,7 @@
 import json
 
 import pytest
+from babel.support import NullTranslations
 
 from core import route_health as rh
 
@@ -363,7 +364,7 @@ def test_route_messages_keep_their_spec_and_render_in_german(mon):
     raised = rh.check(_host([_app('photos')]), now=300, probe=probe, settings=ON)
     msg = raised[0][1]
     assert isinstance(msg, i18n.Message)
-    de = i18n.translations_for('de')
+    de = NullTranslations()
     assert i18n.render(msg.spec, de) == 'Route photos is unreachable (The proxy answered 502, the backend is not reachable)'
     assert i18n.render(note.spec, de) == ('The proxy redirected to auth.example.com before reaching the backend, and the '
                                           'backend could not be reached from Traefik Manager (Timeout)')
@@ -381,7 +382,7 @@ def test_monitor_messages_render_in_german_with_the_server_prefix(mon):
     from core import i18n
     _t, msg, _c = mon._cert_alert('VPS One', 'a.example.com', 'le', 1)
     assert msg == 'VPS One: Certificate for a.example.com (le) expires in 1 day'
-    de = i18n.translations_for('de')
+    de = NullTranslations()
     assert i18n.render(msg.spec, de) == 'VPS One: Certificate for a.example.com (le) expires in 1 day'
     assert json.loads(json.dumps(msg.spec)) == msg.spec
 
