@@ -21,8 +21,8 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "\"{name}\" is still in use. {parts}, then delete it?"
-msgstr "“{name}” is nog in gebruik. {parts} en daarna verwijderen?"
+msgid "\"{name}\" is still in use."
+msgstr "“{name}” is nog in gebruik."
 
 #. Used in the browser
 #, python-brace-format
@@ -2949,6 +2949,10 @@ msgid "Delete all of it"
 msgstr "Alles verwijderen"
 
 #. Used in the browser
+msgid "Delete all of it?"
+msgstr "Alles verwijderen?"
+
+#. Used in the browser
 #, python-brace-format
 msgid "Delete backup \"{name}\"?"
 msgstr "Back-up “{name}” verwijderen?"
@@ -3000,11 +3004,6 @@ msgstr "Sjabloon verwijderen"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete the route {names}"
-msgstr "De route {names} verwijderen"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Delete the service {name}? Its own backends are removed with it."
 msgstr "De service {name} verwijderen? De eigen backends worden mee verwijderd."
 
@@ -3036,11 +3035,6 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete {n} routes: {names}"
-msgstr "{n} routes verwijderen: {names}"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Deleted {n} route."
 msgid_plural "Deleted {n} routes."
 msgstr[0] "{n} route verwijderd."
@@ -3052,6 +3046,13 @@ msgid ""
 msgstr ""
 "Verwijdert alleen de lokale kloon. Externe repository en commits blijven "
 "onaangeroerd; opnieuw geïnitialiseerd bij de volgende push."
+
+#. Used in the browser
+#, python-brace-format
+msgid "Deleting it also deletes {n} route: {names}."
+msgid_plural "Deleting it also deletes {n} routes: {names}."
+msgstr[0] "Bij het verwijderen wordt ook {n} route verwijderd: {names}."
+msgstr[1] "Bij het verwijderen worden ook {n} routes verwijderd: {names}."
 
 msgid "Deliver errors right away even inside the quiet window."
 msgstr "Fouten direct bezorgen, ook binnen de stille uren."
@@ -5093,6 +5094,17 @@ msgstr "Common Name van uitgever"
 
 msgid "It adopts an existing install"
 msgstr "Het neemt een bestaande installatie over"
+
+#. Used in the browser
+#, python-brace-format
+msgid "It is also removed from {names}, and any left empty are deleted too."
+msgstr "Het wordt ook uit {names} verwijderd, en die daardoor leeg raken, worden ook verwijderd."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"It is also removed from {names}, which is deleted if nothing is left in it."
+msgstr "Het wordt ook uit {names} verwijderd, dat wordt verwijderd als er niets meer in zit."
 
 msgid "It will not be shown again."
 msgstr "Deze wordt niet opnieuw getoond."
@@ -13745,18 +13757,6 @@ msgstr "stuurt door naar {to}"
 #. Used in the browser
 msgid "referenced by no router"
 msgstr "door geen router gerefereerd"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (any left empty are deleted too)"
-msgstr ""
-"verwijder het uit {names} (die daardoor leeg raken, worden ook verwijderd)"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (which is deleted if nothing is left in it)"
-msgstr ""
-"verwijder het uit {names} (dat wordt verwijderd als er niets meer in zit)"
 
 #. Used in the browser
 msgctxt "label"

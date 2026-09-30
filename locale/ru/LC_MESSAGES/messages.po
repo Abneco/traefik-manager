@@ -22,8 +22,8 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "\"{name}\" is still in use. {parts}, then delete it?"
-msgstr "«{name}» всё ещё используется. {parts}, затем удалить его?"
+msgid "\"{name}\" is still in use."
+msgstr "«{name}» всё ещё используется."
 
 #. Used in the browser
 #, python-brace-format
@@ -2951,6 +2951,10 @@ msgid "Delete all of it"
 msgstr "Удалить всё"
 
 #. Used in the browser
+msgid "Delete all of it?"
+msgstr "Удалить всё?"
+
+#. Used in the browser
 #, python-brace-format
 msgid "Delete backup \"{name}\"?"
 msgstr "Удалить резервную копию «{name}»?"
@@ -3002,11 +3006,6 @@ msgstr "Удалить шаблон"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete the route {names}"
-msgstr "Удалить маршрут {names}"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Delete the service {name}? Its own backends are removed with it."
 msgstr ""
 "Удалить сервис {name}? Его собственные бэкенды будут убраны вместе с ним."
@@ -3041,11 +3040,6 @@ msgstr[2] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete {n} routes: {names}"
-msgstr "Удалить маршруты ({n}): {names}"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Deleted {n} route."
 msgid_plural "Deleted {n} routes."
 msgstr[0] "Удалён {n} маршрут."
@@ -3058,6 +3052,14 @@ msgid ""
 msgstr ""
 "Удаляет только локальный клон. Удалённый репозиторий и коммиты не "
 "затрагиваются; клон создаётся заново при следующем push."
+
+#. Used in the browser
+#, python-brace-format
+msgid "Deleting it also deletes {n} route: {names}."
+msgid_plural "Deleting it also deletes {n} routes: {names}."
+msgstr[0] "При удалении также удаляется {n} маршрут: {names}."
+msgstr[1] "При удалении также удаляются {n} маршрута: {names}."
+msgstr[2] "При удалении также удаляются {n} маршрутов: {names}."
 
 msgid "Deliver errors right away even inside the quiet window."
 msgstr "Доставлять ошибки сразу, даже в период тишины."
@@ -5101,6 +5103,17 @@ msgstr "Common Name издателя"
 
 msgid "It adopts an existing install"
 msgstr "Он подхватывает существующую установку"
+
+#. Used in the browser
+#, python-brace-format
+msgid "It is also removed from {names}, and any left empty are deleted too."
+msgstr "Он также убирается из {names}, опустевшие тоже удаляются."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"It is also removed from {names}, which is deleted if nothing is left in it."
+msgstr "Он также убирается из {names}, который удаляется, если в нём ничего не останется."
 
 msgid "It will not be shown again."
 msgstr "Он больше не будет показан."
@@ -13726,16 +13739,6 @@ msgstr "перенаправляет на {to}"
 #. Used in the browser
 msgid "referenced by no router"
 msgstr "не используется ни одним роутером"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (any left empty are deleted too)"
-msgstr "убрать его из {names} (опустевшие тоже удаляются)"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (which is deleted if nothing is left in it)"
-msgstr "убрать его из {names} (удаляется, если в нём ничего не останется)"
 
 #. Used in the browser
 msgctxt "label"

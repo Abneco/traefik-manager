@@ -21,8 +21,8 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "\"{name}\" is still in use. {parts}, then delete it?"
-msgstr "“{name}”仍在使用中。{parts}，然后将其删除？"
+msgid "\"{name}\" is still in use."
+msgstr "“{name}”仍在使用中。"
 
 #. Used in the browser
 #, python-brace-format
@@ -2808,6 +2808,10 @@ msgid "Delete all of it"
 msgstr "全部删除"
 
 #. Used in the browser
+msgid "Delete all of it?"
+msgstr "全部删除？"
+
+#. Used in the browser
 #, python-brace-format
 msgid "Delete backup \"{name}\"?"
 msgstr "删除备份“{name}”？"
@@ -2855,11 +2859,6 @@ msgstr "删除模板"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete the route {names}"
-msgstr "删除路由 {names}"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Delete the service {name}? Its own backends are removed with it."
 msgstr "删除服务 {name}？其自身的后端将一并移除。"
 
@@ -2884,11 +2883,6 @@ msgstr[0] "删除 {n} 个路由：{names}？这会将它们从配置文件中移
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete {n} routes: {names}"
-msgstr "删除 {n} 个路由：{names}"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Deleted {n} route."
 msgid_plural "Deleted {n} routes."
 msgstr[0] "已删除 {n} 个路由。"
@@ -2897,6 +2891,12 @@ msgid ""
 "Deletes the local clone only. Remote repository and commits are untouched; "
 "re-initialized on next push."
 msgstr "仅删除本地克隆。远程仓库和提交不受影响；下次推送时会重新初始化。"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Deleting it also deletes {n} route: {names}."
+msgid_plural "Deleting it also deletes {n} routes: {names}."
+msgstr[0] "删除它也会删除 {n} 个路由：{names}。"
 
 msgid "Deliver errors right away even inside the quiet window."
 msgstr "即使在免打扰时段内也立即发送错误。"
@@ -4858,6 +4858,17 @@ msgstr "签发者通用名称"
 
 msgid "It adopts an existing install"
 msgstr "它可以接管现有安装"
+
+#. Used in the browser
+#, python-brace-format
+msgid "It is also removed from {names}, and any left empty are deleted too."
+msgstr "它也会从 {names} 中移除，变为空的也会被删除。"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"It is also removed from {names}, which is deleted if nothing is left in it."
+msgstr "它也会从 {names} 中移除，如果其中不再剩余任何内容，则会被删除。"
 
 msgid "It will not be shown again."
 msgstr "它不会再次显示。"
@@ -13038,16 +13049,6 @@ msgstr "重定向到 {to}"
 #. Used in the browser
 msgid "referenced by no router"
 msgstr "未被任何路由器引用"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (any left empty are deleted too)"
-msgstr "将其从 {names} 中移除（变为空的也会被删除）"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (which is deleted if nothing is left in it)"
-msgstr "将其从 {names} 中移除（如果其中不再剩余任何内容，则会被删除）"
 
 #. Used in the browser
 msgctxt "label"

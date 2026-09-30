@@ -900,13 +900,14 @@ async function _sendServiceDelete(name, force) {
         if (res.status === 409 && body && ((body.inUseBy || []).length || (body.parents || []).length)) {
             const routes = body.inUseBy || [], parents = body.parents || [];
             const show = a => a.length > 5 ? t('{items} and {count} more', { items: a.slice(0, 5).join(', '), count: a.length - 5 }) : a.join(', ');
-            const parts = [];
-            if (routes.length) parts.push(routes.length === 1 ? t('Delete the route {names}', { names: show(routes) })
-                                                              : t('Delete {n} routes: {names}', { n: routes.length, names: show(routes) }));
-            if (parents.length) parts.push(parents.length === 1
-                ? t('remove it from {names} (which is deleted if nothing is left in it)', { names: show(parents) })
-                : t('remove it from {names} (any left empty are deleted too)', { names: show(parents) }));
-            if (await _confirm(t('"{name}" is still in use. {parts}, then delete it?', { name, parts: parts.join(', ' + t('and') + ' ') }),
+            const lines = [t('"{name}" is still in use.', { name })];
+            if (routes.length) lines.push(tn('Deleting it also deletes {n} route: {names}.', 'Deleting it also deletes {n} routes: {names}.',
+                                             routes.length, { names: show(routes) }));
+            if (parents.length) lines.push(parents.length === 1
+                ? t('It is also removed from {names}, which is deleted if nothing is left in it.', { names: show(parents) })
+                : t('It is also removed from {names}, and any left empty are deleted too.', { names: show(parents) }));
+            lines.push(t('Delete all of it?'));
+            if (await _confirm(lines.join(' ').replace(/([。！？]) /g, '$1'),
                                t('Service In Use'), t('Delete all of it'), _confirmWordFor(name))) {
                 await _sendServiceDelete(name, true);
             }

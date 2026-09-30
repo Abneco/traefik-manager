@@ -19,7 +19,7 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "\"{name}\" is still in use. {parts}, then delete it?"
+msgid "\"{name}\" is still in use."
 msgstr ""
 
 #. Used in the browser
@@ -2744,6 +2744,10 @@ msgid "Delete all of it"
 msgstr ""
 
 #. Used in the browser
+msgid "Delete all of it?"
+msgstr ""
+
+#. Used in the browser
 #, python-brace-format
 msgid "Delete backup \"{name}\"?"
 msgstr ""
@@ -2791,11 +2795,6 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete the route {names}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "Delete the service {name}? Its own backends are removed with it."
 msgstr ""
 
@@ -2822,11 +2821,6 @@ msgstr[2] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete {n} routes: {names}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "Deleted {n} route."
 msgid_plural "Deleted {n} routes."
 msgstr[0] ""
@@ -2837,6 +2831,14 @@ msgid ""
 "Deletes the local clone only. Remote repository and commits are untouched; "
 "re-initialized on next push."
 msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "Deleting it also deletes {n} route: {names}."
+msgid_plural "Deleting it also deletes {n} routes: {names}."
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 msgid "Deliver errors right away even inside the quiet window."
 msgstr ""
@@ -4734,6 +4736,17 @@ msgid "Issuer Common Name"
 msgstr ""
 
 msgid "It adopts an existing install"
+msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "It is also removed from {names}, and any left empty are deleted too."
+msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"It is also removed from {names}, which is deleted if nothing is left in it."
 msgstr ""
 
 msgid "It will not be shown again."
@@ -12654,16 +12667,6 @@ msgstr ""
 
 #. Used in the browser
 msgid "referenced by no router"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (any left empty are deleted too)"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (which is deleted if nothing is left in it)"
 msgstr ""
 
 #. Used in the browser

@@ -21,8 +21,8 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "\"{name}\" is still in use. {parts}, then delete it?"
-msgstr "„{name}“ wird noch verwendet. {parts}, dann löschen?"
+msgid "\"{name}\" is still in use."
+msgstr "„{name}“ wird noch verwendet."
 
 #. Used in the browser
 #, python-brace-format
@@ -2969,6 +2969,10 @@ msgid "Delete all of it"
 msgstr "Alles löschen"
 
 #. Used in the browser
+msgid "Delete all of it?"
+msgstr "Alles löschen?"
+
+#. Used in the browser
 #, python-brace-format
 msgid "Delete backup \"{name}\"?"
 msgstr "Backup „{name}“ löschen?"
@@ -3020,11 +3024,6 @@ msgstr "Vorlage löschen"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete the route {names}"
-msgstr "Route {names} löschen"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Delete the service {name}? Its own backends are removed with it."
 msgstr "Service {name} löschen? Seine eigenen Backends werden mit entfernt."
 
@@ -3056,11 +3055,6 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Delete {n} routes: {names}"
-msgstr "{n} Routen löschen: {names}"
-
-#. Used in the browser
-#, python-brace-format
 msgid "Deleted {n} route."
 msgid_plural "Deleted {n} routes."
 msgstr[0] "{n} Route gelöscht."
@@ -3072,6 +3066,13 @@ msgid ""
 msgstr ""
 "Löscht nur den lokalen Klon. Remote-Repository und Commits bleiben "
 "unberührt; beim nächsten Push wird er neu initialisiert."
+
+#. Used in the browser
+#, python-brace-format
+msgid "Deleting it also deletes {n} route: {names}."
+msgid_plural "Deleting it also deletes {n} routes: {names}."
+msgstr[0] "Beim Löschen wird auch {n} Route gelöscht: {names}."
+msgstr[1] "Beim Löschen werden auch {n} Routen gelöscht: {names}."
 
 msgid "Deliver errors right away even inside the quiet window."
 msgstr "Fehler sofort zustellen, auch während der Ruhezeit."
@@ -5117,6 +5118,17 @@ msgstr "Common Name des Ausstellers"
 
 msgid "It adopts an existing install"
 msgstr "Es übernimmt eine bestehende Installation"
+
+#. Used in the browser
+#, python-brace-format
+msgid "It is also removed from {names}, and any left empty are deleted too."
+msgstr "Außerdem wird es aus {names} entfernt, leer gebliebene werden ebenfalls gelöscht."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"It is also removed from {names}, which is deleted if nothing is left in it."
+msgstr "Außerdem wird es aus {names} entfernt, das gelöscht wird, wenn darin nichts übrig bleibt."
 
 msgid "It will not be shown again."
 msgstr "Er wird nicht erneut angezeigt."
@@ -13805,16 +13817,6 @@ msgstr "leitet auf {to} um"
 #. Used in the browser
 msgid "referenced by no router"
 msgstr "von keinem Router referenziert"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (any left empty are deleted too)"
-msgstr "entferne es aus {names} (leer gebliebene werden ebenfalls gelöscht)"
-
-#. Used in the browser
-#, python-brace-format
-msgid "remove it from {names} (which is deleted if nothing is left in it)"
-msgstr "entferne es aus {names} (wird gelöscht, wenn darin nichts übrig bleibt)"
 
 #. Used in the browser
 msgctxt "label"
