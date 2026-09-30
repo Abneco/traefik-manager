@@ -43,12 +43,16 @@ msgid "%(auth_verify)s is appended automatically"
 msgstr "%(auth_verify)s est automatiquement ajouté"
 
 #, python-format
-msgid "%(bare)s is %(bits)s"
-msgstr "%(bare)s fait %(bits)s"
+msgid "%(child)s is still a backend of %(parents)s"
+msgstr "%(child)s est encore un backend de %(parents)s"
 
 #, python-format
 msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s est encore utilisé par %(users)s"
+
+#, python-format
+msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgstr "%(child)s est encore utilisé par %(users)s et reste un backend de %(parents)s"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -121,15 +125,8 @@ msgid "%(name)s is defined in %(file)s, which is read-only here."
 msgstr "%(name)s est défini dans %(file)s, qui est en lecture seule."
 
 #, python-format
-msgid "%(name)s is still used by %(tls_users)s%(tls_users2)s"
-msgstr "%(name)s est toujours utilisé par %(tls_users)s%(tls_users2)s"
-
-#, python-format
-msgid ""
-"%(name)s is still used by %(users)s%(users2)s. Delete those middlewares first"
-msgstr ""
-"%(name)s est toujours utilisé par %(users)s%(users2)s. Supprimez ces "
-"middlewares d’abord"
+msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
+msgstr "%(name)s est toujours utilisé par %(users)s. Supprimez ces middlewares d’abord"
 
 #, python-format
 msgid ""
@@ -8172,13 +8169,23 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Remove {list_count} certificates from acme.json{where}: {shown}?"
-msgstr "Supprimer {list_count} certificats de acme.json{where} : {shown} ?"
+msgid "Remove {list_count} certificates from acme.json on {agent}: {shown}?"
+msgstr "Supprimer {list_count} certificats de acme.json sur {agent} : {shown} ?"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Remove {shown} from acme.json{where}?"
-msgstr "Supprimer {shown} de acme.json{where} ?"
+msgid "Remove {list_count} certificates from acme.json: {shown}?"
+msgstr "Supprimer {list_count} certificats de acme.json : {shown} ?"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Remove {shown} from acme.json on {agent}?"
+msgstr "Supprimer {shown} de acme.json sur {agent} ?"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Remove {shown} from acme.json?"
+msgstr "Supprimer {shown} de acme.json ?"
 
 #, python-format
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
@@ -12719,7 +12726,6 @@ msgstr ""
 msgid "degraded: {routes}"
 msgstr ""
 
-#. Used in the browser
 msgid "denied"
 msgstr ""
 
@@ -14462,10 +14468,6 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid "unreported status \"{status}\""
-msgstr ""
-
-#. Used in the browser
-msgid "unsupported"
 msgstr ""
 
 #. Used in the browser

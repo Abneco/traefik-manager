@@ -40,12 +40,16 @@ msgid "%(auth_verify)s is appended automatically"
 msgstr "%(auth_verify)s 会自动追加"
 
 #, python-format
-msgid "%(bare)s is %(bits)s"
-msgstr "%(bare)s：%(bits)s"
+msgid "%(child)s is still a backend of %(parents)s"
+msgstr "%(child)s 仍是 %(parents)s 的后端"
 
 #, python-format
 msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s 仍被 %(users)s 使用"
+
+#, python-format
+msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgstr "%(child)s 仍被 %(users)s 使用，且仍是 %(parents)s 的后端"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -112,13 +116,8 @@ msgid "%(name)s is defined in %(file)s, which is read-only here."
 msgstr "%(name)s 定义在 %(file)s 中，该文件在此处为只读。"
 
 #, python-format
-msgid "%(name)s is still used by %(tls_users)s%(tls_users2)s"
-msgstr "%(name)s 仍被 %(tls_users)s%(tls_users2)s 使用"
-
-#, python-format
-msgid ""
-"%(name)s is still used by %(users)s%(users2)s. Delete those middlewares first"
-msgstr "%(name)s 仍被 %(users)s%(users2)s 使用。先删除这些中间件"
+msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
+msgstr "%(name)s 仍被 %(users)s 使用。先删除这些中间件"
 
 #, python-format
 msgid ""
@@ -7644,13 +7643,23 @@ msgstr "移除此决策。DELETE /v1/decisions 需要机器令牌，Bouncer 密�
 
 #. Used in the browser
 #, python-brace-format
-msgid "Remove {list_count} certificates from acme.json{where}: {shown}?"
-msgstr "从 acme.json{where} 中移除 {list_count} 个证书：{shown}？"
+msgid "Remove {list_count} certificates from acme.json on {agent}: {shown}?"
+msgstr "从 {agent} 上的 acme.json 中移除 {list_count} 个证书：{shown}？"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Remove {shown} from acme.json{where}?"
-msgstr "从 acme.json{where} 中移除 {shown}？"
+msgid "Remove {list_count} certificates from acme.json: {shown}?"
+msgstr "从 acme.json 中移除 {list_count} 个证书：{shown}？"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Remove {shown} from acme.json on {agent}?"
+msgstr "从 {agent} 上的 acme.json 中移除 {shown}？"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Remove {shown} from acme.json?"
+msgstr "从 acme.json 中移除 {shown}？"
 
 #, python-format
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
@@ -11814,7 +11823,6 @@ msgstr "降级"
 msgid "degraded: {routes}"
 msgstr "降级：{routes}"
 
-#. Used in the browser
 msgid "denied"
 msgstr "已拒绝"
 
@@ -13535,10 +13543,6 @@ msgstr "未报告"
 #, python-brace-format
 msgid "unreported status \"{status}\""
 msgstr "未报告的状态“{status}”"
-
-#. Used in the browser
-msgid "unsupported"
-msgstr "不支持"
 
 #. Used in the browser
 msgid "unused"

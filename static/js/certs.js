@@ -297,11 +297,19 @@ async function removeCerts(rows, opts) {
     }
     notes.push(t('A copy of acme.json is saved to your backups first, and can be restored from Settings, Backups, Certificates.'));
 
-    const where = server && typeof _activeAgent !== 'undefined' && _activeAgent ? ' on ' + _activeAgent.name : '';
+    const agent = server && typeof _activeAgent !== 'undefined' && _activeAgent ? _activeAgent.name : '';
+    let message;
+    if (agent) {
+        message = list.length === 1
+            ? t('Remove {shown} from acme.json on {agent}?', { shown, agent })
+            : t('Remove {list_count} certificates from acme.json on {agent}: {shown}?', { list_count: list.length, agent, shown });
+    } else {
+        message = list.length === 1
+            ? t('Remove {shown} from acme.json?', { shown })
+            : t('Remove {list_count} certificates from acme.json: {shown}?', { list_count: list.length, shown });
+    }
     const answer = await _confirmWith({
-        message: list.length === 1
-            ? t('Remove {shown} from acme.json{where}?', { shown, where })
-            : t('Remove {list_count} certificates from acme.json{where}: {shown}?', { list_count: list.length, where, shown }),
+        message,
         title: list.length === 1 ? t('Remove Certificate') : t('Remove Certificates'),
         okLabel: tc('button', 'Remove'), typeWord: _confirmWordFor(names), notes,
     });

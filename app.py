@@ -1814,7 +1814,13 @@ def _children_still_in_use(configs, parent: str, keep) -> list:
 def _in_use_error(blocked):
     child, users = blocked[0]
     return jsonify({'ok': False,
-                    'error': gettext('%(child)s is still used by %(users)s', child=child, users=', '.join(users[:5]))}), 409
+                    'error': gettext('%(child)s is still used by %(users)s', child=child, users=_name_list(users))}), 409
+
+
+def _name_list(names, limit: int = 5) -> str:
+    names = list(names or [])
+    shown = ', '.join(str(n) for n in names[:limit])
+    return f'{shown} (+{len(names) - limit})' if len(names) > limit else shown
 
 
 def _agent_service_home(agent_configs: dict, name: str) -> str:
@@ -1972,13 +1978,14 @@ def api_service_delete(name):
     used_by  = sorted(set(_service_routers_using(configs, bare)))
     parents  = sorted(set(_service_referenced_by(configs, bare)))
     if (used_by or parents) and not force:
-        bits = []
-        if used_by:
-            bits.append('still used by ' + ', '.join(used_by[:5]) + (' and others' if len(used_by) > 5 else ''))
-        if parents:
-            bits.append('still a backend of ' + ', '.join(parents[:5]) + (' and others' if len(parents) > 5 else ''))
-        return jsonify({'ok': False, 'error': gettext('%(bare)s is %(bits)s', bare=bare, bits='; '.join(bits)),
-                        'inUseBy': used_by, 'parents': parents}), 409
+        if used_by and parents:
+            error = gettext('%(child)s is still used by %(users)s and is still a backend of %(parents)s',
+                            child=bare, users=_name_list(used_by), parents=_name_list(parents))
+        elif used_by:
+            error = gettext('%(child)s is still used by %(users)s', child=bare, users=_name_list(used_by))
+        else:
+            error = gettext('%(child)s is still a backend of %(parents)s', child=bare, parents=_name_list(parents))
+        return jsonify({'ok': False, 'error': error, 'inUseBy': used_by, 'parents': parents}), 409
 
     settings = load_settings()
     ledger   = dict(settings.get('managed_middlewares') or {})
@@ -2790,7 +2797,7 @@ def api_static_config_save():
     for _name in _gone:
         _users = _middlewares_using_plugin(_dyn, _name)
         if _users:
-            return jsonify({'error': gettext('%(name)s is still used by %(users)s%(users2)s. Delete those middlewares first', name=_name, users=', '.join(_users[:5]), users2=(' and others' if len(_users) > 5 else '')),
+            return jsonify({'error': gettext('%(name)s is still used by %(users)s. Delete those middlewares first', name=_name, users=_name_list(_users)),
                             'inUseBy': _users}), 409
     try:
         create_backup(safe_path)
@@ -4743,7 +4750,7 @@ def api_tls_options_delete(name):
     _tls_users = _tls_option_routers_using(_tls_all, name)
     if _tls_users:
         return jsonify({'ok': False,
-                        'message': gettext('%(name)s is still used by %(tls_users)s%(tls_users2)s', name=name, tls_users=', '.join(_tls_users[:5]), tls_users2=(' and others' if len(_tls_users) > 5 else '')),
+                        'message': gettext('%(child)s is still used by %(users)s', child=name, users=_name_list(_tls_users)),
                         'inUseBy': _tls_users}), 409
     del tls_opts[name]
     if agent:
@@ -7392,8 +7399,7 @@ def delete_middleware(mw_name):
                 else [load_config(_p) for _p in env.CONFIG_PATHS])
         _users = _middleware_routers_using(_all, mw_name)
         if _users and not force:
-            msg = (f"{mw_name} is still used by " + ', '.join(_users[:5])
-                   + (' and others' if len(_users) > 5 else ''))
+            msg = gettext('%(child)s is still used by %(users)s', child=mw_name, users=_name_list(_users))
             if fetch:
                 return jsonify({'ok': False, 'message': msg, 'inUseBy': _users}), 409
             flash(msg, "error")
