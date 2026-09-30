@@ -398,6 +398,8 @@ def check_message(message, num_plurals, where):
         for ch in RISKY_ASCII:
             if form.count(ch) > max(t.count(ch) for t in ids):
                 problems.append(Problem(label, f'adds the character {ch!r}, which could change markup or code around the text'))
+        if '%' in form and '%' not in source:
+            problems.append(Problem(label, "adds a '%' sign the source does not have, which breaks the page where the text is formatted"))
         if sorted(t.lower() for t in TAG_RE.findall(form)) != sorted(t.lower() for t in TAG_RE.findall(source)) and TAG_RE.search(form):
             problems.append(Problem(label, 'adds or changes HTML markup'))
         for url in URL_RE.findall(form):

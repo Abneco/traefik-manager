@@ -87,6 +87,7 @@ def test_a_clean_translation_passes(tmp_path):
     ('Save', 'Spei\nchern', 'line breaks'),
     ('Save', ' Speichern', 'whitespace'),
     ('Save', 'Speichern\t', 'tab'),
+    ('Allow encoded percent', 'Kodierte % erlauben', "adds a '%' sign"),
 ])
 def test_hostile_or_broken_translations_are_rejected(tmp_path, msgid, msgstr, fragment):
     problems = _problems(tmp_path, _entry(msgid, msgstr))
