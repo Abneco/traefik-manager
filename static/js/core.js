@@ -1562,8 +1562,8 @@ const _BROWSER_NOTIF_RANK = { info: 0, success: 0, warning: 1, error: 2 };
 let _notifSeenTs = null;
 
 function browserNotifSupport() {
-    if (window.isSecureContext === false) return { ok: false, reason: t('insecure') };
-    if (typeof Notification === 'undefined') return { ok: false, reason: t('unsupported') };
+    if (window.isSecureContext === false) return { ok: false, reason: 'insecure' };
+    if (typeof Notification === 'undefined') return { ok: false, reason: 'unsupported' };
     return { ok: true, reason: '' };
 }
 
@@ -1609,7 +1609,7 @@ async function enableBrowserNotifs() {
     if (perm === 'default') perm = await _requestNotifPermission();
     if (perm !== 'granted') {
         localStorage.setItem(BROWSER_NOTIF_KEY, '0');
-        return { ok: false, reason: t('denied') };
+        return { ok: false, reason: 'denied' };
     }
     localStorage.setItem(BROWSER_NOTIF_KEY, '1');
     _notifSeenTs = new Set(_notifData.map(n => n.ts));
