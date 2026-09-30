@@ -17974,9 +17974,9 @@ msgid "{start} to {end}"
 msgstr "{start} tot {end}"
 
 #. Used in the browser
-#, python-format, python-brace-format
-msgid "{status} on {sdShort}, {pct}% of that path"
-msgstr "{status} op {sdShort}, {pct}% op dat pad"
+#, python-brace-format
+msgid "{status} on {sdShort}, {share} of that path"
+msgstr "{status} op {sdShort}, {share} van de verzoeken naar dat pad"
 
 #. Used in the browser
 #, python-brace-format

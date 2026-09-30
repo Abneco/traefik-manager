@@ -16514,8 +16514,8 @@ msgid "{start} to {end}"
 msgstr ""
 
 #. Used in the browser
-#, python-format, python-brace-format
-msgid "{status} on {sdShort}, {pct}% of that path"
+#, python-brace-format
+msgid "{status} on {sdShort}, {share} of that path"
 msgstr ""
 
 #. Used in the browser

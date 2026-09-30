@@ -18022,9 +18022,9 @@ msgid "{start} to {end}"
 msgstr "{start} a {end}"
 
 #. Used in the browser
-#, python-format, python-brace-format
-msgid "{status} on {sdShort}, {pct}% of that path"
-msgstr ""
+#, python-brace-format
+msgid "{status} on {sdShort}, {share} of that path"
+msgstr "{status} en {sdShort}, {share} de las solicitudes a ese path"
 
 #. Used in the browser
 #, python-brace-format

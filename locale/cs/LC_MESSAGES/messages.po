@@ -18173,9 +18173,9 @@ msgid "{start} to {end}"
 msgstr "{start} až {end}"
 
 #. Used in the browser
-#, python-format, python-brace-format
-msgid "{status} on {sdShort}, {pct}% of that path"
-msgstr ""
+#, python-brace-format
+msgid "{status} on {sdShort}, {share} of that path"
+msgstr "{status} na {sdShort}, {share} požadavků na tuto cestu"
 
 #. Used in the browser
 #, python-brace-format
