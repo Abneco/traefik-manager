@@ -1,8 +1,10 @@
 function _tvFlag(f) {
-    return '<span class="sig-flag ' + f.cls + ' lg-static" title="' + _esc(f.tip || (f.n + ' ' + f.label)) + '">'
+    const tip = f.tip || (f.n === '' ? f.label : t('{label}: {n}', { label: f.label, n: _sdNum(f.n) }));
+    return '<span class="sig-flag ' + f.cls + ' lg-static" title="' + _esc(tip || '') + '">'
         + '<i class="' + f.ic + '"></i>'
-        + (f.n === '' ? '' : '<b>' + _sdNum(f.n) + '</b>')
-        + (f.label ? '<span class="sig-fl">' + _esc(f.label) + '</span>' : '')
+        + (f.html ? f.html
+            : (f.n === '' ? '' : '<b>' + _sdNum(f.n) + '</b>')
+            + (f.label ? '<span class="sig-fl">' + _esc(f.label) + '</span>' : ''))
         + '</span>';
 }
 
@@ -29,19 +31,24 @@ function renderProviderVerdict(prefix, routes, mws) {
     const by = p => routes.filter(r => r._proto === p).length;
     const flags = [];
     const h = by('HTTP'), tcp = by('TCP'), u = by('UDP');
-    if (h) flags.push({ cls: 'd-off', ic: 'ph-bold ph-globe', n: h, label: 'HTTP' });
-    if (tcp) flags.push({ cls: 'd-off', ic: 'ph-bold ph-arrows-left-right', n: tcp, label: 'TCP' });
-    if (u) flags.push({ cls: 'd-off', ic: 'ph-bold ph-broadcast', n: u, label: 'UDP' });
-    if (err) flags.push({ cls: 'd-bad', ic: 'ph-fill ph-warning-octagon', n: err, label: t('not serving') });
+    if (h) flags.push({ cls: 'd-off', ic: 'ph-bold ph-globe', n: h, label: 'HTTP',
+        tip: tn('{n} HTTP route', '{n} HTTP routes', h, { n: _sdNum(h) }) });
+    if (tcp) flags.push({ cls: 'd-off', ic: 'ph-bold ph-arrows-left-right', n: tcp, label: 'TCP',
+        tip: tn('{n} TCP route', '{n} TCP routes', tcp, { n: _sdNum(tcp) }) });
+    if (u) flags.push({ cls: 'd-off', ic: 'ph-bold ph-broadcast', n: u, label: 'UDP',
+        tip: tn('{n} UDP route', '{n} UDP routes', u, { n: _sdNum(u) }) });
+    if (err) flags.push({ cls: 'd-bad', ic: 'ph-fill ph-warning-octagon', n: err, label: t('not serving'),
+        tip: tn('{count} route not serving', '{count} routes not serving', err, { count: _sdNum(err) }) });
     if (mws && mws.length) flags.push({ cls: 'd-off', ic: 'ph-bold ph-stack', n: mws.length,
-        label: mws.length === 1 ? tc('label', 'middleware') : tc('label', 'middlewares') });
+        html: thn('{n} middleware', '{n} middlewares', mws.length, { n: tmHtml('<b>' + _sdNum(mws.length) + '</b>') }),
+        tip: tn('{n} middleware', '{n} middlewares', mws.length, { n: _sdNum(mws.length) }) });
     _tvStrip(mountId, {
         health: err ? 'down' : 'up',
         ic: err ? 'ph-fill ph-warning-octagon' : 'ph-fill ph-check-circle',
         txt: err ? tn('{count} route not serving', '{count} routes not serving', err, { count: _sdNum(err) })
                  : tn('{count} route live', '{count} routes live', routes.length, { count: _sdNum(routes.length) }),
         flags,
-        meta: '<b>read-only</b>',
+        meta: '<b>' + th('read-only') + '</b>',
     });
 }
 

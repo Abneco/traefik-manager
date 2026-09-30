@@ -150,11 +150,11 @@ function logGeo_click(cc) {
 function clearLogCountryFilter() { _logCountryFilter = ''; renderLogs(); }
 
 const HTTP_STATUS = {
-    100:'Continue',101:t('Switching Protocols'),103:t('Early Hints'),
-    200:'OK',201:'Created',202:'Accepted',204:t('No Content'),206:t('Partial Content'),
-    301:t('Moved Permanently'),302:'Found',303:t('See Other'),304:t('Not Modified'),307:t('Temporary Redirect'),308:t('Permanent Redirect'),
-    400:t('Bad Request'),401:'Unauthorized',402:t('Payment Required'),403:'Forbidden',404:t('Not Found'),405:t('Method Not Allowed'),
-    406:t('Not Acceptable'),407:t('Proxy Authentication Required'),408:t('Request Timeout'),409:'Conflict',410:'Gone',
+    100:t('Continue'),101:t('Switching Protocols'),103:t('Early Hints'),
+    200:t('OK'),201:t('Created'),202:t('Accepted'),204:t('No Content'),206:t('Partial Content'),
+    301:t('Moved Permanently'),302:t('Found'),303:t('See Other'),304:t('Not Modified'),307:t('Temporary Redirect'),308:t('Permanent Redirect'),
+    400:t('Bad Request'),401:t('Unauthorized'),402:t('Payment Required'),403:t('Forbidden'),404:t('Not Found'),405:t('Method Not Allowed'),
+    406:t('Not Acceptable'),407:t('Proxy Authentication Required'),408:t('Request Timeout'),409:t('Conflict'),410:t('Gone'),
     411:t('Length Required'),413:t('Payload Too Large'),414:t('URI Too Long'),415:t('Unsupported Media Type'),
     418:t('I am a teapot'),421:t('Misdirected Request'),422:t('Unprocessable Entity'),426:t('Upgrade Required'),
     429:t('Too Many Requests'),431:t('Request Header Fields Too Large'),451:t('Unavailable For Legal Reasons'),
@@ -327,17 +327,29 @@ function _lgStatusMatch(s, spec) {
     return String(s) === spec;
 }
 
-function _lgStatusName(s) { return s ? (HTTP_STATUS[s] || '') : 'tunnel'; }
+function _lgStatusName(s) { return s ? (HTTP_STATUS[s] || '') : t('tunnel'); }
 
 function _lgHeldOpen(e) { return e.status === 101 || e.status === 0; }
 
 const LG_IP_GLYPH = {
-    'public':     ['ph-bold ph-globe', t('public')],
-    'private':    ['ph-bold ph-house-line', t('private')],
-    'cgnat':      ['ph-bold ph-arrows-in', 'cgnat'],
-    'loopback':   ['ph-bold ph-circle-dashed', t('loopback')],
-    'link-local': ['ph-bold ph-circle-dashed', t('link local')],
-    'unknown':    ['ph-bold ph-circle-dashed', t('unknown')],
+    'public':     ['ph-bold ph-globe', t('public'), t('public address'),
+        ip => t('{ip}, public address', { ip }),
+        n => tn('{n} request from public addresses. Click to filter the log list.', '{n} requests from public addresses. Click to filter the log list.', n)],
+    'private':    ['ph-bold ph-house-line', t('private'), t('private address'),
+        ip => t('{ip}, private address', { ip }),
+        n => tn('{n} request from private addresses. Click to filter the log list.', '{n} requests from private addresses. Click to filter the log list.', n)],
+    'cgnat':      ['ph-bold ph-arrows-in', 'cgnat', t('cgnat address'),
+        ip => t('{ip}, cgnat address', { ip }),
+        n => tn('{n} request from cgnat addresses. Click to filter the log list.', '{n} requests from cgnat addresses. Click to filter the log list.', n)],
+    'loopback':   ['ph-bold ph-circle-dashed', t('loopback'), t('loopback address'),
+        ip => t('{ip}, loopback address', { ip }),
+        n => tn('{n} request from loopback addresses. Click to filter the log list.', '{n} requests from loopback addresses. Click to filter the log list.', n)],
+    'link-local': ['ph-bold ph-circle-dashed', t('link local'), t('link local address'),
+        ip => t('{ip}, link local address', { ip }),
+        n => tn('{n} request from link local addresses. Click to filter the log list.', '{n} requests from link local addresses. Click to filter the log list.', n)],
+    'unknown':    ['ph-bold ph-circle-dashed', t('unknown'), t('unknown address'),
+        ip => t('{ip}, unknown address', { ip }),
+        n => tn('{n} request from unknown addresses. Click to filter the log list.', '{n} requests from unknown addresses. Click to filter the log list.', n)],
 };
 
 function _lgSpec(obj) {
@@ -470,16 +482,30 @@ function filterLogs() {
     _lgSearchTimer = setTimeout(renderLogs, 120);
 }
 
+function _lgSplitUnit(phrase, num, cls) {
+    const open = '<span class="' + cls + '">';
+    return (open + phrase(tmHtml('</span>' + num + open)) + '</span>')
+        .split(open + ' ').join(open).split(' </span>').join('</span>')
+        .split(open + '</span>').join('');
+}
+
+function _lgFlagTip(f) {
+    if (f.tip) return f.tip;
+    if (f.n === '' || !f.label) return f.label || '';
+    return t('{label}: {count}', { label: f.label, count: _sdNum(f.n) });
+}
+
 function _lgFlag(f) {
     const dead = !f.go;
     const tag = f.tag === 'span' || dead;
     return (tag ? '<span' : '<button type="button"')
         + ' class="sig-flag ' + f.cls + (f.extra ? ' ' + f.extra : '') + (dead ? ' lg-static' : '') + '"'
         + (dead ? '' : ' data-lg="' + _esc(f.go) + '"')
-        + ' title="' + _esc(f.tip || (f.n + ' ' + f.label)) + '">'
+        + ' title="' + _esc(_lgFlagTip(f)) + '">'
         + '<i class="' + f.ic + '"></i>'
-        + (f.n === '' ? '' : '<b>' + _sdNum(f.n) + '</b>')
-        + (f.label && f.words !== false ? '<span class="sig-fl">' + _esc(f.label) + '</span>' : '')
+        + (f.phrase ? _lgSplitUnit(f.phrase, '<b>' + _sdNum(f.n) + '</b>', 'sig-fl')
+            : (f.n === '' ? '' : '<b>' + _sdNum(f.n) + '</b>')
+            + (f.label && f.words !== false ? '<span class="sig-fl">' + _esc(f.label) + '</span>' : ''))
         + (tag ? '</span>' : '</button>');
 }
 
@@ -487,8 +513,9 @@ function _lgProv(p) {
     const dead = p.n === 0 || !p.go;
     return '<button type="button" class="sig-prov' + (p.cls ? ' ' + p.cls : '') + (dead ? ' lg-static' : '') + '"'
         + ' data-lg="' + _esc(dead ? '' : p.go) + '" title="' + _esc(p.tip) + '">'
-        + '<i class="' + p.ic + '"></i>' + _esc(p.label)
-        + (p.n === '' ? '' : '<b>' + _sdNum(p.n) + '</b>') + '</button>';
+        + '<i class="' + p.ic + '"></i>'
+        + (p.phrase ? p.phrase(tmHtml('<b>' + _sdNum(p.n) + '</b>'))
+            : _esc(p.label) + (p.n === '' ? '' : '<b>' + _sdNum(p.n) + '</b>')) + '</button>';
 }
 
 function _lgOk(txt, ic) {
@@ -590,16 +617,19 @@ function _lgStrip(groups, aria, extraCls) {
             }
             drawn += want;
         });
-        html += `<span class="sig-more" title="${th('{total} requests drawn as {drawn} cells, so each cell stands for about {round} requests', { total: tmHtml(_sdNum(total)), drawn: tmHtml(_sdNum(drawn)), round: tmHtml(Math.round(per)) })}">${th('1 cell = {round}', { round: tmHtml(Math.round(per)) })}</span>`;
+        html += `<span class="sig-more" title="${thn('{total} requests drawn as {drawn} cells, so each cell stands for about {n} request', '{total} requests drawn as {drawn} cells, so each cell stands for about {n} requests', Math.round(per), { total: tmHtml(_sdNum(total)), drawn: tmHtml(_sdNum(drawn)), n: tmHtml(_sdNum(Math.round(per))) })}">${th('1 cell = {round}', { round: tmHtml(Math.round(per)) })}</span>`;
     }
     return '<div class="sig-strip' + (extraCls ? ' ' + extraCls : '') + '" role="img" aria-label="'
         + _esc(aria) + '">' + html + '</div>';
 }
 
 function _lgCellLabel(e) {
-    return (e.status || '-') + ' ' + _lgStatusName(e.status) + ' ' + e.method + ' ' + e.path
-        + (e.ip ? ' ' + t('from {ip}', { ip: e.ip }) : '')
-        + (e.origin != null && e.origin !== e.status ? ' ' + t('(traefik answered, backend said {origin})', { origin: e.origin }) : '');
+    const p = { status: e.status || '-', name: _lgStatusName(e.status), method: e.method, path: e.path, ip: e.ip, origin: e.origin };
+    const split = e.origin != null && e.origin !== e.status;
+    if (e.ip && split) return t('{status} {name} {method} {path} from {ip} (traefik answered, backend said {origin})', p);
+    if (e.ip) return t('{status} {name} {method} {path} from {ip}', p);
+    if (split) return t('{status} {name} {method} {path} (traefik answered, backend said {origin})', p);
+    return [p.status, p.name, p.method, p.path].join(' ');
 }
 
 function _lgRank(rows, keyFn, kindFn) {
@@ -642,8 +672,8 @@ function _lgRankBody(list, opts) {
             ic: o.e5 ? 'ph-fill ph-x-circle' : 'ph-fill ph-warning',
             n: o.err, label: '', words: false,
             go: _lgSpec(Object.assign({}, opts.facet(o), { status: _lgErrStatus(o.e4, o.e5) })),
-            tip: (o.worst ? t('{error} of {n} requests failed, most often {status} {name}.', { error: o.err, n: o.n, status: o.worst, name: _lgStatusName(o.worst) })
-                      : t('{error} of {n} requests failed.', { error: o.err, n: o.n }))
+            tip: (o.worst ? tn('{error} of {n} request failed, most often {status} {name}.', '{error} of {n} requests failed, most often {status} {name}.', o.n, { error: o.err, status: o.worst, name: _lgStatusName(o.worst) })
+                      : tn('{error} of {n} request failed.', '{error} of {n} requests failed.', o.n, { error: o.err }))
                 + ' ' + t('Click to filter to just those.')
         }) : '';
         return _lgRow({
@@ -655,30 +685,34 @@ function _lgRankBody(list, opts) {
             bad: bad,
             n: o.n,
             pct: pct,
-            tip: (o.err ? t('{name}: {n} of {total} requests in this window ({pct}%), {failed} failed.', { name: opts.tipName ? opts.tipName(o) : o.key, n: o.n, total, pct, failed: o.err })
-                    : t('{name}: {n} of {total} requests in this window ({pct}%).', { name: opts.tipName ? opts.tipName(o) : o.key, n: o.n, total, pct }))
+            tip: (o.err ? tn('{name}: {count} of {n} request in this window ({pct}%), {failed} failed.', '{name}: {count} of {n} requests in this window ({pct}%), {failed} failed.', total, { name: opts.tipName ? opts.tipName(o) : o.key, count: o.n, pct, failed: o.err })
+                    : tn('{name}: {count} of {n} request in this window ({pct}%).', '{name}: {count} of {n} requests in this window ({pct}%).', total, { name: opts.tipName ? opts.tipName(o) : o.key, count: o.n, pct }))
                 + ' ' + t('Click to filter the log list.')
         });
     });
     let tail = '';
     if (list.length > shown.length) {
         const rest = list.slice(shown.length).reduce((a, o) => a + o.n, 0);
-        tail = `<div class="lg-tail">${th('+{rest} requests across {more}', { rest: _sdNum(rest), more: _lgMore(opts.noun, list.length - shown.length) })}</div>`;
+        tail = `<div class="lg-tail">${_lgTail(_lgMore(opts.noun, list.length - shown.length), rest)}</div>`;
     }
     if (list.length > 4) {
         const rest4 = list.slice(4).reduce((a, o) => a + o.n, 0);
-        tail += `<div class="lg-tail lg-tail-c">${th('+{rest} requests across {more}', { rest: _sdNum(rest4), more: _lgMore(opts.noun, list.length - 4) })}</div>`;
+        tail += `<div class="lg-tail lg-tail-c">${_lgTail(_lgMore(opts.noun, list.length - 4), rest4)}</div>`;
     }
     return { body: '<div class="lg-rows">' + rows.join('') + '</div>', tail: tail };
+}
+
+function _lgTail(more, rest) {
+    return th('{more} ({total})', { more, total: tn('{n} request', '{n} requests', rest, { n: _sdNum(rest) }) });
 }
 
 function _lgSubOffender(list, label) {
     if (!list.length) return t('nothing recorded');
     const o = list[0];
-    let s = `<b>${_esc(label ? label(o) : o.key)}</b> ${th('{n} requests', { n: tmHtml(_sdNum(o.n)) })}`;
+    let s = `<b>${_esc(label ? label(o) : o.key)}</b> ${thn('{n} request', '{n} requests', o.n, { n: tmHtml(_sdNum(o.n)) })}`;
     if (o.err) s += ', ' + _esc(_sdNum(o.worstN) + ' x ' + o.worst);
     const more = list.filter(x => x.err).length - (o.err ? 1 : 0);
-    if (more > 0) s += ', ' + th('+{count} more failing', { count: more });
+    if (more > 0) s += ', ' + thn('+{n} more failing', '+{n} more failing', more, { n: _sdNum(more) });
     return s;
 }
 
@@ -712,17 +746,18 @@ function renderLogStats(visible, meta) {
     const selSpan = scoped ? _lgSpanOf(rows) : null;
 
     const nextLines = LG_LINE_STEPS.find(n => n > _currentLogLines) || null;
-    const scopeTip = t('These numbers summarize the last {fetched} lines of the access log, not all traffic. The oldest line here is the edge of the fetched window, not the start of activity. Traefik does not report the file total, so the share of overall traffic is unknown. {parsed} of {fetched} lines parsed.{value}', { fetched: _sdNum(meta.fetched), parsed: _sdNum(meta.parsed), value: nextLines ? ' ' + t('Click to widen the window to {count} lines.', { count: nextLines }) : '' });
+    const scopeTip = tn('These numbers summarize the last {fetched} line of the access log, not all traffic. The oldest line here is the edge of the fetched window, not the start of activity. Traefik does not report the file total, so the share of overall traffic is unknown. {parsed} of {fetched} line parsed.', 'These numbers summarize the last {fetched} lines of the access log, not all traffic. The oldest line here is the edge of the fetched window, not the start of activity. Traefik does not report the file total, so the share of overall traffic is unknown. {parsed} of {fetched} lines parsed.', meta.fetched, { fetched: _sdNum(meta.fetched), parsed: _sdNum(meta.parsed) })
+        + (nextLines ? ' ' + tn('Click to widen the window to {count} line.', 'Click to widen the window to {count} lines.', nextLines, { count: _sdNum(nextLines) }) : '');
 
     const facts = [];
-    facts.push(`<span class="sig-key-item lg-static" title="${_esc(scopeTip)}"><i class="ph-bold ph-rows"></i>${th('last{b}lines', { b: tmHtml(`<b>${_sdNum(meta.fetched)}</b>`) })}</span>`);
+    facts.push(`<span class="sig-key-item lg-static" title="${_esc(scopeTip)}"><i class="ph-bold ph-rows"></i>${thn('last {n} line', 'last {n} lines', meta.fetched, { n: tmHtml(`<b>${_sdNum(meta.fetched)}</b>`) })}</span>`);
     if (spanMs != null && spanMs > 0) {
         facts.push(`<span class="sig-key-item lg-static" title="${th('Oldest line to newest line in the fetched window. Filters do not change it, and earlier requests are not in the fetched tail.')}"><i class="ph-bold ph-clock-countdown"></i>${th('span{b}', { b: tmHtml(`<b>${_lgSpanTxt(spanMs)}</b>`) })}</span>`);
     }
     if (rpm != null) {
-        facts.push(`<span class="sig-key-item lg-static" title="${th('Average request rate across the whole fetched window, not across the current selection.')}"><i class="ph-bold ph-broadcast"></i><b>${_sdNum(rpm)}</b>req/min</span>`);
+        facts.push(`<span class="sig-key-item lg-static" title="${th('Average request rate across the whole fetched window, not across the current selection.')}"><i class="ph-bold ph-broadcast"></i>${th('{rate} req/min', { rate: tmHtml(`<b>${_sdNum(rpm)}</b>`) })}</span>`);
     }
-    facts.push(`<span class="sig-key-item lg-static" title="${th('Lines that no access log format matched. They are listed below but excluded from every number here.')}"><i class="ph-bold ph-scroll"></i><b>${_sdNum(meta.unparsed)}</b>${thc('label', 'unparsed')}</span>`);
+    facts.push(`<span class="sig-key-item lg-static" title="${th('Lines that no access log format matched. They are listed below but excluded from every number here.')}"><i class="ph-bold ph-scroll"></i>${thn('{n} unparsed', '{n} unparsed', meta.unparsed, { n: tmHtml(`<b>${_sdNum(meta.unparsed)}</b>`) })}</span>`);
 
     const dead = meta.facetDead || {};
     const chips = [];
@@ -742,7 +777,7 @@ function renderLogStats(visible, meta) {
         chips.push(`<button type="button" class="sig-key-item" data-lg="clear=" title="${th('Clear every card filter')}"><i class="ph-bold ph-x"></i>${thc('button', 'clear')}</button>`);
     }
 
-    const scopeTxt = scoped ? t('{total} of the last {fetched} lines', { total: _sdNum(total), fetched: _sdNum(meta.fetched) }) : t('sample, not all traffic');
+    const scopeTxt = scoped ? tn('{total} of the last {fetched} line', '{total} of the last {fetched} lines', meta.fetched, { total: _sdNum(total), fetched: _sdNum(meta.fetched) }) : t('sample, not all traffic');
     const scopeEl = nextLines
         ? '<button type="button" class="sig-key-scope" data-lg="lines=' + nextLines + '" title="' + _esc(scopeTip) + '">'
             + '<i class="ph-bold ph-funnel"></i>' + _esc(scopeTxt) + '</button>'
@@ -817,20 +852,20 @@ function _lgEmptyVerdict(meta) {
         _lgActiveFacets().forEach(k => bits.push(k + ' ' + _logFacet[k]));
         if (_logCountryFilter) bits.push(t('country {code}', { code: _logCountryFilter }));
         if (meta.q) bits.push(t('search "{query}"', { query: meta.q }));
-        prose = t('0 of the last {fetched} lines are {bits}', { fetched: _sdNum(meta.fetched), bits: bits.join(' ' + t('and') + ' ') });
+        prose = tn('0 of the last {fetched} line are {bits}', '0 of the last {fetched} lines are {bits}', meta.fetched, { fetched: _sdNum(meta.fetched), bits: tmList(bits) });
         actions = _lgFlag({ cls: 'd-blue', ic: 'ph-bold ph-x', n: '', label: t('clear filters'), go: 'clear=all', tip: t('Clear every filter and the search box') })
             ;
         const wider = LG_LINE_STEPS.find(n => n > _currentLogLines);
         if (wider) {
-            actions += _lgFlag({ cls: 'd-blue', ic: 'ph-bold ph-rows', n: '', label: t('load {wider} lines', { wider }), go: 'lines=' + wider, tip: t('Refetch with a wider window') })
+            actions += _lgFlag({ cls: 'd-blue', ic: 'ph-bold ph-rows', n: '', label: tn('load {wider} line', 'load {wider} lines', wider, { wider: _sdNum(wider) }), go: 'lines=' + wider, tip: t('Refetch with a wider window') })
                 ;
         }
     } else if (meta.unparsed) {
-        prose = t('none of the {fetched} fetched lines could be parsed as a Traefik access log', { fetched: _sdNum(meta.fetched) });
+        prose = tn('none of the {fetched} fetched line could be parsed as a Traefik access log', 'none of the {fetched} fetched lines could be parsed as a Traefik access log', meta.fetched, { fetched: _sdNum(meta.fetched) });
     } else {
         prose = t('the access log is empty, Traefik has not served a request since it was last rotated');
     }
-    return `<div class="sig-verdict" id="logVerdict" data-health="up"><i class="${ic} sig-verdict-ic"></i><span class="sig-verdict-txt">${_esc(txt)}</span><span class="sig-verdict-items"><span class="sig-mono">${_esc(prose)}</span>${actions}</span><span class="sig-verdict-meta">${th('last {b} lines{SD_SEP}{logAge}', { b: tmHtml(`<b>${_sdNum(meta.fetched)}</b>`), SD_SEP: tmHtml(SD_SEP), logAge: tmHtml(`<b id="logAge">${_sdAgo(_lgStamp)}</b>`) })}</span></div>`;
+    return `<div class="sig-verdict" id="logVerdict" data-health="up"><i class="${ic} sig-verdict-ic"></i><span class="sig-verdict-txt">${_esc(txt)}</span><span class="sig-verdict-items"><span class="sig-mono">${_esc(prose)}</span>${actions}</span><span class="sig-verdict-meta">${thn('last {b} line{SD_SEP}{logAge}', 'last {b} lines{SD_SEP}{logAge}', meta.fetched, { b: tmHtml(`<b>${_sdNum(meta.fetched)}</b>`), SD_SEP: tmHtml(SD_SEP), logAge: tmHtml(`<b id="logAge">${_sdAgo(_lgStamp)}</b>`) })}</span></div>`;
 }
 
 function _lgVerdict(v) {
@@ -847,32 +882,33 @@ function _lgVerdict(v) {
         items.push(_lgFlag({
             cls: bad ? 'd-bad' : 'd-warn',
             ic: bad ? 'ph-fill ph-x-circle' : 'ph-fill ph-warning',
-            n: n, label: code + ' ' + (_lgStatusName(code) || 'response').toLowerCase(),
+            n: n, label: code + ' ' + (_lgStatusName(code) || t('response')).toLowerCase(),
             go: _lgSpec({ status: String(code) }),
-            tip: t('{n} requests returned {code} {lgStatusName}. Click to filter the log list.', { n, code, lgStatusName: _lgStatusName(code) })
+            tip: tn('{n} request returned {code} {lgStatusName}. Click to filter the log list.', '{n} requests returned {code} {lgStatusName}. Click to filter the log list.', n, { n: _sdNum(n), code, lgStatusName: _lgStatusName(code) })
         }));
     });
     if (v.slow) {
         items.push(_lgFlag({
             cls: 'd-warn', ic: 'ph-fill ph-hourglass-high', n: v.slow, label: t('over 500ms'),
-            go: _lgSpec({ dur: 'slow' }), tip: t('{slow} requests took longer than 500ms. Click to filter the log list.', { slow: v.slow })
+            go: _lgSpec({ dur: 'slow' }), tip: tn('{slow} request took longer than 500ms. Click to filter the log list.', '{slow} requests took longer than 500ms. Click to filter the log list.', v.slow, { slow: _sdNum(v.slow) })
         }));
     }
     if (v.retries) {
         items.push(_lgFlag({
             cls: 'd-warn', ic: 'ph-fill ph-arrow-u-up-left', n: v.retries, label: tc('label', 'retries'),
-            go: '', tip: t('{retries} upstream retry attempts. The client never saw these, but a backend was flapping.', { retries: v.retries })
+            phrase: b => thn('{n} retry', '{n} retries', v.retries, { n: b }),
+            go: '', tip: tn('{retries} upstream retry attempt. The client never saw it, but a backend was flapping.', '{retries} upstream retry attempts. The client never saw these, but a backend was flapping.', v.retries, { retries: _sdNum(v.retries) })
         }));
     }
     const shown = items.slice(0, 4);
-    if (items.length > shown.length) shown.push('<span class="sig-mono">+' + (items.length - shown.length) + ` ${thc('label', 'more')}</span>`);
+    if (items.length > shown.length) shown.push('<span class="sig-mono">' + thn('+{n} more', '+{n} more', items.length - shown.length) + '</span>');
     const calm = [];
     if (!v.s5) calm.push(t('no server errors'));
     if (!v.s4 && v.s5) calm.push(t('no client errors'));
     if (!v.slow) calm.push(v.maxDur != null ? t('nothing slower than {lgMs}', { lgMs: _lgMs(v.maxDur) }) : t('no timing recorded'));
     if (calm.length) shown.push('<span class="sig-mono">' + _esc(calm.join(', ')) + '</span>');
 
-    const meta = (v.spanMs != null && v.spanMs > 0 ? `<b>${_lgSpanTxt(v.spanMs)}</b> ${th('window{SD_SEP}', { SD_SEP: tmHtml(SD_SEP) })}` : '')
+    const meta = (v.spanMs != null && v.spanMs > 0 ? th('{span} window', { span: tmHtml(`<b>${_lgSpanTxt(v.spanMs)}</b>`) }) + SD_SEP : '')
         + '<b id="logAge">' + _sdAgo(_lgStamp) + '</b>';
     return '<div class="sig-verdict" id="logVerdict" data-health="' + v.health + '">'
         + '<i class="' + ic + ' sig-verdict-ic"></i>'
@@ -885,9 +921,9 @@ function _lgStatusCard(rows, bucket, codeRank, total) {
     const s4 = bucket['4xx'], s5 = bucket['5xx'];
     const flags = [];
     if (s5) flags.push(_lgFlag({ cls: 'd-bad', ic: 'ph-fill ph-x-circle', n: s5, label: '5xx',
-        go: _lgSpec({ status: '5xx' }), tip: t('{s5} server errors. Click to filter the log list.', { s5 }) }));
+        go: _lgSpec({ status: '5xx' }), tip: tn('{s5} server error. Click to filter the log list.', '{s5} server errors. Click to filter the log list.', s5, { s5: _sdNum(s5) }) }));
     if (s4) flags.push(_lgFlag({ cls: 'd-warn', ic: 'ph-fill ph-warning', n: s4, label: '4xx',
-        go: _lgSpec({ status: '4xx' }), tip: t('{s4} client errors. Click to filter the log list.', { s4 }) }));
+        go: _lgSpec({ status: '4xx' }), tip: tn('{s4} client error. Click to filter the log list.', '{s4} client errors. Click to filter the log list.', s4, { s4: _sdNum(s4) }) }));
     if (!flags.length) flags.push(_lgOk(t('all 2xx')));
 
     const groups = [
@@ -896,7 +932,7 @@ function _lgStatusCard(rows, bucket, codeRank, total) {
         { cls: 'sig-cell-idle', items: rows.filter(e => ['3xx', '1xx', 'other'].indexOf(_lgStatusClass(e.status)) >= 0).map(_lgCellLabel) },
         { cls: '',              items: rows.filter(e => _lgStatusClass(e.status) === '2xx').map(_lgCellLabel) },
     ];
-    const aria = t('{total} requests: {s5} server errors, {s4} client errors, {v3xx} redirects, {v2xx} ok', { total, s5, s4, v3xx: bucket['3xx'], v2xx: bucket['2xx'] });
+    const aria = tn('{total} request. Server errors: {s5}, client errors: {s4}, redirects: {v3xx}, ok: {v2xx}', '{total} requests. Server errors: {s5}, client errors: {s4}, redirects: {v3xx}, ok: {v2xx}', total, { total: _sdNum(total), s5: _sdNum(s5), s4: _sdNum(s4), v3xx: _sdNum(bucket['3xx']), v2xx: _sdNum(bucket['2xx']) });
 
     const provs = [
         { key: '2xx', ic: 'ph-bold ph-check-circle', n: bucket['2xx'] },
@@ -910,28 +946,29 @@ function _lgStatusCard(rows, bucket, codeRank, total) {
     let sub;
     if (codeRank.length) {
         sub = _lgSub(`<b>${codeRank[0][0]}</b> ${th('{toLowerCase} x{v1}', { toLowerCase: tmHtml(_lgStatusName(codeRank[0][0]).toLowerCase()), v1: tmHtml(_sdNum(codeRank[0][1])) })}`,
-            codeRank.length > 1 ? th('+{count} codes', { count: codeRank.length - 1 }) : '');
+            codeRank.length > 1 ? thn('+{n} code', '+{n} codes', codeRank.length - 1) : '');
     } else {
-        sub = _lgSub(`<b>${_sdNum(bucket['2xx'])}</b> ${th('ok{SD_SEP}{b} redirects', { SD_SEP: tmHtml(SD_SEP), b: tmHtml(`<b>${_sdNum(bucket['3xx'])}</b>`) })}`, th('clean'));
+        sub = _lgSub(th('{b} ok', { b: tmHtml(`<b>${_sdNum(bucket['2xx'])}</b>`) }) + SD_SEP
+            + thn('{n} redirect', '{n} redirects', bucket['3xx'], { n: tmHtml(`<b>${_sdNum(bucket['3xx'])}</b>`) }), th('clean'));
     }
 
     return _lgCard({
         key: 'status', accent: 'var(--blue)', ic: 'ph-fill ph-pulse', title: t('Status Codes'),
         health: s5 ? 'down' : (s4 ? 'warn' : ''),
         go: (s5 || s4) ? _lgSpec({ status: _lgErrStatus(s4, s5) }) : '', goLabel: tc('button', 'Errors'),
-        goTip: t('Filter the log list to the {count} failing requests', { count: _sdNum(s4 + s5) }),
+        goTip: tn('Filter the log list to the {count} failing request', 'Filter the log list to the {count} failing requests', s4 + s5, { count: _sdNum(s4 + s5) }),
         total: _sdNum(total), flags: flags.join(''), sub: sub,
         body: _lgStrip(groups, aria),
         foot: provs.map(p => _lgProv({
             ic: p.ic, label: p.key, n: p.n, cls: p.cls, go: _lgSpec({ status: p.key }),
-            tip: p.n ? t('Filter the log list to the {n} {key} responses', { n: p.n, key: p.key })
+            tip: p.n ? tn('Filter the log list to the {n} {key} response', 'Filter the log list to the {n} {key} responses', p.n, { n: _sdNum(p.n), key: p.key })
                      : t('No {key} responses in this window', { key: p.key })
         })).join('')
     });
 }
 
 function _lgLatencyCard(rows, timed, d) {
-    const heldWord = d.held === 1 ? t('upgrade') : t('upgrades');
+    const heldPhrase = b => thn('{n} upgrade', '{n} upgrades', d.held, { n: b });
     const heldTip = d.held
         ? tn('{count} protocol upgrade, a websocket or a CONNECT tunnel, the longest held open for {span}. Traefik logs the whole connection lifetime as the duration, so these are left out of the average and the bands here. Click to list them.', '{count} protocol upgrades, a websocket or a CONNECT tunnel, the longest held open for {span}. Traefik logs the whole connection lifetime as the duration, so these are left out of the average and the bands here. Click to list them.', d.held, { count: _sdNum(d.held), span: _lgSpanTxt(d.heldMax.durMs) })
         : '';
@@ -945,24 +982,25 @@ function _lgLatencyCard(rows, timed, d) {
             goLabel: d.held ? tc('button', 'Upgrades') : t('Static Config'),
             goTip: d.held ? t('Filter the log list to the held-open connections') : t('Open the Static Config tab'),
             foot: d.held
-                ? _lgProv({ ic: 'ph-bold ph-plugs-connected', label: heldWord, n: d.held, go: _lgSpec({ dur: 'held' }), tip: heldTip })
+                ? _lgProv({ ic: 'ph-bold ph-plugs-connected', phrase: heldPhrase, n: d.held, go: _lgSpec({ dur: 'held' }), tip: heldTip })
                 : _lgProv({ ic: 'ph-bold ph-sliders-horizontal', label: t('open static config'), n: '', go: 'cfg=accesslog', tip: t('Open the Static Config tab to change accessLog.format') })
         });
     }
     const hero = _lgHeroMs(d.avgDur);
     const flags = [];
     if (d.vslow) flags.push(_lgFlag({ cls: 'd-bad', ic: 'ph-fill ph-hourglass-high', n: d.vslow, label: t('over 2s'),
-        go: _lgSpec({ dur: 'slow' }), tip: t('{vslow} requests took longer than 2 seconds', { vslow: d.vslow }) }));
+        go: _lgSpec({ dur: 'slow' }), tip: tn('{vslow} request took longer than 2 seconds', '{vslow} requests took longer than 2 seconds', d.vslow, { vslow: _sdNum(d.vslow) }) }));
     if (d.slow && !d.vslow) flags.push(_lgFlag({ cls: 'd-warn', ic: 'ph-fill ph-hourglass-high', n: d.slow, label: t('over 500ms'),
-        go: _lgSpec({ dur: 'slow' }), tip: t('{slow} requests took longer than 500ms', { slow: d.slow }) }));
+        go: _lgSpec({ dur: 'slow' }), tip: tn('{slow} request took longer than 500ms', '{slow} requests took longer than 500ms', d.slow, { slow: _sdNum(d.slow) }) }));
     if (d.retries) flags.push(_lgFlag({ cls: 'd-warn', ic: 'ph-fill ph-arrow-u-up-left', n: d.retries, label: tc('label', 'retries'),
-        go: '', tip: t('{retries} upstream retry attempts across this window', { retries: d.retries }) }));
+        phrase: b => thn('{n} retry', '{n} retries', d.retries, { n: b }),
+        go: '', tip: tn('{retries} upstream retry attempt across this window', '{retries} upstream retry attempts across this window', d.retries, { retries: _sdNum(d.retries) }) }));
     if (!flags.length) flags.push(_lgOk(t('all under 100ms')));
 
     const maxWhere = d.maxRow ? ' ' + d.maxRow.path : '';
     const tailBits = [];
-    if (d.held) tailBits.push(th('{count} {upgrades}, longest {span}', { count: _sdNum(d.held), upgrades: heldWord, span: _lgSpanTxt(d.heldMax.durMs) }));
-    if (d.untimed > 0) tailBits.push(th('{count} untimed', { count: _sdNum(d.untimed) }));
+    if (d.held) tailBits.push(thn('{count} upgrade, longest {span}', '{count} upgrades, longest {span}', d.held, { count: _sdNum(d.held), span: _lgSpanTxt(d.heldMax.durMs) }));
+    if (d.untimed > 0) tailBits.push(thn('{count} untimed', '{count} untimed', d.untimed, { count: _sdNum(d.untimed) }));
     const sub = _lgSub(`${th('p50 {b}{SD_SEP}p95 {b2}{SD_SEP}max {b3}{maxWhere}', { b: tmHtml(`<b>${_lgMs(d.p50)}</b>`), SD_SEP: tmHtml(SD_SEP), b2: tmHtml(`<b>${_lgMs(d.p95)}</b>`), b3: tmHtml(`<b>${_lgMs(d.maxDur)}</b>`), maxWhere })}`,
         tailBits.join(SD_SEP));
 
@@ -972,7 +1010,7 @@ function _lgLatencyCard(rows, timed, d) {
         { cls: 'sig-cell-warn', items: timed.filter(e => e.durMs >= 100 && e.durMs < 2000).sort((a, b) => b.durMs - a.durMs).map(lab) },
         { cls: '',              items: timed.filter(e => e.durMs < 100).sort((a, b) => b.durMs - a.durMs).map(lab) },
     ];
-    const aria = t('{timed_count} timed requests, median {lgMs}, slowest {lgMs2}', { timed_count: timed.length, lgMs: _lgMs(d.p50), lgMs2: _lgMs(d.maxDur) });
+    const aria = tn('{timed_count} timed request, median {lgMs}, slowest {lgMs2}', '{timed_count} timed requests, median {lgMs}, slowest {lgMs2}', timed.length, { timed_count: _sdNum(timed.length), lgMs: _lgMs(d.p50), lgMs2: _lgMs(d.maxDur) });
 
     return _lgCard({
         key: 'latency', accent: 'var(--teal)', ic: 'ph-fill ph-timer', title: t('Response Time'),
@@ -984,12 +1022,12 @@ function _lgLatencyCard(rows, timed, d) {
         body: _lgStrip(groups, aria),
         foot: [
             _lgProv({ ic: 'ph-bold ph-lightning', label: t('under 100ms'), n: d.fast, go: _lgSpec({ dur: 'fast' }),
-                tip: d.fast ? t('Filter the log list to the {fast} requests faster than 100ms', { fast: d.fast }) : t('No request was faster than 100ms') }),
+                tip: d.fast ? tn('Filter the log list to the {fast} request faster than 100ms', 'Filter the log list to the {fast} requests faster than 100ms', d.fast, { fast: _sdNum(d.fast) }) : t('No request was faster than 100ms') }),
             _lgProv({ ic: 'ph-bold ph-hourglass-medium', label: '100-500ms', n: d.med, cls: d.med ? 'sig-prov-warn' : '', go: _lgSpec({ dur: 'med' }),
-                tip: d.med ? t('Filter the log list to the {med} requests between 100ms and 500ms', { med: d.med }) : t('No request took between 100ms and 500ms') }),
+                tip: d.med ? tn('Filter the log list to the {med} request between 100ms and 500ms', 'Filter the log list to the {med} requests between 100ms and 500ms', d.med, { med: _sdNum(d.med) }) : t('No request took between 100ms and 500ms') }),
             _lgProv({ ic: 'ph-bold ph-hourglass-high', label: t('over 500ms'), n: d.slow, cls: d.slow ? 'sig-prov-bad' : '', go: _lgSpec({ dur: 'slow' }),
-                tip: d.slow ? t('Filter the log list to the {slow} requests slower than 500ms', { slow: d.slow }) : t('No request took longer than 500ms') }),
-            d.held ? _lgProv({ ic: 'ph-bold ph-plugs-connected', label: heldWord, n: d.held, go: _lgSpec({ dur: 'held' }), tip: heldTip }) : ''
+                tip: d.slow ? tn('Filter the log list to the {slow} request slower than 500ms', 'Filter the log list to the {slow} requests slower than 500ms', d.slow, { slow: _sdNum(d.slow) }) : t('No request took longer than 500ms') }),
+            d.held ? _lgProv({ ic: 'ph-bold ph-plugs-connected', phrase: heldPhrase, n: d.held, go: _lgSpec({ dur: 'held' }), tip: heldTip }) : ''
         ].join('')
     });
 }
@@ -1001,12 +1039,13 @@ function _lgMethodsCard(rows, total) {
     const risky = rows.some(e => e.method === 'DELETE' || e.method === 'PUT');
     const flags = writes.length
         ? [_lgFlag({ cls: risky ? 'd-warn' : 'd-off', ic: 'ph-bold ph-pencil-simple', n: writes.length, label: tc('label', 'writes'),
+            phrase: b => thn('{n} write', '{n} writes', writes.length, { n: b }),
             go: _lgSpec({ method: writes[0].method }),
-            tip: t('{writes_count} write requests (POST, PUT, PATCH or DELETE). Click to filter to {method}.', { writes_count: writes.length, method: writes[0].method }) })]
+            tip: tn('{writes_count} write request (POST, PUT, PATCH or DELETE). Click to filter to {method}.', '{writes_count} write requests (POST, PUT, PATCH or DELETE). Click to filter to {method}.', writes.length, { writes_count: _sdNum(writes.length), method: writes[0].method }) })]
         : [_lgOk(t('reads only'))];
     const top = byVolume[0];
-    const sub = _lgSub((top ? '<b>' + _esc(top.key) + '</b> ' + Math.round((top.n / total) * 100) + '%' : th('no method recorded'))
-        + ', ' + (risky ? th('PUT or DELETE present') : th('no PUT or DELETE')));
+    const sub = _lgSub(top ? '<b>' + _esc(top.key) + '</b> ' + Math.round((top.n / total) * 100) + '%' : th('no method recorded'),
+        risky ? th('PUT or DELETE present') : th('no PUT or DELETE'));
     const built = _lgRankBody(list, {
         total: total, noun: 'methods',
         facet: o => ({ method: o.key }),
@@ -1050,8 +1089,8 @@ function _lgDomainsCard(rows, total, isJson) {
     const plain = rows.filter(e => e.scheme && e.scheme !== 'https').length;
     const secure = rows.filter(e => e.scheme === 'https').length;
     const foot = (secure || plain) ? [
-        _lgProv({ ic: 'ph-bold ph-lock-simple', label: 'https', n: secure, go: '', tip: t('{secure} requests arrived over TLS', { secure }) }),
-        _lgProv({ ic: 'ph-bold ph-lock-simple-open', label: tc('label', 'plaintext'), n: plain, cls: plain ? 'sig-prov-warn' : '', go: '', tip: t('{plain} requests arrived without TLS', { plain }) })
+        _lgProv({ ic: 'ph-bold ph-lock-simple', label: 'https', n: secure, go: '', tip: tn('{secure} request arrived over TLS', '{secure} requests arrived over TLS', secure, { secure: _sdNum(secure) }) }),
+        _lgProv({ ic: 'ph-bold ph-lock-simple-open', label: tc('label', 'plaintext'), n: plain, cls: plain ? 'sig-prov-warn' : '', go: '', tip: tn('{plain} request arrived without TLS', '{plain} requests arrived without TLS', plain, { plain: _sdNum(plain) }) })
     ].join('') : '';
     return _lgCard({
         key: 'domains', accent: 'var(--purple)', ic: 'ph-fill ph-globe-simple', title: t('Domains'),
@@ -1091,8 +1130,8 @@ function _lgPathsCard(rows, total) {
         total: total, noun: 'paths',
         facet: o => ({ path: o.key }),
         label: o => o.label,
-        tipName: o => o.folded ? t('{label} ({merged} paths folded into this pattern)', { label: o.label, merged: o.merged }) : o.key,
-        glyph: o => o.folded ? `<i class="lg-g ph-bold ph-asterisk" title="${th('pattern, {merged} paths folded', { merged: tmHtml(o.merged) })}"></i>` : ''
+        tipName: o => o.folded ? tn('{label} ({merged} path folded into this pattern)', '{label} ({merged} paths folded into this pattern)', o.merged, { label: o.label, merged: _sdNum(o.merged) }) : o.key,
+        glyph: o => o.folded ? `<i class="lg-g ph-bold ph-asterisk" title="${thn('pattern, {merged} path folded', 'pattern, {merged} paths folded', o.merged, { merged: _sdNum(o.merged) })}"></i>` : ''
     });
     return _lgCard({
         key: 'paths', cls: 'lg-wide', accent: 'var(--teal)', ic: 'ph-fill ph-path', title: t('Paths'),
@@ -1102,10 +1141,10 @@ function _lgPathsCard(rows, total) {
         sub: _lgSub(_lgSubOffender(list, o => o.label)),
         body: built.body, tail: built.tail,
         foot: [
-            _lgProv({ ic: 'ph-bold ph-asterisk', label: tc('label', 'patterns'), n: folded.size, go: '',
-                tip: t('{size} path patterns collapse a numeric, date or hex segment. Only patterns that merge two or more real paths are folded.', { size: folded.size }) }),
+            _lgProv({ ic: 'ph-bold ph-asterisk', phrase: b => thn('{n} pattern', '{n} patterns', folded.size, { n: b }), n: folded.size, go: '',
+                tip: tn('{size} path pattern collapses a numeric, date or hex segment. Only patterns that merge two or more real paths are folded.', '{size} path patterns collapse a numeric, date or hex segment. Only patterns that merge two or more real paths are folded.', folded.size, { size: _sdNum(folded.size) }) }),
             _lgProv({ ic: 'ph-bold ph-dot-outline', label: t('seen once'), n: once, go: '',
-                tip: t('{once} paths were requested exactly once in this window, so the ranked rows are not the whole distribution', { once }) })
+                tip: tn('{once} path was requested exactly once in this window, so the ranked rows are not the whole distribution', '{once} paths were requested exactly once in this window, so the ranked rows are not the whole distribution', once, { once: _sdNum(once) }) })
         ].join('')
     });
 }
@@ -1121,10 +1160,10 @@ function _lgClientsCard(rows, total) {
         total: total, noun: 'clients',
         facet: o => ({ ip: o.key }),
         kindLabel: o => (LG_IP_GLYPH[o.kind] || LG_IP_GLYPH.unknown)[1],
-        tipName: o => o.key + ', ' + t('{v1} address', { v1: (LG_IP_GLYPH[o.kind] || LG_IP_GLYPH.unknown)[1] }),
+        tipName: o => (LG_IP_GLYPH[o.kind] || LG_IP_GLYPH.unknown)[3](o.key),
         glyph: o => {
             const g = LG_IP_GLYPH[o.kind] || LG_IP_GLYPH.unknown;
-            return '<i class="lg-g ' + g[0] + '" title="' + _esc(t('{v1} address', { v1: g[1] })) + '"></i>';
+            return '<i class="lg-g ' + g[0] + '" title="' + _esc(g[2]) + '"></i>';
         }
     });
     const byClass = new Map();
@@ -1132,7 +1171,7 @@ function _lgClientsCard(rows, total) {
     const foot = [...byClass.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([c, n]) => {
         const g = LG_IP_GLYPH[c] || LG_IP_GLYPH.unknown;
         return _lgProv({ ic: g[0], label: g[1], n: n, go: _lgSpec({ ipclass: c }),
-            tip: t('{n} requests from {v1} addresses. Click to filter the log list.', { n, v1: g[1] }) });
+            tip: g[4](n) });
     }).join('');
     return _lgCard({
         key: 'clients', accent: 'var(--blue)', ic: 'ph-fill ph-users-three', title: t('Clients'),
@@ -1146,12 +1185,12 @@ function _lgClientsCard(rows, total) {
 
 function _lgServicesCard(rows, total, isJson) {
     const useRouter = !isJson;
-    const what = useRouter ? t('router') : t('service');
     const list = _lgRank(rows, e => (useRouter ? e.router : e.service), e => _lgProvider(useRouter ? e.router : e.service));
     if (!list.length) {
         const sel = _lgSelected();
         const note = sel
-            ? th('The requests selected right now carry no {what} name. Clear the filters to rank the whole window.', { what })
+            ? (useRouter ? th('The requests selected right now carry no router name. Clear the filters to rank the whole window.')
+                : th('The requests selected right now carry no service name. Clear the filters to rank the whole window.'))
             : (isJson
                 ? `${th('These lines carry no {servicename}. Traefik omits it when it answers a request itself, and {accesslog_fields_names} in the static config controls whether it is written at all.', { servicename: tmHtml(`<code>ServiceName</code>`), accesslog_fields_names: tmHtml(`<code>accessLog.fields.names</code>`) })}`
                 : `${th('The generic {common} writer stops after the user agent, so neither the router nor the service reaches the log. Set {accesslog_format_json} in the static config.', { common: tmHtml(`<code>common</code>`), accesslog_format_json: tmHtml(`<code>accessLog.format: json</code>`) })}`);
@@ -1161,8 +1200,8 @@ function _lgServicesCard(rows, total, isJson) {
             go: sel ? 'clear=all' : 'cfg=accesslog', goLabel: sel ? tc('button', 'Clear') : t('Static Config'),
             goTip: sel ? t('Clear every filter and the search box') : t('Open the Static Config tab'),
             total: '-', flags: _lgOk(sel ? t('none in selection') : t('not logged'), 'ph-bold ph-info'),
-            sub: _lgSub(sel ? th('no {what} named in this selection', { what })
-                : (isJson ? th('no ServiceName on these lines') : th('this access log format names no {what}', { what }))),
+            sub: _lgSub(sel ? (useRouter ? th('no router named in this selection') : th('no service named in this selection'))
+                : (isJson ? th('no ServiceName on these lines') : th('this access log format names no router'))),
             body: '<p class="lg-note">' + note + '</p>',
             foot: sel ? '' : _lgProv({ ic: 'ph-bold ph-sliders-horizontal', label: t('open static config'), n: '', go: 'cfg=accesslog',
                 tip: t('Open the Static Config tab to change the accessLog block') })
@@ -1185,7 +1224,7 @@ function _lgServicesCard(rows, total, isJson) {
     rows.forEach(e => { const p = _lgProvider(useRouter ? e.router : e.service); if (p) byProv.set(p, (byProv.get(p) || 0) + 1); });
     const foot = [...byProv.entries()].sort((a, b) => b[1] - a[1]).slice(0, 4).map(([p, n]) =>
         _lgProv({ ic: 'ph-bold ph-cube', label: p, n: n, go: _lgSpec({ provider: p }),
-            tip: t('{n} requests handled by the {p} provider. Click to filter the log list.', { n, p }) })).join('');
+            tip: tn('{n} request handled by the {p} provider. Click to filter the log list.', '{n} requests handled by the {p} provider. Click to filter the log list.', n, { n: _sdNum(n), p }) })).join('');
     return _lgCard({
         key: 'services', accent: 'var(--green)', ic: 'ph-fill ph-hard-drives',
         title: useRouter ? t('Routers') : t('Services'),
@@ -1231,19 +1270,19 @@ function _lgFailPanel(rows, total) {
         const bad = o.status >= 500;
         const cells = [
             { cls: bad ? 'sig-cell-err' : 'sig-cell-warn', items: new Array(o.n).fill(o.status + ' ' + o.method + ' ' + o.path) },
-            { cls: '', items: new Array(Math.max(0, denom - o.n)).fill('ok ' + o.path) },
+            { cls: '', items: new Array(Math.max(0, denom - o.n)).fill(t('ok {path}', { path: o.path })) },
         ];
         o.durs.sort((a, b) => a - b);
         const p95 = o.durs.length ? o.durs[Math.min(o.durs.length - 1, Math.floor(o.durs.length * 0.95))] : null;
         const subBits = [];
-        if (ip) subBits.push(ip + ' ' + classifyIp(ip));
+        if (ip) subBits.push((LG_IP_GLYPH[classifyIp(ip)] || LG_IP_GLYPH.unknown)[3](ip));
         if (p95 != null) subBits.push('p95 ' + _lgMs(p95));
         if (dom) subBits.push(dom);
         if (svc) subBits.push(_sdShort(svc));
-        return `<div class="sig-ep-row" role="button" tabindex="0"${bad ? ' data-health="down"' : ''} data-lg="${_esc(_lgSpec({ status: String(o.status), path: o.path }))}" title="${_esc(t('{n} of the {denom} requests to {path} returned {status} {lgStatusName} ({pct}%). Click to filter the log list to just those.', { n: o.n, denom, path: o.path, status: o.status, lgStatusName: _lgStatusName(o.status), pct }))}"><span class="sig-ep-id"><span class="d-proto sig-proto ${bad ? 'd-bad' : 'd-warn'}">${o.status}</span><span class="sig-ep-name">${_esc(o.path)}</span></span><span class="sig-ep-addr">${_esc(svc ? _sdShort(svc) : _lgStatusName(o.status))}</span><span class="sig-ep-strip">${_lgStrip(cells, t('{n} of {denom} requests to {path} failed', { n: o.n, denom, path: o.path }), 'sig-strip-xs')}</span><span class="sig-ep-n">${_sdNum(o.n)}</span><span class="sig-ep-flags"><span class="lg-share ${pct >= 50 ? bad ? 'd-bad' : 'd-warn' : 'd-off'}">${pct}%</span></span><span class="sig-ep-sub">${_esc(subBits.join(' · '))}</span><span class="sig-ep-kind">${_esc(t('{status} on {sdShort}, {pct}% of that path', { status: o.status, sdShort: svc ? _sdShort(svc) : o.path, pct }))}</span></div>`;
+        return `<div class="sig-ep-row" role="button" tabindex="0"${bad ? ' data-health="down"' : ''} data-lg="${_esc(_lgSpec({ status: String(o.status), path: o.path }))}" title="${_esc(tn('{count} of the {n} request to {path} returned {status} {lgStatusName} ({pct}%). Click to filter the log list to just those.', '{count} of the {n} requests to {path} returned {status} {lgStatusName} ({pct}%). Click to filter the log list to just those.', denom, { count: _sdNum(o.n), n: _sdNum(denom), path: o.path, status: o.status, lgStatusName: _lgStatusName(o.status), pct }))}"><span class="sig-ep-id"><span class="d-proto sig-proto ${bad ? 'd-bad' : 'd-warn'}">${o.status}</span><span class="sig-ep-name">${_esc(o.path)}</span></span><span class="sig-ep-addr">${_esc(svc ? _sdShort(svc) : _lgStatusName(o.status))}</span><span class="sig-ep-strip">${_lgStrip(cells, tn('{count} of {n} request to {path} failed', '{count} of {n} requests to {path} failed', denom, { count: _sdNum(o.n), n: _sdNum(denom), path: o.path }), 'sig-strip-xs')}</span><span class="sig-ep-n">${_sdNum(o.n)}</span><span class="sig-ep-flags"><span class="lg-share ${pct >= 50 ? bad ? 'd-bad' : 'd-warn' : 'd-off'}">${pct}%</span></span><span class="sig-ep-sub">${_esc(subBits.join(' · '))}</span><span class="sig-ep-kind">${_esc(t('{status} on {sdShort}, {pct}% of that path', { status: o.status, sdShort: svc ? _sdShort(svc) : o.path, pct }))}</span></div>`;
     }).join('');
 
-    return `<section class="sig-ep"><div class="sig-ep-head"><i class="ph-fill ph-warning-octagon sig-ep-headic ${fails.some(e => e.status >= 500) ? 'd-bad' : 'd-warn'}"></i><span class="sc-sec-label">${th('Where it fails')}</span><span class="d-n">${_sdNum(list.length)}</span><span class="sc-sec-rule"></span><span class="sig-ep-tot">${th('{fails_count} of {total} requests', { fails_count: tmHtml(_sdNum(fails.length)), total: tmHtml(_sdNum(total)) })}</span></div><div class="sig-ep-rows">${rowsHtml}</div></section>`;
+    return `<section class="sig-ep"><div class="sig-ep-head"><i class="ph-fill ph-warning-octagon sig-ep-headic ${fails.some(e => e.status >= 500) ? 'd-bad' : 'd-warn'}"></i><span class="sc-sec-label">${th('Where it fails')}</span><span class="d-n">${_sdNum(list.length)}</span><span class="sc-sec-rule"></span><span class="sig-ep-tot">${thn('{fails_count} of {total} request', '{fails_count} of {total} requests', total, { fails_count: _sdNum(fails.length), total: _sdNum(total) })}</span></div><div class="sig-ep-rows">${rowsHtml}</div></section>`;
 }
 
 function _lgRuntime(meta, rows) {
@@ -1253,7 +1292,7 @@ function _lgRuntime(meta, rows) {
             ? t('Parsed as a Traefik JSON access log, so host, scheme, router, retries and nanosecond timing are all available.')
             : (fmt === 'clf' ? t("Parsed as Traefik's common (CLF) access log. No Host, no TLS, no retry count, no origin timing.")
                              : t('Parsed as a generic common log. No router, no service, no duration.')))}"><i class="ph-bold ${fmt === 'json' ? 'ph-brackets-curly' : 'ph-scroll'}"></i>${_esc(fmt === 'json' ? t('json access log') : (fmt === 'clf' ? t('clf access log') : t('generic clf access log')))}</span>`);
-    facts.push(`<span class="sig-f${meta.unparsed ? ' sig-f-off' : ''}" title="${th('Unparsed lines are still listed below but are excluded from every number on this panel.')}"><i class="ph-bold ph-list-magnifying-glass"></i>${th('{parsed} of {fetched} lines parsed', { parsed: tmHtml(_sdNum(meta.parsed)), fetched: tmHtml(_sdNum(meta.fetched)) })}</span>`);
+    facts.push(`<span class="sig-f${meta.unparsed ? ' sig-f-off' : ''}" title="${th('Unparsed lines are still listed below but are excluded from every number on this panel.')}"><i class="ph-bold ph-list-magnifying-glass"></i>${thn('{parsed} of {fetched} line parsed', '{parsed} of {fetched} lines parsed', meta.fetched, { parsed: _sdNum(meta.parsed), fetched: _sdNum(meta.fetched) })}</span>`);
     facts.push(`<span class="sig-f" title="${_esc(fmt === 'json'
         ? t('Durations are read from the nanosecond Duration field, not re-parsed from a rounded display string.')
         : t('The common log writes whole milliseconds, so sub-millisecond timing is not knowable.'))}"><i class="ph-bold ph-timer"></i>${fmt === 'json' ? th('ns precision') : th('ms precision')}</span>`);
@@ -1263,7 +1302,7 @@ function _lgRuntime(meta, rows) {
     facts.push(`<span class="sig-f ${meta.geoOn ? 'sig-f-on' : 'sig-f-off'}" title="${meta.geoOn ? th('Country lookup is on, so the Geography panel below is live.') : th('Country lookup is off.')}"><i class="ph-bold ph-globe-hemisphere-west"></i>${meta.geoOn ? th('geoip on') : th('geoip off')}</span>`);
     const auto = _lgAutoOn();
     facts.push(`<span class="sig-f ${auto ? 'sig-f-on' : 'sig-f-off'}" title="${_esc(auto
-        ? t('This panel refetches every {seconds} seconds while the Logs tab is open and the browser tab is visible. It pauses while you are typing in the filter box.', { seconds: _lgAutoInterval() / 1000 })
+        ? tn('This panel refetches every {seconds} second while the Logs tab is open and the browser tab is visible. It pauses while you are typing in the filter box.', 'This panel refetches every {seconds} seconds while the Logs tab is open and the browser tab is visible. It pauses while you are typing in the filter box.', _lgAutoInterval() / 1000, { seconds: _lgAutoInterval() / 1000 })
         : t('This panel does not poll. It was read {sdAgo} and only changes when you press refresh or change the window.', { sdAgo: _sdAgo(_lgStamp) }))}"><i class="ph-bold ph-arrows-clockwise"></i>${(auto ? th('auto refresh every {seconds}s', { seconds: _lgAutoInterval() / 1000 }) : th('auto refresh off'))}</span>`);
     return '<div class="sig-runtime" id="logRuntime">' + facts.join('') + '</div>';
 }
@@ -1337,7 +1376,7 @@ function renderLogs() {
         ? '<div class="sig-ep-rows lg-feed-rows">' + cards + '</div>'
         : `<div class="atk-empty"><i class="ph-fill ph-receipt"></i><div class="atk-empty-t">${th('Nothing to show')}</div><p class="lg-note">${_esc(emptyTxt)}</p></div>`;
 
-    container.innerHTML = `${geoPanel}<div class="sig-root"><section class="sig-ep lg-feed"><div class="sig-ep-head"><i class="ph-fill ph-receipt sig-ep-headic"></i><span class="sc-sec-label">${th('Access log')}</span><span class="d-n">${_sdNum(visible.length)}</span><span class="sc-sec-rule"></span><span class="sig-idle-txt">${th('{visible_count} of {fetched} lines', { visible_count: tmHtml(_sdNum(visible.length)), fetched: tmHtml(_sdNum(fetched)) })}</span></div>${body}</section></div>`;
+    container.innerHTML = `${geoPanel}<div class="sig-root"><section class="sig-ep lg-feed"><div class="sig-ep-head"><i class="ph-fill ph-receipt sig-ep-headic"></i><span class="sc-sec-label">${th('Access log')}</span><span class="d-n">${_sdNum(visible.length)}</span><span class="sc-sec-rule"></span><span class="sig-idle-txt">${thn('{visible_count} of {fetched} line', '{visible_count} of {fetched} lines', fetched, { visible_count: _sdNum(visible.length), fetched: _sdNum(fetched) })}</span></div>${body}</section></div>`;
 
     if (geoPanel) renderGeoMap(document.getElementById('logGeoMap'), countryData, logGeo_click, _logCountryFilter);
 }

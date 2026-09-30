@@ -150,8 +150,10 @@ def test_a_pod_with_only_one_kind_reports_only_that_kind():
 def test_the_hidden_roll_up_names_both_kinds():
     src = _src()
     body = src[src.index('const hidden = list.slice(limit);'):src.index('pod.appendChild(btn);')]
-    assert "hDown ? ', ' + t('{count} of them down', { count: hDown })" in body \
-        and "hWarn ? ', ' + t('{count} of them degraded', { count: hWarn })" in body, \
+    label = _fn('_dskMoreLabel', src)
+    assert '_dskMoreLabel(icons, hidden.length, _dskGroupLabel(meta.name), hDown, hWarn)' in body \
+        and '{down} of them down and {warn} degraded' in label \
+        and '{down} of them down' in label and '{warn} of them degraded' in label, \
         'the +N more aria label still collapses degraded into down'
     assert body.count('class="dsk-more-w"') == 1 and body.count('class="dsk-more-n"') == 1
 

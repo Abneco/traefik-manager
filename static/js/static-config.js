@@ -22,7 +22,7 @@ function _confirmWith(o) {
     const check   = (o && o.checkbox) || null;
     const later   = (o && o.checkboxAsync) || null;
     const danger  = (o && o.danger !== undefined) ? o.danger
-                    : /delete|remove|revoke|reset/i.test(String(okLabel || ''));
+                    : tmSources(okLabel || '').some(s => /delete|remove|revoke|reset/i.test(s));
     return new Promise(resolve => {
         const overlay = document.getElementById('customConfirmOverlay');
         const msg     = document.getElementById('customConfirmMsg');
@@ -581,8 +581,9 @@ function _sharedChangeNote(change) {
         return t('{name}, defined in {file}', { name: change.name, file: change.file });
     }
     if (used.count > (used.routes || []).length) {
-        return t('{name}, defined in {file}, used by {count} routes including {routes}',
-                 { name: change.name, file: change.file, count: used.count, routes: shown });
+        return tn('{name}, defined in {file}, used by {count} route including {routes}',
+                  '{name}, defined in {file}, used by {count} routes including {routes}', used.count,
+                  { name: change.name, file: change.file, count: used.count, routes: shown });
     }
     return tn('{name}, defined in {file}, used by {count} route: {routes}',
               '{name}, defined in {file}, used by {count} routes: {routes}', used.count,
@@ -1258,7 +1259,7 @@ function _renderStaticVerdict(d) {
     }
     const items = shown.map(([ic, txt, sec]) =>
         `<button type="button" class="sig-flag d-warn" onclick="_scJump(${_jsArg(sec)})" title="${th('Go to {sec}', { sec })}"><i class="ph-bold ${ic}"></i><span class="sig-fl">${_esc(txt)}</span></button>`).join('');
-    el.innerHTML = `<div class="sig-verdict" data-health="warn"><i class="ph-fill ph-warning-circle sig-verdict-ic"></i><span class="sig-verdict-txt">${th('{found_count} to look at', { found_count: tmHtml(found.length) })}</span><span class="sig-verdict-items">${items}${more > 0 ? `<span class="sig-ok">${th('+{more} more', { more: tmHtml(more) })}</span>` : ''}</span>${meta}</div>`;
+    el.innerHTML = `<div class="sig-verdict" data-health="warn"><i class="ph-fill ph-warning-circle sig-verdict-ic"></i><span class="sig-verdict-txt">${thn('{n} thing to look at', '{n} things to look at', found.length)}</span><span class="sig-verdict-items">${items}${more > 0 ? `<span class="sig-ok">${th('+{more} more', { more: tmHtml(more) })}</span>` : ''}</span>${meta}</div>`;
 }
 
 function _scJump(section) {
@@ -2003,7 +2004,7 @@ function _buildStaticClassicHTML() {
                 </div>
                 <div>
                     <label class="text-xs block mb-1" style="color:var(--muted)">${th('CA server {optional}', { optional: tmHtml(`<span style="font-weight:400">${th('(optional)')}</span>`) })}</label>
-                    <input id="sfResCaServer" type="text" class="input-field text-sm" placeholder="default: Let's Encrypt production">
+                    <input id="sfResCaServer" type="text" class="input-field text-sm" placeholder="${thc('placeholder', "default: Let's Encrypt production")}">
                 </div>
                 <div>
                     <label class="text-xs block mb-1" style="color:var(--muted)">${th('Key type {optional}', { optional: tmHtml(`<span style="font-weight:400">${th('(optional)')}</span>`) })}</label>

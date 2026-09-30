@@ -459,11 +459,14 @@ async function _errText(res, fallback) {
 }
 
 
-function _passwordError(pw, label) {
-    label = label || t('Password');
-    if (pw.length < 8) return t('{label} must be at least 8 characters.', { label });
+function _passwordError(pw, isNew) {
+    if (pw.length < 8) {
+        return isNew ? t('New password must be at least 8 characters.') : t('Password must be at least 8 characters.');
+    }
     if (new TextEncoder().encode(pw).length > 72) {
-        return t('{label} must be 72 bytes or fewer, which is the bcrypt limit. Accented and non-Latin characters take more than one byte each.', { label });
+        return isNew
+            ? t('New password must be 72 bytes or fewer, which is the bcrypt limit. Accented and non-Latin characters take more than one byte each.')
+            : t('Password must be 72 bytes or fewer, which is the bcrypt limit. Accented and non-Latin characters take more than one byte each.');
     }
     return null;
 }
@@ -1174,7 +1177,7 @@ function _geoPanelHtml(panelId, countryData, activeCC, onClearAttr) {
     const top = entries.slice(0, 8).map(([cc, d]) => {
         const sel = activeCC === cc;
         const pct = (d.count / total * 100).toFixed(1);
-        return `<div class="lg-row${sel ? ' lg-row-on' : ''}" role="button" tabindex="0" onclick="${panelId}_click(${_jsArg(cc)})" title="${th('{name} - {count} requests, {pct}%', { name: d.name, count: tmHtml(d.count.toLocaleString()), pct: tmHtml(pct) })}">
+        return `<div class="lg-row${sel ? ' lg-row-on' : ''}" role="button" tabindex="0" onclick="${panelId}_click(${_jsArg(cc)})" title="${thn('{name} - {count} request, {pct}%', '{name} - {count} requests, {pct}%', d.count, { name: d.name, count: tmHtml(d.count.toLocaleString()), pct: tmHtml(pct) })}">
             <span class="lg-id"><span class="lg-g">${_flagEmoji(cc)}</span><span class="lg-name">${_esc(d.name)}</span></span>
             <span class="lg-bad"></span>
             <span class="lg-n">${d.count.toLocaleString()}</span>
@@ -1184,7 +1187,6 @@ function _geoPanelHtml(panelId, countryData, activeCC, onClearAttr) {
     const clear = activeCC
         ? `<button type="button" class="sig-explore" onclick="${onClearAttr}" title="${th('Clear the country filter')}">${_flagEmoji(activeCC)} ${_esc((countryData[activeCC] || {}).name || activeCC)} <i class="ph-bold ph-x"></i></button>`
         : '';
-    const label = entries.length === 1 ? t('country') : t('countries');
     const more = entries.length > 8 ? `<div class="lg-tail">${thn('+{count} more country', '+{count} more countries', entries.length - 8, { count: tmNumber(entries.length - 8) })}</div>` : '';
     return `<div class="sig-root">
         <section class="sig-ep lg-geo">
@@ -1192,7 +1194,7 @@ function _geoPanelHtml(panelId, countryData, activeCC, onClearAttr) {
                 <i class="ph-fill ph-globe-hemisphere-west sig-ep-headic"></i>
                 <span class="sc-sec-label">${thc('heading', 'Geography')}</span><span class="d-n">${entries.length}</span>
                 <span class="sc-sec-rule"></span>
-                ${clear || `<span class="sig-ep-tot">${entries.length.toLocaleString()} ${label}</span>`}
+                ${clear || `<span class="sig-ep-tot">${thn('{count} country', '{count} countries', entries.length, { count: entries.length.toLocaleString() })}</span>`}
             </div>
             <div class="tm-geo-grid">
                 <div id="${panelId}Map" class="tm-geo-map"></div>
@@ -1296,7 +1298,7 @@ async function loadIpDiagnostic() {
             ${row(t('Socket peer'), d.socket_peer, d.socket_peer_class, t('The direct TCP connection - your reverse proxy, or the real client if none.'))}
             <div class="flex items-center gap-2 py-2" style="border-bottom:1px solid var(--border)">
                 <span class="text-xs" style="color:var(--muted);min-width:120px">${th('Proxy trusted')}</span>
-                <span class="text-xs font-mono" style="color:var(--text)">${d.proxy_trusted === undefined ? '-' : d.proxy_trusted ? 'yes' : 'no'}</span>
+                <span class="text-xs font-mono" style="color:var(--text)">${d.proxy_trusted === undefined ? '-' : d.proxy_trusted ? thc('label', 'Yes') : thc('label', 'No')}</span>
             </div>
             <div class="flex items-center gap-2 py-2">
                 <span class="text-xs" style="color:var(--muted);min-width:120px">${th('Trusted hops')}</span>
@@ -1655,7 +1657,7 @@ function _syncBrowserNotifs() {
     const fresh = _notifData.filter(n => !seen.has(n.ts) && _browserNotifWanted(n.type || 'info'));
     if (!fresh.length) return;
     if (fresh.length > BROWSER_NOTIF_BURST) {
-        _showBrowserNotif('info', t('{fresh_count} new notifications', { fresh_count: fresh.length }), 'burst');
+        _showBrowserNotif('info', tn('{n} new notification', '{n} new notifications', fresh.length), 'burst');
         return;
     }
     fresh.slice().reverse().forEach(n => _showBrowserNotif(n.type || 'info', n.msg || '', n.ts));

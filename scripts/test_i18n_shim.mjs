@@ -95,8 +95,25 @@ check('german ago uses Intl', ru.tmAgo(7300) !== '2h ago', true);
 check('number english', en.tmNumber(1234567), (1234567).toLocaleString());
 check('number german locale', load(JSON.stringify({ locale: 'de', messages: {} })).tmNumber(1234567), '1.234.567');
 check('date invalid', en.tmDate('not a date'), '');
+check('list german locale', load(JSON.stringify({ locale: 'de', messages: {} })).tmList(['a', 'b', 'c']), 'a, b und c');
+check('list russian locale', ru.tmList(['a', 'b']), 'a и b');
+check('list single item', ru.tmList(['a']), 'a');
+check('list empty', en.tmList([]), '');
+check('list bad locale falls back', unknownLocale.tmList(['a', 'b']), 'a, b');
 
-const confirmSrc = readFileSync(join(root, 'static', 'js', 'static-config.js'), 'utf8');
+const de = load(JSON.stringify({
+    locale: 'de',
+    plural: { one: 0, other: 1 },
+    messages: { 'button\u0004Delete': 'Löschen', 'Revoke API Key': 'API-Schlüssel widerrufen', '{n} route': ['{n} Route', '{n} Routen'] },
+}));
+const danger = w => label => w.tmSources(label).some(s => /delete|remove|revoke|reset/i.test(s));
+check('translated delete button is destructive', danger(de)('Löschen'), true);
+check('translated revoke button is destructive', danger(de)('API-Schlüssel widerrufen'), true);
+check('plural forms map back', de.tmSources('{n} Routen').includes('{n} route'), true);
+check('english label is its own source', danger(en)('Remove Agent'), true);
+check('unknown label is not destructive', danger(de)('Speichern'), false);
+
+const confirmSrc =readFileSync(join(root, 'static', 'js', 'static-config.js'), 'utf8');
 const cStart = confirmSrc.indexOf('function _confirmWordFor(');
 const cEnd = confirmSrc.indexOf('function _confirm(');
 const { _confirmWordFor } = new Function(confirmSrc.slice(cStart, cEnd) + '\nreturn { _confirmWordFor };')();

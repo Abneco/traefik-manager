@@ -197,7 +197,7 @@ function renderServicesTable() {
             const anyDown = serverEntries.length > 0 && activeCount < serverEntries.length;
             const dotCls = st === 'error' || (anyDown && activeCount === 0) ? 'status-offline'
                          : anyDown || st !== 'success' ? 'status-checking' : 'status-online';
-            const dotTitle = anyDown ? t('{activeCount} of {serverEntries_count} servers up', { activeCount, serverEntries_count: serverEntries.length }) : stLabel;
+            const dotTitle = anyDown ? tn('{activeCount} of {n} server up', '{activeCount} of {n} servers up', serverEntries.length, { activeCount }) : stLabel;
             const lb = s.loadBalancer || {};
             const composite = (s.weighted?.services || []).map(x => `${x.name}${x.weight != null ? ` (${x.weight})` : ''}`)
                 .concat((s.highestRandomWeight?.services || []).map(x => `${x.name}${x.weight != null ? ` (${x.weight})` : ''}`))

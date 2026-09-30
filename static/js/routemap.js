@@ -255,7 +255,7 @@ function _rmBuildDagre(routes) {
         { ...dims('route', _rmNodeHtml('route', r.id, { route:r })), type:'route', id:r.id, route:r }));
     Object.entries(collapsed).forEach(([prov, rs]) => {
         const ctx = { label: prov, count: rs.length,
-                      title: t('{rs_count} {prov} routes - click to list them', { rs_count: rs.length, prov }) };
+                      title: tn('{n} {prov} route - click to list it', '{n} {prov} routes - click to list them', rs.length, { prov }) };
         g.setNode(`group:${prov}`,
             { ...dims('group', _rmNodeHtml('group', prov, ctx)), type:'group', id:prov,
               label: prov, count: rs.length, title: ctx.title, members: rs });

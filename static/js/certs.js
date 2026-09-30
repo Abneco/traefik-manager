@@ -73,13 +73,16 @@ function renderCertsVerdict() {
         if (next === null || d < next) next = d;
     });
     const resolvers = new Set(_allCerts.map(c => c.resolver).filter(Boolean)).size;
-    const flags = [{ cls: 'd-off', ic: 'ph-bold ph-shield-check', n: _allCerts.length,
-                     label: _allCerts.length === 1 ? tc('label', 'certificate') : tc('label', 'certificates') }];
+    const certsLabel = tn('{n} certificate', '{n} certificates', _allCerts.length, { n: _sdNum(_allCerts.length) });
+    const flags = [{ cls: 'd-off', ic: 'ph-bold ph-shield-check', n: '', label: certsLabel, tip: certsLabel }];
     if (expired)  flags.push({ cls: 'd-bad', ic: 'ph-fill ph-x-circle', n: expired, label: tc('label', 'expired') });
     if (critical) flags.push({ cls: 'd-bad', ic: 'ph-fill ph-warning-octagon', n: critical, label: t('under 7d') });
     if (expiring) flags.push({ cls: 'd-warn', ic: 'ph-fill ph-hourglass-high', n: expiring, label: t('under 30d') });
     if (!expired && !critical && !expiring) flags.push({ cls: 'd-on', ic: 'ph-bold ph-check', n: '', label: t('none expiring soon') });
-    if (resolvers > 1) flags.push({ cls: 'd-off', ic: 'ph-bold ph-certificate', n: resolvers, label: tc('label', 'resolvers') });
+    if (resolvers > 1) {
+        const resolversLabel = tn('{n} resolver', '{n} resolvers', resolvers, { n: _sdNum(resolvers) });
+        flags.push({ cls: 'd-off', ic: 'ph-bold ph-certificate', n: '', label: resolversLabel, tip: resolversLabel });
+    }
     const unused   = _certUsage.certs.filter(u => u.unused).length;
     const orphaned = _certUsage.certs.filter(u => u.orphaned).length;
     if (unused)   flags.push({ cls: 'd-warn', ic: 'ph-bold ph-plugs', n: unused, label: tc('label', 'unused') });
@@ -88,8 +91,8 @@ function renderCertsVerdict() {
         health: (expired || critical) ? 'down' : expiring ? 'warn' : 'up',
         ic: (expired || critical) ? 'ph-fill ph-warning-octagon' : expiring ? 'ph-fill ph-hourglass-high' : 'ph-fill ph-check-circle',
         txt: expired  ? tn('{count} certificate has expired', '{count} certificates have expired', expired, { count: _sdNum(expired) })
-           : critical ? t('{critical} expiring within 7 days', { critical: _sdNum(critical) })
-           : expiring ? t('{expiring} expiring within 30 days', { expiring: _sdNum(expiring) })
+           : critical ? tn('{n} certificate expiring within 7 days', '{n} certificates expiring within 7 days', critical, { n: _sdNum(critical) })
+           : expiring ? tn('{n} certificate expiring within 30 days', '{n} certificates expiring within 30 days', expiring, { n: _sdNum(expiring) })
            : t('All certificates healthy'),
         flags,
         meta: [next !== null ? `${th('next expiry in {d}', { d: tmHtml(`<b>${_sdNum(next)}d</b>`) })}` : '',
@@ -352,9 +355,10 @@ async function _sendCertRemoval(list, server) {
             return;
         }
         if (!body.restarted) {
+            const removed = body.removed || list.length;
             stop((body.restart_error
-                ? t('Removed {removed}, but Traefik did not restart: {error}. The change is undone until it does.', { removed: body.removed, error: body.restart_error })
-                : t('Removed {removed}, but Traefik did not restart. The change is undone until it does.', { removed: body.removed })));
+                ? tn('Removed {n} certificate, but Traefik did not restart: {error}. The change is undone until it does.', 'Removed {n} certificates, but Traefik did not restart: {error}. The change is undone until it does.', removed, { error: body.restart_error })
+                : tn('Removed {n} certificate, but Traefik did not restart. The change is undone until it does.', 'Removed {n} certificates, but Traefik did not restart. The change is undone until it does.', removed)));
             refreshCertsTab();
             return;
         }
@@ -399,7 +403,7 @@ function renderCertCards() {
         return;
     }
     const cards = items.map(cert => {
-        const main     = cert.main || 'Unknown';
+        const main     = cert.main || t('Unknown');
         const sans     = cert.sans || [];
         const resolver = cert.resolver || '-';
         let daysLeft = null, expiryStr = '-';
@@ -428,7 +432,7 @@ function renderCertCards() {
                 ${_certDeleteRail(cert, main, resolver, sans)}
             </div>
             ${vals ? `<div class="tm-vals">${vals}</div>` : ''}
-            <div class="tm-foot"><span class="tm-meta${_certFlagClass(cert)}">${daysLeft !== null && daysLeft < 0 ? th('expired {date}', { date: expiryStr }) : th('expires {date}', { date: expiryStr })}${extra.length ? ' · ' + th('{count} domains', { count: extra.length + 1 }) : ''}${_certFlagText(cert)}</span>${daysLeft !== null ? `<span class="tm-cf" style="color:${expiryColor}">${_certLeft(daysLeft)}</span>` : ''}</div>
+            <div class="tm-foot"><span class="tm-meta${_certFlagClass(cert)}">${daysLeft !== null && daysLeft < 0 ? th('expired {date}', { date: expiryStr }) : th('expires {date}', { date: expiryStr })}${extra.length ? ' · ' + thn('{count} domain', '{count} domains', extra.length + 1, { count: extra.length + 1 }) : ''}${_certFlagText(cert)}</span>${daysLeft !== null ? `<span class="tm-cf" style="color:${expiryColor}">${_certLeft(daysLeft)}</span>` : ''}</div>
         </div>`;
     }).join('');
     document.getElementById('certsContent').innerHTML =

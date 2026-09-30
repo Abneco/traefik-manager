@@ -687,7 +687,7 @@ async function changePassword() {
     };
 
     if (!current || !newPw || !confirm) return show(t('Please fill in all fields.'), false);
-    const pwErr = _passwordError(newPw, t('New password'));
+    const pwErr = _passwordError(newPw, true);
     if (pwErr)                         return show(pwErr, false);
     if (newPw !== confirm)             return show(t('Passwords do not match.'), false);
 
@@ -902,7 +902,7 @@ async function loadChannelsList() {
         body.innerHTML = _channels.map(c => {
             const missing = _channelMissing(c);
             const detail  = missing.length
-                ? `<span style="color:var(--yellow)">${th('Needs {missing}', { missing: missing.join(', ') })}</span>`
+                ? `<span style="color:var(--yellow)">${th('Needs {missing}', { missing: tmList(missing) })}</span>`
                 : _channelSummary(c);
             return `
             <div class="sc-set" data-channel-id="${_esc(c.id)}"${missing.length ? ' data-health="warn"' : ''}>
@@ -1074,7 +1074,7 @@ function _channelError(message) {
 async function _persistChannel() {
     const payload = _channelPayload();
     const missing = _channelMissing(payload);
-    if (missing.length) { _channelError(t('Fill in {missing} first.', { missing: missing.join(' and ') })); return null; }
+    if (missing.length) { _channelError(t('Fill in {missing} first.', { missing: tmList(missing) })); return null; }
     const start = document.getElementById('chQuietStart').value.trim();
     const end   = document.getElementById('chQuietEnd').value.trim();
     if (!!start !== !!end) { _channelError(t('Set both a start and an end time for quiet hours, or clear them both.')); return null; }
@@ -3282,10 +3282,9 @@ function filterSettings() {
     if (!empty) return;
     if (!q || activeHits) { empty.style.display = 'none'; return; }
     empty.style.display = '';
-    empty.innerHTML = elsewhere.length ? th('No matches here. Found in') + ' '
-          + elsewhere.map(e =>
+    empty.innerHTML = elsewhere.length ? th('No matches here. Found in {sections}', { sections: tmHtml(tmList(elsewhere.map(e =>
               `<button type="button" class="settings-jump" onclick="switchSettingsPanel(${_jsArg(e.id)})">`
-              + `${_esc(e.label)} <span>${_esc(e.hits)}</span></button>`).join(' ') : th('No settings match your search');
+              + `${_esc(e.label)} <span>${_esc(e.hits)}</span></button>`))) }) : th('No settings match your search');
 }
 
 function clearSettingsSearch() {

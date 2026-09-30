@@ -502,15 +502,15 @@ function _dskState(r) {
     } else if (svc && svc.total && svc.up === 0) {
         s.health  = 'down';
         s.dot     = 'sig-cell-err';
-        s.dotTip  = t('Backend unreachable - 0 of {total} servers up', { total: svc.total });
-        s.note    = `${th('backend unreachable {servers}', { servers: tmHtml(`<b>${th('0/{total} servers up', { total: svc.total })}</b>`) })}`;
+        s.dotTip  = tn('Backend unreachable - 0 of {n} server up', 'Backend unreachable - 0 of {n} servers up', svc.total);
+        s.note    = `${th('backend unreachable {servers}', { servers: tmHtml(`<b>${thn('0/{n} server up', '0/{n} servers up', svc.total)}</b>`) })}`;
         s.noteIc  = 'ph-fill ph-warning-octagon';
         s.noteCls = 'd-bad';
     } else if (svc && svc.total && svc.up < svc.total) {
         s.health  = 'warn';
         s.dot     = 'sig-cell-warn';
-        s.dotTip  = t('Backend degraded - {up} of {total} servers up', { up: svc.up, total: svc.total });
-        s.note    = `${th('backend degraded {servers}', { servers: tmHtml(`<b>${th('{up}/{total} servers up', { up: svc.up, total: svc.total })}</b>`) })}`;
+        s.dotTip  = tn('Backend degraded - {up} of {n} server up', 'Backend degraded - {up} of {n} servers up', svc.total, { up: svc.up });
+        s.note    = `${th('backend degraded {servers}', { servers: tmHtml(`<b>${thn('{up}/{n} server up', '{up}/{n} servers up', svc.total, { up: svc.up })}</b>`) })}`;
         s.noteIc  = 'ph-fill ph-warning';
         s.noteCls = 'd-warn';
     } else if (_rmStatusBlind) {
@@ -526,12 +526,12 @@ function _dskState(r) {
     } else if (svc && svc.total) {
         s.health = 'up';
         s.dot    = 'sig-cell-ok';
-        s.dotTip = t('Router loaded, {up} of {total} backend servers up', { up: svc.up, total: svc.total });
+        s.dotTip = tn('Router loaded, {up} of {n} backend server up', 'Router loaded, {up} of {n} backend servers up', svc.total, { up: svc.up });
     } else if (chk && chk.state === 'down') {
         s.health  = 'down';
         s.dot     = 'sig-cell-err';
         s.dotTip  = (chk.source === 'traefik' || chk.source === 'servers')
-            ? t('Backend unreachable - 0 of {total} servers up', { total: (chk.servers || {}).total || 0 })
+            ? tn('Backend unreachable - 0 of {n} server up', 'Backend unreachable - 0 of {n} servers up', (chk.servers || {}).total || 0)
             : (chk.error ? t('Unreachable: {error} · {ago}', { error: chk.error, ago: _dskAgo(chk.at) }) : t('Unreachable · {ago}', { ago: _dskAgo(chk.at) }));
         s.note    = t('backend unreachable');
         s.noteIc  = 'ph-fill ph-warning-octagon';
@@ -541,9 +541,9 @@ function _dskState(r) {
         s.health  = 'warn';
         s.dot     = 'sig-cell-warn';
         s.dotTip  = ((chk.down_servers || []).length
-            ? t('Backend degraded - {up} of {total} servers up ({servers} down) · {ago}', { up: sv.up, total: sv.total, servers: chk.down_servers.join(', '), ago: _dskAgo(chk.at) })
-            : t('Backend degraded - {up} of {total} servers up · {ago}', { up: sv.up, total: sv.total, ago: _dskAgo(chk.at) }));
-        s.note    = `${th('backend degraded {servers}', { servers: tmHtml(`<b>${th('{up}/{total} servers up', { up: sv.up, total: sv.total })}</b>`) })}`;
+            ? tn('Backend degraded - {up} of {n} server up ({servers} down) · {ago}', 'Backend degraded - {up} of {n} servers up ({servers} down) · {ago}', sv.total, { up: sv.up, servers: tmList(chk.down_servers), ago: _dskAgo(chk.at) })
+            : tn('Backend degraded - {up} of {n} server up · {ago}', 'Backend degraded - {up} of {n} servers up · {ago}', sv.total, { up: sv.up, ago: _dskAgo(chk.at) }));
+        s.note    = `${th('backend degraded {servers}', { servers: tmHtml(`<b>${thn('{up}/{n} server up', '{up}/{n} servers up', sv.total, { up: sv.up })}</b>`) })}`;
         s.noteIc  = 'ph-fill ph-warning';
         s.noteCls = 'd-warn';
     } else if (chk && chk.state === 'up') {
@@ -592,14 +592,14 @@ function _dskRowTitle(r, s, name) {
     else if (r.target && r.target !== 'N/A') bits.push(t('backend {target}', { target: r.target }));
     bits.push(t('provider {provider}', { provider: r.provider || 'file' }));
     const eps = r.entryPoints || [];
-    if (eps.length) bits.push(t('entry point {eps}', { eps: eps.join(', ') }));
+    if (eps.length) bits.push(tn('entry point {eps}', 'entry points {eps}', eps.length, { eps: tmList(eps) }));
     const nsrv = (r.servers || []).length;
     if (nsrv) bits.push(tn('{n} server', '{n} servers', nsrv));
     const mws = r.middlewares || [];
-    if (mws.length) bits.push(tn('{n} middleware: {names}', '{n} middlewares: {names}', mws.length, { names: mws.map(m => String(m).split('@')[0]).join(', ') }));
+    if (mws.length) bits.push(tn('{n} middleware: {names}', '{n} middlewares: {names}', mws.length, { names: tmList(mws.map(m => String(m).split('@')[0])) }));
     if (r.certResolver) bits.push(t('cert resolver {certResolver}', { certResolver: r.certResolver }));
     if (r.healthCheck && Object.keys(r.healthCheck).length) bits.push(t('active health check'));
-    if (s.hosts > 1) bits.push(t('{hosts} hosts in the rule, the first is used', { hosts: s.hosts }));
+    if (s.hosts > 1) bits.push(tn('{n} host in the rule, the first is used', '{n} hosts in the rule, the first is used', s.hosts));
     if (r.configFile) bits.push(r.configFile);
     if (s.note) bits.push(_dskPlain(s.note));
     return bits.join(' \u00b7 ');
@@ -661,6 +661,20 @@ function _dskAlarm(meta, down, warn) {
     return html;
 }
 
+function _dskMoreLabel(icons, n, name, down, warn) {
+    const p = { name, down, warn };
+    if (icons) {
+        if (down && warn) return tn('Show {n} more app in {name}, {down} of them down and {warn} degraded', 'Show {n} more apps in {name}, {down} of them down and {warn} degraded', n, p);
+        if (down) return tn('Show {n} more app in {name}, {down} of them down', 'Show {n} more apps in {name}, {down} of them down', n, p);
+        if (warn) return tn('Show {n} more app in {name}, {warn} of them degraded', 'Show {n} more apps in {name}, {warn} of them degraded', n, p);
+        return tn('Show {n} more app in {name}', 'Show {n} more apps in {name}', n, p);
+    }
+    if (down && warn) return tn('Show {n} more route in {name}, {down} of them down and {warn} degraded', 'Show {n} more routes in {name}, {down} of them down and {warn} degraded', n, p);
+    if (down) return tn('Show {n} more route in {name}, {down} of them down', 'Show {n} more routes in {name}, {down} of them down', n, p);
+    if (warn) return tn('Show {n} more route in {name}, {warn} of them degraded', 'Show {n} more routes in {name}, {warn} of them degraded', n, p);
+    return tn('Show {n} more route in {name}', 'Show {n} more routes in {name}', n, p);
+}
+
 function dashBuildPod(entry) {
     const meta  = entry.meta;
     const icons = entry.icons;
@@ -713,17 +727,14 @@ function dashBuildPod(entry) {
         btn.setAttribute('aria-expanded', open ? 'true' : 'false');
         btn.setAttribute('aria-controls', bodyId);
         btn.setAttribute('aria-label', open
-            ? (icons ? t('Show fewer apps in {name}, {count} shown', { name: _dskGroupLabel(meta.name), count: list.length })
-                     : t('Show fewer routes in {name}, {count} shown', { name: _dskGroupLabel(meta.name), count: list.length }))
-            : (icons ? tn('Show {n} more app in {name}', 'Show {n} more apps in {name}', hidden.length, { name: _dskGroupLabel(meta.name) })
-                     : tn('Show {n} more route in {name}', 'Show {n} more routes in {name}', hidden.length, { name: _dskGroupLabel(meta.name) }))
-              + (hDown ? ', ' + t('{count} of them down', { count: hDown }) : '')
-              + (hWarn ? ', ' + t('{count} of them degraded', { count: hWarn }) : ''));
+            ? (icons ? tn('Show fewer apps in {name}, {count} shown', 'Show fewer apps in {name}, {count} shown', list.length, { name: _dskGroupLabel(meta.name), count: list.length })
+                     : tn('Show fewer routes in {name}, {count} shown', 'Show fewer routes in {name}, {count} shown', list.length, { name: _dskGroupLabel(meta.name), count: list.length }))
+            : _dskMoreLabel(icons, hidden.length, _dskGroupLabel(meta.name), hDown, hWarn));
         btn.innerHTML = open
             ? `<i class="ph-bold ph-caret-up"></i>${th('show less')}`
-            : `<i class="ph-bold ph-caret-down"></i><b>${hidden.length}</b> ${th('more')}`
-              + (hDown ? ' <span class="dsk-more-n">\u00b7 ' + hDown + ` ${thc('label', 'down')}</span>` : '')
-              + (hWarn ? ' <span class="dsk-more-w">\u00b7 ' + hWarn + ` ${thc('label', 'degraded')}</span>` : '');
+            : `<i class="ph-bold ph-caret-down"></i>${thn('{n} more', '{n} more', hidden.length, { n: tmHtml(`<b>${hidden.length}</b>`) })}`
+              + (hDown ? ' <span class="dsk-more-n">\u00b7 ' + thn('{n} down', '{n} down', hDown) + '</span>' : '')
+              + (hWarn ? ' <span class="dsk-more-w">\u00b7 ' + thn('{n} degraded', '{n} degraded', hWarn) + '</span>' : '');
         pod.appendChild(btn);
     }
     return pod;
@@ -886,20 +897,27 @@ function _dskEmptyPanel(total) {
     const acts = document.getElementById('dashEmptyDo');
     if (!ic || !ttl || !note || !acts) return;
 
-    const on = [];
-    if (_dashSearch)             on.push(`${th('the search {code}', { code: tmHtml(`<code>${_esc(_dashSearch)}</code>`) })}`);
-    if (_dashProto !== 'all')    on.push(`${th('the {b} protocol filter', { b: tmHtml(`<b>${_esc(_dashProto)}</b>`) })}`);
-    if (_dashProvider !== 'all') on.push(`${th('the {b} provider filter', { b: tmHtml(`<b>${_esc(_dashProvider)}</b>`) })}`);
+    const search   = !!_dashSearch;
+    const proto    = _dashProto !== 'all';
+    const provider = _dashProvider !== 'all';
+    const f = {
+        search:   tmHtml(`<code>${_esc(_dashSearch)}</code>`),
+        proto:    tmHtml(`<b>${_esc(_dashProto)}</b>`),
+        provider: tmHtml(`<b>${_esc(_dashProvider)}</b>`),
+    };
 
-    if (total && on.length) {
+    if (total && (search || proto || provider)) {
         ic.className  = 'ph-fill ph-funnel';
         ttl.textContent = t('Nothing matches');
-        const listed = on.length === 1 ? on[0]
-            : th('{items} and {last}', { items: tmHtml(on.slice(0, -1).join(', ')), last: tmHtml(on[on.length - 1]) });
-        note.innerHTML = thn('{n} route is loaded.', '{n} routes are loaded.', total) + ' '
-            + (on.length === 1
-                ? th('{filters} matches none of them.', { filters: tmHtml(listed) })
-                : th('{filters} together match none of them.', { filters: tmHtml(listed) }));
+        const miss = search && proto && provider
+            ? thn('The search {search}, the {proto} protocol filter and the {provider} provider filter together do not match it.', 'The search {search}, the {proto} protocol filter and the {provider} provider filter together match none of them.', total, f)
+            : search && proto ? thn('The search {search} and the {proto} protocol filter together do not match it.', 'The search {search} and the {proto} protocol filter together match none of them.', total, f)
+            : search && provider ? thn('The search {search} and the {provider} provider filter together do not match it.', 'The search {search} and the {provider} provider filter together match none of them.', total, f)
+            : proto && provider ? thn('The {proto} protocol filter and the {provider} provider filter together do not match it.', 'The {proto} protocol filter and the {provider} provider filter together match none of them.', total, f)
+            : search ? thn('The search {search} does not match it.', 'The search {search} matches none of them.', total, f)
+            : proto ? thn('The {proto} protocol filter does not match it.', 'The {proto} protocol filter matches none of them.', total, f)
+            : thn('The {provider} provider filter does not match it.', 'The {provider} provider filter matches none of them.', total, f);
+        note.innerHTML = thn('{n} route is loaded.', '{n} routes are loaded.', total) + ' ' + miss;
         acts.innerHTML = `${_dashSearch ? `<button type="button" class="sig-flag d-blue" data-dsk="act=clear;what=search"><i class="ph-bold ph-x"></i>${th('clear search')}</button>` : ''}<button type="button" class="sig-flag d-blue" data-dsk="act=clear;what=all"><i class="ph-bold ph-arrow-counter-clockwise"></i>${th('reset all filters')}</button>`;
     } else {
         ic.className  = 'ph-fill ph-plus-circle';

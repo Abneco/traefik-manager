@@ -77,6 +77,23 @@
         return fill(escapeHtml(pluralForm(singular, plural, n)), htmlParams(Object.assign({ n: n }, params || {})));
     }
 
+    let sources = null;
+
+    function tmSources(text) {
+        if (!sources) {
+            sources = {};
+            for (const key of Object.keys(messages)) {
+                const value = messages[key];
+                const msgid = key.slice(key.indexOf(CONTEXT) + 1);
+                for (const form of Array.isArray(value) ? value : [value]) {
+                    if (typeof form === 'string' && form) (sources[form] = sources[form] || []).push(msgid);
+                }
+            }
+        }
+        const s = String(text == null ? '' : text);
+        return [s].concat(sources[s] || []);
+    }
+
     function tmHtml(markup) {
         return { __html: String(markup == null ? '' : markup) };
     }
@@ -100,6 +117,15 @@
             return new Intl.DateTimeFormat(formatLocale(), options).format(date);
         } catch (e) {
             return date.toLocaleString();
+        }
+    }
+
+    function tmList(items, type) {
+        const list = (items || []).map(String);
+        try {
+            return new Intl.ListFormat(formatLocale(), { style: 'long', type: type || 'conjunction' }).format(list);
+        } catch (e) {
+            return list.join(', ');
         }
     }
 
@@ -134,4 +160,6 @@
     window.tmNumber = tmNumber;
     window.tmDate = tmDate;
     window.tmAgo = tmAgo;
+    window.tmList = tmList;
+    window.tmSources = tmSources;
 })();

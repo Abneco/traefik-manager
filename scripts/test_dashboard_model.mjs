@@ -234,7 +234,7 @@ test('every composite kind is named instead of being bucketed as unchecked', () 
         weighted:            'weighted',
         mirroring:           'mirroring',
         failover:            'failover',
-        highestRandomWeight: 'highest random weight',
+        highestRandomWeight: 'highestRandomWeight',
     };
     Object.keys(kinds).forEach(key => {
         const raw = svc('c@file');
@@ -293,7 +293,7 @@ test('the tally, the groups and the aria line all surface composites', () => {
     assert.equal(card.groups.composite.length, 1);
     assert.equal(card.groups.composite[0].name, 'w@file');
     assert.equal(_sdHealth(card.t), 'up', 'a healthy composite must not turn the card amber');
-    assert.ok(_sdAria('services', 2, card.t).includes('1 composite'), _sdAria('services', 2, card.t));
+    assert.ok(_sdAria('service', 2, card.t).includes('1 composite'), _sdAria('service', 2, card.t));
 });
 
 test('a composite that does report server status is still judged on it', () => {

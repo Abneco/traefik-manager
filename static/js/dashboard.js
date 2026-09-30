@@ -22,11 +22,49 @@ const SD_PROV = {
 };
 
 const SD_CARD_META = {
-    http:       { title: t('HTTP Routers'),      icon: 'ph-arrows-split',          accent: 'var(--blue)',   label: t('HTTP routers') },
-    stream:     { title: t('TCP / UDP Routers'), icon: 'ph-arrows-left-right', accent: 'var(--teal)',   label: t('stream routers') },
-    service:    { title: t('Services'),          icon: 'ph-hard-drives',       accent: 'var(--green)',  label: tc('label', 'services') },
-    middleware: { title: t('Middlewares'),       icon: 'ph-stack',   accent: 'var(--purple)', label: tc('label', 'middlewares') },
+    http: {
+        title: t('HTTP Routers'), icon: 'ph-arrows-split', accent: 'var(--blue)', label: t('HTTP routers'),
+        none: () => t('no HTTP routers configured'),
+        noneFrom: p => t('no HTTP routers from provider {sdScope}', { sdScope: p }),
+        listGone: () => t('total from /api/overview, the HTTP router list is unavailable'),
+        overviewOnly: n => tn('{n} HTTP router reported by /api/overview, the object list could not be read',
+                              '{n} HTTP routers reported by /api/overview, the object list could not be read', n, { n: _sdNum(n) }),
+        unread: () => t('HTTP routers could not be read from the Traefik API'),
+        aria: (n, details) => tn('{n} HTTP router: {details}', '{n} HTTP routers: {details}', n, { n: _sdNum(n), details }),
+    },
+    stream: {
+        title: t('TCP / UDP Routers'), icon: 'ph-arrows-left-right', accent: 'var(--teal)', label: t('stream routers'),
+        none: () => t('no stream routers configured'),
+        noneFrom: p => t('no stream routers from provider {sdScope}', { sdScope: p }),
+        listGone: () => t('total from /api/overview, the stream router list is unavailable'),
+        overviewOnly: n => tn('{n} stream router reported by /api/overview, the object list could not be read',
+                              '{n} stream routers reported by /api/overview, the object list could not be read', n, { n: _sdNum(n) }),
+        unread: () => t('stream routers could not be read from the Traefik API'),
+        aria: (n, details) => tn('{n} stream router: {details}', '{n} stream routers: {details}', n, { n: _sdNum(n), details }),
+    },
+    service: {
+        title: t('Services'), icon: 'ph-hard-drives', accent: 'var(--green)', label: tc('label', 'services'),
+        none: () => t('no services configured'),
+        noneFrom: p => t('no services from provider {sdScope}', { sdScope: p }),
+        listGone: () => t('total from /api/overview, the service list is unavailable'),
+        overviewOnly: n => tn('{n} service reported by /api/overview, the object list could not be read',
+                              '{n} services reported by /api/overview, the object list could not be read', n, { n: _sdNum(n) }),
+        unread: () => t('services could not be read from the Traefik API'),
+        aria: (n, details) => tn('{n} service: {details}', '{n} services: {details}', n, { n: _sdNum(n), details }),
+    },
+    middleware: {
+        title: t('Middlewares'), icon: 'ph-stack', accent: 'var(--purple)', label: tc('label', 'middlewares'),
+        none: () => t('no middlewares configured'),
+        noneFrom: p => t('no middlewares from provider {sdScope}', { sdScope: p }),
+        listGone: () => t('total from /api/overview, the middleware list is unavailable'),
+        overviewOnly: n => tn('{n} middleware reported by /api/overview, the object list could not be read',
+                              '{n} middlewares reported by /api/overview, the object list could not be read', n, { n: _sdNum(n) }),
+        unread: () => t('middlewares could not be read from the Traefik API'),
+        aria: (n, details) => tn('{n} middleware: {details}', '{n} middlewares: {details}', n, { n: _sdNum(n), details }),
+    },
 };
+
+const SD_MARK = { n: '\u0001' };
 
 const SD_PROV_ALIAS = {
     kubernetescrd:     'kubernetes',
@@ -136,8 +174,23 @@ function _sdComposite(s) {
     if (s.weighted)            return 'weighted';
     if (s.mirroring)           return 'mirroring';
     if (s.failover)            return 'failover';
-    if (s.highestRandomWeight) return t('highest random weight');
+    if (s.highestRandomWeight) return 'highestRandomWeight';
     return '';
+}
+
+function _sdCompositeReason(kind) {
+    if (kind === 'weighted')  return t('weighted service, health lives on its children');
+    if (kind === 'mirroring') return t('mirroring service, health lives on its children');
+    if (kind === 'failover')  return t('failover service, health lives on its children');
+    return t('highest random weight service, health lives on its children');
+}
+
+function _sdCellReason(o) {
+    if (o.reason) return o.reason;
+    if (o.cell === 'err')  return tc('label', 'error');
+    if (o.cell === 'warn') return t('warning');
+    if (o.cell === 'idle') return tc('label', 'idle');
+    return o.cell;
 }
 
 function _sdSection(o) {
@@ -213,16 +266,16 @@ function _sdObj(raw, kind, ctx) {
         o.backends = _sdBackends(raw);
         o.composite = _sdComposite(raw);
         if (!o.backends) {
-            if (o.composite) { o.reason = t('{composite} service, health lives on its children', { composite: o.composite }); return o; }
+            if (o.composite) { o.reason = _sdCompositeReason(o.composite); return o; }
             o.cell = 'idle'; o.reason = t('no health check configured'); o.unchecked = true; return o;
         }
         if (o.backends.down > 0 && o.backends.up === 0) {
             o.cell = 'err';
-            o.reason = t('all {total} backends DOWN', { total: o.backends.total });
+            o.reason = tn('{n} of {n} backend DOWN', 'all {n} backends DOWN', o.backends.total);
             o.down = true;
         } else if (o.backends.down > 0) {
             o.cell = 'warn';
-            o.reason = t('{down} of {total} backends DOWN', { down: o.backends.down, total: o.backends.total });
+            o.reason = tn('{down} of {n} backend DOWN', '{down} of {n} backends DOWN', o.backends.total, { down: o.backends.down });
             o.degraded = true;
         }
         return o;
@@ -278,7 +331,7 @@ function _sdCells(objs) {
     const c = { err: [], warn: [], idle: [], ok: 0 };
     objs.forEach(o => {
         if (o.cell === 'ok') { c.ok++; return; }
-        c[o.cell].push((o.name || o.short) + ': ' + (o.reason || o.cell));
+        c[o.cell].push((o.name || o.short) + ': ' + _sdCellReason(o));
     });
     return c;
 }
@@ -303,7 +356,7 @@ function _sdStrip(cells, aria, extraCls) {
     for (let i = 0; i < shownOk; i++) html += cell('', '');
     const hidden = (ok - shownOk) + dropped;
     if (hidden > 0) {
-        html += `<span class="sig-more" title="${th('{hidden} more objects not drawn individually', { hidden: tmHtml(_sdNum(hidden)) })}">+${_sdNum(hidden)}</span>`;
+        html += `<span class="sig-more" title="${thn('{n} more object not drawn individually', '{n} more objects not drawn individually', hidden, { n: _sdNum(hidden) })}">+${_sdNum(hidden)}</span>`;
     }
     if (total === 0) {
         html = `<span class="sig-more" style="margin-left:0">${cells.blind ? th('no data') : th('nothing configured')}</span>`;
@@ -313,10 +366,13 @@ function _sdStrip(cells, aria, extraCls) {
 }
 
 function _sdFlag(f, words) {
+    const body = words === 'full'
+        ? _esc(f.what).split(SD_MARK.n).join('<b>' + _sdNum(f.n) + '</b>')
+        : '<b>' + _sdNum(f.n) + '</b>'
+          + (words === false ? '' : '<span class="sig-fl">' + _esc(f.label) + '</span>');
     return '<button type="button" class="sig-flag ' + f.cls + '" data-sd="' + _esc(f.go || '') + '"'
-         + ' title="' + _esc(f.tip || (f.n + ' ' + f.label)) + '">'
-         + '<i class="' + f.ic + '"></i><b>' + _sdNum(f.n) + '</b>'
-         + (words === false ? '' : '<span class="sig-fl">' + _esc(f.label) + '</span>')
+         + ' title="' + _esc(f.tip || '') + '">'
+         + '<i class="' + f.ic + '"></i>' + body
          + '</button>';
 }
 
@@ -330,7 +386,7 @@ function _sdOwnList(go) {
     return /^tab=(services|middlewares)/.test(String(go || ''));
 }
 
-function _sdExc(cls, ic, n, label, baseGo, objs) {
+function _sdExc(cls, ic, n, label, what, baseGo, objs) {
     const split = _sdProvSplit(objs);
     let go = baseGo;
     if (split.length === 1 && split[0][0] !== 'file' && split[0][0] !== 'internal' && _sdOwnList(baseGo)) {
@@ -338,12 +394,11 @@ function _sdExc(cls, ic, n, label, baseGo, objs) {
         if (tab && tab !== 'services' && tab !== 'live') go = 'tab=' + tab;
     }
     const foreign = split.some(x => x[0] !== 'file');
-    if (Array.isArray(label)) label = n === 1 ? label[0] : label[1];
-    const bits = [_sdNum(n) + ' ' + label];
-    if (foreign && split.length) bits.push(split.map(x => _sdNum(x[1]) + ' ' + x[0]).join(', '));
+    const bits = [String(what || '').split(SD_MARK.n).join(_sdNum(n))];
+    if (foreign && split.length) bits.push(tmList(split.map(x => tn('{n} from {provider}', '{n} from {provider}', x[1], { n: _sdNum(x[1]), provider: x[0] }))));
     if (go !== baseGo) bits.push(t('opens the {v0} tab, where this provider is read-only', { v0: split[0][0] }));
     else if (foreign && _sdOwnList(baseGo)) bits.push(t('that list only holds objects from your own config files, so open the provider tab for the rest'));
-    return { cls: cls, ic: ic, n: n, label: label, go: go, tip: bits.join(' - ') };
+    return { cls: cls, ic: ic, n: n, label: label, what: what, go: go, tip: bits.join(' - ') };
 }
 
 function _sdProvFoot(provs, note) {
@@ -355,10 +410,12 @@ function _sdProvFoot(provs, note) {
         const cls   = p.bad ? ' sig-prov-bad' : p.warn ? ' sig-prov-warn' : '';
         const glyph = p.bad ? '<i class="ph-fill ph-x-circle sig-pg"></i>'
                     : p.warn ? '<i class="ph-fill ph-warning sig-pg"></i>' : '';
-        const tip = p.p + ' - ' + _sdNum(p.n)
-        + (p.bad  ? ', ' + tn('owns {n} failure', 'owns {n} failures', p.bad) : '')
-        + (p.warn ? ', ' + tn('owns {n} warning', 'owns {n} warnings', p.warn) : '')
-        + '. ' + t('Click to scope every card to this provider.');
+        const tip = [
+            tn('{provider}: {n} object.', '{provider}: {n} objects.', p.n, { n: _sdNum(p.n), provider: p.p }),
+            p.bad  ? tn('{n} of them is failing.', '{n} of them are failing.', p.bad, { n: _sdNum(p.bad) }) : '',
+            p.warn ? tn('{n} of them has a warning.', '{n} of them have warnings.', p.warn, { n: _sdNum(p.warn) }) : '',
+            t('Click to scope every card to this provider.'),
+        ].filter(Boolean).join(' ');
         return '<button type="button" class="sig-prov' + cls + '" data-sd="scope=' + _esc(p.p) + '"'
              + ' title="' + _esc(tip) + '"><i class="ph-bold ' + meta.g + '"></i><b>'
              + _sdNum(p.n) + '</b>' + glyph + '</button>';
@@ -401,7 +458,7 @@ function _sdSubOffender(objs, tail) {
     const first = worst[0];
     const more = worst.length - 1;
     const head = '<b>' + _esc(first.name || first.short) + '</b> ';
-    const count = more > 0 ? ', ' + th('+{count} more', { count: _sdNum(more) }) : '';
+    const count = more > 0 ? ', ' + thn('+{n} more', '+{n} more', more, { n: _sdNum(more) }) : '';
     if (tail && !more && String(first.reason || '').toLowerCase() === String(tail).toLowerCase()) tail = '';
     const parts = _sdSubParts(head + _esc(_sdTerse(first.reason)) + count, tail);
     parts.full = _sdPlain(head + _esc(first.reason) + count + (tail ? SD_SEP + tail : ''));
@@ -418,20 +475,21 @@ function _sdHealth(t) {
     return 'up';
 }
 
-function _sdAria(label, total, tally) {
-    if (total === 0) return t('no {label} configured', { label });
+function _sdAria(key, total, tally) {
+    const meta = SD_CARD_META[key];
+    if (total === 0) return meta.none();
     const bits = [];
     if (tally.disabled)  bits.push(tn('{count} disabled', '{count} disabled', tally.disabled, { count: tally.disabled }));
     if (tally.down)      bits.push(tn('{count} unreachable', '{count} unreachable', tally.down, { count: tally.down }));
     if (tally.warning)   bits.push(tn('{count} warning', '{count} warnings', tally.warning, { count: tally.warning }));
     if (tally.degraded)  bits.push(tn('{count} degraded', '{count} degraded', tally.degraded, { count: tally.degraded }));
     if (tally.unbound)   bits.push(tn('{count} unbound', '{count} unbound', tally.unbound, { count: tally.unbound }));
-    if (tally.unused)    bits.push(t('{count} unused', { count: tally.unused }));
-    if (tally.composite) bits.push(t('{count} composite', { count: tally.composite }));
-    if (tally.unchecked) bits.push(t('{count} unchecked', { count: tally.unchecked }));
-    if (tally.unknown)   bits.push(t('{count} unreported', { count: tally.unknown }));
-    bits.push(t('{count} healthy', { count: _sdNum(tally.ok) }));
-    return t('{count} {objects}: {details}', { count: _sdNum(total), objects: label, details: bits.join(', ') });
+    if (tally.unused)    bits.push(tn('{count} unused', '{count} unused', tally.unused, { count: tally.unused }));
+    if (tally.composite) bits.push(tn('{count} composite', '{count} composite', tally.composite, { count: tally.composite }));
+    if (tally.unchecked) bits.push(tn('{count} unchecked', '{count} unchecked', tally.unchecked, { count: tally.unchecked }));
+    if (tally.unknown)   bits.push(tn('{count} unreported', '{count} unreported', tally.unknown, { count: tally.unknown }));
+    bits.push(tn('{count} healthy', '{count} healthy', tally.ok, { count: _sdNum(tally.ok) }));
+    return meta.aria(total, bits.join(', '));
 }
 
 function _sdAgo(ms) {
@@ -488,7 +546,7 @@ function _sdEpGlyphs(ep, info) {
     if (ep.http3) g.push(['ph-bold ph-lightning', 'd-mw',
         (ep.http3.advertisedPort ? t('HTTP/3 advertised on port {port}', { port: ep.http3.advertisedPort }) : t('HTTP/3 advertised'))]);
     if (mws.length) g.push(['ph-bold ph-stack', 'd-mw',
-        t('Entry point middlewares {mws} are prepended into every router on this entry point', { mws: mws.join(', ') })]);
+        tn('Entry point middleware {mws} is prepended into every router on this entry point', 'Entry point middlewares {mws} are prepended into every router on this entry point', mws.length, { mws: tmList(mws) })]);
     if (red) g.push(['ph-bold ph-arrow-bend-up-right', 'd-blue',
         _sdRedirectText(red)]);
     if (!red && _sdEpProto(ep, info).tag === 'HTTP') {
@@ -496,7 +554,7 @@ function _sdEpGlyphs(ep, info) {
             t('No entry-point-level TLS, and no router on it reports TLS either')]);
     }
     if (info.internalOnly) g.push(['ph-bold ph-traffic-signal', 'd-off', t('Serves internal routers only')]);
-    if (pp.length) g.push(['ph-bold ph-shield-check', 'd-off', t('PROXY protocol trusted from {pp}', { pp: pp.join(', ') })]);
+    if (pp.length) g.push(['ph-bold ph-shield-check', 'd-off', t('PROXY protocol trusted from {pp}', { pp: tmList(pp) })]);
     return g.map(x => '<i class="' + x[0] + ' d-glyph ' + x[1] + '" title="' + _esc(x[2]) + '"></i>').join('');
 }
 
@@ -556,15 +614,15 @@ function _sdEpRow(ep, info) {
     const p = _sdEpProto(ep, info);
     const health = info.err > 0 ? 'down' : (!info.blind && info.n === 0) ? 'idle' : (info.warn > 0 ? 'warn' : 'up');
     const base = 'tab=services;proto=' + p.key + ';ep=' + ep.name;
-    const go = _sdExc('', '', info.n, 'routers', base, info.objs).go;
+    const go = _sdExc('', '', info.n, '', '', base, info.objs).go;
     const flags = [];
     const disabledN = info.err - (info.down || 0);
-    if (disabledN) flags.push(_sdExc('d-bad',  'ph-fill ph-x-circle', disabledN,  tc('label', 'disabled'), base + ';apistatus=disabled', info.objs.filter(o => o.cell === 'err' && !o.down)));
-    if (info.down) flags.push(_sdExc('d-bad',  'ph-fill ph-warning-octagon', info.down, tc('label', 'unreachable'), base + ';apistatus=unreachable', info.objs.filter(o => o.down)));
+    if (disabledN) flags.push(_sdExc('d-bad',  'ph-fill ph-x-circle', disabledN,  tc('label', 'disabled'), tn('{n} router disabled', '{n} routers disabled', disabledN, SD_MARK), base + ';apistatus=disabled', info.objs.filter(o => o.cell === 'err' && !o.down)));
+    if (info.down) flags.push(_sdExc('d-bad',  'ph-fill ph-warning-octagon', info.down, tc('label', 'unreachable'), tn('{n} route unreachable', '{n} routes unreachable', info.down, SD_MARK), base + ';apistatus=unreachable', info.objs.filter(o => o.down)));
     const degradedN = info.degraded || 0;
     const warnN = info.warn - degradedN;
-    if (degradedN) flags.push(_sdExc('d-warn', 'ph-fill ph-warning-diamond', degradedN, tc('label', 'degraded'), base + ';apistatus=degraded', info.objs.filter(o => o.degraded)));
-    if (warnN) flags.push(_sdExc('d-warn', 'ph-fill ph-warning',  warnN, tc('label', 'warnings'), base + ';apistatus=warning', info.objs.filter(o => o.cell === 'warn' && !o.degraded)));
+    if (degradedN) flags.push(_sdExc('d-warn', 'ph-fill ph-warning-diamond', degradedN, tc('label', 'degraded'), tn('{n} route degraded', '{n} routes degraded', degradedN, SD_MARK), base + ';apistatus=degraded', info.objs.filter(o => o.degraded)));
+    if (warnN) flags.push(_sdExc('d-warn', 'ph-fill ph-warning',  warnN, tc('label', 'warnings'), tn('{n} router warning', '{n} router warnings', warnN, SD_MARK), base + ';apistatus=warning', info.objs.filter(o => o.cell === 'warn' && !o.degraded)));
     const flagHtml = flags.length
         ? flags.map(f => _sdFlag(f, false)).join('')
         : info.blind ? `<span class="sig-idle-txt">${th('no data')}</span>`
@@ -603,7 +661,7 @@ function _sdGo(spec) {
     if (p.apistatus && typeof filterApiStatus === 'function') filterApiStatus(p.apistatus);
     if (p.ep && typeof filterRouteEntryPoint === 'function') filterRouteEntryPoint(p.ep);
     if (p.svcstatus && typeof pickLiveStatus === 'function') {
-        const labels = { all: t('All Status'), success: 'Success', warning: t('Warnings'), error: 'Errors' };
+        const labels = { all: t('All Status'), success: tc('button', 'Success'), warning: t('Warnings'), error: tc('button', 'Errors') };
         pickLiveStatus(p.svcstatus, labels[p.svcstatus] || t('All Status'), true);
     }
     if (p.provider && typeof pickLiveProvider === 'function') pickLiveProvider(p.provider, p.provider, true);
@@ -759,10 +817,10 @@ function _sdBackendRoll(objs) {
 function _sdBackendTxt(b, total) {
     const bits = [];
     if (b.checked) {
-        bits.push(b.down === 0 ? t('{up} of {total} backends up', { up: _sdNum(b.up), total: _sdNum(b.total) })
-                               : t('{down} of {total} backends down', { down: _sdNum(b.down), total: _sdNum(b.total) }));
+        bits.push(b.down === 0 ? tn('{up} of {n} backend up', '{up} of {n} backends up', b.total, { up: _sdNum(b.up), n: _sdNum(b.total) })
+                               : tn('{down} of {n} backend down', '{down} of {n} backends down', b.total, { down: _sdNum(b.down), n: _sdNum(b.total) }));
     }
-    if (b.composite) bits.push(t('{count} composite', { count: _sdNum(b.composite) }));
+    if (b.composite) bits.push(tn('{count} composite', '{count} composite', b.composite, { count: _sdNum(b.composite) }));
     if (bits.length) return bits.join(SD_SEP);
     return total ? t('no health checks configured') : '';
 }
@@ -806,27 +864,25 @@ function _sdRender(model) {
     const blind    = ['http', 'stream', 'service', 'middleware'].filter(k => !m[k].known);
     const unlisted = ['http', 'stream', 'service', 'middleware'].filter(k => !m[k].listed);
 
-    const emptyTxt = k => _sdScope
-        ? t('no {label} from provider {sdScope}', { label: SD_CARD_META[k].label, sdScope: _sdScope })
-        : t('no {label} configured', { label: SD_CARD_META[k].label });
+    const emptyTxt = k => _sdScope ? SD_CARD_META[k].noneFrom(_sdScope) : SD_CARD_META[k].none();
 
     const cards = [];
     const h = m.http;
     const hGo = 'tab=services;proto=http';
     cards.push({
         key: 'http', total: h.total, health: _sdHealth(h.t), cells: h.cells, provs: h.provs,
-        aria: _sdAria(t('HTTP routers'), h.total, h.t),
+        aria: _sdAria('http', h.total, h.t),
         explore: hGo, exploreLabel: tc('button', 'Explore'),
         sub: h.total === 0 ? _sdSubPlain(emptyTxt('http')) : _sdSubOffender(h.objs,
-            (h.truncated ? th('{ok} live of {count} listed', { ok: _sdNum(h.t.ok), count: _sdNum(h.objs.length) }) : th('{ok} live', { ok: _sdNum(h.t.ok) }))
+            (h.truncated ? thn('{ok} live of {n} listed', '{ok} live of {n} listed', h.objs.length, { ok: _sdNum(h.t.ok), n: _sdNum(h.objs.length) }) : th('{ok} live', { ok: _sdNum(h.t.ok) }))
             + (h.t.unbound ? SD_SEP + thn('{count} unbound', '{count} unbound', h.t.unbound, { count: _sdNum(h.t.unbound) }) : '')),
         flags: [
-            h.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle', h.t.disabled, tc('label', 'disabled'),   hGo + ';apistatus=disabled', h.groups.disabled),
-            h.t.down     && _sdExc('d-bad',  'ph-fill ph-warning-octagon', h.t.down, tc('label', 'unreachable'), hGo + ';apistatus=unreachable', h.groups.down),
-            h.t.degraded && _sdExc('d-warn', 'ph-fill ph-warning-diamond', h.t.degraded, tc('label', 'degraded'), hGo + ';apistatus=degraded', h.groups.degraded),
-            h.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',  h.t.warning,  tc('label', 'warnings'),   hGo + ';apistatus=warning',  h.groups.warning),
-            h.t.unbound  && _sdExc('d-off',  'ph-bold ph-plug',     h.t.unbound,  tc('label', 'unbound'),    hGo + ';apistatus=unbound',  h.groups.unbound),
-            h.t.unknown  && _sdExc('d-off',  'ph-bold ph-question', h.t.unknown,  tc('label', 'unreported'), hGo,                         h.groups.unknown),
+            h.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle', h.t.disabled, tc('label', 'disabled'), tn('{n} router disabled', '{n} routers disabled', h.t.disabled, SD_MARK), hGo + ';apistatus=disabled', h.groups.disabled),
+            h.t.down     && _sdExc('d-bad',  'ph-fill ph-warning-octagon', h.t.down, tc('label', 'unreachable'), tn('{n} route unreachable', '{n} routes unreachable', h.t.down, SD_MARK), hGo + ';apistatus=unreachable', h.groups.down),
+            h.t.degraded && _sdExc('d-warn', 'ph-fill ph-warning-diamond', h.t.degraded, tc('label', 'degraded'), tn('{n} route degraded', '{n} routes degraded', h.t.degraded, SD_MARK), hGo + ';apistatus=degraded', h.groups.degraded),
+            h.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',  h.t.warning,  tc('label', 'warnings'), tn('{n} router warning', '{n} router warnings', h.t.warning, SD_MARK), hGo + ';apistatus=warning',  h.groups.warning),
+            h.t.unbound  && _sdExc('d-off',  'ph-bold ph-plug',     h.t.unbound,  tc('label', 'unbound'), tn('{n} router bound to no entry point', '{n} routers bound to no entry point', h.t.unbound, SD_MARK), hGo + ';apistatus=unbound',  h.groups.unbound),
+            h.t.unknown  && _sdExc('d-off',  'ph-bold ph-question', h.t.unknown,  tc('label', 'unreported'), tn('{n} router with no reported status', '{n} routers with no reported status', h.t.unknown, SD_MARK), hGo,                         h.groups.unknown),
         ].filter(Boolean),
     });
 
@@ -837,16 +893,16 @@ function _sdRender(model) {
     const sGo = 'tab=services;proto=' + streamProto;
     cards.push({
         key: 'stream', total: s.total, health: _sdHealth(s.t), cells: s.cells, provs: s.provs,
-        aria: _sdAria(t('stream routers'), s.total, s.t),
+        aria: _sdAria('stream', s.total, s.t),
         explore: sGo, exploreLabel: tc('button', 'Explore {protocol}', { protocol: streamProto.toUpperCase() }),
         sub: s.total === 0 ? _sdSubPlain(emptyTxt('stream')) : _sdSubOffender(s.objs,
             '<span class="d-proto d-proto-tcp">TCP</span> ' + _sdNum(tcpN) + SD_SEP
           + '<span class="d-proto d-proto-udp">UDP</span> ' + _sdNum(udpN)
           + (s.t.ok === s.total ? SD_SEP + th('all forwarding') : '')),
         flags: [
-            s.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle', s.t.disabled, tc('label', 'disabled'), sGo + ';apistatus=disabled', s.groups.disabled),
-            s.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',  s.t.warning,  tc('label', 'warnings'), sGo + ';apistatus=warning',  s.groups.warning),
-            s.t.unbound  && _sdExc('d-off',  'ph-bold ph-plug',     s.t.unbound,  tc('label', 'unbound'),  sGo + ';apistatus=unbound',  s.groups.unbound),
+            s.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle', s.t.disabled, tc('label', 'disabled'), tn('{n} stream router disabled', '{n} stream routers disabled', s.t.disabled, SD_MARK), sGo + ';apistatus=disabled', s.groups.disabled),
+            s.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',  s.t.warning,  tc('label', 'warnings'), tn('{n} stream router warning', '{n} stream router warnings', s.t.warning, SD_MARK), sGo + ';apistatus=warning',  s.groups.warning),
+            s.t.unbound  && _sdExc('d-off',  'ph-bold ph-plug',     s.t.unbound,  tc('label', 'unbound'), tn('{n} router bound to no entry point', '{n} routers bound to no entry point', s.t.unbound, SD_MARK), sGo + ';apistatus=unbound',  s.groups.unbound),
         ].filter(Boolean),
     });
 
@@ -855,29 +911,29 @@ function _sdRender(model) {
     const backendTxt = _sdBackendTxt(b, v.total);
     cards.push({
         key: 'service', total: v.total, health: _sdHealth(v.t), cells: v.cells, provs: v.provs,
-        aria: _sdAria(t('services'), v.total, v.t),
+        aria: _sdAria('service', v.total, v.t),
         explore: 'tab=live', exploreLabel: tc('button', 'Explore'),
         sub: v.total === 0 ? _sdSubPlain(emptyTxt('service')) : _sdSubOffender(v.objs, backendTxt),
         flags: [
-            v.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle',            v.t.disabled, tc('label', 'disabled'),      'tab=live;svcstatus=error',   v.groups.disabled),
-            v.t.down     && _sdExc('d-bad',  'ph-fill ph-arrow-fat-line-down', v.t.down,     tc('label', 'down'),          'tab=live;svcstatus=error',   v.groups.down),
-            v.t.degraded && _sdExc('d-warn', 'ph-fill ph-warning-diamond',     v.t.degraded, tc('label', 'degraded'),      'tab=live;svcstatus=warning', v.groups.degraded),
-            v.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',             v.t.warning,  tc('label', 'warnings'),      'tab=live;svcstatus=warning', v.groups.warning),
-            v.t.composite && _sdExc('d-off', 'ph-bold ph-share-network',        v.t.composite, tc('label', 'composite'),    'tab=live',                   v.groups.composite),
+            v.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle',            v.t.disabled, tc('label', 'disabled'), tn('{n} service disabled', '{n} services disabled', v.t.disabled, SD_MARK), 'tab=live;svcstatus=error',   v.groups.disabled),
+            v.t.down     && _sdExc('d-bad',  'ph-fill ph-arrow-fat-line-down', v.t.down,     tc('label', 'down'), tn('{n} service down', '{n} services down', v.t.down, SD_MARK), 'tab=live;svcstatus=error',   v.groups.down),
+            v.t.degraded && _sdExc('d-warn', 'ph-fill ph-warning-diamond',     v.t.degraded, tc('label', 'degraded'), tn('{n} service degraded', '{n} services degraded', v.t.degraded, SD_MARK), 'tab=live;svcstatus=warning', v.groups.degraded),
+            v.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',             v.t.warning,  tc('label', 'warnings'), tn('{n} service warning', '{n} service warnings', v.t.warning, SD_MARK), 'tab=live;svcstatus=warning', v.groups.warning),
+            v.t.composite && _sdExc('d-off', 'ph-bold ph-share-network',        v.t.composite, tc('label', 'composite'), tn('{n} composite service', '{n} composite services', v.t.composite, SD_MARK), 'tab=live',                   v.groups.composite),
         ].filter(Boolean),
     });
 
     const w = m.middleware;
     cards.push({
         key: 'middleware', total: w.total, health: _sdHealth(w.t), cells: w.cells, provs: w.provs,
-        aria: _sdAria(t('middlewares'), w.total, w.t),
+        aria: _sdAria('middleware', w.total, w.t),
         explore: 'tab=middlewares', exploreLabel: tc('button', 'Explore'),
         sub: w.total === 0 ? _sdSubPlain(emptyTxt('middleware')) : _sdSubOffender(w.objs,
-            th('{max} in use', { max: _sdNum(Math.max(0, w.total - w.t.unused)) }) + (w.t.unused ? SD_SEP + th('{count} unused', { count: _sdNum(w.t.unused) }) : '')),
+            th('{max} in use', { max: _sdNum(Math.max(0, w.total - w.t.unused)) }) + (w.t.unused ? SD_SEP + thn('{count} unused', '{count} unused', w.t.unused, { count: _sdNum(w.t.unused) }) : '')),
         flags: [
-            w.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle',   w.t.disabled, tc('label', 'disabled'), 'tab=middlewares', w.groups.disabled),
-            w.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',    w.t.warning,  tc('label', 'warnings'), 'tab=middlewares', w.groups.warning),
-            w.t.unused   && _sdExc('d-off',  'ph-bold ph-link-break', w.t.unused,   tc('label', 'unused'),   'tab=middlewares', w.groups.unused),
+            w.t.disabled && _sdExc('d-bad',  'ph-fill ph-x-circle',   w.t.disabled, tc('label', 'disabled'), tn('{n} middleware disabled', '{n} middlewares disabled', w.t.disabled, SD_MARK), 'tab=middlewares', w.groups.disabled),
+            w.t.warning  && _sdExc('d-warn', 'ph-fill ph-warning',    w.t.warning,  tc('label', 'warnings'), tn('{n} middleware warning', '{n} middleware warnings', w.t.warning, SD_MARK), 'tab=middlewares', w.groups.warning),
+            w.t.unused   && _sdExc('d-off',  'ph-bold ph-link-break', w.t.unused,   tc('label', 'unused'), tn('{n} unused middleware', '{n} unused middlewares', w.t.unused, SD_MARK), 'tab=middlewares', w.groups.unused),
         ].filter(Boolean),
     });
 
@@ -894,9 +950,9 @@ function _sdRender(model) {
         c.cells = { err: [], warn: [], idle: [], ok: 0, blind: true };
         if (cm.known) {
             c.provNote = t('provider breakdown needs the object list');
-            c.sub = t('total from /api/overview, the {label} list is unavailable', { label: SD_CARD_META[c.key].label });
+            c.sub = SD_CARD_META[c.key].listGone();
             c.subFull = c.sub;
-            c.aria = t('{total} {label} reported by /api/overview, the object list could not be read', { total: _sdNum(c.total), label: SD_CARD_META[c.key].label });
+            c.aria = SD_CARD_META[c.key].overviewOnly(c.total);
             return;
         }
         c.total = null;
@@ -905,7 +961,7 @@ function _sdRender(model) {
         c.provNote = t('no provider data');
         c.sub = t('Traefik API unreachable');
         c.subFull = c.sub;
-        c.aria = t('{label} could not be read from the Traefik API', { label: SD_CARD_META[c.key].label });
+        c.aria = SD_CARD_META[c.key].unread();
     });
 
     if (gridEl) gridEl.innerHTML = cards.map(_sdCard).join('');
@@ -919,16 +975,16 @@ function _sdRender(model) {
         const svcDeg  = new Set(m.service.groups.degraded.map(o => o.short));
         const rtDown  = m.http.groups.down.filter(o => !svcDown.has(o.service));
         const rtDeg   = m.http.groups.degraded.filter(o => !svcDeg.has(o.service));
-        if (m.http.t.disabled)       items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.http.t.disabled,       tn('router disabled', 'routers disabled', m.http.t.disabled),     'tab=services;proto=http;apistatus=disabled', m.http.groups.disabled));
-        if (rtDown.length)           items.push(_sdExc('d-bad',  'ph-fill ph-warning-octagon',     rtDown.length,           tn('route unreachable', 'routes unreachable', rtDown.length), 'tab=services;proto=http;apistatus=unreachable', rtDown));
-        if (rtDeg.length)            items.push(_sdExc('d-warn', 'ph-fill ph-warning-diamond',     rtDeg.length,            tn('route degraded', 'routes degraded', rtDeg.length),    'tab=services;proto=http;apistatus=degraded', rtDeg));
-        if (m.http.t.warning)        items.push(_sdExc('d-warn', 'ph-fill ph-warning',             m.http.t.warning,        tn('router warning', 'router warnings', m.http.t.warning),      'tab=services;proto=http;apistatus=warning',  m.http.groups.warning));
-        if (m.stream.t.disabled)     items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.stream.t.disabled,     t('stream disabled'),      sGo + ';apistatus=disabled',                  m.stream.groups.disabled));
-        if (m.service.t.disabled)    items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.service.t.disabled,    tn('service disabled', 'services disabled', m.service.t.disabled),    'tab=live;svcstatus=error',                   m.service.groups.disabled));
-        if (m.service.t.down)        items.push(_sdExc('d-bad',  'ph-fill ph-arrow-fat-line-down', m.service.t.down,        tn('service down', 'services down', m.service.t.down),        'tab=live;svcstatus=error',                   m.service.groups.down));
-        if (m.service.t.degraded)    items.push(_sdExc('d-warn', 'ph-fill ph-warning-diamond',     m.service.t.degraded,    tn('service degraded', 'services degraded', m.service.t.degraded),    'tab=live;svcstatus=warning',                 m.service.groups.degraded));
-        if (m.service.t.warning)     items.push(_sdExc('d-warn', 'ph-fill ph-warning',             m.service.t.warning,     tn('service warning', 'service warnings', m.service.t.warning),     'tab=live;svcstatus=warning',                 m.service.groups.warning));
-        if (m.middleware.t.disabled) items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.middleware.t.disabled, tn('middleware disabled', 'middlewares disabled', m.middleware.t.disabled), 'tab=middlewares',                            m.middleware.groups.disabled));
+        if (m.http.t.disabled)       items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.http.t.disabled,       '', tn('{n} router disabled', '{n} routers disabled', m.http.t.disabled, SD_MARK),     'tab=services;proto=http;apistatus=disabled', m.http.groups.disabled));
+        if (rtDown.length)           items.push(_sdExc('d-bad',  'ph-fill ph-warning-octagon',     rtDown.length,           '', tn('{n} route unreachable', '{n} routes unreachable', rtDown.length, SD_MARK), 'tab=services;proto=http;apistatus=unreachable', rtDown));
+        if (rtDeg.length)            items.push(_sdExc('d-warn', 'ph-fill ph-warning-diamond',     rtDeg.length,            '', tn('{n} route degraded', '{n} routes degraded', rtDeg.length, SD_MARK),    'tab=services;proto=http;apistatus=degraded', rtDeg));
+        if (m.http.t.warning)        items.push(_sdExc('d-warn', 'ph-fill ph-warning',             m.http.t.warning,        '', tn('{n} router warning', '{n} router warnings', m.http.t.warning, SD_MARK),      'tab=services;proto=http;apistatus=warning',  m.http.groups.warning));
+        if (m.stream.t.disabled)     items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.stream.t.disabled,     '', tn('{n} stream router disabled', '{n} stream routers disabled', m.stream.t.disabled, SD_MARK),      sGo + ';apistatus=disabled',                  m.stream.groups.disabled));
+        if (m.service.t.disabled)    items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.service.t.disabled,    '', tn('{n} service disabled', '{n} services disabled', m.service.t.disabled, SD_MARK),    'tab=live;svcstatus=error',                   m.service.groups.disabled));
+        if (m.service.t.down)        items.push(_sdExc('d-bad',  'ph-fill ph-arrow-fat-line-down', m.service.t.down,        '', tn('{n} service down', '{n} services down', m.service.t.down, SD_MARK),        'tab=live;svcstatus=error',                   m.service.groups.down));
+        if (m.service.t.degraded)    items.push(_sdExc('d-warn', 'ph-fill ph-warning-diamond',     m.service.t.degraded,    '', tn('{n} service degraded', '{n} services degraded', m.service.t.degraded, SD_MARK),    'tab=live;svcstatus=warning',                 m.service.groups.degraded));
+        if (m.service.t.warning)     items.push(_sdExc('d-warn', 'ph-fill ph-warning',             m.service.t.warning,     '', tn('{n} service warning', '{n} service warnings', m.service.t.warning, SD_MARK),     'tab=live;svcstatus=warning',                 m.service.groups.warning));
+        if (m.middleware.t.disabled) items.push(_sdExc('d-bad',  'ph-fill ph-x-circle',            m.middleware.t.disabled, '', tn('{n} middleware disabled', '{n} middlewares disabled', m.middleware.t.disabled, SD_MARK), 'tab=middlewares',                            m.middleware.groups.disabled));
 
         const issues = items.reduce((a, x) => a + x.n, 0);
         const offenders = new Set();
@@ -939,9 +995,9 @@ function _sdRender(model) {
         let where = '';
         if (names.length === 1)      where = `${th('all inside {b}', { b: tmHtml(`<b>${_esc(names[0])}</b>`) })}`;
         else if (names.length === 2) where = `${th('all inside {b} and {b2}', { b: tmHtml(`<b>${_esc(names[0])}</b>`), b2: tmHtml(`<b>${_esc(names[1])}</b>`) })}`;
-        else if (names.length > 2)   where = t('across {names_count} providers', { names_count: names.length });
-        else if (b.total > 0)        where = t('{up} of {total} backends up', { up: _sdNum(b.up), total: _sdNum(b.total) });
-        else if (total4 > 0)         where = th('{count} objects', { count: _sdNum(total4) });
+        else if (names.length > 2)   where = tn('across {n} provider', 'across {n} providers', names.length, { n: _sdNum(names.length) });
+        else if (b.total > 0)        where = tn('{up} of {n} backend up', '{up} of {n} backends up', b.total, { up: _sdNum(b.up), n: _sdNum(b.total) });
+        else if (total4 > 0)         where = thn('{n} object', '{n} objects', total4, { n: _sdNum(total4) });
 
         const shown = items.slice(0, 4);
         const rest  = items.length - shown.length;
@@ -953,9 +1009,8 @@ function _sdRender(model) {
             quiet = t('Could not read routers, services or middlewares. Check TRAEFIK_API_URL and that api.insecure or an api@internal route is enabled.');
         } else if (off.length) {
             const labels = off.map(k => SD_CARD_META[k].label);
-            const last = labels.pop();
             txt = issues ? tn('{count} issue', '{count} issues', issues, { count: _sdNum(issues) }) : t('Partial data');
-            quiet = t('No object list for {objects}, so the strips and provider counts are incomplete', { objects: labels.length ? t('{items} and {last}', { items: labels.join(', '), last }) : last });
+            quiet = t('No object list for: {objects}. The strips and provider counts are incomplete.', { objects: tmList(labels) });
         } else if (issues) {
             txt = tn('{count} issue', '{count} issues', issues, { count: _sdNum(issues) });
             quiet = '';
@@ -970,8 +1025,8 @@ function _sdRender(model) {
         verdEl.className = 'sig-verdict';
         verdEl.setAttribute('data-health', (issues || off.length) ? 'down' : 'up');
         verdEl.innerHTML =
-            `<i class="ph-fill ${issues || off.length ? 'ph-warning-octagon' : 'ph-check-circle'} sig-verdict-ic"></i><span class="sig-verdict-txt">${_esc(txt)}</span><span class="sig-verdict-items">${shown.length ? shown.map(f => _sdFlag(f)).join('')
-                            + (rest > 0 ? '<span class="sig-mono">+' + rest + ` ${thc('label', 'more')}</span>` : '') : ''}${quiet ? '<span class="sig-mono">' + _esc(quiet) + '</span>' : ''}</span><span class="sig-verdict-meta">${!dead && where ? where + SD_SEP : ''}<b id="sigAge">${_sdAgo(_sdStamp)}</b></span>`;
+            `<i class="ph-fill ${issues || off.length ? 'ph-warning-octagon' : 'ph-check-circle'} sig-verdict-ic"></i><span class="sig-verdict-txt">${_esc(txt)}</span><span class="sig-verdict-items">${shown.length ? shown.map(f => _sdFlag(f, 'full')).join('')
+                            + (rest > 0 ? '<span class="sig-mono">' + thn('+{n} more', '+{n} more', rest, { n: _sdNum(rest) }) + '</span>' : '') : ''}${quiet ? '<span class="sig-mono">' + _esc(quiet) + '</span>' : ''}</span><span class="sig-verdict-meta">${!dead && where ? where + SD_SEP : ''}<b id="sigAge">${_sdAgo(_sdStamp)}</b></span>`;
     }
 
     if (keyEl) {
@@ -985,7 +1040,7 @@ function _sdRender(model) {
         const truncated = ['http', 'stream', 'service', 'middleware'].reduce((a, k) => a + m[k].truncated, 0);
         const caveats = [];
         if (_sdScope) caveats.push(t('Every card is scoped to provider {sdScope}. Click to clear.', { sdScope: _sdScope }));
-        if (truncated > 0) caveats.push(t('{truncated} objects are counted in the totals but were not returned by the list endpoint, so they are missing from the strips and provider counts.', { truncated: _sdNum(truncated) }));
+        if (truncated > 0) caveats.push(tn('{n} object is counted in the totals but was not returned by the list endpoint, so it is missing from the strips and provider counts.', '{n} objects are counted in the totals but were not returned by the list endpoint, so they are missing from the strips and provider counts.', truncated, { n: _sdNum(truncated) }));
         if (unlisted.length) caveats.push(t('These counts only cover the object lists that could be read.'));
         keyEl.className = 'sig-key';
         keyEl.innerHTML = `<span class="sig-key-lab">${thc('label', 'providers')}</span>${list.map(k => {
@@ -1031,7 +1086,7 @@ function _sdRender(model) {
                     if (o.down) i.down++;
                     if (o.degraded) i.degraded++;
                     if (o.cell === 'ok') { i.ok++; i.cells.ok++; }
-                    else { i[o.cell]++; i.cells[o.cell].push((o.name || o.short) + ': ' + (o.reason || o.cell)); }
+                    else { i[o.cell]++; i.cells[o.cell].push((o.name || o.short) + ': ' + _sdCellReason(o)); }
                 });
             });
             let httpN = 0, strN = 0, idleN = 0;
@@ -1042,9 +1097,9 @@ function _sdRender(model) {
                 if (!i.blind && i.n === 0) idleN++;
             });
             const summary = epBlind ? t('router list unavailable') : [
-                t('{count} HTTP', { count: _sdNum(httpN) }),
-                strN  ? t('{count} stream', { count: _sdNum(strN) }) : '',
-                idleN ? t('{count} idle', { count: _sdNum(idleN) }) : '',
+                tn('{n} HTTP', '{n} HTTP', httpN, { n: _sdNum(httpN) }),
+                strN  ? tn('{n} stream', '{n} stream', strN, { n: _sdNum(strN) }) : '',
+                idleN ? tn('{n} idle', '{n} idle', idleN, { n: _sdNum(idleN) }) : '',
             ].filter(Boolean).join(' · ');
             barEl.innerHTML = `<div class="sig-ep-head"><i class="ph-fill ph-door-open sig-ep-headic"></i><span class="sc-sec-label">${th('Entry Points')}</span><span class="d-n">${eps.length}</span><span class="sc-sec-rule"></span><span class="sig-ep-tot">${_esc(summary)}</span></div><div class="sig-ep-rows" id="entrypointsList">${eps.map(ep => _sdEpRow(ep, info.get(ep.name))).join('')}</div>`;
         } else {
@@ -1099,11 +1154,11 @@ function _sdApplyHealth(objs) {
         const sv = h.servers || {};
         if (h.state === 'down') {
             o.cell = 'err'; o.down = true;
-            o.reason = (h.source === 'traefik' || h.source === 'servers') ? t('backend down, 0 of {total} servers up', { total: sv.total })
+            o.reason = (h.source === 'traefik' || h.source === 'servers') ? tn('backend down, 0 of {n} server up', 'backend down, 0 of {n} servers up', sv.total)
                 : (h.error ? t('backend unreachable, {error}', { error: h.error }) : t('backend unreachable'));
         } else if (h.state === 'degraded') {
             o.cell = 'warn'; o.degraded = true;
-            o.reason = t('backend degraded, {up} of {total} servers up', { up: sv.up, total: sv.total });
+            o.reason = tn('backend degraded, {up} of {n} server up', 'backend degraded, {up} of {n} servers up', sv.total, { up: sv.up });
         }
     });
 }
@@ -1162,18 +1217,18 @@ function _sdHealthDot(h, noHost) {
         if (h.state === 'up') {
             const what = h.self ? t('Online (self)')
                 : h.unverified ? (h.note ? t('Proxy answered {status_code}, backend not verified. {note}', { status_code: h.status_code, note: h.note }) : t('Proxy answered {status_code}, backend not verified', { status_code: h.status_code }))
-                : (h.source === 'traefik' || h.source === 'servers') ? t('Backend up, {up} of {total} servers', { up: sv.up, total: sv.total })
+                : (h.source === 'traefik' || h.source === 'servers') ? tn('Backend up, {up} of {n} server', 'Backend up, {up} of {n} servers', sv.total, { up: sv.up })
                 : h.via_target ? t('Backend online · {latency_ms}ms', { latency_ms: h.latency_ms })
                 : t('Online · {latency_ms}ms ({status_code})', { latency_ms: h.latency_ms, status_code: h.status_code });
             return { cls: 'status-online', title: what + ' · ' + when };
         }
         if (h.state === 'degraded') {
             return { cls: 'status-checking', title: (h.down_servers || []).length
-                ? t('Backend degraded, {up} of {total} servers up ({servers} down) · {when}', { up: sv.up, total: sv.total, servers: h.down_servers.join(', '), when })
-                : t('Backend degraded, {up} of {total} servers up · {when}', { up: sv.up, total: sv.total, when }) };
+                ? tn('Backend degraded, {up} of {n} server up ({servers} down) · {when}', 'Backend degraded, {up} of {n} servers up ({servers} down) · {when}', sv.total, { up: sv.up, servers: tmList(h.down_servers), when })
+                : tn('Backend degraded, {up} of {n} server up · {when}', 'Backend degraded, {up} of {n} servers up · {when}', sv.total, { up: sv.up, when }) };
         }
         if (h.state === 'down') {
-            const why = (h.source === 'traefik' || h.source === 'servers') ? t('Backend down, 0 of {total} servers up', { total: sv.total })
+            const why = (h.source === 'traefik' || h.source === 'servers') ? tn('Backend down, 0 of {n} server up', 'Backend down, 0 of {n} servers up', sv.total)
                 : (h.error ? t('Unreachable: {error}', { error: h.error }) : t('Unreachable'));
             return { cls: 'status-offline', title: why + ' · ' + when };
         }

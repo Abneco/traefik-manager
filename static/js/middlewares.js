@@ -509,9 +509,8 @@ async function _sendMwDelete(name, configFile, force) {
         const json = await res.json().catch(() => null);
         if (res.status === 409 && json && (json.inUseBy || []).length) {
             const routes = json.inUseBy;
-            const shown = routes.length > 5 ? t('{items} and {count} more', { items: routes.slice(0, 5).join(', '), count: routes.length - 5 }) : routes.join(', ');
-            const label = routes.length === 1 ? t('1 route') : t('{routes_count} routes', { routes_count: routes.length });
-            if (await _confirm(t('"{name}" is still used by {shown}. Remove it from {label} and delete it?', { name, shown, label }),
+            const shown = routes.length > 5 ? t('{items} and {count} more', { items: routes.slice(0, 5).join(', '), count: routes.length - 5 }) : tmList(routes);
+            if (await _confirm(tn('"{name}" is still used by {shown}. Remove it from {n} route and delete it?', '"{name}" is still used by {shown}. Remove it from {n} routes and delete it?', routes.length, { name, shown }),
                                t('Middleware In Use'), t('Remove and delete'), _confirmWordFor(name))) {
                 await _sendMwDelete(name, configFile, true);
             }
@@ -560,8 +559,8 @@ function _tmMwCard(mw, showCf) {
     const typeLower = (mw.type || 'http').toLowerCase();
     const used = _tmMwUsage(mw);
     const chained = used ? false : _tmMwChained(mw);
-    const usage = used ? tn('used by {n} route', 'used by {n} routes', used)
-                       : chained ? t('used in a chain') : 'unused';
+    const usage = used ? thn('used by {n} route', 'used by {n} routes', used)
+                       : chained ? th('used in a chain') : thc('label', 'unused');
     const yaml = String(mw.yaml || '').split('\n').slice(0, 4).join('\n');
     const rail = `<span class="tm-rail tm-rail-sm" onclick="event.stopPropagation()">${_faNeedsLimit(mw.yaml) ? `<button type="button" class="tm-btn" title="${th('No response size limit set - Traefik 3.7 warns about this. Click to add one')}" data-mw='${mwJson}' onclick="event.stopPropagation();addFaLimit(this)"><i class="ph-bold ph-warning" style="color:var(--yellow)"></i></button>` : ''}<button type="button" class="tm-btn" title="${thc('tooltip', 'Edit')}" data-mw='${mwJson}' onclick="event.stopPropagation();handleMwEdit(this)"><i class="ph-bold ph-pencil-simple"></i></button><button type="button" class="tm-btn" title="${thc('tooltip', 'Delete')}" onclick="event.stopPropagation();deleteMw(${_jsArg(mw.name)}${cfArg})"><i class="ph-bold ph-trash"></i></button></span>`;
     return `<div class="tm-card mw-card" data-mwname="${_esc(mw.name.toLowerCase())}" data-mwtype="${typeLower}" style="--tm-accent:var(--purple)" data-mw='${mwJson}' onclick="openMwDetail(this)">
@@ -1142,7 +1141,7 @@ async function _pluginSectionWrite(body) {
 async function deletePlugin(name) {
     const users = _pluginMwsUsing(name).map(m => m.name);
     if (users.length) {
-        const shown = users.length > 5 ? t('{items} and {count} more', { items: users.slice(0, 5).join(', '), count: users.length - 5 }) : users.join(', ');
+        const shown = users.length > 5 ? t('{items} and {count} more', { items: users.slice(0, 5).join(', '), count: users.length - 5 }) : tmList(users);
         await _confirm(t('"{name}" is still used by {shown}. Delete those middlewares first.', { name, shown }),
                        t('Plugin In Use'), tc('button', 'OK'));
         return;
@@ -1188,12 +1187,12 @@ function renderPluginsVerdict() {
     const used = _allPlugins.filter(p => _tmPluginUsage(p.name || '') > 0).length;
     const unused = _allPlugins.length - used;
     const known = Object.keys(_pluginCatalog).length > 0;
-    const flags = [{ cls: 'd-off', ic: 'ph-bold ph-puzzle-piece', n: _allPlugins.length,
-                     label: _allPlugins.length === 1 ? tc('label', 'plugin') : tc('label', 'plugins') }];
+    const pluginsLabel = tn('{count} plugin', '{count} plugins', _allPlugins.length, { count: _sdNum(_allPlugins.length) });
+    const flags = [{ cls: 'd-off', ic: 'ph-bold ph-puzzle-piece', n: '', label: pluginsLabel, tip: pluginsLabel }];
     if (used) flags.push({ cls: 'd-on', ic: 'ph-bold ph-plugs-connected', n: used, label: t('in use') });
     if (unused) flags.push({ cls: 'd-off', ic: 'ph-bold ph-plugs', n: unused, label: tc('label', 'unused') });
-    if (updates) flags.push({ cls: 'd-warn', ic: 'ph-fill ph-arrow-circle-up', n: updates,
-                              label: updates === 1 ? t('update available') : t('updates available') });
+    const updatesLabel = tn('{count} update available', '{count} updates available', updates, { count: _sdNum(updates) });
+    if (updates) flags.push({ cls: 'd-warn', ic: 'ph-fill ph-arrow-circle-up', n: '', label: updatesLabel, tip: updatesLabel });
     else if (known) flags.push({ cls: 'd-on', ic: 'ph-bold ph-check', n: '', label: t('all current') });
     _tvStrip('pluginsVerdict', {
         health: updates ? 'warn' : 'up',
@@ -1218,7 +1217,7 @@ function renderPluginCards() {
     }
     const cards = items.map(p => {
         const idx        = _allPlugins.indexOf(p);
-        const name       = p.name || 'Unknown';
+        const name       = p.name || t('Unknown');
         const version    = p.version || '-';
         const latest     = _pluginLatest(p);
         const moduleName = p.moduleName || '';
@@ -1249,7 +1248,7 @@ function openPluginDetail(idx) {
     const p = _allPlugins[idx];
     if (!p) return;
 
-    const name       = p.name || 'Unknown';
+    const name       = p.name || t('Unknown');
     const version    = p.version || '-';
     const moduleName = p.moduleName || '';
     const repoUrl    = moduleName.startsWith('github.com/') ? 'https://' + moduleName : '';
