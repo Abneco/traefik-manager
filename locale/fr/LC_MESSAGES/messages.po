@@ -33,10 +33,11 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"\"{name}\" is still used by {shown}. Remove it from {label} and delete it?"
-msgstr ""
-"\"{name}\" est encore utilisé par {shown}. L’enlever de {label} et le "
-"supprimer ?"
+"\"{name}\" is still used by {shown}. Remove it from {n} route and delete it?"
+msgid_plural ""
+"\"{name}\" is still used by {shown}. Remove it from {n} routes and delete it?"
+msgstr[0] "\"{name}\" est encore utilisé par {shown}. L’enlever de {n} route et le supprimer ?"
+msgstr[1] "\"{name}\" est encore utilisé par {shown}. L’enlever de {n} routes et le supprimer ?"
 
 #, python-format
 msgid "%(auth_verify)s is appended automatically"
@@ -67,6 +68,22 @@ msgstr ""
 "le et refaites votre modification."
 
 #, python-format
+msgid ""
+"%(file)s changed while it was being edited, most likely Traefik renewing a "
+"certificate. Nothing was written, try again."
+msgstr "%(file)s a été modifié pendant son édition, très probablement par Traefik lors du renouvellement d’un certificat. Rien n’a été écrit, réessayez."
+
+#, python-format
+msgid ""
+"%(file)s did not read back as valid JSON after writing, the previous copy "
+"was put back"
+msgstr "%(file)s n’a pas pu être relu comme un JSON valide après l’écriture, la copie précédente a été restaurée"
+
+#, python-format
+msgid "%(file)s does not hold a resolver map, nothing was changed"
+msgstr "%(file)s ne contient pas de table de résolveurs, rien n’a été modifié"
+
+#, python-format
 msgid "%(file)s is mounted read only on this agent, nothing was changed"
 msgstr "%(file)s est monté en lecture seule sur cet agent, rien n’a été modifié"
 
@@ -74,6 +91,23 @@ msgstr "%(file)s est monté en lecture seule sur cet agent, rien n’a été mod
 msgid "%(file)s is mounted read only on this agent, nothing was restored"
 msgstr ""
 "%(file)s est monté en lecture-seule sur cet agent, rien n’a pu être restauré"
+
+#, python-format
+msgid "%(file)s is mounted read only, nothing was changed"
+msgstr "%(file)s est monté en lecture seule, rien n’a été modifié"
+
+#, python-format
+msgid "%(file)s is not valid JSON, nothing was changed: %(detail)s"
+msgstr "%(file)s n’est pas un fichier JSON valide, rien n’a été modifié : %(detail)s"
+
+#, python-format
+msgid "%(file)s is not valid UTF-8, nothing was changed"
+msgstr "%(file)s n’est pas encodé en UTF-8 valide, rien n’a été modifié"
+
+#, python-format
+msgid ""
+"%(file)s was rewritten by something else while it was being saved. Try again."
+msgstr "%(file)s a été réécrit par un autre processus pendant l’enregistrement. Réessayez."
 
 #, python-format
 msgid ""
@@ -151,6 +185,34 @@ msgid ""
 msgstr ""
 "%(original)s correspond à plus d’un fichier de configuration, donc cette "
 "sauvegarde ne peut pas être restaurée en toute sécurité"
+
+#, python-format
+msgid "%(path)s is a directory, not a file"
+msgstr "%(path)s est un répertoire, pas un fichier"
+
+#, python-format
+msgid "%(path)s is inside %(base)s"
+msgstr "%(path)s se trouve dans %(base)s"
+
+#, python-format
+msgid "%(path)s is not a .json file or a directory"
+msgstr "%(path)s n’est ni un fichier .json ni un répertoire"
+
+#, python-format
+msgid "%(path)s is not a .yml, .yaml or .toml file"
+msgstr "%(path)s n’est pas un fichier .yml, .yaml ou .toml"
+
+#, python-format
+msgid "%(path)s is not an existing file"
+msgstr "%(path)s n’est pas un fichier existant"
+
+#, python-format
+msgid "%(path)s is one of Traefik Manager's own files"
+msgstr "%(path)s fait partie des fichiers propres à Traefik Manager"
+
+#, python-format
+msgid "%(path)s is part of Traefik Manager's code"
+msgstr "%(path)s fait partie du code de Traefik Manager"
 
 #, python-format
 msgid "%(status)s is replaced with the response code."
@@ -260,18 +322,8 @@ msgid "(set - leave blank to keep)"
 msgstr "(défini, laisser vide pour conserver)"
 
 #. Used in the browser
-#, python-brace-format
-msgid "(traefik answered, backend said {origin})"
-msgstr "(traefik a répondu, le backend a dit {origin})"
-
-#. Used in the browser
 msgid "+ New file…"
 msgstr "+ Nouveau fichier…"
-
-#. Used in the browser
-#, python-brace-format
-msgid "+{count} codes"
-msgstr "+{count} codes"
 
 #. Used in the browser
 #, python-brace-format
@@ -287,18 +339,29 @@ msgstr[1] "+{count} pays supplémentaires"
 
 #. Used in the browser
 #, python-brace-format
-msgid "+{count} more failing"
-msgstr "+{count} autres en échec"
-
-#. Used in the browser
-#, python-brace-format
 msgid "+{more} more"
 msgstr "+{more} supplémentaires"
 
 #. Used in the browser
 #, python-brace-format
-msgid "+{rest} requests across {more}"
-msgstr "+{rest} requêtes réparties sur {more}"
+msgid "+{n} code"
+msgid_plural "+{n} codes"
+msgstr[0] "+{n} code"
+msgstr[1] "+{n} codes"
+
+#. Used in the browser
+#, python-brace-format
+msgid "+{n} more"
+msgid_plural "+{n} more"
+msgstr[0] "+{n} supplémentaire"
+msgstr[1] "+{n} supplémentaires"
+
+#. Used in the browser
+#, python-brace-format
+msgid "+{n} more failing"
+msgid_plural "+{n} more failing"
+msgstr[0] "+{n} autre en échec"
+msgstr[1] "+{n} autres en échec"
 
 msgid "/ (server root)"
 msgstr "/ (racine du serveur)"
@@ -322,16 +385,27 @@ msgstr "/v1/alerts renvoie {altStatus}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "0 of the last {fetched} lines are {bits}"
-msgstr "0 des {fetched} dernières lignes sont des {bits}"
+msgid "0 of the last {fetched} line are {bits}"
+msgid_plural "0 of the last {fetched} lines are {bits}"
+msgstr[0] "0 sur {fetched} dernière ligne correspond à {bits}"
+msgstr[1] "0 des {fetched} dernières lignes correspond à {bits}"
+
+#. Used in the browser
+#, python-brace-format
+msgid "0 of {n} retained alert matches every filter at once"
+msgid_plural "0 of {n} retained alerts match every filter at once"
+msgstr[0] "0 alerte conservée sur {n} correspond à tous les filtres à la fois"
+msgstr[1] "0 alerte conservée sur {n} correspond à tous les filtres à la fois"
 
 msgid "0 selected"
 msgstr "0 sélectionné"
 
 #. Used in the browser
 #, python-brace-format
-msgid "0/{total} servers up"
-msgstr "0/{total} serveurs opérationnels"
+msgid "0/{n} server up"
+msgid_plural "0/{n} servers up"
+msgstr[0] "0/{n} serveur actif"
+msgstr[1] "0/{n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
@@ -348,10 +422,6 @@ msgstr "1 heure"
 
 msgid "1 minute"
 msgstr "1 minute"
-
-#. Used in the browser
-msgid "1 route"
-msgstr "1 route"
 
 msgid "1 year"
 msgstr "1 année"
@@ -395,6 +465,18 @@ msgstr "5 minutes"
 
 msgid "7 days"
 msgstr "7 jours"
+
+#, python-format
+msgid ""
+"A backend host is required for %(protocol)s routes. Send targetIp (repeated "
+"per protocol, index %(index)s) or %(field)s."
+msgstr "Un hôte backend est requis pour les routes %(protocol)s. Envoyez targetIp (répété par protocole, index %(index)s) ou %(field)s."
+
+#, python-format
+msgid ""
+"A backend port is required for %(protocol)s routes. Send targetPort "
+"(repeated per protocol, index %(index)s) or %(field)s."
+msgstr "Un port backend est requis pour les routes %(protocol)s. Envoyez targetPort (répété par protocole, index %(index)s) ou %(field)s."
 
 #, python-format
 msgid ""
@@ -451,6 +533,16 @@ msgstr ""
 msgid "A label for the device this key belongs to."
 msgstr "Une étiquette pour l’appareil auquel cette clé appartient."
 
+#, python-format
+msgid ""
+"A middleware named '%(name)s' already exists and wasn't created by the route "
+"presets. Rename or remove it first, then re-save."
+msgstr "Un middleware nommé « %(name)s » existe déjà et n’a pas été créé par les préréglages de route. Renommez-le ou supprimez-le d’abord, puis enregistrez de nouveau."
+
+#, python-format
+msgid "A name cannot contain any of these characters: %(chars)s"
+msgstr "Un nom ne peut contenir aucun de ces caractères : %(chars)s"
+
 msgid ""
 "A personal access token with write access to that one repository. Stored "
 "encrypted, and never shown again after setup."
@@ -494,6 +586,11 @@ msgstr "Contournement ACME autorisé"
 
 msgid "ACME_JSON_PATH is not set on this agent"
 msgstr "ACME_JSON_PATH n’est pas défini sur cet agent"
+
+msgid ""
+"ADMIN_PASSWORD is set, so a password saved here would never be used. Change "
+"that variable and restart instead."
+msgstr "ADMIN_PASSWORD est défini : un mot de passe enregistré ici ne serait donc jamais utilisé. Modifiez plutôt cette variable, puis redémarrez."
 
 #. Used in the browser
 msgid "ALPN Protocols"
@@ -580,6 +677,10 @@ msgstr "À propos"
 msgid "Accept PROXY protocol from everyone"
 msgstr "Accepter le protocole PROXY de toutes les sources"
 
+#. Used in the browser
+msgid "Accepted"
+msgstr "Accepté"
+
 msgid "Access Control"
 msgstr "Contrôle d’accès"
 
@@ -625,6 +726,10 @@ msgstr "Chemin du journal d’accès %(optional)s"
 #, python-format
 msgid "Access log path refused: %(refused)s"
 msgstr "Chemin du journal d’accès refusé : %(refused)s"
+
+#, python-format
+msgid "Access log path: %(problem)s"
+msgstr "Chemin du journal d’accès : %(problem)s"
 
 msgid "Access logs not loaded"
 msgstr "Journal d’accès non chargé"
@@ -963,6 +1068,22 @@ msgstr "Agent"
 
 msgid "Agent URL"
 msgstr "URL de l’agent"
+
+#, python-format
+msgid "Agent URL must include a host, for example %(example)s"
+msgstr "L’URL de l’agent doit inclure un hôte, par exemple %(example)s"
+
+msgid "Agent URL must not be empty."
+msgstr "L’URL de l’agent ne doit pas être vide."
+
+msgid ""
+"Agent URL must start with http:// or https:// - without a scheme the agent "
+"cannot be reached."
+msgstr "L’URL de l’agent doit commencer par http:// ou https:// - sans schéma, l’agent est inaccessible."
+
+#, python-format
+msgid "Agent branch \"%(branch)s\" must differ from the Host branch"
+msgstr "La branche de l’agent « %(branch)s » doit être différente de la branche de l’hôte"
 
 #. Used in the browser
 msgid "Agent config saved"
@@ -1446,37 +1567,47 @@ msgstr "URL du backend"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend degraded - {up} of {total} servers up"
-msgstr "Backend dégradé : {up} serveurs actifs sur {total}"
+msgid "Backend degraded - {up} of {n} server up"
+msgid_plural "Backend degraded - {up} of {n} servers up"
+msgstr[0] "Backend dégradé : {up} sur {n} serveur actif"
+msgstr[1] "Backend dégradé : {up} sur {n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend degraded - {up} of {total} servers up ({servers} down) · {ago}"
-msgstr ""
-"Backend dégradé : {up} serveurs actifs sur {total} ({servers} indisponibles) "
-"· {ago}"
+msgid "Backend degraded - {up} of {n} server up ({servers} down) · {ago}"
+msgid_plural ""
+"Backend degraded - {up} of {n} servers up ({servers} down) · {ago}"
+msgstr[0] "Backend dégradé : {up} sur {n} serveur actif (indisponibles : {servers}) · {ago}"
+msgstr[1] "Backend dégradé : {up} sur {n} serveurs actifs (indisponibles : {servers}) · {ago}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend degraded - {up} of {total} servers up · {ago}"
-msgstr "Backend dégradé : {up} serveurs actifs sur {total} · {ago}"
+msgid "Backend degraded - {up} of {n} server up · {ago}"
+msgid_plural "Backend degraded - {up} of {n} servers up · {ago}"
+msgstr[0] "Backend dégradé : {up} sur {n} serveur actif · {ago}"
+msgstr[1] "Backend dégradé : {up} sur {n} serveurs actifs · {ago}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend degraded, {up} of {total} servers up ({servers} down) · {when}"
-msgstr ""
-"Backend dégradé : {up} serveurs actifs sur {total} ({servers} indisponibles) "
-"· {when}"
+msgid "Backend degraded, {up} of {n} server up ({servers} down) · {when}"
+msgid_plural ""
+"Backend degraded, {up} of {n} servers up ({servers} down) · {when}"
+msgstr[0] "Backend dégradé : {up} sur {n} serveur actif (indisponibles : {servers}) · {when}"
+msgstr[1] "Backend dégradé : {up} sur {n} serveurs actifs (indisponibles : {servers}) · {when}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend degraded, {up} of {total} servers up · {when}"
-msgstr "Backend dégradé : {up} serveurs actifs sur {total} · {when}"
+msgid "Backend degraded, {up} of {n} server up · {when}"
+msgid_plural "Backend degraded, {up} of {n} servers up · {when}"
+msgstr[0] "Backend dégradé : {up} sur {n} serveur actif · {when}"
+msgstr[1] "Backend dégradé : {up} sur {n} serveurs actifs · {when}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend down, 0 of {total} servers up"
-msgstr "Backend indisponible : 0 serveur actif sur {total}"
+msgid "Backend down, 0 of {n} server up"
+msgid_plural "Backend down, 0 of {n} servers up"
+msgstr[0] "Backend indisponible : 0 sur {n} serveur actif"
+msgstr[1] "Backend indisponible : 0 sur {n} serveurs actifs"
 
 #. Used in the browser
 msgid "Backend of"
@@ -1492,13 +1623,17 @@ msgstr "Service backend"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend unreachable - 0 of {total} servers up"
-msgstr "Backend inaccessible : 0 serveur actif sur {total}"
+msgid "Backend unreachable - 0 of {n} server up"
+msgid_plural "Backend unreachable - 0 of {n} servers up"
+msgstr[0] "Backend inaccessible : 0 sur {n} serveur actif"
+msgstr[1] "Backend inaccessible : 0 sur {n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Backend up, {up} of {total} servers"
-msgstr "Backend opérationnel : {up} serveurs sur {total}"
+msgid "Backend up, {up} of {n} server"
+msgid_plural "Backend up, {up} of {n} servers"
+msgstr[0] "Backend opérationnel : {up} sur {n} serveur actif"
+msgstr[1] "Backend opérationnel : {up} sur {n} serveurs actifs"
 
 #. Used in the browser
 msgctxt "label"
@@ -1916,6 +2051,9 @@ msgstr "Certificats"
 msgid "Certificates and access logs"
 msgstr "Certificats et journaux d’accès"
 
+msgid "Certificates cannot be edited here"
+msgstr "Les certificats ne peuvent pas être modifiés ici"
+
 msgid "Certificates no router serves"
 msgstr "Certificats utilisés par aucun routeur"
 
@@ -2130,15 +2268,17 @@ msgstr "Cliquez pour limiter toutes les cartes à ce fournisseur."
 
 #. Used in the browser
 #, python-brace-format
-msgid "Click to see the {count} subscribed bans that were excluded."
-msgstr ""
-"Cliquez pour voir les {count} bannissements issus d’abonnements qui ont été "
-"exclus."
+msgid "Click to see the {count} subscribed ban that was excluded."
+msgid_plural "Click to see the {count} subscribed bans that were excluded."
+msgstr[0] "Cliquez pour voir le {count} bannissement issu d’abonnements qui a été exclu."
+msgstr[1] "Cliquez pour voir les {count} bannissements issus d’abonnements qui ont été exclus."
 
 #. Used in the browser
 #, python-brace-format
-msgid "Click to widen the window to {count} lines."
-msgstr "Cliquez pour étendre la fenêtre à {count} lignes."
+msgid "Click to widen the window to {count} line."
+msgid_plural "Click to widen the window to {count} lines."
+msgstr[0] "Cliquez pour étendre la fenêtre à {count} ligne."
+msgstr[1] "Cliquez pour étendre la fenêtre à {count} lignes."
 
 #. Used in the browser
 #, python-brace-format
@@ -2261,6 +2401,10 @@ msgstr ""
 "externe. Laissez l’URL vide pour ignorer."
 
 #, python-format
+msgid "Commit failed: %(error)s"
+msgstr "Échec du commit : %(error)s"
+
+#, python-format
 msgid "Commit message %(optional)s"
 msgstr "Message du commit %(optional)s"
 
@@ -2350,6 +2494,10 @@ msgstr "Confirmer le nouveau mot de passe"
 msgid "Confirm password"
 msgstr "Confirmer le mot de passe"
 
+#. Used in the browser
+msgid "Conflict"
+msgstr "Conflit"
+
 msgctxt "label"
 msgid "Connect"
 msgstr "Connecter"
@@ -2416,6 +2564,10 @@ msgstr "Type de contenu"
 
 msgid "Content-Type nosniff"
 msgstr "Content-Type nosniff"
+
+#. Used in the browser
+msgid "Continue"
+msgstr "Continuer"
 
 #. Used in the browser
 msgctxt "button"
@@ -2499,6 +2651,10 @@ msgstr "Impossible de vérifier l’agent"
 msgid "Could not copy - select the text and copy it manually"
 msgstr "Impossible de copier ; sélectionnez le texte et copiez-le manuellement"
 
+#, python-format
+msgid "Could not create a unique backup of %(file)s, nothing was changed"
+msgstr "Impossible de créer une sauvegarde unique de %(file)s, rien n’a été modifié"
+
 #. Used in the browser
 msgid "Could not delete"
 msgstr "Impossible de supprimer"
@@ -2559,8 +2715,16 @@ msgid "Could not reach the CrowdSec LAPI"
 msgstr "Impossible de joindre la LAPI CrowdSec"
 
 #, python-format
+msgid "Could not read %(file)s back after writing: %(detail)s"
+msgstr "Impossible de relire %(file)s après l’écriture : %(detail)s"
+
+#, python-format
 msgid "Could not read %(file)s: %(detail)s"
 msgstr "Impossible de lire %(file)s : %(detail)s"
+
+#, python-format
+msgid "Could not read agent configs: %(error)s"
+msgstr "Impossible de lire les configurations des agents : %(error)s"
 
 #. Used in the browser
 msgid "Could not read decisions"
@@ -2654,6 +2818,10 @@ msgstr ""
 "directement écrit dans votre fichier de configuration dynamique."
 
 #. Used in the browser
+msgid "Created"
+msgstr "Créé"
+
+#. Used in the browser
 #, python-brace-format
 msgid "Created {date}"
 msgstr "Créé le {date}"
@@ -2704,6 +2872,36 @@ msgstr ""
 
 msgid "CrowdSec credentials saved"
 msgstr "Identifiants CrowdSec enregistrés"
+
+#, python-format
+msgid ""
+"CrowdSec has not answered for %(num)d day, so these decisions are the last "
+"ones read and may be out of date. %(reason)s"
+msgid_plural ""
+"CrowdSec has not answered for %(num)d days, so these decisions are the last "
+"ones read and may be out of date. %(reason)s"
+msgstr[0] "CrowdSec ne répond plus depuis %(num)d jour : ces décisions sont donc les dernières lues et peuvent être obsolètes. %(reason)s"
+msgstr[1] "CrowdSec ne répond plus depuis %(num)d jours : ces décisions sont donc les dernières lues et peuvent être obsolètes. %(reason)s"
+
+#, python-format
+msgid ""
+"CrowdSec has not answered for %(num)d hour, so these decisions are the last "
+"ones read and may be out of date. %(reason)s"
+msgid_plural ""
+"CrowdSec has not answered for %(num)d hours, so these decisions are the last "
+"ones read and may be out of date. %(reason)s"
+msgstr[0] "CrowdSec ne répond plus depuis %(num)d heure : ces décisions sont donc les dernières lues et peuvent être obsolètes. %(reason)s"
+msgstr[1] "CrowdSec ne répond plus depuis %(num)d heures : ces décisions sont donc les dernières lues et peuvent être obsolètes. %(reason)s"
+
+#, python-format
+msgid ""
+"CrowdSec has not answered for %(num)d minute, so these decisions are the "
+"last ones read and may be out of date. %(reason)s"
+msgid_plural ""
+"CrowdSec has not answered for %(num)d minutes, so these decisions are the "
+"last ones read and may be out of date. %(reason)s"
+msgstr[0] "CrowdSec ne répond plus depuis %(num)d minute : ces décisions sont donc les dernières lues et peuvent être obsolètes. %(reason)s"
+msgstr[1] "CrowdSec ne répond plus depuis %(num)d minutes : ces décisions sont donc les dernières lues et peuvent être obsolètes. %(reason)s"
 
 #. Used in the browser
 msgid "CrowdSec is up to date, nothing changed since the last read"
@@ -3373,6 +3571,12 @@ msgid "Docker host"
 msgstr "Hôte Docker"
 
 #, python-format
+msgid ""
+"Docker restart failed - check DOCKER_HOST and TRAEFIK_CONTAINER "
+"(%(container)s)"
+msgstr "Échec du redémarrage via Docker - vérifiez DOCKER_HOST et TRAEFIK_CONTAINER (%(container)s)"
+
+#, python-format
 msgid "Docker restart failed: %(detail)s"
 msgstr "Échec du redémarrage via Docker : %(detail)s"
 
@@ -3715,6 +3919,9 @@ msgstr "Saisissez le code à 6 chiffres."
 msgid "Enter the Traefik API URL."
 msgstr "Saisissez l’URL de l’API Traefik."
 
+msgid "Enter the current code from your authenticator app."
+msgstr "Saisissez le code actuel de votre application d’authentification."
+
 msgid ""
 "Enter the name and URL for this remote agent. The URL is where TMA is "
 "reachable from this Traefik Manager instance."
@@ -3739,11 +3946,13 @@ msgstr "Point d’entrée"
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"Entry point middleware {mws} is prepended into every router on this entry "
+"point"
+msgid_plural ""
 "Entry point middlewares {mws} are prepended into every router on this entry "
 "point"
-msgstr ""
-"Les middlewares du point d’entrée {mws} sont ajoutés au début de chaque "
-"routeur utilisant ce point d’entrée"
+msgstr[0] "Le middleware du point d’entrée {mws} est ajouté au début de chaque routeur utilisant ce point d’entrée"
+msgstr[1] "Les middlewares du point d’entrée {mws} sont ajoutés au début de chaque routeur utilisant ce point d’entrée"
 
 #. Used in the browser
 msgid "Entry points"
@@ -3857,18 +4066,19 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"Every card above summarizes the {retained} alert the LAPI still retains, not "
+"every attack this host has ever seen. The oldest alert here is the edge of "
+"retention, not the start of activity, and CrowdSec does not report how many "
+"it pruned. Subscribed blocklist rows are left out on purpose because they "
+"describe the internet rather than your host."
+msgid_plural ""
 "Every card above summarizes the {retained} alerts the LAPI still retains, "
 "not every attack this host has ever seen. The oldest alert here is the edge "
 "of retention, not the start of activity, and CrowdSec does not report how "
 "many it pruned. Subscribed blocklist rows are left out on purpose because "
-"they describe the internet rather than your host. {value}"
-msgstr ""
-"Chaque carte ci-dessus résume les {retained} alertes encore conservées par "
-"la LAPI, et non toutes les attaques jamais détectées par cet hôte. L’alerte "
-"la plus ancienne correspond à la limite de conservation, et non au début de "
-"l’activité, et CrowdSec n’indique pas combien d’alertes ont été supprimées. "
-"Les entrées des listes de blocage suivies sont volontairement exclues, car "
-"elles décrivent Internet plutôt que votre hôte. {value}"
+"they describe the internet rather than your host."
+msgstr[0] "Chaque carte ci-dessus résume {retained} alerte encore conservée par la LAPI, et non toutes les attaques jamais détectées par cet hôte. L’alerte la plus ancienne correspond à la limite de conservation, et non au début de l’activité, et CrowdSec n’indique pas combien d’alertes ont été supprimées. Les entrées des listes de blocage suivies sont volontairement exclues, car elles décrivent Internet plutôt que votre hôte."
+msgstr[1] "Chaque carte ci-dessus résume les {retained} alertes encore conservées par la LAPI, et non toutes les attaques jamais détectées par cet hôte. L’alerte la plus ancienne correspond à la limite de conservation, et non au début de l’activité, et CrowdSec n’indique pas combien d’alertes ont été supprimées. Les entrées des listes de blocage suivies sont volontairement exclues, car elles décrivent Internet plutôt que votre hôte."
 
 #. Used in the browser
 #, python-brace-format
@@ -4291,32 +4501,39 @@ msgstr "Limiter la liste des journaux aux connexions maintenues ouvertes"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Filter the log list to the {count} failing requests"
-msgstr "Limiter la liste des journaux aux {count} requêtes en échec"
+msgid "Filter the log list to the {count} failing request"
+msgid_plural "Filter the log list to the {count} failing requests"
+msgstr[0] "Limiter la liste des journaux à {count} requête en échec"
+msgstr[1] "Limiter la liste des journaux aux {count} requêtes en échec"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Filter the log list to the {fast} requests faster than 100ms"
-msgstr ""
-"Limiter la liste des journaux aux {fast} requêtes traitées en moins de 100 ms"
+msgid "Filter the log list to the {fast} request faster than 100ms"
+msgid_plural "Filter the log list to the {fast} requests faster than 100ms"
+msgstr[0] "Limiter la liste des journaux à {fast} requête traitée en moins de 100 ms"
+msgstr[1] "Limiter la liste des journaux aux {fast} requêtes traitées en moins de 100 ms"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Filter the log list to the {med} requests between 100ms and 500ms"
-msgstr ""
-"Limiter la liste des journaux aux {med} requêtes traitées entre 100 ms et "
-"500 ms"
+msgid "Filter the log list to the {med} request between 100ms and 500ms"
+msgid_plural ""
+"Filter the log list to the {med} requests between 100ms and 500ms"
+msgstr[0] "Limiter la liste des journaux à {med} requête traitée entre 100 ms et 500 ms"
+msgstr[1] "Limiter la liste des journaux aux {med} requêtes traitées entre 100 ms et 500 ms"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Filter the log list to the {n} {key} responses"
-msgstr "Limiter la liste des journaux aux {n} réponses {key}"
+msgid "Filter the log list to the {n} {key} response"
+msgid_plural "Filter the log list to the {n} {key} responses"
+msgstr[0] "Limiter la liste des journaux à {n} réponse {key}"
+msgstr[1] "Limiter la liste des journaux aux {n} réponses {key}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "Filter the log list to the {slow} requests slower than 500ms"
-msgstr ""
-"Limiter la liste des journaux aux {slow} requêtes traitées en plus de 500 ms"
+msgid "Filter the log list to the {slow} request slower than 500ms"
+msgid_plural "Filter the log list to the {slow} requests slower than 500ms"
+msgstr[0] "Limiter la liste des journaux à {slow} requête traitée en plus de 500 ms"
+msgstr[1] "Limiter la liste des journaux aux {slow} requêtes traitées en plus de 500 ms"
 
 #. Used in the browser
 #, python-brace-format
@@ -4391,6 +4608,10 @@ msgstr ""
 "Pour une LAPI protégée par TLS mutuel : chemins du certificat, de la clé et "
 "de l’autorité de certification tels qu’ils sont montés dans le conteneur de "
 "l’agent. Remplace la clé d’API et l’identifiant de la machine."
+
+#. Used in the browser
+msgid "Forbidden"
+msgstr "Interdit"
 
 #, python-format
 msgid ""
@@ -4474,6 +4695,10 @@ msgstr ""
 #, python-brace-format
 msgid "Forwarding timeouts {optional_e_g}"
 msgstr "Délais de transfert {optional_e_g}"
+
+#. Used in the browser
+msgid "Found"
+msgstr "Trouvé"
 
 msgid "Frame deny (anti-clickjacking)"
 msgstr "Interdire les cadres (protection contre le détournement de clic)"
@@ -4588,6 +4813,13 @@ msgstr "Dépôt Git non initialisé"
 msgid "Git settings saved"
 msgstr "Paramètres Git enregistrés"
 
+#, python-format
+msgid "GitHub returned HTTP %(status_code)d"
+msgstr "GitHub a renvoyé HTTP %(status_code)d"
+
+msgid "Give it a name"
+msgstr "Donnez-lui un nom"
+
 #. Used in the browser
 msgid "Give the service a name."
 msgstr "Donnez un nom au service."
@@ -4612,6 +4844,10 @@ msgstr "Revenir aux éléments sur les attaques, la vue principale"
 #, python-brace-format
 msgid "Go to {sec}"
 msgstr "Accéder à {sec}"
+
+#. Used in the browser
+msgid "Gone"
+msgstr "Disparu"
 
 msgid "Google Play"
 msgstr "Google Play"
@@ -4639,12 +4875,14 @@ msgstr ""
 "l’API"
 
 #, python-format
-msgid "HTTP %(status_code)s from %(url)s/api/version"
-msgstr "HTTP %(status_code)s depuis %(url)s/api/version"
+msgid ""
+"HTTP %(status_code)s - the saved password is only sent to the saved API URL, "
+"enter it to test this one"
+msgstr "HTTP %(status_code)s - le mot de passe enregistré n’est envoyé qu’à l’URL d’API enregistrée, saisissez-le pour tester celle-ci"
 
 #, python-format
-msgid "HTTP %(status_code)s%(hint)s"
-msgstr "HTTP %(status_code)s%(hint)s"
+msgid "HTTP %(status_code)s from %(url)s/api/version"
+msgstr "HTTP %(status_code)s depuis %(url)s/api/version"
 
 #. Used in the browser
 msgid "HTTP Challenge"
@@ -4681,6 +4919,10 @@ msgstr "HTTP uniquement"
 #. Used in the browser
 msgid "HTTP routers"
 msgstr "Routeurs HTTP"
+
+#. Used in the browser
+msgid "HTTP routers could not be read from the Traefik API"
+msgstr "Les routeurs HTTP n’ont pas pu être lus depuis l’API Traefik"
 
 #. Used in the browser
 #, python-brace-format
@@ -5060,6 +5302,10 @@ msgstr "Intervalle"
 msgid "Interval must be a number of seconds"
 msgstr "L’intervalle doit être un nombre de secondes"
 
+#, python-format
+msgid "Interval must be one of %(intervals)s seconds"
+msgstr "L’intervalle doit être l’une de ces valeurs, en secondes : %(intervals)s"
+
 msgid "Interval when down"
 msgstr "Intervalle en cas d’indisponibilité"
 
@@ -5221,6 +5467,10 @@ msgid ""
 msgstr ""
 "Conserver uniquement les N derniers fichiers %(bak)s pour chaque fichier de "
 "configuration (%(backup_keep_count)s). 0 = tout conserver."
+
+#, python-format
+msgid "Keep the name to %(max)d characters or fewer"
+msgstr "Limitez le nom à %(max)d caractères maximum"
 
 #. Used in the browser
 msgid "Key copied"
@@ -5528,6 +5778,10 @@ msgstr ""
 "La connexion locale par mot de passe est désactivée. Connectez-vous avec "
 "votre fournisseur d’identité."
 
+msgid ""
+"Local password login is turned off. Sign in with your identity provider."
+msgstr "La connexion locale par mot de passe est désactivée. Connectez-vous avec votre fournisseur d’identité."
+
 #. Used in the browser
 msgid "Local plugin"
 msgstr "Plugin local"
@@ -5716,6 +5970,18 @@ msgstr "Middleware"
 msgctxt "label"
 msgid "Middleware"
 msgstr "Middleware"
+
+#, python-format
+msgid "Middleware %(name)s created"
+msgstr "Middleware %(name)s créé"
+
+#, python-format
+msgid "Middleware %(name)s deleted"
+msgstr "Middleware %(name)s supprimé"
+
+#, python-format
+msgid "Middleware %(name)s updated"
+msgstr "Middleware %(name)s mis à jour"
 
 msgid "Middleware Chain"
 msgstr "Chaîne de middlewares"
@@ -6046,17 +6312,26 @@ msgstr "Nouveau nom de groupe…"
 msgid "New in v1:"
 msgstr "Nouveautés de la v1 :"
 
-#. Used in the browser
 msgid "New password"
 msgstr "Nouveau mot de passe"
 
 msgid "New password (min 8 chars)"
 msgstr "Nouveau mot de passe (8 caractères minimum)"
 
+#. Used in the browser
+msgid ""
+"New password must be 72 bytes or fewer, which is the bcrypt limit. Accented "
+"and non-Latin characters take more than one byte each."
+msgstr "Le nouveau mot de passe ne doit pas dépasser 72 octets, la limite de bcrypt. Les caractères accentués et non latins occupent chacun plus d’un octet."
+
 msgid "New password must be at least 8 characters and at most 72 bytes."
 msgstr ""
 "Le nouveau mot de passe doit contenir au moins 8 caractères et au plus 72 "
 "octets."
+
+#. Used in the browser
+msgid "New password must be at least 8 characters."
+msgstr "Le nouveau mot de passe doit contenir au moins 8 caractères."
 
 msgid "Next server"
 msgstr "Serveur suivant"
@@ -6331,8 +6606,9 @@ msgid "No log lines in the fetched window."
 msgstr "Aucune ligne de journal dans la période récupérée."
 
 #. Used in the browser
-msgid "No matches here. Found in"
-msgstr "Aucune correspondance ici. Trouvé dans"
+#, python-brace-format
+msgid "No matches here. Found in {sections}"
+msgstr "Aucune correspondance ici. Trouvé dans {sections}"
 
 msgid "No matching certificate was found"
 msgstr "Aucun certificat correspondant trouvé"
@@ -6361,11 +6637,8 @@ msgstr "Aucune notification pour le moment"
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"No object list for {objects}, so the strips and provider counts are "
-"incomplete"
-msgstr ""
-"Aucune liste d’objets pour {objects} ; les bandeaux et les totaux par "
-"fournisseur sont donc incomplets"
+"No object list for: {objects}. The strips and provider counts are incomplete."
+msgstr "Aucune liste d’objets pour : {objects}. Les bandeaux et les totaux par fournisseur sont incomplets."
 
 #. Used in the browser
 msgid "No one has tripped a scenario"
@@ -6406,6 +6679,12 @@ msgstr "Pas d’URL de dépôt"
 
 msgid "No repository URL configured"
 msgstr "Aucune URL de dépôt configurée"
+
+msgid "No repository configured"
+msgstr "Aucun dépôt configuré"
+
+msgid "No repository configured on the Host"
+msgstr "Aucun dépôt configuré sur l’hôte"
 
 #. Used in the browser
 msgid "No request took between 100ms and 500ms"
@@ -6771,6 +7050,10 @@ msgstr "Fournisseur OIDC indisponible. Réessayez ultérieurement."
 #. Used in the browser
 msgid "OIDC saved"
 msgstr "OIDC enregistré"
+
+#. Used in the browser
+msgid "OK"
+msgstr "OK"
 
 #. Used in the browser
 msgctxt "button"
@@ -7225,6 +7508,16 @@ msgstr "Mot de passe"
 msgid "Password & 2FA"
 msgstr "Mot de passe et authentification à deux facteurs"
 
+#. Used in the browser
+msgid ""
+"Password must be 72 bytes or fewer, which is the bcrypt limit. Accented and "
+"non-Latin characters take more than one byte each."
+msgstr "Le mot de passe ne doit pas dépasser 72 octets, la limite de bcrypt. Les caractères accentués et non latins occupent chacun plus d’un octet."
+
+#. Used in the browser
+msgid "Password must be at least 8 characters."
+msgstr "Le mot de passe doit contenir au moins 8 caractères."
+
 msgid "Password saved"
 msgstr "Mot de passe enregistré"
 
@@ -7236,6 +7529,11 @@ msgstr ""
 #. Used in the browser
 msgid "Passwords do not match."
 msgstr "Les mots de passe ne correspondent pas."
+
+msgid ""
+"Paste the middleware body, or a full http:/tcp: block holding a single "
+"middleware"
+msgstr "Collez le corps du middleware, ou un bloc http:/tcp: complet contenant un seul middleware"
 
 #. Used in the browser
 msgid "Paste the static config snippet"
@@ -7464,6 +7762,15 @@ msgstr "Plugin supprimé : redémarrez Traefik pour appliquer la modification"
 msgid "Plugin saved - restart Traefik to apply"
 msgstr "Plugin enregistré : redémarrez Traefik pour appliquer la modification"
 
+#, python-format
+msgid "Plugin saved but middleware could not be written: %(error)s"
+msgstr "Plugin enregistré, mais le middleware n’a pas pu être écrit : %(error)s"
+
+msgid ""
+"Plugin saved, but the middleware was not written - no config directory is "
+"configured, so there is no file to write it to"
+msgstr "Plugin enregistré, mais le middleware n’a pas été écrit - aucun répertoire de configuration n’est défini, il n’y a donc aucun fichier où l’écrire"
+
 msgid ""
 "Plugin versions come from your static config. The latest version is checked "
 "against the Traefik plugin catalog once a day; updating means changing the "
@@ -7664,6 +7971,9 @@ msgstr ""
 "Fournisseur accessible : émetteur {issuer}. Les identifiants ne sont "
 "vérifiés qu’au moment de la connexion."
 
+msgid "Provider reachable. Credentials are not verified until you sign in."
+msgstr "Fournisseur joignable. Les identifiants ne sont vérifiés qu’à la connexion."
+
 msgid "Provider tabs"
 msgstr "Onglets des fournisseurs"
 
@@ -7754,6 +8064,10 @@ msgstr "Envoyer automatiquement"
 #. Used in the browser
 msgid "Push failed"
 msgstr "Échec de l’envoi"
+
+#, python-format
+msgid "Push failed: %(error)s"
+msgstr "Échec de l’envoi : %(error)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -8216,20 +8530,24 @@ msgstr[1] "{n} certificats supprimés"
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"Removed {removed}, but Traefik did not restart. The change is undone until "
-"it does."
-msgstr ""
-"Certificats supprimés : {removed}, mais Traefik n’a pas redémarré. La "
-"modification est annulée tant qu’il ne redémarre pas."
+"Removed {n} certificate, but Traefik did not restart. The change is undone "
+"until it does."
+msgid_plural ""
+"Removed {n} certificates, but Traefik did not restart. The change is undone "
+"until it does."
+msgstr[0] "{n} certificat supprimé, mais Traefik n’a pas redémarré. La modification est annulée tant qu’il ne redémarre pas."
+msgstr[1] "{n} certificats supprimés, mais Traefik n’a pas redémarré. La modification est annulée tant qu’il ne redémarre pas."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"Removed {removed}, but Traefik did not restart: {error}. The change is "
+"Removed {n} certificate, but Traefik did not restart: {error}. The change is "
 "undone until it does."
-msgstr ""
-"Certificats supprimés : {removed}, mais Traefik n’a pas redémarré : {error}. "
-"La modification est annulée tant qu’il ne redémarre pas."
+msgid_plural ""
+"Removed {n} certificates, but Traefik did not restart: {error}. The change "
+"is undone until it does."
+msgstr[0] "{n} certificat supprimé, mais Traefik n’a pas redémarré : {error}. La modification est annulée tant qu’il ne redémarre pas."
+msgstr[1] "{n} certificats supprimés, mais Traefik n’a pas redémarré : {error}. La modification est annulée tant qu’il ne redémarre pas."
 
 #. Used in the browser
 msgid "Rename it everywhere, or copy it for this route?"
@@ -8263,6 +8581,10 @@ msgstr "Remplacer le chemin par expression régulière"
 msgctxt "setting"
 msgid "Replacement"
 msgstr "Remplacement"
+
+#, python-format
+msgid "Repo init failed: %(error)s"
+msgstr "Échec de l’initialisation du dépôt : %(error)s"
 
 msgctxt "heading"
 msgid "Repository"
@@ -8615,6 +8937,18 @@ msgstr "Rotation {optional}"
 msgid "Route \"%(plain_id)s\" not found"
 msgstr "Route « %(plain_id)s » introuvable"
 
+#, python-format
+msgid "Route %(name)s created"
+msgstr "Route %(name)s créée"
+
+#, python-format
+msgid "Route %(name)s deleted"
+msgstr "Route %(name)s supprimée"
+
+#, python-format
+msgid "Route %(name)s updated"
+msgstr "Route %(name)s mise à jour"
+
 msgid "Route / Service Name"
 msgstr "Nom de la route ou du service"
 
@@ -8734,8 +9068,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "Router loaded, {up} of {total} backend servers up"
-msgstr "Routeur chargé, {up} serveurs backend disponibles sur {total}"
+msgid "Router loaded, {up} of {n} backend server up"
+msgid_plural "Router loaded, {up} of {n} backend servers up"
+msgstr[0] "Routeur chargé, {up} sur {n} serveur backend actif"
+msgstr[1] "Routeur chargé, {up} sur {n} serveurs backend actifs"
 
 msgid "Router name is required"
 msgstr "Le nom du routeur est requis"
@@ -9239,6 +9575,9 @@ msgstr "Sélectionner un fichier…"
 msgid "Select a provider type"
 msgstr "Sélectionnez un type de fournisseur"
 
+msgid "Select a service to reference, or switch the backend to Manual."
+msgstr "Sélectionnez un service à référencer, ou passez le backend en mode Manuel."
+
 msgid "Select a template above to use the wizard."
 msgstr "Sélectionnez un modèle ci-dessus pour utiliser l’assistant."
 
@@ -9374,6 +9713,10 @@ msgstr "Service"
 msgctxt "setting"
 msgid "Service"
 msgstr "Service"
+
+#, python-format
+msgid "Service '%(service)s' does not exist for %(protocol)s routes."
+msgstr "Le service « %(service)s » n’existe pas pour les routes %(protocol)s."
 
 #. Used in the browser
 msgid "Service Details"
@@ -9645,12 +9988,16 @@ msgstr "Afficher toutes les alertes simulées"
 #. Used in the browser
 #, python-brace-format
 msgid "Show fewer apps in {name}, {count} shown"
-msgstr "Afficher moins d’applications dans {name}, {count} affichées"
+msgid_plural "Show fewer apps in {name}, {count} shown"
+msgstr[0] "Afficher moins d’applications dans {name}, {count} affichée"
+msgstr[1] "Afficher moins d’applications dans {name}, {count} affichées"
 
 #. Used in the browser
 #, python-brace-format
 msgid "Show fewer routes in {name}, {count} shown"
-msgstr "Afficher moins de routes dans {name}, {count} affichées"
+msgid_plural "Show fewer routes in {name}, {count} shown"
+msgstr[0] "Afficher moins de routes dans {name}, {count} affichée"
+msgstr[1] "Afficher moins de routes dans {name}, {count} affichées"
 
 msgid "Show it as its own tab in the side navigation"
 msgstr "L’afficher dans son propre onglet de la navigation latérale"
@@ -9702,10 +10049,54 @@ msgstr[1] "Afficher {n} applications supplémentaires dans {name}"
 
 #. Used in the browser
 #, python-brace-format
+msgid "Show {n} more app in {name}, {down} of them down"
+msgid_plural "Show {n} more apps in {name}, {down} of them down"
+msgstr[0] "Afficher {n} application supplémentaire dans {name}, dont {down} indisponible"
+msgstr[1] "Afficher {n} applications supplémentaires dans {name}, dont {down} indisponibles"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Show {n} more app in {name}, {down} of them down and {warn} degraded"
+msgid_plural ""
+"Show {n} more apps in {name}, {down} of them down and {warn} degraded"
+msgstr[0] "Afficher {n} application supplémentaire dans {name}, dont {down} indisponible et {warn} dégradée"
+msgstr[1] "Afficher {n} applications supplémentaires dans {name}, dont {down} indisponibles et {warn} dégradées"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Show {n} more app in {name}, {warn} of them degraded"
+msgid_plural "Show {n} more apps in {name}, {warn} of them degraded"
+msgstr[0] "Afficher {n} application supplémentaire dans {name}, dont {warn} dégradée"
+msgstr[1] "Afficher {n} applications supplémentaires dans {name}, dont {warn} dégradées"
+
+#. Used in the browser
+#, python-brace-format
 msgid "Show {n} more route in {name}"
 msgid_plural "Show {n} more routes in {name}"
 msgstr[0] "Afficher {n} route supplémentaire dans {name}"
 msgstr[1] "Afficher {n} routes supplémentaires dans {name}"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Show {n} more route in {name}, {down} of them down"
+msgid_plural "Show {n} more routes in {name}, {down} of them down"
+msgstr[0] "Afficher {n} route supplémentaire dans {name}, dont {down} indisponible"
+msgstr[1] "Afficher {n} routes supplémentaires dans {name}, dont {down} indisponibles"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Show {n} more route in {name}, {down} of them down and {warn} degraded"
+msgid_plural ""
+"Show {n} more routes in {name}, {down} of them down and {warn} degraded"
+msgstr[0] "Afficher {n} route supplémentaire dans {name}, dont {down} indisponible et {warn} dégradée"
+msgstr[1] "Afficher {n} routes supplémentaires dans {name}, dont {down} indisponibles et {warn} dégradées"
+
+#. Used in the browser
+#, python-brace-format
+msgid "Show {n} more route in {name}, {warn} of them degraded"
+msgid_plural "Show {n} more routes in {name}, {warn} of them degraded"
+msgstr[0] "Afficher {n} route supplémentaire dans {name}, dont {warn} dégradée"
+msgstr[1] "Afficher {n} routes supplémentaires dans {name}, dont {warn} dégradées"
 
 #. Used in the browser
 #, python-brace-format
@@ -9763,6 +10154,10 @@ msgstr "Déconnecter les autres"
 
 msgid "Signal file path"
 msgstr "Chemin du fichier de signal"
+
+#, python-format
+msgid "Signal file write failed - check SIGNAL_FILE_PATH (%(path)s)"
+msgstr "Échec de l’écriture du fichier de signal - vérifiez SIGNAL_FILE_PATH (%(path)s)"
 
 msgctxt "button"
 msgid "Simple"
@@ -9890,6 +10285,10 @@ msgstr ""
 #, python-format
 msgid "Static config path refused: %(refused)s"
 msgstr "Chemin de configuration statique refusé : %(refused)s"
+
+#, python-format
+msgid "Static config path: %(problem)s"
+msgstr "Chemin de la configuration statique : %(problem)s"
 
 #. Used in the browser
 msgid "Static config saved"
@@ -10052,6 +10451,7 @@ msgstr "Nom commun du sujet"
 msgid "Success"
 msgstr "Succès"
 
+#. Used in the browser
 msgctxt "button"
 msgid "Success"
 msgstr "Succès"
@@ -10130,6 +10530,9 @@ msgstr "Supervision du système"
 msgid "TCP / UDP Routers"
 msgstr "Routeurs TCP / UDP"
 
+msgid "TCP middlewares support only ipAllowList and inFlightConn"
+msgstr "Les middlewares TCP ne prennent en charge que ipAllowList et inFlightConn"
+
 #. Used in the browser
 msgctxt "label"
 msgid "TLS"
@@ -10203,6 +10606,12 @@ msgstr ""
 "La vérification TLS a échoué : le certificat de l’API n’est pas de "
 "confiance. Montez votre certificat CA dans /etc/ssl/certs/ca-"
 "certificates.crt ou réglez TRAEFIK_INSECURE_SKIP_VERIFY=true. (%(error)s)"
+
+#, python-format
+msgid ""
+"TLS verification failed - the agent certificate is not trusted by Traefik "
+"Manager (%(error)s)"
+msgstr "Échec de la vérification TLS - le certificat de l’agent n’est pas approuvé par Traefik Manager (%(error)s)"
 
 #. Used in the browser
 msgid "TLS, no certResolver"
@@ -10339,6 +10748,9 @@ msgstr "Test en cours…"
 msgid "Text (default)"
 msgstr "Texte (par défaut)"
 
+msgid "That block defines several middlewares - paste one at a time"
+msgstr "Ce bloc définit plusieurs middlewares - collez-les un par un"
+
 #, python-format
 msgid ""
 "That name belongs to a %(clash)s service, and only HTTP services can be "
@@ -10346,6 +10758,9 @@ msgid ""
 msgstr ""
 "Ce nom appartient à un service %(clash)s et seuls les services HTTP peuvent "
 "être modifiés ici"
+
+msgid "That name is reserved"
+msgstr "Ce nom est réservé"
 
 msgid "That service is not managed here"
 msgstr "Ce service n’est pas géré ici"
@@ -10663,6 +11078,9 @@ msgstr ""
 msgid "The middleware body only, without the name above it."
 msgstr "Corps du middleware uniquement, sans le nom qui le précède."
 
+msgid "The middleware in that block has no configuration"
+msgstr "Le middleware de ce bloc n’a aucune configuration"
+
 #, python-format
 msgid ""
 "The middleware snippet contains template placeholders (%(example)s) that "
@@ -10699,21 +11117,24 @@ msgid "The public address where TMA is running on the remote server."
 msgstr "Adresse publique à laquelle TMA s’exécute sur le serveur distant."
 
 #. Used in the browser
+msgid ""
+"The requests selected right now carry no router name. Clear the filters to "
+"rank the whole window."
+msgstr "Les requêtes actuellement sélectionnées ne contiennent aucun nom de routeur. Effacez les filtres pour classer toute la période."
+
+#. Used in the browser
+msgid ""
+"The requests selected right now carry no service name. Clear the filters to "
+"rank the whole window."
+msgstr "Les requêtes actuellement sélectionnées ne contiennent aucun nom de service. Effacez les filtres pour classer toute la période."
+
+#. Used in the browser
 #, python-brace-format
 msgid ""
 "The requests selected right now carry no {requesthost}. Clear the filters to "
 "rank the whole window."
 msgstr ""
 "Les requêtes actuellement sélectionnées ne contiennent aucun {requesthost}. "
-"Effacez les filtres pour classer toute la période."
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"The requests selected right now carry no {what} name. Clear the filters to "
-"rank the whole window."
-msgstr ""
-"Les requêtes actuellement sélectionnées ne contiennent aucun nom {what}. "
 "Effacez les filtres pour classer toute la période."
 
 #. Used in the browser
@@ -10727,13 +11148,15 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"The retained window holds {retained} alert, and every filter on the window "
+"row is applied together, so this card has nothing left to rank. That is the "
+"filter talking, not the host."
+msgid_plural ""
 "The retained window holds {retained} alerts, and every filter on the window "
 "row is applied together, so this card has nothing left to rank. That is the "
 "filter talking, not the host."
-msgstr ""
-"La période conservée contient {retained} alertes et tous les filtres de la "
-"ligne de période sont appliqués ensemble. Cette carte n’a donc plus rien à "
-"classer. Cela résulte du filtre, pas de l’hôte."
+msgstr[0] "La période conservée contient {retained} alerte et tous les filtres de la ligne de période sont appliqués ensemble. Cette carte n’a donc plus rien à classer. Cela résulte du filtre, pas de l’hôte."
+msgstr[1] "La période conservée contient {retained} alertes et tous les filtres de la ligne de période sont appliqués ensemble. Cette carte n’a donc plus rien à classer. Cela résulte du filtre, pas de l’hôte."
 
 msgid ""
 "The route list could not be read. Names, icons and launch links all come "
@@ -10744,6 +11167,45 @@ msgstr ""
 "lancement proviennent tous de cet appel ; rien ne peut donc être affiché. "
 "Vérifiez que traefik-manager peut accéder à l’API Traefik et à ses fichiers "
 "de configuration."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"The search {search} and the {proto} protocol filter together do not match it."
+msgid_plural ""
+"The search {search} and the {proto} protocol filter together match none of "
+"them."
+msgstr[0] "La recherche {search} et le filtre de protocole {proto} combinés n’y correspondent pas."
+msgstr[1] "La recherche {search} et le filtre de protocole {proto} combinés ne correspondent à aucun élément."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"The search {search} and the {provider} provider filter together do not match "
+"it."
+msgid_plural ""
+"The search {search} and the {provider} provider filter together match none "
+"of them."
+msgstr[0] "La recherche {search} et le filtre de fournisseur {provider} combinés n’y correspondent pas."
+msgstr[1] "La recherche {search} et le filtre de fournisseur {provider} combinés ne correspondent à aucun élément."
+
+#. Used in the browser
+#, python-brace-format
+msgid "The search {search} does not match it."
+msgid_plural "The search {search} matches none of them."
+msgstr[0] "La recherche {search} n’y correspond pas."
+msgstr[1] "La recherche {search} ne correspond à aucun élément."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"The search {search}, the {proto} protocol filter and the {provider} provider "
+"filter together do not match it."
+msgid_plural ""
+"The search {search}, the {proto} protocol filter and the {provider} provider "
+"filter together match none of them."
+msgstr[0] "La recherche {search}, le filtre de protocole {proto} et le filtre de fournisseur {provider} combinés n’y correspondent pas."
+msgstr[1] "La recherche {search}, le filtre de protocole {proto} et le filtre de fournisseur {provider} combinés ne correspondent à aucun élément."
 
 #. Used in the browser
 msgid "The server changed, reload the list and select again"
@@ -10775,6 +11237,31 @@ msgid ""
 msgstr ""
 "Service qui fournit la page d’erreur. Il doit déjà exister dans cette "
 "configuration."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"The {proto} protocol filter and the {provider} provider filter together do "
+"not match it."
+msgid_plural ""
+"The {proto} protocol filter and the {provider} provider filter together "
+"match none of them."
+msgstr[0] "Le filtre de protocole {proto} et le filtre de fournisseur {provider} combinés n’y correspondent pas."
+msgstr[1] "Le filtre de protocole {proto} et le filtre de fournisseur {provider} combinés ne correspondent à aucun élément."
+
+#. Used in the browser
+#, python-brace-format
+msgid "The {proto} protocol filter does not match it."
+msgid_plural "The {proto} protocol filter matches none of them."
+msgstr[0] "Le filtre de protocole {proto} n’y correspond pas."
+msgstr[1] "Le filtre de protocole {proto} ne correspond à aucun élément."
+
+#. Used in the browser
+#, python-brace-format
+msgid "The {provider} provider filter does not match it."
+msgid_plural "The {provider} provider filter matches none of them."
+msgstr[0] "Le filtre de fournisseur {provider} n’y correspond pas."
+msgstr[1] "Le filtre de fournisseur {provider} ne correspond à aucun élément."
 
 #. Used in the browser
 #, python-brace-format
@@ -10846,16 +11333,17 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"These numbers summarize the last {fetched} line of the access log, not all "
+"traffic. The oldest line here is the edge of the fetched window, not the "
+"start of activity. Traefik does not report the file total, so the share of "
+"overall traffic is unknown. {parsed} of {fetched} line parsed."
+msgid_plural ""
 "These numbers summarize the last {fetched} lines of the access log, not all "
 "traffic. The oldest line here is the edge of the fetched window, not the "
 "start of activity. Traefik does not report the file total, so the share of "
-"overall traffic is unknown. {parsed} of {fetched} lines parsed.{value}"
-msgstr ""
-"Ces nombres résument les {fetched} dernières lignes du journal d’accès, et "
-"non tout le trafic. La ligne la plus ancienne correspond à la limite de la "
-"période récupérée, pas au début de l’activité. Traefik n’indique pas le "
-"nombre total de lignes du fichier ; la part du trafic global est donc "
-"inconnue. {parsed} lignes sur {fetched} ont été analysées.{value}"
+"overall traffic is unknown. {parsed} of {fetched} lines parsed."
+msgstr[0] "Ces nombres portent sur {fetched} ligne récupérée à la fin du journal d’accès, et non sur tout le trafic. La ligne la plus ancienne correspond à la limite de la période récupérée, pas au début de l’activité. Traefik n’indique pas le nombre total de lignes du fichier ; la part du trafic global est donc inconnue. {parsed} sur {fetched} ligne analysée."
+msgstr[1] "Ces nombres portent sur les {fetched} dernières lignes du journal d’accès, et non sur tout le trafic. La ligne la plus ancienne correspond à la limite de la période récupérée, pas au début de l’activité. Traefik n’indique pas le nombre total de lignes du fichier ; la part du trafic global est donc inconnue. {parsed} sur {fetched} lignes analysées."
 
 #, python-format
 msgid ""
@@ -11034,6 +11522,10 @@ msgstr ""
 "Cette carte signale l’échec de lecture au lieu d’afficher un zéro trompeur. "
 "{decErr}"
 
+#. Used in the browser
+msgid "This config"
+msgstr "Cette configuration"
+
 #, python-format
 msgid ""
 "This edits the %(static)s config - it is global and needs a Traefik restart "
@@ -11092,13 +11584,13 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"This panel refetches every {seconds} second while the Logs tab is open and "
+"the browser tab is visible. It pauses while you are typing in the filter box."
+msgid_plural ""
 "This panel refetches every {seconds} seconds while the Logs tab is open and "
 "the browser tab is visible. It pauses while you are typing in the filter box."
-msgstr ""
-"Ce panneau récupère de nouveau les données toutes les {seconds} secondes "
-"lorsque l’onglet Journaux est ouvert et que l’onglet du navigateur est "
-"visible. L’actualisation est suspendue pendant la saisie dans le champ de "
-"filtre."
+msgstr[0] "Ce panneau récupère de nouveau les données à intervalle de {seconds} seconde lorsque l’onglet Journaux est ouvert et que l’onglet du navigateur est visible. L’actualisation est suspendue pendant la saisie dans le champ de filtre."
+msgstr[1] "Ce panneau récupère de nouveau les données toutes les {seconds} secondes lorsque l’onglet Journaux est ouvert et que l’onglet du navigateur est visible. L’actualisation est suspendue pendant la saisie dans le champ de filtre."
 
 #. Used in the browser
 #, python-brace-format
@@ -11203,6 +11695,12 @@ msgstr "Jeton fourni par BotFather. Il est stocké sous forme chiffrée."
 #. Used in the browser
 msgid "Too Many Requests"
 msgstr "Trop de requêtes"
+
+msgid "Too many failed sign-in attempts. Try again later."
+msgstr "Trop de tentatives de connexion échouées. Réessayez ultérieurement."
+
+msgid "Too many failed two-factor codes. Try again later."
+msgstr "Trop de codes à deux facteurs erronés. Réessayez ultérieurement."
 
 msgid "Too many requests to the agent, try again in a moment"
 msgstr "Trop de requêtes ont été envoyées à l’agent. Réessayez dans un instant"
@@ -11670,6 +12168,10 @@ msgid "Ukrainian"
 msgstr "Ukrainien"
 
 #. Used in the browser
+msgid "Unauthorized"
+msgstr "Non autorisé"
+
+#. Used in the browser
 msgid "Unavailable For Legal Reasons"
 msgstr "Indisponible pour des raisons juridiques"
 
@@ -11751,6 +12253,9 @@ msgstr "Type de média non pris en charge"
 
 msgid "Unsupported URL - use https://, http://, ssh:// or git://"
 msgstr "URL non prise en charge – utilisez https://, http://, ssh:// ou git://"
+
+msgid "Unsupported git repository URL scheme"
+msgstr "Schéma d’URL du dépôt Git non pris en charge"
 
 msgctxt "button"
 msgid "Unused"
@@ -12231,6 +12736,18 @@ msgstr "Zoom avant"
 msgid "Zoom out"
 msgstr "Zoom arrière"
 
+msgid ""
+"a catch-all router can be served any certificate, so nothing is called unused"
+msgstr "un routeur générique peut recevoir n’importe quel certificat, rien n’est donc signalé comme inutilisé"
+
+msgid "a config file could not be read, so nothing is called unused"
+msgstr "un fichier de configuration n’a pas pu être lu, rien n’est donc signalé comme inutilisé"
+
+msgid ""
+"a router matches hosts by regular expression, so its certificates cannot be "
+"worked out"
+msgstr "un routeur associe les hôtes par expression régulière, ses certificats ne peuvent donc pas être déterminés"
+
 #. Used in the browser
 msgid "access log off"
 msgstr "Journal d’accès désactivé"
@@ -12252,8 +12769,17 @@ msgstr "comptes {names}"
 msgid "acme.json Path"
 msgstr "Chemin vers acme.json"
 
+msgid "acme.json cannot be written here"
+msgstr "acme.json ne peut pas être écrit ici"
+
+msgid "acme.json is mounted read only"
+msgstr "acme.json est monté en lecture seule"
+
 msgid "acme.json is mounted read only on this agent"
 msgstr "acme.json est monté en lecture seule sur cet agent"
+
+msgid "acme.json is not mounted"
+msgstr "acme.json n’est pas monté"
 
 #. Used in the browser
 msgid "acme.json may be empty - certs are issued on first request."
@@ -12265,10 +12791,20 @@ msgstr ""
 msgid "acme.json not mounted"
 msgstr "acme.json non monté"
 
+#, python-format
+msgid "acme.json path refused: %(refused)s"
+msgstr "Chemin acme.json refusé : %(refused)s"
+
+#, python-format
+msgid "acme.json path: %(problem)s"
+msgstr "Chemin acme.json : %(problem)s"
+
 #. Used in the browser
 #, python-brace-format
-msgid "across {names_count} providers"
-msgstr "répartis entre {names_count} fournisseurs"
+msgid "across {n} provider"
+msgid_plural "across {n} providers"
+msgstr[0] "sur {n} fournisseur"
+msgstr[1] "sur {n} fournisseurs"
 
 #. Used in the browser
 #, python-brace-format
@@ -12316,6 +12852,14 @@ msgstr ""
 
 #. Used in the browser
 msgctxt "label"
+msgid "agent"
+msgstr "agent"
+
+msgid "agent rejected the middleware file write"
+msgstr "l’agent a refusé l’écriture du fichier de middleware"
+
+#. Used in the browser
+msgctxt "label"
 msgid "alert"
 msgstr "alerte"
 
@@ -12323,11 +12867,6 @@ msgstr "alerte"
 msgid "alert cap reached"
 msgstr "limite d’alertes atteinte"
 
-msgid "alerts"
-msgstr "alertes"
-
-#. Used in the browser
-msgctxt "label"
 msgid "alerts"
 msgstr "alertes"
 
@@ -12388,17 +12927,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "all {total} backends DOWN"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "all {total} servers down"
-msgstr ""
-
-#. Used in the browser
-msgid "and"
-msgstr ""
+msgid "all {n} server down"
+msgid_plural "all {n} servers down"
+msgstr[0] "{n} serveur indisponible sur {n}"
+msgstr[1] "les {n} serveurs indisponibles"
 
 #. Used in the browser
 msgid "another entry point"
@@ -12448,13 +12980,17 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "backend degraded, {up} of {total} servers up"
-msgstr ""
+msgid "backend degraded, {up} of {n} server up"
+msgid_plural "backend degraded, {up} of {n} servers up"
+msgstr[0] "backend dégradé : {up} sur {n} serveur actif"
+msgstr[1] "backend dégradé : {up} sur {n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
-msgid "backend down, 0 of {total} servers up"
-msgstr ""
+msgid "backend down, 0 of {n} server up"
+msgid_plural "backend down, 0 of {n} servers up"
+msgstr[0] "backend indisponible : 0 sur {n} serveur actif"
+msgstr[1] "backend indisponible : 0 sur {n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
@@ -12535,6 +13071,11 @@ msgid "base64-encoded HMAC key"
 msgstr ""
 
 #. Used in the browser
+msgctxt "label"
+msgid "blank"
+msgstr "vide"
+
+#. Used in the browser
 msgctxt "option"
 msgid "block"
 msgstr ""
@@ -12546,6 +13087,11 @@ msgstr ""
 #. Used in the browser
 msgid "browser string"
 msgstr ""
+
+#. Used in the browser
+msgctxt "label"
+msgid "bucket"
+msgstr "bucket"
 
 msgid "burst"
 msgstr "rafale"
@@ -12579,14 +13125,8 @@ msgid "cert resolver {certResolver}"
 msgstr ""
 
 #. Used in the browser
-msgctxt "label"
-msgid "certificate"
-msgstr ""
-
-#. Used in the browser
-msgctxt "label"
-msgid "certificates"
-msgstr ""
+msgid "cgnat address"
+msgstr "adresse CGNAT"
 
 #. Used in the browser
 msgid "check LAPI url"
@@ -12667,12 +13207,9 @@ msgid "copied"
 msgstr ""
 
 #. Used in the browser
-msgid "countries"
-msgstr ""
-
-#. Used in the browser
+msgctxt "label"
 msgid "country"
-msgstr ""
+msgstr "pays"
 
 #. Used in the browser
 #, python-brace-format
@@ -12722,6 +13259,11 @@ msgstr ""
 #. Used in the browser
 msgid "default 200"
 msgstr ""
+
+#. Used in the browser
+msgctxt "placeholder"
+msgid "default: Let's Encrypt production"
+msgstr "par défaut : Let's Encrypt production"
 
 #. Used in the browser
 msgctxt "button"
@@ -12847,7 +13389,9 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid "entry point {eps}"
-msgstr ""
+msgid_plural "entry points {eps}"
+msgstr[0] "point d’entrée {eps}"
+msgstr[1] "points d’entrée {eps}"
 
 #. Used in the browser
 msgid "entrypoints"
@@ -12857,6 +13401,11 @@ msgstr ""
 msgctxt "status"
 msgid "ep"
 msgstr ""
+
+#. Used in the browser
+msgctxt "label"
+msgid "error"
+msgstr "erreur"
 
 #. Used in the browser
 msgid "error only"
@@ -12935,6 +13484,10 @@ msgid "failing"
 msgstr ""
 
 #. Used in the browser
+msgid "failover service, health lives on its children"
+msgstr "service de basculement, l’état de santé est porté par ses services enfants"
+
+#. Used in the browser
 msgid "file off"
 msgstr ""
 
@@ -12966,10 +13519,6 @@ msgstr ""
 
 #. Used in the browser
 msgid "forwardedHeaders.insecure is on, any client can set X-Forwarded-For"
-msgstr ""
-
-#. Used in the browser
-msgid "from this host"
 msgstr ""
 
 #. Used in the browser
@@ -13013,8 +13562,13 @@ msgid "helper above can bulk-add Cloudflare ranges."
 msgstr ""
 
 #. Used in the browser
-msgid "highest random weight"
-msgstr ""
+msgid "highest random weight service, health lives on its children"
+msgstr "service à poids aléatoire le plus élevé, l’état de santé est porté par ses services enfants"
+
+#. Used in the browser
+msgctxt "label"
+msgid "host"
+msgstr "hôte"
 
 #. Used in the browser
 msgid "host GeoIP DB"
@@ -13091,6 +13645,9 @@ msgctxt "label"
 msgid "internal"
 msgstr "interne"
 
+msgid "invalid middleware file name"
+msgstr "nom de fichier de middleware non valide"
+
 #. Used in the browser
 msgid "json access log"
 msgstr ""
@@ -13110,13 +13667,17 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "last {b} lines{SD_SEP}{logAge}"
-msgstr ""
+msgid "last {b} line{SD_SEP}{logAge}"
+msgid_plural "last {b} lines{SD_SEP}{logAge}"
+msgstr[0] "{b} dernière ligne{SD_SEP}{logAge}"
+msgstr[1] "{b} dernières lignes{SD_SEP}{logAge}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "last{b}lines"
-msgstr ""
+msgid "last {n} line"
+msgid_plural "last {n} lines"
+msgstr[0] "{n} dernière ligne"
+msgstr[1] "{n} dernières lignes"
 
 #. Used in the browser
 msgctxt "label"
@@ -13127,6 +13688,11 @@ msgstr ""
 msgctxt "label"
 msgid "leaky"
 msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "leaky {capacity}/{leakspeed}"
+msgstr "à fuite {capacity}/{leakspeed}"
 
 #. Used in the browser
 #, python-brace-format
@@ -13148,14 +13714,20 @@ msgid "link local"
 msgstr ""
 
 #. Used in the browser
+msgid "link local address"
+msgstr "adresse de lien local"
+
+#. Used in the browser
 msgctxt "label"
 msgid "lists"
 msgstr "listes"
 
 #. Used in the browser
 #, python-brace-format
-msgid "load {wider} lines"
-msgstr ""
+msgid "load {wider} line"
+msgid_plural "load {wider} lines"
+msgstr[0] "charger {wider} ligne"
+msgstr[1] "charger {wider} lignes"
 
 #. Used in the browser
 #, python-brace-format
@@ -13186,6 +13758,10 @@ msgstr ""
 #. Used in the browser
 msgid "loopback"
 msgstr ""
+
+#. Used in the browser
+msgid "loopback address"
+msgstr "adresse de boucle locale"
 
 #. Used in the browser
 msgctxt "button"
@@ -13243,25 +13819,18 @@ msgstr "statistiques activées"
 msgid "metrics {provider}"
 msgstr ""
 
-#. Used in the browser
-msgctxt "label"
-msgid "middleware"
-msgstr ""
-
-#. Used in the browser
-msgid "middleware disabled"
-msgid_plural "middlewares disabled"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgid "middlewares"
-msgstr ""
+#, python-format
+msgid "middleware file not allowed: %(file)s"
+msgstr "fichier de middleware non autorisé : %(file)s"
 
 #. Used in the browser
 msgctxt "label"
 msgid "middlewares"
 msgstr ""
+
+#. Used in the browser
+msgid "middlewares could not be read from the Traefik API"
+msgstr "les middlewares n’ont pas pu être lus depuis l’API Traefik"
 
 #, python-format
 msgid "min_severity must be one of: %(channel_severities)s"
@@ -13272,13 +13841,8 @@ msgid "minimum time between config reloads (default 2s)"
 msgstr ""
 
 #. Used in the browser
-msgid "more"
-msgstr "plus"
-
-#. Used in the browser
-msgctxt "label"
-msgid "more"
-msgstr "plus"
+msgid "mirroring service, health lives on its children"
+msgstr "service en miroir, l’état de santé est porté par ses services enfants"
 
 #. Used in the browser
 #, python-brace-format
@@ -13304,6 +13868,11 @@ msgid "neither directory nor filename is set"
 msgstr ""
 
 #. Used in the browser
+msgctxt "label"
+msgid "network"
+msgstr "réseau"
+
+#. Used in the browser
 msgctxt "button"
 msgid "newer"
 msgstr ""
@@ -13316,6 +13885,15 @@ msgstr ""
 #. Used in the browser
 msgid "no HTTP meta"
 msgstr ""
+
+#. Used in the browser
+msgid "no HTTP routers configured"
+msgstr "aucun routeur HTTP configuré"
+
+#. Used in the browser
+#, python-brace-format
+msgid "no HTTP routers from provider {sdScope}"
+msgstr "aucun routeur HTTP du fournisseur {sdScope}"
 
 #. Used in the browser
 msgid "no HTTP scenario fired"
@@ -13469,6 +14047,15 @@ msgid "no method recorded"
 msgstr ""
 
 #. Used in the browser
+msgid "no middlewares configured"
+msgstr "aucun middleware configuré"
+
+#. Used in the browser
+#, python-brace-format
+msgid "no middlewares from provider {sdScope}"
+msgstr "aucun middleware du fournisseur {sdScope}"
+
+#. Used in the browser
 msgid "no network reached a scenario"
 msgstr ""
 
@@ -13500,6 +14087,10 @@ msgstr ""
 msgid "no resolver"
 msgstr ""
 
+msgid ""
+"no restart method is configured, and Traefik only reads acme.json at startup"
+msgstr "aucune méthode de redémarrage n’est configurée, et Traefik ne lit acme.json qu’au démarrage"
+
 #. Used in the browser
 msgid "no router binds this entry point"
 msgstr ""
@@ -13507,6 +14098,10 @@ msgstr ""
 #. Used in the browser
 msgid "no router in the evidence"
 msgstr ""
+
+#. Used in the browser
+msgid "no router named in this selection"
+msgstr "aucun routeur nommé dans cette sélection"
 
 #. Used in the browser
 msgid "no router on this server serves a domain this certificate covers"
@@ -13540,12 +14135,34 @@ msgid "no server errors"
 msgstr ""
 
 #. Used in the browser
+msgid "no service named in this selection"
+msgstr "aucun service nommé dans cette sélection"
+
+#. Used in the browser
+msgid "no services configured"
+msgstr "aucun service configuré"
+
+#. Used in the browser
+#, python-brace-format
+msgid "no services from provider {sdScope}"
+msgstr "aucun service du fournisseur {sdScope}"
+
+#. Used in the browser
 msgid "no sources"
 msgstr ""
 
 #. Used in the browser
 msgid "no status reported"
 msgstr ""
+
+#. Used in the browser
+msgid "no stream routers configured"
+msgstr "aucun routeur de flux configuré"
+
+#. Used in the browser
+#, python-brace-format
+msgid "no stream routers from provider {sdScope}"
+msgstr "aucun routeur de flux du fournisseur {sdScope}"
 
 #. Used in the browser
 msgid "no target meta reported"
@@ -13574,22 +14191,7 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "no {label} configured"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "no {label} from provider {sdScope}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "no {parser}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "no {what} named in this selection"
 msgstr ""
 
 #. Used in the browser
@@ -13621,8 +14223,11 @@ msgstr "n'est pas installé"
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"none of the {fetched} fetched line could be parsed as a Traefik access log"
+msgid_plural ""
 "none of the {fetched} fetched lines could be parsed as a Traefik access log"
-msgstr ""
+msgstr[0] "aucune ligne récupérée sur {fetched} n’a pu être interprétée comme un journal d’accès Traefik"
+msgstr[1] "aucune des {fetched} lignes récupérées n’a pu être interprétée comme un journal d’accès Traefik"
 
 #. Used in the browser
 #, fuzzy
@@ -13704,11 +14309,6 @@ msgid "ntfy.sh / self-hosted ntfy"
 msgstr ""
 
 #. Used in the browser
-#, python-brace-format
-msgid "of {retained} retained alerts match"
-msgstr ""
-
-#. Used in the browser
 #, fuzzy
 msgctxt "label"
 msgid "offline"
@@ -13716,13 +14316,18 @@ msgstr "hors ligne"
 
 #. Used in the browser
 #, python-brace-format
-msgid "ok{SD_SEP}{b} redirects"
-msgstr ""
+msgid "ok {path}"
+msgstr "ok {path}"
 
 #. Used in the browser
 msgctxt "button"
 msgid "older"
 msgstr ""
+
+#. Used in the browser
+msgctxt "label"
+msgid "one-shot"
+msgstr "ponctuel"
 
 #. Used in the browser
 msgctxt "button"
@@ -13769,6 +14374,11 @@ msgid "other"
 msgstr "autre"
 
 #. Used in the browser
+msgctxt "label"
+msgid "outcome"
+msgstr "résultat"
+
+#. Used in the browser
 msgid "over 2s"
 msgstr ""
 
@@ -13778,20 +14388,6 @@ msgstr ""
 
 msgid "own container environment"
 msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "owns {n} failure"
-msgid_plural "owns {n} failures"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "owns {n} warning"
-msgid_plural "owns {n} warnings"
-msgstr[0] ""
-msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
@@ -13822,13 +14418,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "pattern, {merged} paths folded"
-msgstr ""
-
-#. Used in the browser
-msgctxt "label"
-msgid "patterns"
-msgstr ""
+msgid "pattern, {merged} path folded"
+msgid_plural "pattern, {merged} paths folded"
+msgstr[0] "modèle, {merged} chemin regroupé"
+msgstr[1] "modèle, {merged} chemins regroupés"
 
 msgid "period"
 msgstr "période"
@@ -13856,16 +14449,6 @@ msgid "plaintext"
 msgstr ""
 
 #. Used in the browser
-msgctxt "label"
-msgid "plugin"
-msgstr ""
-
-#. Used in the browser
-msgid "plugins"
-msgstr ""
-
-#. Used in the browser
-msgctxt "label"
 msgid "plugins"
 msgstr ""
 
@@ -13875,6 +14458,10 @@ msgstr ""
 #. Used in the browser
 msgid "private"
 msgstr ""
+
+#. Used in the browser
+msgid "private address"
+msgstr "adresse privée"
 
 #. Used in the browser
 msgid "provider breakdown needs the object list"
@@ -13899,6 +14486,10 @@ msgstr ""
 msgid "public"
 msgstr ""
 
+#. Used in the browser
+msgid "public address"
+msgstr "adresse publique"
+
 msgid "quiet_hours must be HH:MM-HH:MM, for example 23:00-07:00"
 msgstr ""
 
@@ -13914,6 +14505,9 @@ msgstr ""
 msgctxt "label"
 msgid "ranges"
 msgstr ""
+
+msgid "rate limited by GitHub, retrying later"
+msgstr "limite de débit GitHub atteinte, nouvelle tentative ultérieure"
 
 #. Used in the browser
 msgid "raw TCP passthrough"
@@ -13940,6 +14534,10 @@ msgstr ""
 #, python-brace-format
 msgid "read {timeout}"
 msgstr ""
+
+#. Used in the browser
+msgid "read-only"
+msgstr "lecture seule"
 
 #. Used in the browser
 msgid "reads only"
@@ -13988,20 +14586,22 @@ msgid ""
 msgstr ""
 
 #. Used in the browser
-msgctxt "label"
-msgid "resolvers"
+msgid "resp header (0)"
 msgstr ""
 
 #. Used in the browser
-msgid "resp header (0)"
-msgstr ""
+msgid "response"
+msgstr "réponse"
 
 msgid "restore it under Dashboard settings"
 msgstr "le restaurer dans les paramètres du tableau de bord"
 
 #. Used in the browser
-msgid "retained alerts match every filter at once"
-msgstr ""
+#, python-brace-format
+msgid "retained {b} alert"
+msgid_plural "retained {b} alerts"
+msgstr[0] "{b} alerte conservée"
+msgstr[1] "{b} alertes conservées"
 
 #. Used in the browser
 #, python-brace-format
@@ -14018,31 +14618,14 @@ msgid "retry"
 msgstr ""
 
 #. Used in the browser
-msgid "route degraded"
-msgid_plural "routes degraded"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgid "route unreachable"
-msgid_plural "routes unreachable"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
+msgctxt "label"
 msgid "router"
-msgstr ""
+msgstr "routeur"
 
 #. Used in the browser
 #, python-brace-format
 msgid "router bindings for {name} could not be read from the Traefik API"
 msgstr ""
-
-#. Used in the browser
-msgid "router disabled"
-msgid_plural "routers disabled"
-msgstr[0] ""
-msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
@@ -14063,17 +14646,6 @@ msgstr ""
 
 #. Used in the browser
 msgid "router names"
-msgstr ""
-
-#. Used in the browser
-msgid "router warning"
-msgid_plural "router warnings"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgctxt "label"
-msgid "routers"
 msgstr ""
 
 #. Used in the browser
@@ -14102,6 +14674,11 @@ msgstr ""
 
 #. Used in the browser
 msgctxt "label"
+msgid "scenario"
+msgstr "scénario"
+
+#. Used in the browser
+msgctxt "label"
 msgid "scenarios"
 msgstr ""
 
@@ -14116,8 +14693,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "see the {decN} bans that do work"
-msgstr ""
+msgid "see the {decN} ban that does work"
+msgid_plural "see the {decN} bans that do work"
+msgstr[0] "voir le {decN} bannissement qui fonctionne"
+msgstr[1] "voir les {decN} bannissements qui fonctionnent"
 
 #. Used in the browser
 msgid "seen once"
@@ -14141,37 +14720,13 @@ msgid "service"
 msgstr ""
 
 #. Used in the browser
-msgid "service degraded"
-msgid_plural "services degraded"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgid "service disabled"
-msgid_plural "services disabled"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgid "service down"
-msgid_plural "services down"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgid "service warning"
-msgid_plural "service warnings"
-msgstr[0] ""
-msgstr[1] ""
-
-#. Used in the browser
-msgid "services"
-msgstr ""
-
-#. Used in the browser
 msgctxt "label"
 msgid "services"
 msgstr ""
+
+#. Used in the browser
+msgid "services could not be read from the Traefik API"
+msgstr "les services n’ont pas pu être lus depuis l’API Traefik"
 
 #. Used in the browser
 msgctxt "button"
@@ -14210,6 +14765,11 @@ msgstr ""
 
 #. Used in the browser
 msgctxt "label"
+msgid "source"
+msgstr "source"
+
+#. Used in the browser
+msgctxt "label"
 msgid "sources"
 msgstr ""
 
@@ -14236,16 +14796,16 @@ msgid "sticky"
 msgstr ""
 
 #. Used in the browser
-msgid "stream disabled"
-msgstr ""
-
-#. Used in the browser
 msgid "stream route, nothing to open"
 msgstr ""
 
 #. Used in the browser
 msgid "stream routers"
 msgstr ""
+
+#. Used in the browser
+msgid "stream routers could not be read from the Traefik API"
+msgstr "les routeurs de flux n’ont pas pu être lus depuis l’API Traefik"
 
 #. Used in the browser
 msgid "subscribed from a blocklist"
@@ -14259,6 +14819,11 @@ msgstr ""
 msgctxt "label"
 msgid "syncing…"
 msgstr ""
+
+#. Used in the browser
+msgctxt "label"
+msgid "target"
+msgstr "cible"
 
 #. Used in the browser
 msgid "target_user, the SSH counterpart of target_uri"
@@ -14303,37 +14868,30 @@ msgstr ""
 msgid "the remote host"
 msgstr ""
 
-#. Used in the browser
-#, python-brace-format
-msgid "the search {code}"
-msgstr ""
+msgid "the router list is incomplete, so nothing is called unused"
+msgstr "la liste des routeurs est incomplète, rien n’est donc signalé comme inutilisé"
 
 #. Used in the browser
 msgid "the server did not say why"
 msgstr ""
 
-#. Used in the browser
-#, python-brace-format
-msgid "the {b} protocol filter"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "the {b} provider filter"
-msgstr ""
+msgid "the static config is not readable, so resolvers cannot be checked"
+msgstr "la configuration statique n’est pas lisible, les résolveurs ne peuvent donc pas être vérifiés"
 
 #. Used in the browser
 msgid "this access log format carries no duration"
 msgstr ""
 
 #. Used in the browser
-#, python-brace-format
-msgid "this access log format names no {what}"
-msgstr ""
+msgid "this access log format names no router"
+msgstr "ce format de journal d’accès n’indique aucun routeur"
 
 #. Used in the browser
 msgid "this agent"
 msgstr ""
+
+msgid "this agent is too old to manage certificates"
+msgstr "cet agent est trop ancien pour gérer les certificats"
 
 #. Used in the browser
 #, python-brace-format
@@ -14343,6 +14901,9 @@ msgstr ""
 #. Used in the browser
 msgid "this alert carries no meta[]. cscli and blocklist alerts never do"
 msgstr ""
+
+msgid "this certificate names no domain"
+msgstr "ce certificat n’indique aucun domaine"
 
 #. Used in the browser
 msgid "this server"
@@ -14369,9 +14930,20 @@ msgid "tools"
 msgstr ""
 
 #. Used in the browser
-#, python-brace-format
-msgid "total from /api/overview, the {label} list is unavailable"
-msgstr ""
+msgid "total from /api/overview, the HTTP router list is unavailable"
+msgstr "total issu de /api/overview, la liste des routeurs HTTP est indisponible"
+
+#. Used in the browser
+msgid "total from /api/overview, the middleware list is unavailable"
+msgstr "total issu de /api/overview, la liste des middlewares est indisponible"
+
+#. Used in the browser
+msgid "total from /api/overview, the service list is unavailable"
+msgstr "total issu de /api/overview, la liste des services est indisponible"
+
+#. Used in the browser
+msgid "total from /api/overview, the stream router list is unavailable"
+msgstr "total issu de /api/overview, la liste des routeurs de flux est indisponible"
 
 #. Used in the browser
 msgid "tracing off"
@@ -14399,6 +14971,10 @@ msgstr ""
 #, python-brace-format
 msgid "trigger {capacity_0_fires}"
 msgstr ""
+
+#. Used in the browser
+msgid "tunnel"
+msgstr "tunnel"
 
 #. Used in the browser
 #, python-brace-format
@@ -14438,6 +15014,10 @@ msgstr ""
 msgctxt "label"
 msgid "unknown"
 msgstr ""
+
+#. Used in the browser
+msgid "unknown address"
+msgstr "adresse inconnue"
 
 #. Used in the browser
 msgid "unknown backend"
@@ -14497,22 +15077,6 @@ msgid "up {m}m"
 msgstr ""
 
 #. Used in the browser
-msgid "update available"
-msgstr ""
-
-#. Used in the browser
-msgid "updates available"
-msgstr ""
-
-#. Used in the browser
-msgid "upgrade"
-msgstr ""
-
-#. Used in the browser
-msgid "upgrades"
-msgstr ""
-
-#. Used in the browser
 msgid "upgrades only"
 msgstr ""
 
@@ -14564,6 +15128,11 @@ msgstr ""
 #. Used in the browser
 msgid "v3 (default)"
 msgstr ""
+
+#. Used in the browser
+msgctxt "label"
+msgid "verbs"
+msgstr "verbes"
 
 #. Used in the browser
 msgid "version check off"
@@ -14652,6 +15221,10 @@ msgid "websecure"
 msgstr ""
 
 #. Used in the browser
+msgid "weighted service, health lives on its children"
+msgstr "service pondéré, l’état de santé est porté par ses services enfants"
+
+#. Used in the browser
 msgctxt "label"
 msgid "wide"
 msgstr ""
@@ -14659,11 +15232,6 @@ msgstr ""
 #. Used in the browser
 msgctxt "label"
 msgid "window"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "window{SD_SEP}"
 msgstr ""
 
 #. Used in the browser
@@ -14682,13 +15250,17 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "worst {b} {ev} events"
-msgstr ""
+msgid "worst {b} {ev} event"
+msgid_plural "worst {b} {ev} events"
+msgstr[0] "pire : {b} ({ev} événement)"
+msgstr[1] "pire : {b} ({ev} événements)"
 
 #. Used in the browser
 #, python-brace-format
-msgid "worst {b} {n} alerts"
-msgstr ""
+msgid "worst {b} {n} alert"
+msgid_plural "worst {b} {n} alerts"
+msgstr[0] "pire : {b} ({n} alerte)"
+msgstr[1] "pire : {b} ({n} alertes)"
 
 #. Used in the browser
 msgid "write (0)"
@@ -14706,8 +15278,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{activeCount} of {serverEntries_count} servers up"
-msgstr ""
+msgid "{activeCount} of {n} server up"
+msgid_plural "{activeCount} of {n} servers up"
+msgstr[0] "{activeCount} sur {n} serveur actif"
+msgstr[1] "{activeCount} sur {n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
@@ -14721,8 +15295,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{alerts_count} of {retained} retained alerts"
-msgstr ""
+msgid "{alerts_count} of {retained} retained alert"
+msgid_plural "{alerts_count} of {retained} retained alerts"
+msgstr[0] "{alerts_count} sur {retained} alerte conservée"
+msgstr[1] "{alerts_count} sur {retained} alertes conservées"
 
 #. Used in the browser
 #, python-brace-format
@@ -14747,26 +15323,29 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{banned_count} source holds an active ban raised by your own scenarios. "
+"Nothing to do about it"
+msgid_plural ""
 "{banned_count} sources hold an active ban raised by your own scenarios. "
 "Nothing to do about these"
-msgstr ""
+msgstr[0] "{banned_count} source fait l’objet d’un bannissement actif déclenché par vos propres scénarios. Aucune action n’est nécessaire"
+msgstr[1] "{banned_count} sources font l’objet d’un bannissement actif déclenché par vos propres scénarios. Aucune action n’est nécessaire"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{bots_count} agent names a tool outright. The rest are copied browser "
+"strings, which tells you the operator bothered to lie"
+msgid_plural ""
 "{bots_count} agents name a tool outright. The rest are copied browser "
 "strings, which tells you the operator bothered to lie"
-msgstr ""
+msgstr[0] "{bots_count} agent utilisateur nomme directement un outil. Les autres sont des chaînes de navigateur copiées, ce qui montre que l’opérateur a pris la peine de mentir"
+msgstr[1] "{bots_count} agents utilisateurs nomment directement un outil. Les autres sont des chaînes de navigateur copiées, ce qui montre que l’opérateur a pris la peine de mentir"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{composite} service, health lives on its children"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{count} HTTP"
-msgstr ""
+msgid "{b} ok"
+msgstr "{b} ok"
 
 #. Used in the browser
 #, python-brace-format
@@ -14831,7 +15410,9 @@ msgstr[1] ""
 #. Used in the browser
 #, python-brace-format
 msgid "{count} composite"
-msgstr ""
+msgid_plural "{count} composite"
+msgstr[0] "{count} composite"
+msgstr[1] "{count} composites"
 
 #. Used in the browser
 #, python-brace-format
@@ -14877,11 +15458,6 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{count} domains"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "{count} entry"
 msgid_plural "{count} entries"
 msgstr[0] ""
@@ -14896,13 +15472,10 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{count} from sources with no active ban"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "{count} healthy"
-msgstr ""
+msgid_plural "{count} healthy"
+msgstr[0] "{count} en bon état"
+msgstr[1] "{count} en bon état"
 
 #. Used in the browser
 #, python-brace-format
@@ -14910,11 +15483,6 @@ msgid "{count} hit"
 msgid_plural "{count} hits"
 msgstr[0] ""
 msgstr[1] ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{count} idle"
-msgstr ""
 
 #. Used in the browser
 #, python-brace-format
@@ -15023,25 +15591,25 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{count} objects"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{count} of them degraded"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{count} of them down"
-msgstr ""
+msgid ""
+"{count} of the {n} request to {path} returned {status} {lgStatusName} ({pct}"
+"%). Click to filter the log list to just those."
+msgid_plural ""
+"{count} of the {n} requests to {path} returned {status} {lgStatusName} ({pct}"
+"%). Click to filter the log list to just those."
+msgstr[0] "{count} sur {n} requête vers {path} a renvoyé {status} {lgStatusName} ({pct}%). Cliquez pour n’afficher que celles-ci dans la liste des journaux."
+msgstr[1] "{count} sur {n} requêtes vers {path} ont renvoyé {status} {lgStatusName} ({pct}%). Cliquez pour n’afficher que celles-ci dans la liste des journaux."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{count} of them matches every filter on this row at once. Click to drop the "
+"filters."
+msgid_plural ""
 "{count} of them match every filter on this row at once. Click to drop the "
 "filters."
-msgstr ""
+msgstr[0] "{count} d’entre elles correspond à tous les filtres de cette ligne à la fois. Cliquez pour supprimer les filtres."
+msgstr[1] "{count} d’entre elles correspondent à tous les filtres de cette ligne à la fois. Cliquez pour supprimer les filtres."
 
 #. Used in the browser
 #, python-brace-format
@@ -15065,6 +15633,13 @@ msgid ""
 "for them on startup. Let's Encrypt allows five identical certificates per "
 "week."
 msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} of {n} request to {path} failed"
+msgid_plural "{count} of {n} requests to {path} failed"
+msgstr[0] "{count} sur {n} requête vers {path} a échoué"
+msgstr[1] "{count} sur {n} requêtes vers {path} ont échoué"
 
 #. Used in the browser
 #, python-brace-format
@@ -15196,13 +15771,10 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{count} stream"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "{count} subscribed"
-msgstr ""
+msgid_plural "{count} subscribed"
+msgstr[0] "{count} par abonnement"
+msgstr[1] "{count} par abonnement"
 
 #. Used in the browser
 #, python-brace-format
@@ -15214,7 +15786,9 @@ msgstr[1] ""
 #. Used in the browser
 #, python-brace-format
 msgid "{count} unchecked"
-msgstr ""
+msgid_plural "{count} unchecked"
+msgstr[0] "{count} non vérifié"
+msgstr[1] "{count} non vérifiés"
 
 #. Used in the browser
 #, python-brace-format
@@ -15226,17 +15800,23 @@ msgstr[1] ""
 #. Used in the browser
 #, python-brace-format
 msgid "{count} unreported"
-msgstr ""
+msgid_plural "{count} unreported"
+msgstr[0] "{count} non signalé"
+msgstr[1] "{count} non signalés"
 
 #. Used in the browser
 #, python-brace-format
 msgid "{count} untimed"
-msgstr ""
+msgid_plural "{count} untimed"
+msgstr[0] "{count} non chronométrée"
+msgstr[1] "{count} non chronométrées"
 
 #. Used in the browser
 #, python-brace-format
 msgid "{count} unused"
-msgstr ""
+msgid_plural "{count} unused"
+msgstr[0] "{count} inutilisé"
+msgstr[1] "{count} inutilisés"
 
 #. Used in the browser
 #, python-brace-format
@@ -15247,25 +15827,17 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{count} upgrade, longest {span}"
+msgid_plural "{count} upgrades, longest {span}"
+msgstr[0] "{count} mise à niveau, la plus longue : {span}"
+msgstr[1] "{count} mises à niveau, la plus longue : {span}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{count} warning"
 msgid_plural "{count} warnings"
 msgstr[0] ""
 msgstr[1] ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{count} {objects}: {details}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{count} {upgrades}, longest {span}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{critical} expiring within 7 days"
-msgstr ""
 
 #. Used in the browser
 #, python-brace-format
@@ -15296,18 +15868,24 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{down} of {total} backends DOWN"
-msgstr ""
+msgid "{down} of {n} backend DOWN"
+msgid_plural "{down} of {n} backends DOWN"
+msgstr[0] "{down} sur {n} backend INDISPONIBLE"
+msgstr[1] "{down} sur {n} backends INDISPONIBLES"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{down} of {total} backends down"
-msgstr ""
+msgid "{down} of {n} backend down"
+msgid_plural "{down} of {n} backends down"
+msgstr[0] "{down} sur {n} backend indisponible"
+msgstr[1] "{down} sur {n} backends indisponibles"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{down} of {total} servers down"
-msgstr ""
+msgid "{down} of {n} server down"
+msgid_plural "{down} of {n} servers down"
+msgstr[0] "{down} sur {n} serveur indisponible"
+msgstr[1] "{down} sur {n} serveurs indisponibles"
 
 #. Used in the browser
 #, python-brace-format
@@ -15331,13 +15909,17 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{error} of {n} requests failed, most often {status} {name}."
-msgstr ""
+msgid "{error} of {n} request failed, most often {status} {name}."
+msgid_plural "{error} of {n} requests failed, most often {status} {name}."
+msgstr[0] "{error} sur {n} requête a échoué, le plus souvent {status} {name}."
+msgstr[1] "{error} sur {n} requêtes ont échoué, le plus souvent {status} {name}."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{error} of {n} requests failed."
-msgstr ""
+msgid "{error} of {n} request failed."
+msgid_plural "{error} of {n} requests failed."
+msgstr[0] "{error} sur {n} requête a échoué."
+msgstr[1] "{error} sur {n} requêtes ont échoué."
 
 #. Used in the browser
 #, python-brace-format
@@ -15351,13 +15933,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{evTotal} events rolled up"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{expiring} expiring within 30 days"
-msgstr ""
+msgid "{evTotal} event rolled up"
+msgid_plural "{evTotal} events rolled up"
+msgstr[0] "{evTotal} événement regroupé"
+msgstr[1] "{evTotal} événements regroupés"
 
 #. Used in the browser
 #, python-brace-format
@@ -15368,22 +15947,14 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{fails_count} of {total} requests"
-msgstr ""
+msgid "{fails_count} of {total} request"
+msgid_plural "{fails_count} of {total} requests"
+msgstr[0] "{fails_count} sur {total} requête"
+msgstr[1] "{fails_count} sur {total} requêtes"
 
 #. Used in the browser
 #, python-brace-format
 msgid "{fallback} (not found)"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{filters} matches none of them."
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{filters} together match none of them."
 msgstr ""
 
 #. Used in the browser
@@ -15403,37 +15974,26 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{found_count} to look at"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{fresh_count} new notifications"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
 msgid "{from} stays as it is in {file}"
 msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{from}-{to} of {total}"
-msgstr ""
+msgid "{from}-{to} of {total} alert"
+msgid_plural "{from}-{to} of {total} alerts"
+msgstr[0] "{from}-{to} sur {total} alerte"
+msgstr[1] "{from}-{to} sur {total} alertes"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{from}-{to} of {total} decision"
+msgid_plural "{from}-{to} of {total} decisions"
+msgstr[0] "{from}-{to} sur {total} décision"
+msgstr[1] "{from}-{to} sur {total} décisions"
 
 #. Used in the browser
 #, python-brace-format
 msgid "{hiddenCount} hidden"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{hidden} more objects not drawn individually"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{hosts} hosts in the rule, the first is used"
 msgstr ""
 
 #. Used in the browser
@@ -15448,12 +16008,37 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{items} and {count} more"
-msgstr ""
+msgid "{ip}, cgnat address"
+msgstr "{ip}, adresse CGNAT"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{items} and {last}"
+msgid "{ip}, link local address"
+msgstr "{ip}, adresse de lien local"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{ip}, loopback address"
+msgstr "{ip}, adresse de boucle locale"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{ip}, private address"
+msgstr "{ip}, adresse privée"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{ip}, public address"
+msgstr "{ip}, adresse publique"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{ip}, unknown address"
+msgstr "{ip}, adresse inconnue"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{items} and {count} more"
 msgstr ""
 
 #. Used in the browser
@@ -15489,13 +16074,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{label} ({merged} paths folded into this pattern)"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{label} could not be read from the Traefik API"
-msgstr ""
+msgid "{label} ({merged} path folded into this pattern)"
+msgid_plural "{label} ({merged} paths folded into this pattern)"
+msgstr[0] "{label} ({merged} chemin regroupé dans ce modèle)"
+msgstr[1] "{label} ({merged} chemins regroupés dans ce modèle)"
 
 #. Used in the browser
 #, python-brace-format
@@ -15508,6 +16090,16 @@ msgstr ""
 #, python-brace-format
 msgid "{label} must be at least 8 characters."
 msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "{label}: {count}"
+msgstr "{label} : {count}"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{label}: {n}"
+msgstr "{label} : {n}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15524,14 +16116,23 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{loose_count} source tripped a scenario and holds no active decision right "
+"now. Usually an expired ban rather than a miss"
+msgid_plural ""
 "{loose_count} sources tripped a scenario and hold no active decision right "
 "now. Usually an expired ban rather than a miss"
-msgstr ""
+msgstr[0] "{loose_count} source a déclenché un scénario et ne fait l’objet d’aucune décision active pour le moment. Il s’agit généralement d’un bannissement expiré plutôt que d’un oubli"
+msgstr[1] "{loose_count} sources ont déclenché un scénario et ne font l’objet d’aucune décision active pour le moment. Il s’agit généralement d’un bannissement expiré plutôt que d’un oubli"
 
 #. Used in the browser
 #, python-brace-format
 msgid "{max} in use"
 msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "{more} ({total})"
+msgstr "{more} ({total})"
 
 #. Used in the browser
 #, python-brace-format
@@ -15555,18 +16156,40 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{nBackends} backends, load balanced"
-msgstr ""
+msgid "{name} - {count} request, {pct}%"
+msgid_plural "{name} - {count} requests, {pct}%"
+msgstr[0] "{name} - {count} requête, {pct}%"
+msgstr[1] "{name} - {count} requêtes, {pct}%"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{name} - {count} requests, {pct}%"
-msgstr ""
+msgid "{name} - {n} alert, {pct}%, every source banned."
+msgid_plural "{name} - {n} alerts, {pct}%, every source banned."
+msgstr[0] "{name} - {n} alerte, {pct}%, toutes les sources sont bannies."
+msgstr[1] "{name} - {n} alertes, {pct}%, toutes les sources sont bannies."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{name} - {count}, {pct}%"
-msgstr ""
+msgid "{name} - {n} alert, {pct}%, {open} from sources with no active ban."
+msgid_plural ""
+"{name} - {n} alerts, {pct}%, {open} from sources with no active ban."
+msgstr[0] "{name} - {n} alerte, {pct}%, dont {open} provenant de sources sans bannissement actif."
+msgstr[1] "{name} - {n} alertes, {pct}%, dont {open} provenant de sources sans bannissement actif."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{name} - {n} hit, {pct}%, every source banned."
+msgid_plural "{name} - {n} hits, {pct}%, every source banned."
+msgstr[0] "{name} - {n} occurrence, {pct}%, toutes les sources sont bannies."
+msgstr[1] "{name} - {n} occurrences, {pct}%, toutes les sources sont bannies."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{name} - {n} hit, {pct}%, {open} from sources with no active ban."
+msgid_plural ""
+"{name} - {n} hits, {pct}%, {open} from sources with no active ban."
+msgstr[0] "{name} - {n} occurrence, {pct}%, dont {open} provenant de sources sans bannissement actif."
+msgstr[1] "{name} - {n} occurrences, {pct}%, dont {open} provenant de sources sans bannissement actif."
 
 #. Used in the browser
 #, python-brace-format
@@ -15624,6 +16247,14 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{name}, defined in {file}, used by {count} route including {routes}"
+msgid_plural ""
+"{name}, defined in {file}, used by {count} routes including {routes}"
+msgstr[0] "{name}, défini dans {file}, utilisé par {count} route, dont {routes}"
+msgstr[1] "{name}, défini dans {file}, utilisé par {count} routes, dont {routes}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{name}, defined in {file}, used by {count} route: {routes}"
 msgid_plural "{name}, defined in {file}, used by {count} routes: {routes}"
 msgstr[0] ""
@@ -15631,29 +16262,154 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{name}, defined in {file}, used by {count} routes including {routes}"
-msgstr ""
+msgid ""
+"{name}: {count} of {n} request in this window ({pct}%), {failed} failed."
+msgid_plural ""
+"{name}: {count} of {n} requests in this window ({pct}%), {failed} failed."
+msgstr[0] "{name} : {count} sur {n} requête dans cette période ({pct}%), {failed} en échec."
+msgstr[1] "{name} : {count} sur {n} requêtes dans cette période ({pct}%), {failed} en échec."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{name}: {count} of {n} request in this window ({pct}%)."
+msgid_plural "{name}: {count} of {n} requests in this window ({pct}%)."
+msgstr[0] "{name} : {count} sur {n} requête dans cette période ({pct}%)."
+msgstr[1] "{name} : {count} sur {n} requêtes dans cette période ({pct}%)."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} HTTP"
+msgid_plural "{n} HTTP"
+msgstr[0] "{n} HTTP"
+msgstr[1] "{n} HTTP"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} HTTP route"
+msgid_plural "{n} HTTP routes"
+msgstr[0] "{n} route HTTP"
+msgstr[1] "{n} routes HTTP"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"{name}: {n} of {total} requests in this window ({pct}%), {failed} failed."
-msgstr ""
+"{n} HTTP router reported by /api/overview, the object list could not be read"
+msgid_plural ""
+"{n} HTTP routers reported by /api/overview, the object list could not be read"
+msgstr[0] "{n} routeur HTTP signalé par /api/overview, la liste des objets n’a pas pu être lue"
+msgstr[1] "{n} routeurs HTTP signalés par /api/overview, la liste des objets n’a pas pu être lue"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{name}: {n} of {total} requests in this window ({pct}%)."
-msgstr ""
+msgid "{n} HTTP router: {details}"
+msgid_plural "{n} HTTP routers: {details}"
+msgstr[0] "{n} routeur HTTP : {details}"
+msgstr[1] "{n} routeurs HTTP : {details}"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{n} alerts named {key}. Click to filter the evidence below"
-msgstr ""
+msgid "{n} TCP route"
+msgid_plural "{n} TCP routes"
+msgstr[0] "{n} route TCP"
+msgstr[1] "{n} routes TCP"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{n} alerts used {key}. Click to filter the evidence below"
-msgstr ""
+msgid "{n} UDP route"
+msgid_plural "{n} UDP routes"
+msgstr[0] "{n} route UDP"
+msgstr[1] "{n} routes UDP"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} account"
+msgid_plural "{n} accounts"
+msgstr[0] "{n} compte"
+msgstr[1] "{n} comptes"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} alert"
+msgid_plural "{n} alerts"
+msgstr[0] "{n} alerte"
+msgstr[1] "{n} alertes"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} alert named {key}. Click to filter the evidence below"
+msgid_plural "{n} alerts named {key}. Click to filter the evidence below"
+msgstr[0] "{n} alerte nommée {key}. Cliquez pour filtrer les preuves ci-dessous"
+msgstr[1] "{n} alertes nommées {key}. Cliquez pour filtrer les preuves ci-dessous"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} alert readable"
+msgid_plural "{n} alerts readable"
+msgstr[0] "{n} alerte lisible"
+msgstr[1] "{n} alertes lisibles"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} alert used {key}. Click to filter the evidence below"
+msgid_plural "{n} alerts used {key}. Click to filter the evidence below"
+msgstr[0] "{n} alerte a utilisé {key}. Cliquez pour filtrer les preuves ci-dessous"
+msgstr[1] "{n} alertes ont utilisé {key}. Cliquez pour filtrer les preuves ci-dessous"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} backend"
+msgid_plural "{n} backends"
+msgstr[0] "{n} backend"
+msgstr[1] "{n} backends"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} backend, load balanced"
+msgid_plural "{n} backends, load balanced"
+msgstr[0] "{n} backend, avec répartition de charge"
+msgstr[1] "{n} backends, avec répartition de charge"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} ban"
+msgid_plural "{n} bans"
+msgstr[0] "{n} bannissement"
+msgstr[1] "{n} bannissements"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} ban in force"
+msgid_plural "{n} bans in force"
+msgstr[0] "{n} bannissement en vigueur"
+msgstr[1] "{n} bannissements en vigueur"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} ban standing"
+msgid_plural "{n} bans standing"
+msgstr[0] "{n} bannissement toujours en vigueur"
+msgstr[1] "{n} bannissements toujours en vigueur"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} certificate"
+msgid_plural "{n} certificates"
+msgstr[0] "{n} certificat"
+msgstr[1] "{n} certificats"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} certificate expiring within 30 days"
+msgid_plural "{n} certificates expiring within 30 days"
+msgstr[0] "{n} certificat expirant dans les 30 jours"
+msgstr[1] "{n} certificats expirant dans les 30 jours"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} certificate expiring within 7 days"
+msgid_plural "{n} certificates expiring within 7 days"
+msgstr[0] "{n} certificat expirant dans les 7 jours"
+msgstr[1] "{n} certificats expirant dans les 7 jours"
 
 #. Used in the browser
 #, python-brace-format
@@ -15664,6 +16420,99 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{n} composite service"
+msgid_plural "{n} composite services"
+msgstr[0] "{n} service composite"
+msgstr[1] "{n} services composites"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} degraded"
+msgid_plural "{n} degraded"
+msgstr[0] "{n} dégradé"
+msgstr[1] "{n} dégradés"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} down"
+msgid_plural "{n} down"
+msgstr[0] "{n} indisponible"
+msgstr[1] "{n} indisponibles"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} event"
+msgid_plural "{n} events"
+msgstr[0] "{n} événement"
+msgstr[1] "{n} événements"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} from this host"
+msgid_plural "{n} from this host"
+msgstr[0] "{n} de cet hôte"
+msgstr[1] "{n} de cet hôte"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} from {provider}"
+msgid_plural "{n} from {provider}"
+msgstr[0] "{n} de {provider}"
+msgstr[1] "{n} de {provider}"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} host in the rule, the first is used"
+msgid_plural "{n} hosts in the rule, the first is used"
+msgstr[0] "{n} hôte dans la règle, le premier est utilisé"
+msgstr[1] "{n} hôtes dans la règle, le premier est utilisé"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} idle"
+msgid_plural "{n} idle"
+msgstr[0] "{n} inactif"
+msgstr[1] "{n} inactifs"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} middleware"
+msgid_plural "{n} middlewares"
+msgstr[0] "{n} middleware"
+msgstr[1] "{n} middlewares"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} middleware disabled"
+msgid_plural "{n} middlewares disabled"
+msgstr[0] "{n} middleware désactivé"
+msgstr[1] "{n} middlewares désactivés"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{n} middleware reported by /api/overview, the object list could not be read"
+msgid_plural ""
+"{n} middlewares reported by /api/overview, the object list could not be read"
+msgstr[0] "{n} middleware signalé par /api/overview, la liste des objets n’a pas pu être lue"
+msgstr[1] "{n} middlewares signalés par /api/overview, la liste des objets n’a pas pu être lue"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} middleware warning"
+msgid_plural "{n} middleware warnings"
+msgstr[0] "{n} avertissement de middleware"
+msgstr[1] "{n} avertissements de middleware"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} middleware: {details}"
+msgid_plural "{n} middlewares: {details}"
+msgstr[0] "{n} middleware : {details}"
+msgstr[1] "{n} middlewares : {details}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{n} middleware: {names}"
 msgid_plural "{n} middlewares: {names}"
 msgstr[0] ""
@@ -15671,36 +16520,183 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{n} more"
+msgid_plural "{n} more"
+msgstr[0] "{n} supplémentaire"
+msgstr[1] "{n} supplémentaires"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} more object not drawn individually"
+msgid_plural "{n} more objects not drawn individually"
+msgstr[0] "{n} autre objet non représenté individuellement"
+msgstr[1] "{n} autres objets non représentés individuellement"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} new notification"
+msgid_plural "{n} new notifications"
+msgstr[0] "{n} nouvelle notification"
+msgstr[1] "{n} nouvelles notifications"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} object"
+msgid_plural "{n} objects"
+msgstr[0] "{n} objet"
+msgstr[1] "{n} objets"
+
+#. Used in the browser
+#, python-brace-format
 msgid ""
-"{n} of the {denom} requests to {path} returned {status} {lgStatusName} ({pct}"
-"%). Click to filter the log list to just those."
-msgstr ""
+"{n} object is counted in the totals but was not returned by the list "
+"endpoint, so it is missing from the strips and provider counts."
+msgid_plural ""
+"{n} objects are counted in the totals but were not returned by the list "
+"endpoint, so they are missing from the strips and provider counts."
+msgstr[0] "{n} objet est compté dans les totaux mais n’a pas été renvoyé par le point de terminaison de liste ; il est donc absent des bandeaux et des totaux par fournisseur."
+msgstr[1] "{n} objets sont comptés dans les totaux mais n’ont pas été renvoyés par le point de terminaison de liste ; ils sont donc absents des bandeaux et des totaux par fournisseur."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{n} of {denom} requests to {path} failed"
-msgstr ""
+msgid "{n} of them has a warning."
+msgid_plural "{n} of them have warnings."
+msgstr[0] "{n} d’entre eux présente un avertissement."
+msgstr[1] "{n} d’entre eux présentent des avertissements."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{n} requests"
-msgstr ""
+msgid "{n} of them is failing."
+msgid_plural "{n} of them are failing."
+msgstr[0] "{n} d’entre eux est en échec."
+msgstr[1] "{n} d’entre eux sont en échec."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{n} requests from {v1} addresses. Click to filter the log list."
-msgstr ""
+msgid "{n} of {n} backend DOWN"
+msgid_plural "all {n} backends DOWN"
+msgstr[0] "{n} backend INDISPONIBLE sur {n}"
+msgstr[1] "les {n} backends INDISPONIBLES"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{n} requests handled by the {p} provider. Click to filter the log list."
-msgstr ""
+msgid "{n} path"
+msgid_plural "{n} paths"
+msgstr[0] "{n} chemin"
+msgstr[1] "{n} chemins"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} pattern"
+msgid_plural "{n} patterns"
+msgstr[0] "{n} modèle"
+msgstr[1] "{n} modèles"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} range"
+msgid_plural "{n} ranges"
+msgstr[0] "{n} plage"
+msgstr[1] "{n} plages"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} redirect"
+msgid_plural "{n} redirects"
+msgstr[0] "{n} redirection"
+msgstr[1] "{n} redirections"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request"
+msgid_plural "{n} requests"
+msgstr[0] "{n} requête"
+msgstr[1] "{n} requêtes"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request from cgnat addresses. Click to filter the log list."
+msgid_plural "{n} requests from cgnat addresses. Click to filter the log list."
+msgstr[0] "{n} requête provenant d’adresses CGNAT. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes provenant d’adresses CGNAT. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request from link local addresses. Click to filter the log list."
+msgid_plural ""
+"{n} requests from link local addresses. Click to filter the log list."
+msgstr[0] "{n} requête provenant d’adresses de lien local. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes provenant d’adresses de lien local. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request from loopback addresses. Click to filter the log list."
+msgid_plural ""
+"{n} requests from loopback addresses. Click to filter the log list."
+msgstr[0] "{n} requête provenant d’adresses de boucle locale. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes provenant d’adresses de boucle locale. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request from private addresses. Click to filter the log list."
+msgid_plural ""
+"{n} requests from private addresses. Click to filter the log list."
+msgstr[0] "{n} requête provenant d’adresses privées. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes provenant d’adresses privées. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request from public addresses. Click to filter the log list."
+msgid_plural ""
+"{n} requests from public addresses. Click to filter the log list."
+msgstr[0] "{n} requête provenant d’adresses publiques. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes provenant d’adresses publiques. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request from unknown addresses. Click to filter the log list."
+msgid_plural ""
+"{n} requests from unknown addresses. Click to filter the log list."
+msgstr[0] "{n} requête provenant d’adresses inconnues. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes provenant d’adresses inconnues. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} request handled by the {p} provider. Click to filter the log list."
+msgid_plural ""
+"{n} requests handled by the {p} provider. Click to filter the log list."
+msgstr[0] "{n} requête traitée par le fournisseur {p}. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes traitées par le fournisseur {p}. Cliquez pour filtrer la liste des journaux."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{n} request returned {code} {lgStatusName}. Click to filter the log list."
+msgid_plural ""
 "{n} requests returned {code} {lgStatusName}. Click to filter the log list."
-msgstr ""
+msgstr[0] "{n} requête a renvoyé {code} {lgStatusName}. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{n} requêtes ont renvoyé {code} {lgStatusName}. Cliquez pour filtrer la liste des journaux."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} resolver"
+msgid_plural "{n} resolvers"
+msgstr[0] "{n} résolveur"
+msgstr[1] "{n} résolveurs"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} retry"
+msgid_plural "{n} retries"
+msgstr[0] "{n} nouvelle tentative"
+msgstr[1] "{n} nouvelles tentatives"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} route degraded"
+msgid_plural "{n} routes degraded"
+msgstr[0] "{n} route dégradée"
+msgstr[1] "{n} routes dégradées"
 
 #. Used in the browser
 #, python-brace-format
@@ -15725,10 +16721,156 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{n} route unreachable"
+msgid_plural "{n} routes unreachable"
+msgstr[0] "{n} route inaccessible"
+msgstr[1] "{n} routes inaccessibles"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} router"
+msgid_plural "{n} routers"
+msgstr[0] "{n} routeur"
+msgstr[1] "{n} routeurs"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} router bound to no entry point"
+msgid_plural "{n} routers bound to no entry point"
+msgstr[0] "{n} routeur sans point d’entrée"
+msgstr[1] "{n} routeurs sans point d’entrée"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} router disabled"
+msgid_plural "{n} routers disabled"
+msgstr[0] "{n} routeur désactivé"
+msgstr[1] "{n} routeurs désactivés"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} router warning"
+msgid_plural "{n} router warnings"
+msgstr[0] "{n} avertissement de routeur"
+msgstr[1] "{n} avertissements de routeur"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} router with no reported status"
+msgid_plural "{n} routers with no reported status"
+msgstr[0] "{n} routeur sans état signalé"
+msgstr[1] "{n} routeurs sans état signalé"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} scenario"
+msgid_plural "{n} scenarios"
+msgstr[0] "{n} scénario"
+msgstr[1] "{n} scénarios"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{n} server"
 msgid_plural "{n} servers"
 msgstr[0] ""
 msgstr[1] ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} service degraded"
+msgid_plural "{n} services degraded"
+msgstr[0] "{n} service dégradé"
+msgstr[1] "{n} services dégradés"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} service disabled"
+msgid_plural "{n} services disabled"
+msgstr[0] "{n} service désactivé"
+msgstr[1] "{n} services désactivés"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} service down"
+msgid_plural "{n} services down"
+msgstr[0] "{n} service indisponible"
+msgstr[1] "{n} services indisponibles"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{n} service reported by /api/overview, the object list could not be read"
+msgid_plural ""
+"{n} services reported by /api/overview, the object list could not be read"
+msgstr[0] "{n} service signalé par /api/overview, la liste des objets n’a pas pu être lue"
+msgstr[1] "{n} services signalés par /api/overview, la liste des objets n’a pas pu être lue"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} service warning"
+msgid_plural "{n} service warnings"
+msgstr[0] "{n} avertissement de service"
+msgstr[1] "{n} avertissements de service"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} service: {details}"
+msgid_plural "{n} services: {details}"
+msgstr[0] "{n} service : {details}"
+msgstr[1] "{n} services : {details}"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} source"
+msgid_plural "{n} sources"
+msgstr[0] "{n} source"
+msgstr[1] "{n} sources"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} source with no active ban"
+msgid_plural "{n} sources with no active ban"
+msgstr[0] "{n} source sans bannissement actif"
+msgstr[1] "{n} sources sans bannissement actif"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} stream"
+msgid_plural "{n} stream"
+msgstr[0] "{n} flux"
+msgstr[1] "{n} flux"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} stream router disabled"
+msgid_plural "{n} stream routers disabled"
+msgstr[0] "{n} routeur de flux désactivé"
+msgstr[1] "{n} routeurs de flux désactivés"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{n} stream router reported by /api/overview, the object list could not be "
+"read"
+msgid_plural ""
+"{n} stream routers reported by /api/overview, the object list could not be "
+"read"
+msgstr[0] "{n} routeur de flux signalé par /api/overview, la liste des objets n’a pas pu être lue"
+msgstr[1] "{n} routeurs de flux signalés par /api/overview, la liste des objets n’a pas pu être lue"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} stream router warning"
+msgid_plural "{n} stream router warnings"
+msgstr[0] "{n} avertissement de routeur de flux"
+msgstr[1] "{n} avertissements de routeur de flux"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} stream router: {details}"
+msgid_plural "{n} stream routers: {details}"
+msgstr[0] "{n} routeur de flux : {details}"
+msgstr[1] "{n} routeurs de flux : {details}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15739,10 +16881,52 @@ msgstr[1] ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{n} tool"
+msgid_plural "{n} tools"
+msgstr[0] "{n} outil"
+msgstr[1] "{n} outils"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{n} trusted range"
 msgid_plural "{n} trusted ranges"
 msgstr[0] ""
 msgstr[1] ""
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} unparsed"
+msgid_plural "{n} unparsed"
+msgstr[0] "{n} non analysée"
+msgstr[1] "{n} non analysées"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} unused middleware"
+msgid_plural "{n} unused middlewares"
+msgstr[0] "{n} middleware inutilisé"
+msgstr[1] "{n} middlewares inutilisés"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} upgrade"
+msgid_plural "{n} upgrades"
+msgstr[0] "{n} mise à niveau"
+msgstr[1] "{n} mises à niveau"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} write"
+msgid_plural "{n} writes"
+msgstr[0] "{n} écriture"
+msgstr[1] "{n} écritures"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{n} {prov} route - click to list it"
+msgid_plural "{n} {prov} routes - click to list them"
+msgstr[0] "{n} route {prov} - cliquez pour l’afficher"
+msgstr[1] "{n} routes {prov} - cliquez pour les afficher"
 
 #. Used in the browser
 #, python-brace-format
@@ -15751,21 +16935,40 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{ok} live of {count} listed"
-msgstr ""
+msgid "{ok} live of {n} listed"
+msgid_plural "{ok} live of {n} listed"
+msgstr[0] "{ok} en ligne sur {n} listé"
+msgstr[1] "{ok} en ligne sur {n} listés"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{once} path was requested exactly once in this window, so the ranked rows "
+"are not the whole distribution"
+msgid_plural ""
 "{once} paths were requested exactly once in this window, so the ranked rows "
 "are not the whole distribution"
-msgstr ""
+msgstr[0] "{once} chemin n’a été demandé qu’une seule fois dans cette période ; les lignes classées ne représentent donc pas toute la distribution"
+msgstr[1] "{once} chemins n’ont été demandés qu’une seule fois dans cette période ; les lignes classées ne représentent donc pas toute la distribution"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"{open} of {count} here came from a source that holds no active decision now"
-msgstr ""
+"{open} of {n} alert here came from a source that holds no active decision now"
+msgid_plural ""
+"{open} of {n} alerts here came from a source that holds no active decision "
+"now"
+msgstr[0] "{open} sur {n} alerte ici provient d’une source qui ne fait actuellement l’objet d’aucune décision active"
+msgstr[1] "{open} sur {n} alertes ici proviennent d’une source qui ne fait actuellement l’objet d’aucune décision active"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{open} of {n} hit here came from a source that holds no active decision now"
+msgid_plural ""
+"{open} of {n} hits here came from a source that holds no active decision now"
+msgstr[0] "{open} sur {n} occurrence ici provient d’une source qui ne fait actuellement l’objet d’aucune décision active"
+msgstr[1] "{open} sur {n} occurrences ici proviennent d’une source qui ne fait actuellement l’objet d’aucune décision active"
 
 #. Used in the browser
 #, python-brace-format
@@ -15780,26 +16983,50 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{own} decision in force did not come from a subscription. Its alerts are "
+"outside the retention window, or the decision was added by hand"
+msgid_plural ""
 "{own} decisions in force did not come from a subscription. Their alerts are "
 "outside the retention window, or the decision was added by hand"
-msgstr ""
+msgstr[0] "{own} décision en vigueur ne provient pas d’un abonnement. Ses alertes sont hors de la période de conservation, ou la décision a été ajoutée manuellement"
+msgstr[1] "{own} décisions en vigueur ne proviennent pas d’un abonnement. Leurs alertes sont hors de la période de conservation, ou les décisions ont été ajoutées manuellement"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{own} of them was raised here rather than subscribed, but no alert in the "
+"retained window explains it"
+msgid_plural ""
 "{own} of them were raised here rather than subscribed, but no alert in the "
 "retained window explains them"
-msgstr ""
+msgstr[0] "{own} d’entre elles a été déclenchée ici plutôt que via un abonnement, mais aucune alerte de la période conservée ne l’explique"
+msgstr[1] "{own} d’entre elles ont été déclenchées ici plutôt que via un abonnement, mais aucune alerte de la période conservée ne les explique"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{parsed} of {fetched} lines parsed"
-msgstr ""
+msgid "{parsed} of {fetched} line parsed"
+msgid_plural "{parsed} of {fetched} lines parsed"
+msgstr[0] "{parsed} sur {fetched} ligne analysée"
+msgstr[1] "{parsed} sur {fetched} lignes analysées"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{plain} requests arrived without TLS"
-msgstr ""
+msgid "{plain} request arrived without TLS"
+msgid_plural "{plain} requests arrived without TLS"
+msgstr[0] "{plain} requête est arrivée sans TLS"
+msgstr[1] "{plain} requêtes sont arrivées sans TLS"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{provider} (read only)"
+msgstr "{provider} (lecture seule)"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{provider}: {n} object."
+msgid_plural "{provider}: {n} objects."
+msgstr[0] "{provider} : {n} objet."
+msgstr[1] "{provider} : {n} objets."
 
 #. Used in the browser
 #, python-brace-format
@@ -15808,10 +17035,19 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
+msgid "{rate} req/min"
+msgstr "{rate} req/min"
+
+#. Used in the browser
+#, python-brace-format
 msgid ""
+"{repeat_count} source tripped a scenario more than once, so it came back "
+"after the first ban"
+msgid_plural ""
 "{repeat_count} sources tripped a scenario more than once, so they came back "
 "after the first ban"
-msgstr ""
+msgstr[0] "{repeat_count} source a déclenché un scénario plus d’une fois ; elle est donc revenue après le premier bannissement"
+msgstr[1] "{repeat_count} sources ont déclenché un scénario plus d’une fois ; elles sont donc revenues après le premier bannissement"
 
 #. Used in the browser
 #, python-brace-format
@@ -15825,35 +17061,35 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{retries} upstream retry attempts across this window"
-msgstr ""
+msgid "{retries} upstream retry attempt across this window"
+msgid_plural "{retries} upstream retry attempts across this window"
+msgstr[0] "{retries} nouvelle tentative en amont sur cette période"
+msgstr[1] "{retries} nouvelles tentatives en amont sur cette période"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{retries} upstream retry attempt. The client never saw it, but a backend was "
+"flapping."
+msgid_plural ""
 "{retries} upstream retry attempts. The client never saw these, but a backend "
 "was flapping."
-msgstr ""
+msgstr[0] "{retries} nouvelle tentative en amont. Le client ne l’a jamais vue, mais un backend était instable."
+msgstr[1] "{retries} nouvelles tentatives en amont. Le client ne les a jamais vues, mais un backend était instable."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{routes_count} routes"
-msgstr ""
+msgid "{s4} client error. Click to filter the log list."
+msgid_plural "{s4} client errors. Click to filter the log list."
+msgstr[0] "{s4} erreur client. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{s4} erreurs client. Cliquez pour filtrer la liste des journaux."
 
 #. Used in the browser
 #, python-brace-format
-msgid "{rs_count} {prov} routes - click to list them"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{s4} client errors. Click to filter the log list."
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{s5} server errors. Click to filter the log list."
-msgstr ""
+msgid "{s5} server error. Click to filter the log list."
+msgid_plural "{s5} server errors. Click to filter the log list."
+msgstr[0] "{s5} erreur serveur. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{s5} erreurs serveur. Cliquez pour filtrer la liste des journaux."
 
 #. Used in the browser
 #, python-brace-format
@@ -15894,13 +17130,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{secure} requests arrived over TLS"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{servers_count} backends"
-msgstr ""
+msgid "{secure} request arrived over TLS"
+msgid_plural "{secure} requests arrived over TLS"
+msgstr[0] "{secure} requête est arrivée via TLS"
+msgstr[1] "{secure} requêtes sont arrivées via TLS"
 
 #. Used in the browser
 #, python-brace-format
@@ -15917,16 +17150,24 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{size} distinct source range, from source.range. A subnet with several "
+"sources is usually one operator, not several"
+msgid_plural ""
 "{size} distinct source ranges, from source.range. A subnet with several "
 "sources is usually one operator, not several"
-msgstr ""
+msgstr[0] "{size} plage source distincte, issue de source.range. Un sous-réseau regroupant plusieurs sources correspond généralement à un seul opérateur, pas à plusieurs"
+msgstr[1] "{size} plages sources distinctes, issues de source.range. Un sous-réseau regroupant plusieurs sources correspond généralement à un seul opérateur, pas à plusieurs"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{size} path pattern collapses a numeric, date or hex segment. Only patterns "
+"that merge two or more real paths are folded."
+msgid_plural ""
 "{size} path patterns collapse a numeric, date or hex segment. Only patterns "
 "that merge two or more real paths are folded."
-msgstr ""
+msgstr[0] "{size} modèle de chemin remplace un segment numérique, de date ou hexadécimal. Seuls les modèles qui fusionnent au moins deux chemins réels sont regroupés."
+msgstr[1] "{size} modèles de chemin remplacent un segment numérique, de date ou hexadécimal. Seuls les modèles qui fusionnent au moins deux chemins réels sont regroupés."
 
 #. Used in the browser
 #, python-brace-format
@@ -15935,20 +17176,29 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{slow} requests took longer than 500ms"
-msgstr ""
+msgid "{slow} request took longer than 500ms"
+msgid_plural "{slow} requests took longer than 500ms"
+msgstr[0] "{slow} requête a pris plus de 500 ms"
+msgstr[1] "{slow} requêtes ont pris plus de 500 ms"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{slow} requests took longer than 500ms. Click to filter the log list."
-msgstr ""
+msgid "{slow} request took longer than 500ms. Click to filter the log list."
+msgid_plural ""
+"{slow} requests took longer than 500ms. Click to filter the log list."
+msgstr[0] "{slow} requête a pris plus de 500 ms. Cliquez pour filtrer la liste des journaux."
+msgstr[1] "{slow} requêtes ont pris plus de 500 ms. Cliquez pour filtrer la liste des journaux."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{sources} distinct address tripped at least one scenario in the retained "
+"window"
+msgid_plural ""
 "{sources} distinct addresses tripped at least one scenario in the retained "
 "window"
-msgstr ""
+msgstr[0] "{sources} adresse distincte a déclenché au moins un scénario dans la période conservée"
+msgstr[1] "{sources} adresses distinctes ont déclenché au moins un scénario dans la période conservée"
 
 #. Used in the browser
 #, python-brace-format
@@ -15957,8 +17207,15 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{srcs_count} sources, {loose_count} with no active ban"
-msgstr ""
+msgid "{span} window"
+msgstr "période de {span}"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{srcs_count} source, {loose_count} with no active ban"
+msgid_plural "{srcs_count} sources, {loose_count} with no active ban"
+msgstr[0] "{srcs_count} source, dont {loose_count} sans bannissement actif"
+msgstr[1] "{srcs_count} sources, dont {loose_count} sans bannissement actif"
 
 #. Used in the browser
 #, python-brace-format
@@ -15972,8 +17229,28 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{svcUp} of {svcTotal} servers up"
-msgstr ""
+msgid ""
+"{status} {name} {method} {path} (traefik answered, backend said {origin})"
+msgstr "{status} {name} {method} {path} (traefik a répondu, le backend a dit {origin})"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{status} {name} {method} {path} from {ip}"
+msgstr "{status} {name} {method} {path} depuis {ip}"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{status} {name} {method} {path} from {ip} (traefik answered, backend said "
+"{origin})"
+msgstr "{status} {name} {method} {path} depuis {ip} (traefik a répondu, le backend a dit {origin})"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{svcUp} of {n} server up"
+msgid_plural "{svcUp} of {n} servers up"
+msgstr[0] "{svcUp} sur {n} serveur actif"
+msgstr[1] "{svcUp} sur {n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
@@ -15994,8 +17271,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{timed_count} timed requests, median {lgMs}, slowest {lgMs2}"
-msgstr ""
+msgid "{timed_count} timed request, median {lgMs}, slowest {lgMs2}"
+msgid_plural "{timed_count} timed requests, median {lgMs}, slowest {lgMs2}"
+msgstr[0] "{timed_count} requête chronométrée, médiane {lgMs}, la plus lente {lgMs2}"
+msgstr[1] "{timed_count} requêtes chronométrées, médiane {lgMs}, la plus lente {lgMs2}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16050,13 +17329,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{total} across {more}"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} decisions, {own} from this host"
-msgstr ""
+msgid "{total} decision, {own} from this host"
+msgid_plural "{total} decisions, {own} from this host"
+msgstr[0] "{total} décision, dont {own} de cet hôte"
+msgstr[1] "{total} décisions, dont {own} de cet hôte"
 
 #. Used in the browser
 #, python-brace-format
@@ -16075,39 +17351,36 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{total} of the last {fetched} lines"
-msgstr ""
+msgid "{total} of the last {fetched} line"
+msgid_plural "{total} of the last {fetched} lines"
+msgstr[0] "{total} sur {fetched} dernière ligne"
+msgstr[1] "{total} sur les {fetched} dernières lignes"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"{total} requests drawn as {drawn} cells, so each cell stands for about "
-"{round} requests"
-msgstr ""
+"{total} request. Server errors: {s5}, client errors: {s4}, redirects: "
+"{v3xx}, ok: {v2xx}"
+msgid_plural ""
+"{total} requests. Server errors: {s5}, client errors: {s4}, redirects: "
+"{v3xx}, ok: {v2xx}"
+msgstr[0] "{total} requête. Erreurs serveur : {s5}, erreurs client : {s4}, redirections : {v3xx}, ok : {v2xx}"
+msgstr[1] "{total} requêtes. Erreurs serveur : {s5}, erreurs client : {s4}, redirections : {v3xx}, ok : {v2xx}"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
-"{total} requests: {s5} server errors, {s4} client errors, {v3xx} redirects, "
-"{v2xx} ok"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"{total} {label} reported by /api/overview, the object list could not be read"
-msgstr ""
+"{total} requests drawn as {drawn} cells, so each cell stands for about {n} "
+"request"
+msgid_plural ""
+"{total} requests drawn as {drawn} cells, so each cell stands for about {n} "
+"requests"
+msgstr[0] "{total} requêtes représentées par {drawn} cellules : chaque cellule représente donc environ {n} requête"
+msgstr[1] "{total} requêtes représentées par {drawn} cellules : chaque cellule représente donc environ {n} requêtes"
 
 #. Used in the browser
 #, python-brace-format
 msgid "{to} is created in this route's own file"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"{truncated} objects are counted in the totals but were not returned by the "
-"list endpoint, so they are missing from the strips and provider counts."
 msgstr ""
 
 #. Used in the browser
@@ -16117,28 +17390,31 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "{up} of {total} backends up"
-msgstr ""
+msgid "{up} of {n} backend up"
+msgid_plural "{up} of {n} backends up"
+msgstr[0] "{up} sur {n} backend actif"
+msgstr[1] "{up} sur {n} backends actifs"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{up}/{total} servers up"
-msgstr ""
+msgid "{up}/{n} server up"
+msgid_plural "{up}/{n} servers up"
+msgstr[0] "{up}/{n} serveur actif"
+msgstr[1] "{up}/{n} serveurs actifs"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{v1} address"
-msgstr ""
+msgid "{visible_count} of {fetched} line"
+msgid_plural "{visible_count} of {fetched} lines"
+msgstr[0] "{visible_count} sur {fetched} ligne"
+msgstr[1] "{visible_count} sur {fetched} lignes"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{visible_count} of {fetched} lines"
-msgstr ""
-
-#. Used in the browser
-#, python-brace-format
-msgid "{vslow} requests took longer than 2 seconds"
-msgstr ""
+msgid "{vslow} request took longer than 2 seconds"
+msgid_plural "{vslow} requests took longer than 2 seconds"
+msgstr[0] "{vslow} requête a pris plus de 2 secondes"
+msgstr[1] "{vslow} requêtes ont pris plus de 2 secondes"
 
 #. Used in the browser
 #, python-brace-format
@@ -16148,42 +17424,68 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{wide} decision is Range or Country scoped, so it covers far more addresses "
+"than one row suggests. The loose and banned split above matches on the exact "
+"address, so a source covered only by one of these reads as loose"
+msgid_plural ""
 "{wide} decisions are Range or Country scoped, so they cover far more "
 "addresses than one row suggests. The loose and banned split above matches on "
 "the exact address, so a source covered only by one of these reads as loose"
-msgstr ""
+msgstr[0] "{wide} décision a une portée Range ou Country ; elle couvre donc bien plus d’adresses qu’une ligne ne le laisse penser. La répartition entre sources non bannies et bannies ci-dessus repose sur l’adresse exacte ; une source couverte uniquement par l’une de ces décisions apparaît donc comme non bannie"
+msgstr[1] "{wide} décisions ont une portée Range ou Country ; elles couvrent donc bien plus d’adresses qu’une ligne ne le laisse penser. La répartition entre sources non bannies et bannies ci-dessus repose sur l’adresse exacte ; une source couverte uniquement par l’une de ces décisions apparaît donc comme non bannie"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{withAs} of {alerts_count} alerts carry an AS"
-msgstr ""
+msgid "{withAs} of {alerts_count} alert carries an AS"
+msgid_plural "{withAs} of {alerts_count} alerts carry an AS"
+msgstr[0] "{withAs} sur {alerts_count} alerte contient un AS"
+msgstr[1] "{withAs} sur {alerts_count} alertes contiennent un AS"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{withR} of {alerts_count} alerts name a router"
-msgstr ""
+msgid "{withR} of {alerts_count} alert names a router"
+msgid_plural "{withR} of {alerts_count} alerts name a router"
+msgstr[0] "{withR} sur {alerts_count} alerte indique un routeur"
+msgstr[1] "{withR} sur {alerts_count} alertes indiquent un routeur"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{withUa} of {alerts_count} alerts carry one"
-msgstr ""
+msgid "{withUa} of {alerts_count} alert carries one"
+msgid_plural "{withUa} of {alerts_count} alerts carry one"
+msgstr[0] "{withUa} sur {alerts_count} alerte en contient un"
+msgstr[1] "{withUa} sur {alerts_count} alertes en contiennent un"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{withUri} of {alerts_count} alerts carry a path"
-msgstr ""
+msgid "{withUri} of {alerts_count} alert carries a path"
+msgid_plural "{withUri} of {alerts_count} alerts carry a path"
+msgstr[0] "{withUri} sur {alerts_count} alerte contient un chemin"
+msgstr[1] "{withUri} sur {alerts_count} alertes contiennent un chemin"
 
 #. Used in the browser
 #, python-brace-format
-msgid "{withU} of {alerts_count} alerts name an account"
-msgstr ""
+msgid "{withU} of {alerts_count} alert names an account"
+msgid_plural "{withU} of {alerts_count} alerts name an account"
+msgstr[0] "{withU} sur {alerts_count} alerte indique un compte"
+msgstr[1] "{withU} sur {alerts_count} alertes indiquent un compte"
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
+"{writes_count} write request (POST, PUT, PATCH or DELETE). Click to filter "
+"to {method}."
+msgid_plural ""
 "{writes_count} write requests (POST, PUT, PATCH or DELETE). Click to filter "
 "to {method}."
-msgstr ""
+msgstr[0] "{writes_count} requête d’écriture (POST, PUT, PATCH ou DELETE). Cliquez pour filtrer sur {method}."
+msgstr[1] "{writes_count} requêtes d’écriture (POST, PUT, PATCH ou DELETE). Cliquez pour filtrer sur {method}."
+
+#. Used in the browser
+#, python-brace-format
+msgid "{zero} of {retained} retained alert matches"
+msgid_plural "{zero} of {retained} retained alerts match"
+msgstr[0] "{zero} alerte conservée sur {retained} correspond"
+msgstr[1] "{zero} alerte conservée sur {retained} correspond"
 
 msgctxt "label"
 msgid "·"
