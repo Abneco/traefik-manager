@@ -115,8 +115,8 @@ def test_an_agent_cert_names_the_agent_and_the_host_cert_does_not(mon, monkeypat
     fleet.certs['vps1'] = [_cert('agent.example.com', _iso(base, 10))]
 
     msgs = sorted(m for _, m, c in monitor.run_checks_once(force=True) if c == 'certs')
-    assert msgs == ['Certificate for host.example.com (le) expires in 10 day(s)',
-                    'VPS One: Certificate for agent.example.com (le) expires in 10 day(s)'], msgs
+    assert msgs == ['Certificate for host.example.com (le) expires in 10 days',
+                    'VPS One: Certificate for agent.example.com (le) expires in 10 days'], msgs
 
 
 def test_the_same_domain_on_two_servers_keeps_two_independent_states(mon, monkeypatch):
@@ -136,8 +136,8 @@ def test_the_same_domain_on_two_servers_keeps_two_independent_states(mon, monkey
     raised = _only(monitor.run_checks_once(force=True), 'certs')
     assert len(raised) == 2, raised
     assert sorted(m for _, m, _ in raised) == [
-        'Certificate for shared.example.com (le) expires in 10 day(s)',
-        'VPS One: Certificate for shared.example.com (le) expires in 10 day(s)'], raised
+        'Certificate for shared.example.com (le) expires in 10 days',
+        'VPS One: Certificate for shared.example.com (le) expires in 10 days'], raised
 
     assert _only(monitor.run_checks_once(force=True), 'certs') == [], 'the same certs alerted twice'
 
@@ -149,7 +149,7 @@ def test_the_same_domain_on_two_servers_keeps_two_independent_states(mon, monkey
     monkeypatch.setattr(monitor, '_now', lambda: base + 8 * 86400)
     later = _only(monitor.run_checks_once(force=True), 'certs')
     assert [m for _, m, _ in later] == [
-        'VPS One: Certificate for shared.example.com (le) expires in 2 day(s)'], later
+        'VPS One: Certificate for shared.example.com (le) expires in 2 days'], later
 
 
 def test_traefik_down_on_both_servers_recovers_independently(mon, monkeypatch):
@@ -210,7 +210,7 @@ def test_one_broken_agent_does_not_stop_the_next_one(mon, monkeypatch):
 
     raised = monitor.run_checks_once(force=True)
     assert [m for _, m, c in raised if c == 'certs'] == [
-        'VPS Two: Certificate for two.example.com (le) expires in 2 day(s)'], raised
+        'VPS Two: Certificate for two.example.com (le) expires in 2 days'], raised
     assert fleet.paths('vps2') == ['/health', '/api/traefik/version', '/api/traefik/certs',
                                    '/api/traefik/overview', '/api/crowdsec/alerts',
                                    '/api/events?since=0',

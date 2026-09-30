@@ -9,6 +9,7 @@ from urllib.parse import quote
 import requests
 
 from core import env
+from core import i18n as _i18n
 from core import settings as settings_mod
 from core.env import logger
 
@@ -129,7 +130,8 @@ def _cs_request_strict(method: str, path: str, lapi: str = None, key: str = None
         key = _cs_api_key()
     lapi = (lapi or '').rstrip('/')
     if not lapi or not (key or _cs_has_cert()):
-        raise CrowdSecUnavailable('CrowdSec LAPI URL, bouncer API key or client certificate is not set')
+        raise CrowdSecUnavailable(_i18n.lazy_gettext(
+            'CrowdSec LAPI URL, bouncer API key or client certificate is not set'))
     headers = {'Accept': 'application/json'}
     if key:
         headers['X-Api-Key'] = key
@@ -141,10 +143,11 @@ def _cs_request_strict(method: str, path: str, lapi: str = None, key: str = None
     except requests.HTTPError as e:
         status = e.response.status_code if e.response is not None else '?'
         logger.warning(f"CrowdSec LAPI error {method} {path}: {e}")
-        raise CrowdSecUnavailable(f'LAPI answered HTTP {status} on {path}') from e
+        raise CrowdSecUnavailable(_i18n.lazy_gettext('LAPI answered HTTP %(status)s on %(path)s',
+                                                     status=status, path=path)) from e
     except Exception as e:
         logger.warning(f"CrowdSec LAPI error {method} {path}: {e}")
-        raise CrowdSecUnavailable(f'CrowdSec LAPI unreachable: {e}') from e
+        raise CrowdSecUnavailable(_i18n.lazy_gettext('CrowdSec LAPI unreachable: %(error)s', error=e)) from e
     return resp.json() if resp.content else None
 
 
@@ -368,9 +371,24 @@ def _cs_apply_stream(payload, base: dict):
 CS_STALE_AFTER_SECONDS = 900
 
 
+class StaleMode(str):
+    def __new__(cls, age, reason):
+        obj = super().__new__(cls, f'stale:{age}:{reason}')
+        obj.age = age
+        obj.reason = reason
+        return obj
+
+
+def _cs_error_reason(err):
+    args = getattr(err, 'args', ())
+    if len(args) == 1 and isinstance(args[0], _i18n.Message):
+        return args[0]
+    return str(err)
+
+
 def _cs_stale_mode(age, err):
     if age is not None and age >= CS_STALE_AFTER_SECONDS:
-        return f'stale:{age}:{err}'
+        return StaleMode(age, _cs_error_reason(err))
     return 'cache'
 
 
@@ -392,7 +410,7 @@ def cs_decisions_stream(force_full: bool = False):
             if doc['ready'] and (not held or (not force_full and _cs_fresh(doc, now))):
                 return _cs_mirror(doc), 'cache'
             if not held:
-                raise CrowdSecUnavailable('The CrowdSec decision cache is being refreshed')
+                raise CrowdSecUnavailable(_i18n.lazy_gettext('The CrowdSec decision cache is being refreshed'))
             stale = bool(doc['synced'] and (now - doc['synced']).total_seconds() > CS_STREAM_RESYNC_SECONDS)
             full  = force_full or not doc['ready'] or stale
             path  = '/v1/decisions/stream?startup=true' if full else '/v1/decisions/stream'
@@ -404,7 +422,7 @@ def cs_decisions_stream(force_full: bool = False):
                     return _cs_mirror(doc), _cs_stale_mode(age, e)
                 raise
             if not isinstance(payload, dict):
-                raise CrowdSecUnavailable('LAPI stream returned an unexpected payload')
+                raise CrowdSecUnavailable(_i18n.lazy_gettext('LAPI stream returned an unexpected payload'))
             items = _cs_apply_stream(payload, {} if full else doc['items'])
             changed = full or bool(payload.get('new') or payload.get('deleted'))
             if _cs_write_due(doc, now, changed):
@@ -431,15 +449,15 @@ def _cs_alert_fetch(path: str) -> list:
     if _cs_has_machine():
         token = _cs_jwt(lapi)
         if not token:
-            raise CrowdSecUnavailable('CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / '
-                                      'CROWDSEC_MACHINE_PASSWORD or the client certificate', 502)
+            raise CrowdSecUnavailable(_i18n.lazy_gettext('CrowdSec machine login failed - check CROWDSEC_MACHINE_ID / '
+                                                         'CROWDSEC_MACHINE_PASSWORD or the client certificate'), 502)
         headers = {'Authorization': f'Bearer {token}', 'Accept': 'application/json'}
     else:
         headers = {'X-Api-Key': _cs_api_key(), 'Accept': 'application/json'}
     try:
         resp = requests.get(f"{lapi}{path}", headers=headers, timeout=cs_timeout(), **_cs_tls_kwargs())
     except Exception as e:
-        raise CrowdSecUnavailable(f'CrowdSec LAPI unreachable: {e}', 0) from e
+        raise CrowdSecUnavailable(_i18n.lazy_gettext('CrowdSec LAPI unreachable: %(error)s', error=e), 0) from e
     if resp.status_code == 401 and _cs_has_machine():
         logger.info("CrowdSec refused the machine token on /v1/alerts, logging in again")
         cs_jwt_reset()
@@ -449,14 +467,16 @@ def _cs_alert_fetch(path: str) -> list:
             try:
                 resp = requests.get(f"{lapi}{path}", headers=headers, timeout=cs_timeout(), **_cs_tls_kwargs())
             except Exception as e:
-                raise CrowdSecUnavailable(f'CrowdSec LAPI unreachable: {e}', 0) from e
+                raise CrowdSecUnavailable(_i18n.lazy_gettext('CrowdSec LAPI unreachable: %(error)s', error=e),
+                                          0) from e
     if not resp.ok:
         try:
             body = resp.json()
             msg  = body.get('message') or body.get('error') or resp.text
         except Exception:
             msg = resp.text
-        raise CrowdSecUnavailable(f'LAPI {resp.status_code}: {msg}', resp.status_code)
+        raise CrowdSecUnavailable(_i18n.lazy_gettext('LAPI %(status)s: %(error)s', status=resp.status_code, error=msg),
+                                  resp.status_code)
     alerts = resp.json() if resp.content else []
     return alerts if isinstance(alerts, list) else []
 
@@ -490,7 +510,7 @@ def cs_alerts(limit: int, force_full: bool = False):
             if doc['ready'] and (not held or (not force_full and _cs_fresh(doc, now))):
                 return _cs_alert_mirror(doc), 'cache'
             if not held:
-                raise CrowdSecUnavailable('The CrowdSec alert cache is being refreshed')
+                raise CrowdSecUnavailable(_i18n.lazy_gettext('The CrowdSec alert cache is being refreshed'))
             stale = bool(doc['synced'] and (now - doc['synced']).total_seconds() > CS_STREAM_RESYNC_SECONDS)
             full  = force_full or not doc['ready'] or stale
             try:
@@ -547,20 +567,34 @@ def poll_local_alerts(since: str = '15m') -> list:
 
 CS_ALERT_INTERVAL = 300
 CS_ALERT_WINDOW = '10m'
-CS_WINDOW_UNITS = {'s': 'second', 'm': 'minute', 'h': 'hour', 'd': 'day'}
-
-
-def _cs_count(n: int, word: str) -> str:
-    return f"{n} {word}" if n == 1 else f"{n} {word}s"
-
-
 def _cs_window_label(since: str) -> str:
     window = str(since or '').strip().lower()
-    unit   = CS_WINDOW_UNITS.get(window[-1:], '')
+    unit   = window[-1:]
     number = window[:-1]
-    if unit and number.isdigit():
-        return _cs_count(int(number), unit)
+    if not number.isdigit():
+        return window
+    n = int(number)
+    if unit == 's':
+        return _i18n.lazy_ngettext('%(num)d second', '%(num)d seconds', n)
+    if unit == 'm':
+        return _i18n.lazy_ngettext('%(num)d minute', '%(num)d minutes', n)
+    if unit == 'h':
+        return _i18n.lazy_ngettext('%(num)d hour', '%(num)d hours', n)
+    if unit == 'd':
+        return _i18n.lazy_ngettext('%(num)d day', '%(num)d days', n)
     return window
+
+
+def _cs_scenarios(n: int):
+    return _i18n.lazy_ngettext('%(num)d scenario', '%(num)d scenarios', n)
+
+
+def _cs_events(n: int):
+    return _i18n.lazy_ngettext('%(num)d event', '%(num)d events', n)
+
+
+def _cs_sources(n: int):
+    return _i18n.lazy_ngettext('%(num)d source', '%(num)d sources', n)
 
 
 def _cs_alert_source(alert: dict) -> str:
@@ -615,7 +649,9 @@ def _cs_scenario_list(names) -> str:
     shown = ordered[:CS_SUMMARY_SCENARIOS]
     rest = len(ordered) - len(shown)
     text = ', '.join(shown)
-    return f'{text} and {rest} more' if rest > 0 else text
+    if rest > 0:
+        return _i18n.lazy_ngettext('%(names)s and %(num)d more', '%(names)s and %(num)d more', rest, names=text)
+    return text
 
 
 def summarise_alerts(alerts, window_label: str = '') -> str:
@@ -638,19 +674,33 @@ def summarise_alerts(alerts, window_label: str = '') -> str:
                 detail[ip] = where
     if not sources:
         return ''
-    when = f' in the last {window_label}' if window_label else ''
     total = sum(v['events'] for v in sources.values())
     worst_ip, worst = sorted(sources.items(), key=lambda kv: (-kv[1]['events'], kv[0]))[0]
     where = detail.get(worst_ip, '')
-    where = f' ({where})' if where else ''
+    source = f'{worst_ip} ({where})' if where else worst_ip
+    scenario_count = _cs_scenarios(len(scenarios))
+    event_count = _cs_events(total)
+    names = _cs_scenario_list(scenarios)
     if len(sources) == 1:
-        return (f"{worst_ip}{where} tripped {_cs_count(len(scenarios), 'scenario')}"
-                f", {_cs_count(total, 'event')}{when}: {_cs_scenario_list(scenarios)}")
-    return (f"{_cs_count(len(sources), 'source')} tripped "
-            f"{_cs_count(len(scenarios), 'scenario')}, {_cs_count(total, 'event')}{when}. "
-            f"Worst: {worst_ip}{where}, "
-            f"{sorted(worst['scenarios'].items(), key=lambda kv: (-kv[1], kv[0]))[0][0]}, "
-            f"{_cs_count(worst['events'], 'event')}. Scenarios: {_cs_scenario_list(scenarios)}")
+        if window_label:
+            return _i18n.lazy_gettext('%(source)s tripped %(scenarios)s, %(events)s in the last %(window)s: %(list)s',
+                                      source=source, scenarios=scenario_count, events=event_count,
+                                      window=window_label, list=names)
+        return _i18n.lazy_gettext('%(source)s tripped %(scenarios)s, %(events)s: %(list)s',
+                                  source=source, scenarios=scenario_count, events=event_count, list=names)
+    source_count = _cs_sources(len(sources))
+    top = sorted(worst['scenarios'].items(), key=lambda kv: (-kv[1], kv[0]))[0][0]
+    source_events = _cs_events(worst['events'])
+    if window_label:
+        return _i18n.lazy_gettext('%(sources)s tripped %(scenarios)s, %(events)s in the last %(window)s. '
+                                  'Worst: %(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s',
+                                  sources=source_count, scenarios=scenario_count, events=event_count,
+                                  window=window_label, source=source, scenario=top,
+                                  source_events=source_events, list=names)
+    return _i18n.lazy_gettext('%(sources)s tripped %(scenarios)s, %(events)s. '
+                              'Worst: %(source)s, %(scenario)s, %(source_events)s. Scenarios: %(list)s',
+                              sources=source_count, scenarios=scenario_count, events=event_count,
+                              source=source, scenario=top, source_events=source_events, list=names)
 
 
 def check_local_alerts(since: str = CS_ALERT_WINDOW) -> list:

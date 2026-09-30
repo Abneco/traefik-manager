@@ -4,8 +4,9 @@ from functools import lru_cache
 
 from babel import Locale, UnknownLocaleError
 from babel.messages.pofile import read_po
-from babel.support import Translations
+from babel.support import NullTranslations, Translations
 from flask import has_request_context, request
+from flask.json.provider import DefaultJSONProvider
 from flask_babel import Babel, Domain, get_locale, get_translations
 from markupsafe import Markup, escape
 
@@ -340,6 +341,7 @@ def init_app(app, default_language):
     def _select():
         return catalog_identifier(resolve_tag(_saved()))
 
+    app.json = ShownJSONProvider(app)
     babel = Babel(app, locale_selector=_select)
     babel.domain_instance = _Domain(domain=DOMAIN)
     install_escaped_gettext(app.jinja_env)
@@ -363,17 +365,140 @@ def init_app(app, default_language):
 
 
 class Message(str):
-    def __new__(cls, english, translate=None):
+    def __new__(cls, english, translate=None, spec=None):
         obj = super().__new__(cls, english)
         obj.translate = translate
+        obj.spec = spec
         return obj
 
     def shown(self) -> str:
+        if self.spec is not None:
+            return render(self.spec)
         return self.translate() if self.translate else str(self)
+
+
+_NULL = NullTranslations()
+
+
+def _spec_value(value):
+    if isinstance(value, Message) and value.spec is not None:
+        return value.spec
+    if isinstance(value, (int, float)) and not isinstance(value, bool):
+        return value
+    return str(value)
+
+
+def _spec(msgid, params, context=None, plural=None, n=None):
+    spec = {'id': msgid}
+    if context:
+        spec['ctx'] = context
+    if plural is not None:
+        spec['plural'] = plural
+        spec['n'] = n
+    if params:
+        spec['params'] = {key: _spec_value(value) for key, value in params.items()}
+    return spec
+
+
+def is_spec(value) -> bool:
+    return isinstance(value, dict) and isinstance(value.get('id'), str)
+
+
+def _request_translations():
+    if has_request_context():
+        try:
+            return get_translations()
+        except Exception:
+            return _NULL
+    return _NULL
+
+
+def render(spec, translations=None) -> str:
+    if not is_spec(spec):
+        return '' if spec is None else str(spec)
+    trans = translations if translations is not None else _request_translations()
+    msgid, context, plural = spec['id'], spec.get('ctx'), spec.get('plural')
+    params = {key: render(value, trans) if is_spec(value) else value
+              for key, value in (spec.get('params') or {}).items()}
+    try:
+        if plural is not None:
+            n = spec.get('n') or 0
+            params.setdefault('num', n)
+            text = (trans.unpgettext(context, msgid, plural, n) if context
+                    else trans.ungettext(msgid, plural, n))
+        else:
+            text = trans.upgettext(context, msgid) if context else trans.ugettext(msgid)
+        return text % params if params else text
+    except (KeyError, ValueError, TypeError):
+        english = (msgid if plural is None or (spec.get('n') or 0) == 1 else plural)
+        try:
+            return english % params if params else english
+        except (KeyError, ValueError, TypeError):
+            return english
+
+
+def lazy_gettext(msgid, **params):
+    spec = _spec(msgid, params)
+    return Message(render(spec, _NULL), spec=spec)
+
+
+def lazy_pgettext(context, msgid, **params):
+    spec = _spec(msgid, params, context=context)
+    return Message(render(spec, _NULL), spec=spec)
+
+
+def lazy_ngettext(singular, plural, n, **params):
+    spec = _spec(singular, params, plural=plural, n=n)
+    return Message(render(spec, _NULL), spec=spec)
+
+
+def to_stored(value):
+    if isinstance(value, Message) and value.spec is not None:
+        return value.spec
+    return value
+
+
+def from_stored(value, translations=None):
+    return render(value, translations) if is_spec(value) else value
+
+
+@lru_cache(maxsize=None)
+def _translations_for_identifier(identifier: str, locale_dir: str):
+    translations = Translations.load(locale_dir, [identifier], DOMAIN)
+    drop_untranslated_plurals(translations, locale_dir)
+    return translations
+
+
+def translations_for(tag: str, locale_dir: str = None):
+    tag = normalize(tag or '') or ''
+    if not tag or tag == DEFAULT_TAG:
+        return _NULL
+    return _translations_for_identifier(catalog_identifier(tag), locale_dir or LOCALE_DIR)
 
 
 def shown(value):
     return value.shown() if isinstance(value, Message) else value
+
+
+def revive(value):
+    if is_spec(value):
+        return Message(render(value, _NULL), spec=value)
+    return value
+
+
+def shown_tree(value):
+    if isinstance(value, Message):
+        return value.shown()
+    if isinstance(value, dict):
+        return {key: shown_tree(item) for key, item in value.items()}
+    if isinstance(value, (list, tuple)):
+        return [shown_tree(item) for item in value]
+    return value
+
+
+class ShownJSONProvider(DefaultJSONProvider):
+    def dumps(self, obj, **kwargs):
+        return super().dumps(shown_tree(obj), **kwargs)
 
 
 def shown_error(exc) -> str:

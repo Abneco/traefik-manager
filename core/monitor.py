@@ -15,6 +15,7 @@ from core import config as cfg_mod
 from core import crowdsec as crowdsec_mod
 from core import env
 from core import geoip as geoip_mod
+from core import i18n as _i18n
 from core import notifications
 from core import providers as providers_mod
 from core import settings as settings_mod
@@ -44,8 +45,8 @@ HOST_SERVER       = 'host'
 TAB_LABELS = {
     'docker': 'Docker', 'swarm': 'Swarm', 'kubernetes': 'Kubernetes', 'nomad': 'Nomad',
     'ecs': 'ECS', 'consulcatalog': 'Consul Catalog', 'consul': 'Consul', 'etcd': 'etcd',
-    'redis': 'Redis', 'zookeeper': 'ZooKeeper', 'http_provider': 'HTTP provider',
-    'internal': 'Internal',
+    'redis': 'Redis', 'zookeeper': 'ZooKeeper', 'http_provider': _i18n.lazy_gettext('HTTP provider'),
+    'internal': _i18n.lazy_pgettext('provider', 'Internal'),
 }
 KEY_SEP           = '|'
 
@@ -142,7 +143,7 @@ def _prune(state, known):
 
 
 def _server_msg(name, msg):
-    return f"{name}: {msg}" if name else msg
+    return _i18n.lazy_gettext('%(server)s: %(message)s', server=name, message=msg) if name else msg
 
 
 def _notify(type_, msg, category):
@@ -273,10 +274,15 @@ def _agent_overview(agent):
 def _cert_alert(name, main, resolver, days):
     where = f"{main} ({resolver})" if resolver else main
     if days < 0:
-        return ('error', _server_msg(name, f"Certificate for {where} expired {abs(days)} day(s) ago"), 'certs')
+        return ('error', _server_msg(name, _i18n.lazy_ngettext('Certificate for %(domain)s expired %(num)d day ago',
+                                                               'Certificate for %(domain)s expired %(num)d days ago',
+                                                               abs(days), domain=where)), 'certs')
     if days == 0:
-        return ('error', _server_msg(name, f"Certificate for {where} expires today"), 'certs')
-    return ('warning', _server_msg(name, f"Certificate for {where} expires in {days} day(s)"), 'certs')
+        return ('error', _server_msg(name, _i18n.lazy_gettext('Certificate for %(domain)s expires today',
+                                                              domain=where)), 'certs')
+    return ('warning', _server_msg(name, _i18n.lazy_ngettext('Certificate for %(domain)s expires in %(num)d day',
+                                                             'Certificate for %(domain)s expires in %(num)d days',
+                                                             days, domain=where)), 'certs')
 
 
 def _cert_sources(servers):
@@ -359,9 +365,9 @@ def _check_traefik():
             continue
         if up:
             if prev is not None:
-                raised.append(('success', _server_msg(name, 'Traefik API is reachable again'), 'traefik'))
+                raised.append(('success', _server_msg(name, _i18n.lazy_gettext('Traefik API is reachable again')), 'traefik'))
         else:
-            raised.append(('error', _server_msg(name, 'Traefik API is unreachable'), 'traefik'))
+            raised.append(('error', _server_msg(name, _i18n.lazy_gettext('Traefik API is unreachable')), 'traefik'))
     _prune(state, _known_servers(servers))
     return raised
 
@@ -387,12 +393,12 @@ def _check_agents():
             continue
         if status == 'up':
             if prev is not None:
-                raised.append(('success', f"Agent {name} is back online", 'agent'))
+                raised.append(('success', _i18n.lazy_gettext('Agent %(name)s is back online', name=name), 'agent'))
         elif status == 'badkey':
-            raised.append(('error', f"Agent {name} rejected the API key - rotate it in "
-                                    f"Settings or fix TMA_API_KEY on the agent", 'agent'))
+            raised.append(('error', _i18n.lazy_gettext('Agent %(name)s rejected the API key - rotate it in '
+                                                       'Settings or fix TMA_API_KEY on the agent', name=name), 'agent'))
         else:
-            raised.append(('error', f"Agent {name} is unreachable", 'agent'))
+            raised.append(('error', _i18n.lazy_gettext('Agent %(name)s is unreachable', name=name), 'agent'))
     known = {agent_id for agent_id, _name, _agent in servers}
     for agent_id, up in state.items():
         if agent_id in known:
@@ -457,9 +463,9 @@ def _check_crowdsec_agents():
             if up != prev:
                 if up:
                     if prev is not None:
-                        raised.append(('success', _server_msg(name, 'CrowdSec LAPI is reachable again'), 'crowdsec'))
+                        raised.append(('success', _server_msg(name, _i18n.lazy_gettext('CrowdSec LAPI is reachable again')), 'crowdsec'))
                 else:
-                    raised.append(('error', _server_msg(name, 'CrowdSec LAPI is unreachable'), 'crowdsec'))
+                    raised.append(('error', _server_msg(name, _i18n.lazy_gettext('CrowdSec LAPI is unreachable')), 'crowdsec'))
             if up:
                 msg, entry['last_id'] = _crowdsec_summary(alerts, entry.get('last_id'))
                 if msg:
@@ -490,10 +496,11 @@ def _check_geoip():
     ok, info  = geoip_mod._geoip_download()
     state['stale'] = not ok
     if ok:
-        return [('success', f"GeoIP database updated to DB-IP {info}", 'update')]
+        return [('success', _i18n.lazy_gettext('GeoIP database updated to DB-IP %(version)s', version=info), 'update')]
     if was_stale:
         return []
-    return [('warning', f"GeoIP database is out of date and could not be updated: {info}", 'update')]
+    return [('warning', _i18n.lazy_gettext('GeoIP database is out of date and could not be updated: %(error)s',
+                                           error=info), 'update')]
 
 
 _provider_seen = {}
@@ -511,7 +518,8 @@ def _apply_provider_tabs(server, name, overview):
         _provider_seen.pop(server, None)
         logger.exception(f"Could not enable provider tabs for {name or 'the host'}")
         return []
-    return [('info', _server_msg(name, f"{TAB_LABELS.get(tab, tab)} routers found, the {TAB_LABELS.get(tab, tab)} tab is now shown"), 'config')
+    return [('info', _server_msg(name, _i18n.lazy_gettext('%(provider)s routers found, the %(provider)s tab is now shown',
+                                                          provider=TAB_LABELS.get(tab, tab))), 'config')
             for tab in turned]
 
 
@@ -557,6 +565,23 @@ def _enable_agent_provider_tabs(agent_id, found):
     return turned
 
 
+def _unwritable_msg(label, path, err):
+    if label == 'Configuration':
+        return _i18n.lazy_gettext('Configuration storage at %(path)s is not writable, so settings, backups and '
+                                  'scheduled checks will not survive a restart (%(error)s)', path=path, error=err)
+    if label == 'Backups':
+        return _i18n.lazy_gettext('Backups storage at %(path)s is not writable, so settings, backups and '
+                                  'scheduled checks will not survive a restart (%(error)s)', path=path, error=err)
+    if label == 'Dynamic config':
+        return _i18n.lazy_gettext('Dynamic config storage at %(path)s is not writable, so settings, backups and '
+                                  'scheduled checks will not survive a restart (%(error)s)', path=path, error=err)
+    if label == 'Static config':
+        return _i18n.lazy_gettext('Static config storage at %(path)s is not writable, so settings, backups and '
+                                  'scheduled checks will not survive a restart (%(error)s)', path=path, error=err)
+    return _i18n.lazy_gettext('%(label)s storage at %(path)s is not writable, so settings, backups and '
+                              'scheduled checks will not survive a restart (%(error)s)', label=label, path=path, error=err)
+
+
 def _check_storage():
     state  = _section('storage')
     broken = {}
@@ -566,23 +591,20 @@ def _check_storage():
     for path, (label, err) in broken.items():
         if state.get(path):
             continue
-        raised.append(('error',
-                       f"{label} storage at {path} is not writable, so settings, backups and "
-                       f"scheduled checks will not survive a restart ({err})",
-                       'config'))
+        raised.append(('error', _unwritable_msg(label, path, err), 'config'))
     for path in state:
         if path not in broken:
-            raised.append(('success', f"Storage at {path} is writable again", 'config'))
+            raised.append(('success', _i18n.lazy_gettext('Storage at %(path)s is writable again', path=path), 'config'))
     state.clear()
     state.update({path: err for path, (_label, err) in broken.items()})
     return raised
 
 
 _AGENT_EVENT_LABELS = {
-    'git':     'git backup',
-    'restart': 'restart',
-    'backup':  'backup',
-    'storage': 'storage',
+    'git':     _i18n.lazy_pgettext('agent event', 'git backup'),
+    'restart': _i18n.lazy_pgettext('agent event', 'restart'),
+    'backup':  _i18n.lazy_pgettext('agent event', 'backup'),
+    'storage': _i18n.lazy_pgettext('agent event', 'storage'),
 }
 
 
@@ -658,12 +680,14 @@ def _check_agent_events():
             msg  = str(item.get('message') or '').strip()
             if not msg:
                 continue
-            label = _AGENT_EVENT_LABELS.get(kind, kind or 'agent')
-            raised.append(('error', f"{name}: {label} - {msg}", 'agent'))
+            label = _AGENT_EVENT_LABELS.get(kind, kind or _i18n.lazy_pgettext('agent event', 'agent'))
+            raised.append(('error', _i18n.lazy_gettext('%(agent)s: %(label)s - %(message)s',
+                                                       agent=name, label=label, message=msg), 'agent'))
         if len(events) > AGENT_EVENT_MAX:
             raised.append(('error',
-                           f"{name}: {len(events) - AGENT_EVENT_MAX} more failures not shown, "
-                           f"check the agent log",
+                           _i18n.lazy_ngettext('%(agent)s: %(num)d more failure not shown, check the agent log',
+                                               '%(agent)s: %(num)d more failures not shown, check the agent log',
+                                               len(events) - AGENT_EVENT_MAX, agent=name),
                            'agent'))
     state.clear()
     state.update(seen)
@@ -705,7 +729,7 @@ def run_checks_once(force: bool = False) -> list:
                 except (TypeError, ValueError):
                     logger.warning(f"Monitor check {name!r} returned an unusable result: {item!r}")
                     continue
-                raised.append((str(type_), str(msg), str(category)))
+                raised.append((str(type_), msg if isinstance(msg, _i18n.Message) else str(msg), str(category)))
         if ran:
             _write_state()
     for type_, msg, category in raised:

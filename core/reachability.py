@@ -6,6 +6,8 @@ from urllib.parse import urljoin, urlparse
 
 import requests
 
+from core import i18n as _i18n
+
 POOL_WORKERS = 6
 UNREACHABLE = (502, 503, 504)
 REDIRECTS   = (301, 302, 303, 307, 308)
@@ -13,11 +15,11 @@ TIMEOUT     = 5
 
 _DOWN_MARKERS    = ('connection refused', 'no route to host', 'network is unreachable',
                     'connection reset', 'remote end closed')
-_DOWN_WHY        = (('connection refused', 'refused the connection'),
-                    ('no route to host', 'is unreachable (no route to host)'),
-                    ('network is unreachable', 'is unreachable (network unreachable)'),
-                    ('connection reset', 'reset the connection'),
-                    ('remote end closed', 'closed the connection without answering'))
+_DOWN_WHY        = (('connection refused', 'refused'),
+                    ('no route to host', 'no_route'),
+                    ('network is unreachable', 'network'),
+                    ('connection reset', 'reset'),
+                    ('remote end closed', 'closed'))
 _UNKNOWN_MARKERS = ('name or service not known', 'nodename nor servname', 'temporary failure in name resolution',
                     'nameresolutionerror', 'getaddrinfo failed', 'timed out', 'timeout')
 
@@ -50,9 +52,9 @@ def safe_get(url: str, *, ssrf=None, getter=None, **kwargs):
     target = url
     for _ in range(MAX_REDIRECT_HOPS + 1):
         if not _is_http(target):
-            raise BlockedTarget(f'{target} is not an http(s) address')
+            raise BlockedTarget(_i18n.lazy_gettext('%(url)s is not an http(s) address', url=target))
         if not ssrf(target):
-            raise BlockedTarget(f'{target} is not an allowed address')
+            raise BlockedTarget(_i18n.lazy_gettext('%(url)s is not an allowed address', url=target))
         resp = getter(target, **kwargs)
         location = ''
         try:
@@ -62,7 +64,9 @@ def safe_get(url: str, *, ssrf=None, getter=None, **kwargs):
         if resp.status_code not in REDIRECTS or not location:
             return resp
         target = urljoin(target, location)
-    raise BlockedTarget(f'{url} redirected more than {MAX_REDIRECT_HOPS} times')
+    raise BlockedTarget(_i18n.lazy_ngettext('%(url)s redirected more than %(num)d time',
+                                            '%(url)s redirected more than %(num)d times',
+                                            MAX_REDIRECT_HOPS, url=url))
 
 
 def _is_http(url: str) -> bool:
@@ -83,7 +87,7 @@ def _head(target, head):
 
 def _error_text(exc) -> str:
     err = str(exc)[:80]
-    return 'Timeout' if 'timeout' in err.lower() else err
+    return _i18n.lazy_gettext('Timeout') if 'timeout' in err.lower() else err
 
 
 def redirect_target_host(url: str, code: int, location: str) -> str:
@@ -110,21 +114,52 @@ def _classify_failure(exc) -> str:
 
 def _down_why(exc) -> str:
     text = str(exc).lower()
-    return next((why for marker, why in _DOWN_WHY if marker in text), 'is unreachable')
+    return next((why for marker, why in _DOWN_WHY if marker in text), 'unreachable')
+
+
+def redirect_reason(host: str, why) -> str:
+    kind, detail = why if isinstance(why, tuple) else (why, '')
+    if kind == 'refused':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend refused the connection', host=host)
+    if kind == 'no_route':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend is unreachable (no route to host)', host=host)
+    if kind == 'network':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend is unreachable (network unreachable)', host=host)
+    if kind == 'reset':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend reset the connection', host=host)
+    if kind == 'closed':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend closed the connection without answering', host=host)
+    if kind == 'no_address':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend has no address to check', host=host)
+    if kind == 'error':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend could not be reached from Traefik Manager (%(error)s)',
+                                  host=host, error=detail)
+    if kind == 'answered':
+        return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                                  'and the backend answered %(code)s', host=host, code=detail)
+    return _i18n.lazy_gettext('The proxy redirected to %(host)s before reaching the backend, '
+                              'and the backend is unreachable', host=host)
 
 
 def _backend(fallback, ssrf, head):
     if not (fallback and _is_http(fallback) and ssrf(fallback)):
-        return 'unknown', None, 'has no address to check'
+        return 'unknown', None, ('no_address', '')
     try:
         ms, code, _loc = _head(fallback, head)
     except Exception as exc:
         verdict = _classify_failure(exc)
-        why = _down_why(exc) if verdict == 'down' else 'could not be reached from Traefik Manager (' + _error_text(exc) + ')'
+        why = (_down_why(exc), '') if verdict == 'down' else ('error', _error_text(exc))
         return verdict, None, why
     if code in UNREACHABLE:
-        return 'down', None, f'answered {code}'
-    return 'up', {'ok': True, 'latency_ms': ms, 'status_code': code, 'via_target': True}, ''
+        return 'down', None, ('answered', code)
+    return 'up', {'ok': True, 'latency_ms': ms, 'status_code': code, 'via_target': True}, ('', '')
 
 
 def backend_state(url: str, ssrf=None, head=None) -> str:
@@ -171,7 +206,7 @@ def probe(url: str, fallback: str = '', ssrf=None, head=None, verify_backend: bo
         if alt:
             return alt
         return {'ok': False, 'latency_ms': ms, 'status_code': code,
-                'error': f'The proxy answered {code}, the backend is not reachable'}
+                'error': _i18n.lazy_gettext('The proxy answered %(code)s, the backend is not reachable', code=code)}
 
     auth_host = redirect_target_host(url, code, location) if verify_backend else ''
     if auth_host:
@@ -180,8 +215,8 @@ def probe(url: str, fallback: str = '', ssrf=None, head=None, verify_backend: bo
             return alt
         if verdict == 'down':
             return {'ok': False, 'latency_ms': ms, 'status_code': code,
-                    'error': f'The proxy redirected to {auth_host} before reaching the backend, and the backend {why}'}
+                    'error': redirect_reason(auth_host, why)}
         return {'ok': True, 'latency_ms': ms, 'status_code': code, 'unverified': True,
-                'note': f'The proxy redirected to {auth_host} before reaching the backend, and the backend {why}'}
+                'note': redirect_reason(auth_host, why)}
 
     return {'ok': True, 'latency_ms': ms, 'status_code': code}

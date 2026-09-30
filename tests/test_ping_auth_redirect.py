@@ -116,9 +116,10 @@ def test_the_monitor_keeps_the_note_for_the_tooltip(monkeypatch, tmp_path):
 
 
 def test_a_down_backend_names_the_real_cause_not_always_refused():
-    why = lambda msg: reachability._down_why(OSError(msg))
-    assert why('[Errno 111] Connection refused') == 'refused the connection'
-    assert why('[Errno 113] No route to host') == 'is unreachable (no route to host)', \
+    why = lambda msg: reachability.redirect_reason('auth.example.com', reachability._down_why(OSError(msg)))
+    lead = 'The proxy redirected to auth.example.com before reaching the backend, and the backend '
+    assert why('[Errno 111] Connection refused') == lead + 'refused the connection'
+    assert why('[Errno 113] No route to host') == lead + 'is unreachable (no route to host)', \
         'a powered off host has no route, it did not refuse anything'
-    assert why('[Errno 101] Network is unreachable') == 'is unreachable (network unreachable)'
-    assert why('something else went wrong') == 'is unreachable'
+    assert why('[Errno 101] Network is unreachable') == lead + 'is unreachable (network unreachable)'
+    assert why('something else went wrong') == lead + 'is unreachable'

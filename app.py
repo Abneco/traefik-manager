@@ -80,7 +80,7 @@ from core import agent_errors as _agent_err
 from core import git as _git
 from core import auth as _auth
 from core import routes_build as _rb
-from flask_babel import gettext, ngettext
+from flask_babel import gettext
 from core import i18n as _i18n
 from core import crowdsec as _crowd
 from core import certs as _certs
@@ -810,8 +810,9 @@ _reencrypted = _reencrypt_plaintext_secrets()
 if _reencrypted:
     add_notification(
         'warning',
-        f"A secret was written to {' and '.join(_reencrypted)} in plain text. It has been "
-        f"encrypted in place and is no longer stored in the clear",
+        _i18n.lazy_gettext('A secret was written to %(files)s in plain text. It has been encrypted '
+                           'in place and is no longer stored in the clear',
+                           files=', '.join(_reencrypted)),
         category='security')
 
 for _label, _path, _err in env.unwritable_storage():
@@ -890,7 +891,8 @@ def _start_session(remember=False, extra=None, notify=True, note=None):
     session.permanent = bool(remember)
     _auth._stamp_session()
     if notify:
-        add_notification('info', note or f"Login from {request.remote_addr}", category='security')
+        add_notification('info', note or _i18n.lazy_gettext('Login from %(ip)s', ip=request.remote_addr),
+                         category='security')
     _close_reset_window(load_settings())
 
 
@@ -1561,7 +1563,8 @@ def api_revoke_sessions():
     if session.get('authenticated'):
         _auth._stamp_session()
     logger.warning(f"Every other session was signed out from {request.remote_addr}")
-    add_notification('warning', f"Every other session was signed out from {request.remote_addr}", category='security')
+    add_notification('warning', _i18n.lazy_gettext('Every other session was signed out from %(ip)s',
+                                                   ip=request.remote_addr), category='security')
     return jsonify({'success': True})
 
 
@@ -1824,6 +1827,13 @@ def _in_use_error(blocked):
                     'error': gettext('%(child)s is still used by %(users)s', child=child, users=_name_list(users))}), 409
 
 
+def _error_param(exc):
+    args = getattr(exc, 'args', ())
+    if len(args) == 1 and isinstance(args[0], _i18n.Message):
+        return args[0]
+    return str(exc)
+
+
 def _name_list(names, limit: int = 5) -> str:
     names = list(names or [])
     shown = ', '.join(str(n) for n in names[:limit])
@@ -1961,7 +1971,7 @@ def api_service_save():
                                 already=cfg_filename if agent else target_path)
     _save_edit_dicts(managed_middlewares=ledger)
     logger.info(f"Service {name!r} saved by {request.remote_addr}")
-    add_notification('success', f'Service {name} saved', category='config')
+    add_notification('success', _i18n.lazy_gettext('Service %(name)s saved', name=name), category='config')
     if agent:
         threading.Thread(target=lambda: _git_push_agent_if_enabled(agent, 'service save'),
                          daemon=True).start()
@@ -2058,7 +2068,7 @@ def api_service_delete(name):
             save_config(_strip_empty_sections(config), where)
     _save_edit_dicts(managed_middlewares=ledger)
     logger.info(f"Service {bare!r} deleted by {request.remote_addr}")
-    add_notification('warning', f'Service {bare} deleted', category='config')
+    add_notification('warning', _i18n.lazy_gettext('Service %(name)s deleted', name=bare), category='config')
     if agent:
         threading.Thread(target=lambda: _git_push_agent_if_enabled(agent, 'service delete'),
                          daemon=True).start()
@@ -2171,38 +2181,21 @@ CS_PAGE_SIZE = 1000
 CS_MAX_PAGES = 200
 
 
-def _cs_age_text(seconds: int) -> str:
-    if seconds >= 86400:
-        days = seconds // 86400
-        return f"{days} day{'s' if days != 1 else ''}"
-    if seconds >= 3600:
-        hours = seconds // 3600
-        return f"{hours} hour{'s' if hours != 1 else ''}"
-    minutes = max(1, seconds // 60)
-    return f"{minutes} minute{'s' if minutes != 1 else ''}"
-
-
 def _cs_stale_note(seconds: int, why: str) -> str:
-    english = (f'CrowdSec has not answered for {_cs_age_text(seconds)}, so these '
-               f'decisions are the last ones read and may be out of date. {why}')
-
-    def shown():
-        if seconds >= 86400:
-            return ngettext('CrowdSec has not answered for %(num)d day, so these decisions are the last ones '
-                            'read and may be out of date. %(reason)s',
-                            'CrowdSec has not answered for %(num)d days, so these decisions are the last ones '
-                            'read and may be out of date. %(reason)s', seconds // 86400, reason=why)
-        if seconds >= 3600:
-            return ngettext('CrowdSec has not answered for %(num)d hour, so these decisions are the last ones '
-                            'read and may be out of date. %(reason)s',
-                            'CrowdSec has not answered for %(num)d hours, so these decisions are the last ones '
-                            'read and may be out of date. %(reason)s', seconds // 3600, reason=why)
-        return ngettext('CrowdSec has not answered for %(num)d minute, so these decisions are the last ones '
-                        'read and may be out of date. %(reason)s',
-                        'CrowdSec has not answered for %(num)d minutes, so these decisions are the last ones '
-                        'read and may be out of date. %(reason)s', max(1, seconds // 60), reason=why)
-
-    return _i18n.Message(english, shown)
+    if seconds >= 86400:
+        return _i18n.lazy_ngettext('CrowdSec has not answered for %(num)d day, so these decisions are the last ones '
+                                   'read and may be out of date. %(reason)s',
+                                   'CrowdSec has not answered for %(num)d days, so these decisions are the last ones '
+                                   'read and may be out of date. %(reason)s', seconds // 86400, reason=why)
+    if seconds >= 3600:
+        return _i18n.lazy_ngettext('CrowdSec has not answered for %(num)d hour, so these decisions are the last ones '
+                                   'read and may be out of date. %(reason)s',
+                                   'CrowdSec has not answered for %(num)d hours, so these decisions are the last '
+                                   'ones read and may be out of date. %(reason)s', seconds // 3600, reason=why)
+    return _i18n.lazy_ngettext('CrowdSec has not answered for %(num)d minute, so these decisions are the last ones '
+                               'read and may be out of date. %(reason)s',
+                               'CrowdSec has not answered for %(num)d minutes, so these decisions are the last ones '
+                               'read and may be out of date. %(reason)s', max(1, seconds // 60), reason=why)
 
 
 def _cs_decisions_gate():
@@ -2225,7 +2218,7 @@ def _cs_active_decisions(force_full: bool = False):
             all_decisions, _mode = _crowd.cs_decisions_stream(force_full=force_full)
             if str(_mode).startswith('stale:'):
                 _, _age, _why = str(_mode).split(':', 2)
-                stale_note = _cs_stale_note(int(_age), _why)
+                stale_note = _cs_stale_note(int(getattr(_mode, 'age', _age)), getattr(_mode, 'reason', _why))
         except CrowdSecUnavailable as e:
             if 'HTTP 404' in str(e) or 'HTTP 405' in str(e):
                 logger.info("CrowdSec LAPI has no /v1/decisions/stream, falling back to the paged walk")
@@ -2302,10 +2295,10 @@ def api_cs_decisions():
             return resp
         return jsonify(active)
     except CrowdSecUnavailable as e:
-        return jsonify({'error': str(e)}), 502
+        return jsonify({'error': _i18n.shown_error(e)}), 502
     except Exception as e:
         logger.exception("CrowdSec decisions error")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': _i18n.shown_error(e)}), 500
 
 CS_SEARCH_PER_DEFAULT = 20
 CS_SEARCH_PER_MAX = 200
@@ -2320,10 +2313,10 @@ def api_cs_decisions_search():
     try:
         active, stale_note = _cs_active_decisions()
     except CrowdSecUnavailable as e:
-        return jsonify({'error': str(e)}), 502
+        return jsonify({'error': _i18n.shown_error(e)}), 502
     except Exception as e:
         logger.exception("CrowdSec decisions search error")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': _i18n.shown_error(e)}), 500
 
     q          = request.args.get('q', '').strip().lower()
     origin_f   = request.args.get('origin', '').strip()
@@ -2411,11 +2404,11 @@ def api_cs_summary():
             decisions_block['stale'] = _i18n.shown(stale_note)
         except CrowdSecUnavailable as e:
             decisions_block['ok'] = False
-            decisions_block['error'] = str(e)
+            decisions_block['error'] = _i18n.shown_error(e)
         except Exception as e:
             logger.exception("CrowdSec summary decisions error")
             decisions_block['ok'] = False
-            decisions_block['error'] = str(e)
+            decisions_block['error'] = _i18n.shown_error(e)
 
     if decisions_block['ok']:
         origins   = {}
@@ -2455,12 +2448,12 @@ def api_cs_summary():
         alerts_block['capped'] = bool(alert_limit and len(alert_rows_raw) >= alert_limit)
     except CrowdSecUnavailable as e:
         alerts_block['ok'] = False
-        alerts_block['error'] = str(e)
+        alerts_block['error'] = _i18n.shown_error(e)
         alerts_block['status'] = getattr(e, 'status', 0) or 0
     except Exception as e:
         logger.exception("CrowdSec summary alerts error")
         alerts_block['ok'] = False
-        alerts_block['error'] = str(e)
+        alerts_block['error'] = _i18n.shown_error(e)
         alerts_block['status'] = 0
 
     if alerts_block['ok']:
@@ -2501,10 +2494,10 @@ def api_cs_alerts():
         alerts, _mode = _crowd.cs_alerts(_limit, force_full=force_full)
     except CrowdSecUnavailable as e:
         status = getattr(e, 'status', 0) or 0
-        return jsonify({'error': str(e)}), (status if status >= 400 else 502)
+        return jsonify({'error': _i18n.shown_error(e)}), (status if status >= 400 else 502)
     except Exception as e:
         logger.exception("CrowdSec alerts error")
-        return jsonify({'error': str(e)}), 500
+        return jsonify({'error': _i18n.shown_error(e)}), 500
     out = jsonify(alerts)
     out.headers['X-CS-Alert-Limit'] = str(_limit)
     out.headers['X-CS-Alert-Capped'] = '1' if (_limit and len(alerts) >= _limit) else '0'
@@ -2561,7 +2554,8 @@ def api_cs_unban(decision_id):
     if result is None:
         return jsonify({'error': gettext('Failed to delete decision')}), 500
     _crowd.cs_stream_reset()
-    add_notification('success', f'Decision {decision_id} deleted (IP unbanned)', category='crowdsec')
+    add_notification('success', _i18n.lazy_gettext('Decision %(id)s deleted (IP unbanned)', id=decision_id),
+                     category='crowdsec')
     return jsonify({'ok': True})
 
 
@@ -2836,7 +2830,7 @@ def api_static_config_save():
         for _old, _new in _renames.items():
             _cascade_across_configs(None, lambda c, o=_old, n=_new: _retarget_plugin(c, o, n))
         logger.info(f"Static config saved by {request.remote_addr}: {safe_path}")
-        add_notification('success', 'Static config saved')
+        add_notification('success', _i18n.lazy_gettext('Static config saved'))
         threading.Thread(target=lambda: _git_push_if_enabled('static config save'), daemon=True).start()
         return jsonify({'ok': True})
     except Exception as e:
@@ -2850,7 +2844,7 @@ def api_static_restart():
     ok, err = trigger_traefik_restart()
     if ok:
         logger.info(f"Traefik restarted via static config by {request.remote_addr}")
-        add_notification('warning', 'Traefik restarted', category='traefik')
+        add_notification('warning', _i18n.lazy_gettext('Traefik restarted'), category='traefik')
         return jsonify({'ok': True})
     logger.error(f"Traefik restart failed for {request.remote_addr} (RESTART_METHOD {_get_restart_method()!r})")
     return jsonify({'ok': False, 'error': err}), 500
@@ -3627,7 +3621,8 @@ def api_geoip_lookup():
 def api_geoip_update():
     ok, info = _geoip_download()
     if ok:
-        add_notification('success', f'GeoIP database updated (DB-IP {info})', category='update')
+        add_notification('success', _i18n.lazy_gettext('GeoIP database updated (DB-IP %(db_month)s)', db_month=info),
+                         category='update')
         return jsonify({'success': True, 'db_month': info, 'status': _geoip_status()})
     return jsonify({'success': False, 'error': gettext('Download failed: %(info)s', info=info)}), 502
 
@@ -3860,7 +3855,7 @@ def api_plugins_install():
             warning = gettext('Plugin saved but middleware could not be written: %(error)s',
                               error=_i18n.shown_error(e))
     plugin_names = list(plugins_block.keys())
-    add_notification('success', f'Plugin installed: {", ".join(plugin_names)}')
+    add_notification('success', _i18n.lazy_gettext('Plugin installed: %(names)s', names=', '.join(plugin_names)))
     result = {'ok': True, 'plugins': plugin_names}
     if mw_written:
         result['middleware_file'] = mw_written
@@ -4039,7 +4034,8 @@ def api_certs_delete():
     except _acme.AcmeStorePartial as e:
         ok, err = trigger_traefik_restart()
         logger.error(f"Certificate removal stopped partway: {e}")
-        add_notification('error', f"Certificate removal stopped partway: {e}", category='traefik')
+        add_notification('error', _i18n.lazy_gettext('Certificate removal stopped partway: %(error)s',
+                                                 error=_error_param(e)), category='traefik')
         return jsonify({'error': e.shown(), 'removed': e.removed, 'partial': True,
                         'backup': os.path.basename(e.backup or ''),
                         'restarted': ok, 'restart_error': '' if ok else err}), 500
@@ -4053,7 +4049,9 @@ def api_certs_delete():
 
     ok, err = trigger_traefik_restart()
     logger.info(f"Removed {removed} certificate(s) from acme.json, backup at {saved}")
-    add_notification('warning', f"{removed} certificate(s) removed from acme.json", category='traefik')
+    add_notification('warning', _i18n.lazy_ngettext('%(num)d certificate removed from acme.json',
+                                                    '%(num)d certificates removed from acme.json', removed),
+                     category='traefik')
     return jsonify({'ok': True, 'removed': removed, 'backup': os.path.basename(saved or ''),
                     'restarted': ok, 'restart_error': '' if ok else err})
 
@@ -4204,10 +4202,10 @@ def api_git_backup_push():
     else:
         ok, err = _git_push_configs('manual', custom_message=message or None)
     if ok:
-        add_notification('success', f"Git backup pushed ({agent['name']})" if agent else 'Git backup pushed',
-                         category='backup')
+        add_notification('success', _i18n.lazy_gettext('Git backup pushed (%(agent)s)', agent=agent['name'])
+                         if agent else _i18n.lazy_gettext('Git backup pushed'), category='backup')
         return jsonify({'ok': True})
-    add_notification('error', f'Git push failed: {err}', category='backup')
+    add_notification('error', _i18n.lazy_gettext('Git push failed: %(error)s', error=err), category='backup')
     return jsonify({'ok': False, 'error': _i18n.shown(err)}), 400
 
 def _same_git_remote(a: str, b: str) -> bool:
@@ -4337,7 +4335,9 @@ def api_git_backup_restore(sha):
                     resp = _agent_request(agent, 'POST', '/api/configs', json={'name': os.path.basename(fpath), 'content': content})
                     resp.raise_for_status()
                     restored += 1
-            add_notification('warning', f"Restored {agent['name']} from git commit {sha[:8]} ({restored} files)",
+            add_notification('warning', _i18n.lazy_ngettext('Restored %(agent)s from git commit %(sha)s (%(num)d file)',
+                                                            'Restored %(agent)s from git commit %(sha)s (%(num)d files)',
+                                                            restored, agent=agent['name'], sha=sha[:8]),
                              category='backup')
             return jsonify({'ok': True})
         for p in env.CONFIG_PATHS:
@@ -4360,11 +4360,13 @@ def api_git_backup_restore(sha):
             content = _git_show_first(repo_dir, sha, [f'static/{base}', base])
             if content:
                 _write_restored(sp, content)
-        add_notification('warning', f'Restored from git commit {sha[:8]}', category='backup')
+        add_notification('warning', _i18n.lazy_gettext('Restored from git commit %(sha)s', sha=sha[:8]),
+                         category='backup')
         return jsonify({'ok': True})
     except Exception as e:
         logger.exception("Git restore error")
-        add_notification('error', f'Git restore failed: {e}', category='backup')
+        add_notification('error', _i18n.lazy_gettext('Git restore failed: %(error)s', error=_error_param(e)),
+                         category='backup')
         return jsonify({'error': str(e)}), 500
 
 
@@ -4380,7 +4382,8 @@ def api_git_backup_reset():
         if os.path.exists(repo_dir):
             shutil.rmtree(repo_dir)
         logger.info("Git repo directory reset by user")
-        add_notification('warning', 'Git repository reset - re-initialize by pushing again', category='backup')
+        add_notification('warning', _i18n.lazy_gettext('Git repository reset - re-initialize by pushing again'),
+                         category='backup')
         return jsonify({'ok': True})
     except Exception as e:
         logger.exception("Git repo reset error")
@@ -4390,7 +4393,7 @@ def api_git_backup_reset():
 @app.route('/api/notifications')
 @login_required
 def api_notifications():
-    return jsonify(get_notifications())
+    return jsonify(_noti.shown_entries(get_notifications()))
 
 @app.route('/api/notifications/log', methods=['POST'])
 @csrf_protect
@@ -4480,7 +4483,8 @@ def api_notifications_update():
     version = data.get('version', '')
     product = 'Traefik Manager' if data.get('product') == 'manager' else 'Traefik'
     if version:
-        add_notification('info', f"{product} v{version} is available - update now", category='update')
+        add_notification('info', _i18n.lazy_gettext('%(product)s v%(version)s is available - update now',
+                                                    product=product, version=version), category='update')
     return jsonify({'ok': True})
 
 
@@ -4759,7 +4763,7 @@ def api_tls_options_save():
     if original and original != name:
         _cascade_across_configs(agent, lambda c: _retarget_tls_option(c, original, name),
                                 already=cfg_name if agent else target_path)
-    add_notification('success', f"TLS profile '{name}' saved")
+    add_notification('success', _i18n.lazy_gettext("TLS profile '%(name)s' saved", name=name))
     return jsonify({'ok': True})
 
 
@@ -4794,7 +4798,7 @@ def api_tls_options_delete(name):
     else:
         create_backup(target_path)
         save_config(_strip_empty_sections(config), target_path)
-    add_notification('success', f"TLS profile '{name}' deleted")
+    add_notification('success', _i18n.lazy_gettext("TLS profile '%(name)s' deleted", name=name))
     return jsonify({'ok': True})
 
 
@@ -4847,7 +4851,8 @@ def api_restore(filename):
                 _acme.write_bytes_in_place(acme_target, body, restore=current)
             ok, err = trigger_traefik_restart()
             logger.info(f"Restored: {filename} -> {acme_target}")
-            add_notification('warning', f"Certificate store restored: {filename}", category='backup')
+            add_notification('warning', _i18n.lazy_gettext('Certificate store restored: %(file)s', file=filename),
+                             category='backup')
             return jsonify({'success': True, 'restarted': ok, 'restart_error': '' if ok else err})
         if target_path is None:
             return jsonify({'error': gettext('No config file matches %(filename)s', filename=repr(filename))}), 400
@@ -4857,7 +4862,7 @@ def api_restore(filename):
         with open(target_path, 'wb') as fh:
             fh.write(restored)
         logger.info(f"Restored: {filename} → {target_path}")
-        add_notification('warning', f"Backup restored: {filename}", category='backup')
+        add_notification('warning', _i18n.lazy_gettext('Backup restored: %(file)s', file=filename), category='backup')
         return jsonify({'success': True})
     except _acme.AcmeStoreError as e:
         return jsonify({'error': e.shown()}), e.status
@@ -4876,7 +4881,8 @@ def api_backup_create():
             if dest:
                 created.append(os.path.basename(dest))
         if created:
-            add_notification('success', f"Backup created ({len(created)} file{'s' if len(created) > 1 else ''})",
+            add_notification('success', _i18n.lazy_ngettext('Backup created (%(num)d file)',
+                                                            'Backup created (%(num)d files)', len(created)),
                              category='backup')
             return jsonify({'success': True, 'names': created, 'count': len(created)})
         return jsonify({'error': gettext('No config files found to backup')}), 400
@@ -4894,7 +4900,7 @@ def api_static_backup_create():
     try:
         dest = create_backup(path)
         if dest:
-            add_notification('success', "Static config backup created", category='backup')
+            add_notification('success', _i18n.lazy_gettext('Static config backup created'), category='backup')
             return jsonify({'success': True, 'name': os.path.basename(dest)})
         return jsonify({'error': gettext('Static config file not found')}), 400
     except Exception as e:
@@ -4916,7 +4922,7 @@ def api_backup_delete(filename):
         path = _validated_backup_path(filename)
         if os.path.exists(path):
             os.remove(path)
-        add_notification('warning', f"Backup deleted: {filename}", category='backup')
+        add_notification('warning', _i18n.lazy_gettext('Backup deleted: %(file)s', file=filename), category='backup')
         return jsonify({'success': True})
     except Exception as e:
         logger.exception("Backup delete error")
@@ -6445,7 +6451,7 @@ def api_route_raw_save(route_id):
             except OSError:
                 pass
         logger.info(f"Route '{rname}' raw config saved: {target_path}")
-        add_notification('success', f"Route '{rname}' updated")
+        add_notification('success', _i18n.lazy_gettext("Route '%(name)s' updated", name=rname))
         threading.Thread(target=lambda: _git_push_if_enabled('route raw save'), daemon=True).start()
         return jsonify({'ok': True})
     except Exception as e:
@@ -7011,8 +7017,8 @@ def save_entry():
             save_config(_strip_empty_sections(config), target_path)
             _register_config_path(target_path)
             threading.Thread(target=lambda: _git_push_if_enabled('route save'), daemon=True).start()
-        action = "updated" if is_edit else "created"
-        add_notification('success', f"Route {svc_name} {action}")
+        add_notification('success', _i18n.lazy_gettext('Route %(name)s updated', name=svc_name) if is_edit
+                         else _i18n.lazy_gettext('Route %(name)s created', name=svc_name))
         msg = (gettext('Route %(name)s updated', name=svc_name) if is_edit
                else gettext('Route %(name)s created', name=svc_name))
         if fetch:
@@ -7136,7 +7142,7 @@ def delete_entry(router_id):
             threading.Thread(target=lambda: _git_push_if_enabled('route delete'), daemon=True).start()
         if _del_ledger_changed:
             _save_edit_dicts(managed_middlewares=_del_ledger)
-        add_notification('warning', f"Route {plain_id} deleted")
+        add_notification('warning', _i18n.lazy_gettext('Route %(name)s deleted', name=plain_id))
         msg = gettext('Route %(name)s deleted', name=plain_id)
         if fetch:
             return jsonify({'ok': True, 'message': msg})
@@ -7259,8 +7265,8 @@ def save_middleware():
                                         already=target_path)
             _register_config_path(target_path)
             threading.Thread(target=lambda: _git_push_if_enabled('middleware save'), daemon=True).start()
-        action = "updated" if is_edit else "created"
-        add_notification('success', f"Middleware {mw_name} {action}")
+        add_notification('success', _i18n.lazy_gettext('Middleware %(name)s updated', name=mw_name) if is_edit
+                         else _i18n.lazy_gettext('Middleware %(name)s created', name=mw_name))
         msg = (gettext('Middleware %(name)s updated', name=mw_name) if is_edit
                else gettext('Middleware %(name)s created', name=mw_name))
         if fetch:
@@ -7494,7 +7500,7 @@ def delete_middleware(mw_name):
             threading.Thread(target=lambda: _git_push_agent_if_enabled(agent, 'middleware delete'), daemon=True).start()
         else:
             threading.Thread(target=lambda: _git_push_if_enabled('middleware delete'), daemon=True).start()
-        add_notification('warning', f"Middleware {mw_name} deleted")
+        add_notification('warning', _i18n.lazy_gettext('Middleware %(name)s deleted', name=mw_name))
         msg = gettext('Middleware %(name)s deleted', name=mw_name)
         if fetch:
             return jsonify({'ok': True, 'message': msg})
@@ -7750,7 +7756,7 @@ def oidc_callback():
         flash(gettext('Your account is not authorized to access this application.'), "error")
         return redirect(url_for('login'))
     _start_session(False, {'oidc_email': email, 'oidc_name': name, 'auth_method': 'oidc'},
-                   note=f"OIDC login: {email} from {request.remote_addr}")
+                   note=_i18n.lazy_gettext('OIDC login: %(email)s from %(ip)s', email=email, ip=request.remote_addr))
     logger.info(f"OIDC login success for {email!r} from {request.remote_addr}")
     return redirect(url_for('index'))
 
@@ -7831,7 +7837,7 @@ def api_test_oidc():
             'note': gettext('Provider reachable. Credentials are not verified until you sign in.'),
         })
     except Exception as e:
-        return jsonify({'ok': False, 'error': str(e)})
+        return jsonify({'ok': False, 'error': _i18n.shown_error(e)})
 
 
 def _redact_agent(a: dict) -> dict:

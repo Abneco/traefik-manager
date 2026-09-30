@@ -65,7 +65,10 @@ def test_a_live_read_carries_no_stale_header(client, monkeypatch):
 ])
 def test_the_age_reads_naturally(seconds, text):
     import app as tm
-    assert tm._cs_age_text(seconds) == text
+    note = tm._cs_stale_note(seconds, 'HTTP 401')
+    assert note.startswith(f'CrowdSec has not answered for {text}, so these decisions')
+    assert note.endswith('may be out of date. HTTP 401')
+    assert note.spec['params']['reason'] == 'HTTP 401'
 
 
 def test_the_bans_card_says_when_its_numbers_are_old():

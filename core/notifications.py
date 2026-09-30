@@ -9,6 +9,7 @@ import requests
 from ruamel.yaml import YAML as SafeYAML
 
 from core import env
+from core import i18n as _i18n
 from core import settings as settings_mod
 from core import notify_providers as providers
 from core.env import logger
@@ -182,6 +183,35 @@ CATEGORY_LABELS = {
     'agent': 'Agents', 'update': 'Updates',
 }
 
+CATEGORY_SPECS = {
+    'config': _i18n.lazy_pgettext('notification category', 'Config'),
+    'backup': _i18n.lazy_pgettext('notification category', 'Backups'),
+    'security': _i18n.lazy_pgettext('notification category', 'Security'),
+    'traefik': _i18n.lazy_pgettext('notification category', 'Traefik'),
+    'certs': _i18n.lazy_pgettext('notification category', 'Certificates'),
+    'crowdsec': _i18n.lazy_pgettext('notification category', 'CrowdSec'),
+    'agent': _i18n.lazy_pgettext('notification category', 'Agents'),
+    'update': _i18n.lazy_pgettext('notification category', 'Updates'),
+}
+
+
+def outgoing_translations():
+    try:
+        tag = settings_mod.load_settings().get('default_language', '')
+    except Exception:
+        tag = ''
+    try:
+        return _i18n.translations_for(tag)
+    except Exception:
+        return _i18n.translations_for('')
+
+
+def _category_label(category, translations):
+    spec = CATEGORY_SPECS.get(category)
+    if spec is None:
+        return CATEGORY_LABELS.get(category, '') or str(category or '').title()
+    return _i18n.render(spec.spec, translations)
+
 
 def _queue_path():
     return os.path.join(os.path.dirname(env.NOTIFICATIONS_PATH), 'notification_queue.json')
@@ -226,22 +256,26 @@ def queue_add(channel_id, type_, msg, ts, category):
         _queue_write(q)
 
 
-def build_report(items, dropped=0) -> str:
+def build_report(items, dropped=0, translations=None) -> str:
     if not items:
         return ''
+    tr = translations if translations is not None else _i18n.translations_for('')
     order = [c for c in CATEGORY_LABELS if any(i.get('category') == c for i in items)]
+    order += [c for c in dict.fromkeys(i.get('category') for i in items) if c not in order]
     lines = []
     for cat in order:
         rows = [i for i in items if i.get('category') == cat]
-        label = CATEGORY_LABELS.get(cat, cat.title())
+        label = _category_label(cat, tr)
         if len(rows) == 1:
-            lines.append(f"{label}: {rows[0]['msg']}")
+            lines.append(_i18n.render(_i18n.lazy_gettext('%(label)s: %(message)s', label=label, message=rows[0]['msg']).spec, tr))
             continue
-        lines.append(f"{label}: {len(rows)} events, latest {rows[-1]['msg']}")
+        lines.append(_i18n.render(_i18n.lazy_ngettext(
+            '%(label)s: %(num)d event, latest %(message)s', '%(label)s: %(num)d events, latest %(message)s',
+            len(rows), label=label, message=rows[-1]['msg']).spec, tr))
     if dropped:
-        lines.append(f"and {dropped} more")
-    span = f"{items[0]['ts']} to {items[-1]['ts']}"
-    return f"Summary {span}\n" + "\n".join(lines)
+        lines.append(_i18n.render(_i18n.lazy_ngettext('and %(num)d more', 'and %(num)d more', dropped).spec, tr))
+    head = _i18n.render(_i18n.lazy_gettext('Summary %(start)s to %(end)s', start=items[0]['ts'], end=items[-1]['ts']).spec, tr)
+    return head + "\n" + "\n".join(lines)
 
 
 DIGEST_SECONDS = {'hourly': 3600, 'daily': 86400}
@@ -313,7 +347,7 @@ def flush_queue(channel_id=None, force=False) -> int:
             if not items:
                 del q[cid]
                 continue
-            report = build_report(items, held.get('dropped', 0))
+            report = build_report(items, held.get('dropped', 0), outgoing_translations())
             worst = max(items, key=lambda r: SEVERITY_RANK.get(r.get('type'), 0))
             try:
                 _deliver(ch, worst.get('type', 'info'), report, items[-1]['ts'], '')
@@ -363,7 +397,7 @@ def _deliver(channel: dict, type_: str, msg: str, ts: str, category: str = 'conf
     if missing:
         logger.warning(f"Channel {channel.get('name')} is missing {', '.join(missing)}")
         return
-    source = CATEGORY_LABELS.get(category, '') or 'Traefik Manager'
+    source = (_category_label(category, outgoing_translations()) if category in CATEGORY_LABELS else '') or 'Traefik Manager'
     ok, err = providers.send(channel, type_, source, msg, ts)
     if not ok:
         logger.warning(f"Channel {channel.get('name')} delivery failed: {err}")
@@ -418,6 +452,18 @@ def get_notifications():
         return list(reversed(entries[-MAX_ENTRIES:]))
 
 
+def shown_entries(entries, translations=None):
+    out = []
+    for entry in entries:
+        if isinstance(entry, dict) and 'i18n' in entry:
+            entry = dict(entry)
+            spec = entry.pop('i18n')
+            if _i18n.is_spec(spec):
+                entry['msg'] = _i18n.render(spec, translations) or entry.get('msg', '')
+        out.append(entry)
+    return out
+
+
 def delete_notification(ts):
     with _notif_lock, _file_lock():
         entries, next_id = _read_state()
@@ -461,6 +507,7 @@ def highest_id():
 
 
 def add_notification(type_, msg, category='config', webhook=True):
+    spec = _i18n.to_stored(msg) if isinstance(msg, _i18n.Message) else None
     msg = str(msg or '').strip()
     if not msg:
         return False
@@ -468,6 +515,8 @@ def add_notification(type_, msg, category='config', webhook=True):
     entry = {'ts': time.strftime("%Y-%m-%d %H:%M:%S", time.localtime(now)),
              'type': type_, 'msg': msg, 'category': category,
              'at': int(now)}
+    if _i18n.is_spec(spec):
+        entry['i18n'] = spec
     try:
         with _notif_lock, _file_lock():
             entries, next_id = _read_state()
@@ -483,6 +532,12 @@ def add_notification(type_, msg, category='config', webhook=True):
         logger.exception("Failed to store notification")
         return False
     if webhook:
+        out = msg
+        if _i18n.is_spec(spec):
+            try:
+                out = _i18n.render(spec, outgoing_translations()).strip() or msg
+            except Exception:
+                out = msg
         threading.Thread(target=_fire_webhook,
-                         args=(type_, msg, entry['ts'], category), daemon=True).start()
+                         args=(type_, out, entry['ts'], category), daemon=True).start()
     return True

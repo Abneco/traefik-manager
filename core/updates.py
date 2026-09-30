@@ -1,7 +1,6 @@
 import time
 
 import requests
-from flask_babel import gettext
 
 from core import env, i18n
 from core import monitor as monitor_mod
@@ -75,12 +74,9 @@ def release_info(repo: str) -> dict:
             info['url'] = str(data.get('html_url') or '')
             info['notes'] = str(data.get('body') or '')
         elif resp.status_code in (403, 429):
-            info['error'] = i18n.Message('rate limited by GitHub, retrying later',
-                                         lambda: gettext('rate limited by GitHub, retrying later'))
+            info['error'] = i18n.lazy_gettext('rate limited by GitHub, retrying later')
         else:
-            code = resp.status_code
-            info['error'] = i18n.Message('GitHub returned HTTP %d' % code,
-                                         lambda: gettext('GitHub returned HTTP %(status_code)d', status_code=code))
+            info['error'] = i18n.lazy_gettext('GitHub returned HTTP %(status_code)d', status_code=resp.status_code)
             ttl = RELEASE_RETRY_TTL
     except Exception as e:
         info['error'] = str(e)[:120]
@@ -99,13 +95,19 @@ def running_traefik_version() -> str:
     return _strip_v(info.get('Version')) if isinstance(info, dict) else ''
 
 
-def _update_alert(key, product, current, latest, seen):
+def _update_alert(key, current, latest, seen, product=None, agent=None):
     if not latest or seen.get(key) == latest:
         return None
     if compare_versions(latest, current) <= 0:
         return None
     seen[key] = latest
-    return ('info', f"{product} v{latest} is available - update now", 'update')
+    if agent is not None:
+        text = i18n.lazy_gettext('Traefik on %(agent)s v%(version)s is available - update now',
+                                 agent=agent, version=latest)
+    else:
+        text = i18n.lazy_gettext('%(product)s v%(version)s is available - update now',
+                                 product=product, version=latest)
+    return ('info', text, 'update')
 
 
 def _latest_cached(repo, cache) -> str:
@@ -133,7 +135,7 @@ def check_updates(seen: dict = None) -> list:
             ('traefik', 'Traefik',         TRAEFIK_REPO,      running_traefik_version())):
         if not current:
             continue
-        alert = _update_alert(key, product, current, _latest_cached(repo, cache), seen)
+        alert = _update_alert(key, current, _latest_cached(repo, cache), seen, product=product)
         if alert:
             raised.append(alert)
     for agent in monitor_mod._agents():
@@ -144,8 +146,8 @@ def check_updates(seen: dict = None) -> list:
         if not current:
             continue
         name  = str(agent.get('name') or agent_id)
-        alert = _update_alert(f"traefik:{agent_id}", f"Traefik on {name}", current,
-                              _latest_cached(TRAEFIK_REPO, cache), seen)
+        alert = _update_alert(f"traefik:{agent_id}", current, _latest_cached(TRAEFIK_REPO, cache), seen,
+                              agent=name)
         if alert:
             raised.append(alert)
     return raised
