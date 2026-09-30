@@ -52,8 +52,11 @@ msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s está siendo utilizado por %(users)s"
 
 #, python-format
-msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
-msgstr "%(child)s está siendo utilizado por %(users)s y sigue siendo backend de %(parents)s"
+msgid ""
+"%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgstr ""
+"%(child)s está siendo utilizado por %(users)s y sigue siendo backend de "
+"%(parents)s"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -129,7 +132,9 @@ msgstr "%(name)s está definido en %(file)s, que aquí es de solo lectura."
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s está siendo utilizado por %(users)s. Elimina esos middlewares primero"
+msgstr ""
+"%(name)s está siendo utilizado por %(users)s. Elimina esos middlewares "
+"primero"
 
 #, python-format
 msgid ""
@@ -886,8 +891,8 @@ msgid ""
 "%(ip_allow_list)s and the login limiter - check what reaches the app first "
 "with the %(ip_diagnostic)s."
 msgstr ""
-"Añade %(trusted_ips)s a un entrypoint para que Traefik confíe en el %"
-"(x_forwarded_for)s de tus proxies. Esta confianza afecta a los registros, "
+"Añade %(trusted_ips)s a un entrypoint para que Traefik confíe en el "
+"%(x_forwarded_for)s de tus proxies. Esta confianza afecta a los registros, "
 "CrowdSec, %(ip_allow_list)s y el limitador de inicio de sesión: comprueba "
 "primero lo que llega a la app con %(ip_diagnostic)s."
 
@@ -1277,9 +1282,9 @@ msgid ""
 "Enable and manage profiles via the TLS Options tab in Settings - Interface - "
 "TABS."
 msgstr ""
-"Asigna un perfil tls.options a este router (p. ej. versión mínima, cifrados)"
-". Activa y gestiona los perfiles desde la pestaña Opciones TLS en Ajustes - "
-"Interfaz - PESTAÑAS."
+"Asigna un perfil tls.options a este router (p. ej. versión mínima, "
+"cifrados). Activa y gestiona los perfiles desde la pestaña Opciones TLS en "
+"Ajustes - Interfaz - PESTAÑAS."
 
 msgid "At least 8 characters"
 msgstr "Al menos 8 caracteres"
@@ -1815,8 +1820,8 @@ msgid ""
 "Capture groups are %(n1)s, %(n2)s and so on. In a compose file %(code)s must "
 "be written %(code2)s."
 msgstr ""
-"Los grupos de captura son %(n1)s, %(n2)s, etc. En un archivo compose, %(code)"
-"s debe escribirse %(code2)s."
+"Los grupos de captura son %(n1)s, %(n2)s, etc. En un archivo compose, "
+"%(code)s debe escribirse %(code2)s."
 
 #. Used in the browser
 msgid "Card settings"
@@ -4342,8 +4347,8 @@ msgid ""
 "%(transport)s. Entry-point %(responding_timeouts)s are global and static - "
 "adjust them in the Static Config editor if long transcodes still cut off."
 msgstr ""
-"Fuerza %(pass_host_header)s y establece %(forwarding_timeouts)s largos en %"
-"(transport)s. Los %(responding_timeouts)s del entrypoint son globales y "
+"Fuerza %(pass_host_header)s y establece %(forwarding_timeouts)s largos en "
+"%(transport)s. Los %(responding_timeouts)s del entrypoint son globales y "
 "estáticos: ajústalos en el editor de configuración estática si las "
 "transcodificaciones largas se siguen cortando."
 
@@ -4543,8 +4548,8 @@ msgid ""
 "yourself."
 msgstr ""
 "Da a esta interfaz su propio nombre de host a través de Traefik, para "
-"acceder a ella por TLS en lugar de por un puerto publicado. Escribe un %"
-"(traefik_manager_self)s en tu directorio de configuración. Omítelo si ya "
+"acceder a ella por TLS en lugar de por un puerto publicado. Escribe un "
+"%(traefik_manager_self)s en tu directorio de configuración. Omítelo si ya "
 "enrutas a este contenedor por tu cuenta."
 
 #. Used in the browser
@@ -4800,8 +4805,8 @@ msgid ""
 "%(crowdsec_alert_limit)s, or 500. %(n0)s reads every alert, which is slow on "
 "a large LAPI. Applies to this server and to agents."
 msgstr ""
-"Cuántas de las alertas más recientes leer, de 0 a 100000. En blanco usa %"
-"(crowdsec_alert_limit)s, o 500. %(n0)s lee todas las alertas, lo que es "
+"Cuántas de las alertas más recientes leer, de 0 a 100000. En blanco usa "
+"%(crowdsec_alert_limit)s, o 500. %(n0)s lee todas las alertas, lo que es "
 "lento en una LAPI grande. Se aplica a este servidor y a los agentes."
 
 msgctxt "setting"
@@ -5112,7 +5117,8 @@ msgstr "Adopta una instalación existente"
 #. Used in the browser
 #, python-brace-format
 msgid "It is also removed from {names}, and any left empty are deleted too."
-msgstr "También se quita de {names}, y los que queden vacíos también se eliminan."
+msgstr ""
+"También se quita de {names}, y los que queden vacíos también se eliminan."
 
 #. Used in the browser
 #, python-brace-format
@@ -5152,8 +5158,8 @@ msgid ""
 "Keep only the last N %(bak)s files per config file (%(backup_keep_count)s). "
 "0 = keep all."
 msgstr ""
-"Conservar solo los últimos N archivos %(bak)s por archivo de configuración (%"
-"(backup_keep_count)s). 0 = conservar todos."
+"Conservar solo los últimos N archivos %(bak)s por archivo de configuración "
+"(%(backup_keep_count)s). 0 = conservar todos."
 
 #. Used in the browser
 msgid "Key copied"
@@ -5608,8 +5614,8 @@ msgstr "Versión máx."
 #, python-format
 msgid "Max idle conns must be a whole number, got %(max_idle)s"
 msgstr ""
-"Las conexiones inactivas máx. deben ser un número entero, se recibió %"
-"(max_idle)s"
+"Las conexiones inactivas máx. deben ser un número entero, se recibió "
+"%(max_idle)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -7805,8 +7811,8 @@ msgid ""
 "Reads active decisions - the bans in force. Generate one with "
 "%(cscli_bouncers_add)s."
 msgstr ""
-"Lee las decisiones activas - los bloqueos en vigor. Genera una con %"
-"(cscli_bouncers_add)s."
+"Lee las decisiones activas - los bloqueos en vigor. Genera una con "
+"%(cscli_bouncers_add)s."
 
 msgid ""
 "Reads alerts, which is where scenarios, targeted paths and attacking "
@@ -8101,7 +8107,8 @@ msgstr "¿Quitar {shown} de acme.json?"
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
 msgid_plural ""
 "Removed %(num)d certificates, then stopped at %(file)s: %(detail)s"
-msgstr[0] "Se quitó %(num)d certificado y luego se detuvo en %(file)s: %(detail)s"
+msgstr[0] ""
+"Se quitó %(num)d certificado y luego se detuvo en %(file)s: %(detail)s"
 msgstr[1] ""
 "Se quitaron %(num)d certificados y luego se detuvo en %(file)s: %(detail)s"
 
@@ -8265,8 +8272,8 @@ msgstr "Restablecer contraseña"
 #, python-format
 msgid "Resolved from inside the agent container. Sets %(crowdsec_lapi_url)s."
 msgstr ""
-"Se resuelve desde dentro del contenedor del agente. Establece %"
-"(crowdsec_lapi_url)s."
+"Se resuelve desde dentro del contenedor del agente. Establece "
+"%(crowdsec_lapi_url)s."
 
 #. Used in the browser
 msgctxt "label"
@@ -8382,7 +8389,8 @@ msgstr "Restaurar reemplaza todos los certificados de acme.json"
 #, python-brace-format
 msgid "Result: {count} trusted range on {entrypoint} (was {before})."
 msgid_plural "Result: {count} trusted ranges on {entrypoint} (was {before})."
-msgstr[0] "Resultado: {count} rango de confianza en {entrypoint} (antes {before})."
+msgstr[0] ""
+"Resultado: {count} rango de confianza en {entrypoint} (antes {before})."
 msgstr[1] ""
 "Resultado: {count} rangos de confianza en {entrypoint} (antes {before})."
 
@@ -8780,8 +8788,8 @@ msgid ""
 "%(podman_exec_it)s %(flask_reset_password)s The password is not printed "
 "back. Log in with it straight away."
 msgstr ""
-"Ejecuta este comando e introduce una contraseña nueva cuando se te pida: %"
-"(docker_exec_it)s %(podman_exec_it)s %(flask_reset_password)s La contraseña "
+"Ejecuta este comando e introduce una contraseña nueva cuando se te pida: "
+"%(docker_exec_it)s %(podman_exec_it)s %(flask_reset_password)s La contraseña "
 "no se vuelve a mostrar. Inicia sesión con ella enseguida."
 
 #, python-format
@@ -8789,8 +8797,8 @@ msgid ""
 "Run this command to disable 2FA: %(docker_exec_it)s %(podman_exec_it)s "
 "%(flask_reset_password)s"
 msgstr ""
-"Ejecuta este comando para desactivar 2FA: %(docker_exec_it)s %"
-"(podman_exec_it)s %(flask_reset_password)s"
+"Ejecuta este comando para desactivar 2FA: %(docker_exec_it)s "
+"%(podman_exec_it)s %(flask_reset_password)s"
 
 #, python-format
 msgid ""
@@ -9812,8 +9820,8 @@ msgstr "Estado: {entry}"
 msgid ""
 "Step 1 - Paste the static config snippet from the %(traefik_plugin_page)s"
 msgstr ""
-"Paso 1 - Pega el fragmento de configuración estática desde %"
-"(traefik_plugin_page)s"
+"Paso 1 - Pega el fragmento de configuración estática desde "
+"%(traefik_plugin_page)s"
 
 msgid ""
 "Step 2 - Paste the middleware snippet and edit the settings for your needs"
@@ -9822,7 +9830,8 @@ msgstr ""
 "necesites"
 
 msgid "Step 3 - Choose which config file the middleware is written to"
-msgstr "Paso 3 - Elige en qué archivo de configuración se escribe el middleware"
+msgstr ""
+"Paso 3 - Elige en qué archivo de configuración se escribe el middleware"
 
 #. Used in the browser
 #, python-brace-format
@@ -9942,8 +9951,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Funciones admitidas: %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Funciones admitidas: %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -10344,7 +10353,8 @@ msgstr ""
 "de cliente cubre ambos."
 
 msgid "The branch to commit to, and the account the token belongs to."
-msgstr "La rama en la que hacer commit y la cuenta a la que pertenece el token."
+msgstr ""
+"La rama en la que hacer commit y la cuenta a la que pertenece el token."
 
 msgid ""
 "The classic \"behind Cloudflare\" case. Hardcoded and refreshed on release - "
@@ -10673,7 +10683,8 @@ msgstr "Estos valores generan el fragmento de compose, no se envían al agente."
 
 #. Used in the browser
 msgid "These counts only cover the object lists that could be read."
-msgstr "Estos recuentos solo cubren las listas de objetos que se pudieron leer."
+msgstr ""
+"Estos recuentos solo cubren las listas de objetos que se pudieron leer."
 
 #. Used in the browser
 #, python-brace-format
@@ -10714,9 +10725,9 @@ msgid ""
 "These paths refer to files %(inside_this_container)s. Mount the file into "
 "Traefik Manager in your %(docker_compose_yml)s first, then set the path here."
 msgstr ""
-"Estas rutas de archivo hacen referencia a archivos %(inside_this_container)"
-"s. Monta primero el archivo en Traefik Manager en tu %(docker_compose_yml)s "
-"y después define la ruta aquí."
+"Estas rutas de archivo hacen referencia a archivos "
+"%(inside_this_container)s. Monta primero el archivo en Traefik Manager en tu "
+"%(docker_compose_yml)s y después define la ruta aquí."
 
 msgid ""
 "These routes are discovered via Amazon ECS and are read-only. Edit them via "
@@ -11237,7 +11248,8 @@ msgid "Traefik entry point the route listens on."
 msgstr "Entrypoint de Traefik en el que escucha la ruta."
 
 msgid "Traefik entry points listed below the stat cards"
-msgstr "Entrypoints de Traefik mostrados debajo de las tarjetas de estadísticas"
+msgstr ""
+"Entrypoints de Traefik mostrados debajo de las tarjetas de estadísticas"
 
 #. Used in the browser
 msgid "Traefik has not loaded this route"
@@ -11683,7 +11695,8 @@ msgstr ""
 msgid ""
 "Useful when the route has a wildcard host, or the app lives on a different "
 "port."
-msgstr "Útil cuando la ruta tiene un host comodín o la app está en otro puerto."
+msgstr ""
+"Útil cuando la ruta tiene un host comodín o la app está en otro puerto."
 
 #. Used in the browser
 msgid "User Key"
@@ -11884,8 +11897,8 @@ msgid ""
 "Where the CrowdSec local API listens. On the same Docker network that is "
 "usually %(http_crowdsec_8080)s."
 msgstr ""
-"Dónde escucha la API local de CrowdSec. En la misma red de Docker suele ser %"
-"(http_crowdsec_8080)s."
+"Dónde escucha la API local de CrowdSec. En la misma red de Docker suele ser "
+"%(http_crowdsec_8080)s."
 
 #, python-format
 msgid ""
@@ -15007,8 +15020,10 @@ msgstr[1] "{count} routers en {name}, todos en servicio"
 msgid "{count} router on {name}: {disabled}, {down}, {degraded}, {warnings}"
 msgid_plural ""
 "{count} routers on {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[0] "{count} router en {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[1] "{count} routers en {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[0] ""
+"{count} router en {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[1] ""
+"{count} routers en {name}: {disabled}, {down}, {degraded}, {warnings}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15535,7 +15550,8 @@ msgstr "{name}: {n} de {total} solicitudes en esta ventana ({pct}%)."
 #. Used in the browser
 #, python-brace-format
 msgid "{n} alerts named {key}. Click to filter the evidence below"
-msgstr "{n} alertas nombraron {key}. Haz clic para filtrar las pruebas de abajo"
+msgstr ""
+"{n} alertas nombraron {key}. Haz clic para filtrar las pruebas de abajo"
 
 #. Used in the browser
 #, python-brace-format
@@ -15562,8 +15578,8 @@ msgid ""
 "{n} of the {denom} requests to {path} returned {status} {lgStatusName} ({pct}"
 "%). Click to filter the log list to just those."
 msgstr ""
-"{n} de las {denom} solicitudes a {path} devolvieron {status} {lgStatusName} ("
-"{pct}%). Haz clic para filtrar la lista de logs solo a esas."
+"{n} de las {denom} solicitudes a {path} devolvieron {status} {lgStatusName} "
+"({pct}%). Haz clic para filtrar la lista de logs solo a esas."
 
 #. Used in the browser
 #, python-brace-format
