@@ -397,3 +397,14 @@ def test_the_monitor_hands_the_message_with_its_spec_to_the_bell(mon, monkeypatc
     assert sent == ['VPS One: Traefik API is unreachable']
     assert sent[0].spec == {'id': '%(server)s: %(message)s',
                             'params': {'server': 'VPS One', 'message': {'id': 'Traefik API is unreachable'}}}
+
+
+def test_traefiks_own_routers_are_handed_to_the_check(app_module, monkeypatch):
+    from core import traefik as traefik_mod
+    ping = {'name': 'ping@internal', 'provider': 'internal', 'rule': 'PathPrefix(`/ping`)',
+            'service': 'ping@internal', 'entryPoints': ['traefik'], 'status': 'enabled'}
+    monkeypatch.setattr(traefik_mod, '_fetch_traefik_routers_and_services',
+                        lambda complete=None: ({'http': [ping]}, {}))
+    monkeypatch.setattr(app_module, 'traefik_api_get_all', lambda path: [])
+    ids = [a['id'] for _server, _name, apps, _svcs in app_module._route_health_sources() for a in apps]
+    assert 'ping@internal' in ids, 'an internal router with a dashboard link must be checked, not left grey: %r' % ids
