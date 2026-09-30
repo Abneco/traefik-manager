@@ -53,7 +53,9 @@ msgstr "%(child)s wird noch von %(users)s verwendet"
 
 #, python-format
 msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
-msgstr "%(child)s wird noch von %(users)s verwendet und ist noch Backend von %(parents)s"
+msgstr ""
+"%(child)s wird noch von %(users)s verwendet und ist noch Backend von "
+"%(parents)s"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -164,7 +166,8 @@ msgstr ""
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s wird noch von %(users)s verwendet. Lösche zuerst diese Middlewares"
+msgstr ""
+"%(name)s wird noch von %(users)s verwendet. Lösche zuerst diese Middlewares"
 
 #, python-format
 msgid ""
@@ -487,8 +490,8 @@ msgid ""
 "A backup is created automatically before every save. Restore from "
 "%(backups)s if something goes wrong."
 msgstr ""
-"Vor jedem Speichern wird automatisch ein Backup erstellt. Stelle es über %"
-"(backups)s wieder her, falls etwas schiefgeht."
+"Vor jedem Speichern wird automatisch ein Backup erstellt. Stelle es über "
+"%(backups)s wieder her, falls etwas schiefgeht."
 
 msgid "A backup is created automatically before restoring."
 msgstr "Vor dem Wiederherstellen wird automatisch ein Backup erstellt."
@@ -941,8 +944,8 @@ msgid ""
 "client certificate in %(settings_system_monitoring)s."
 msgstr ""
 "Füge deine LAPI-URL sowie einen Bouncer-API-Schlüssel, Maschinen-"
-"Zugangsdaten oder ein mTLS-Client-Zertifikat unter %"
-"(settings_system_monitoring)s hinzu."
+"Zugangsdaten oder ein mTLS-Client-Zertifikat unter "
+"%(settings_system_monitoring)s hinzu."
 
 #. Used in the browser
 #, python-brace-format
@@ -1000,8 +1003,8 @@ msgid ""
 "%(ip_allow_list)s and the login limiter - check what reaches the app first "
 "with the %(ip_diagnostic)s."
 msgstr ""
-"Fügt %(trusted_ips)s zu einem Entrypoint hinzu, damit Traefik %"
-"(x_forwarded_for)s von deinen Proxys vertraut. Dieses Vertrauen wirkt sich "
+"Fügt %(trusted_ips)s zu einem Entrypoint hinzu, damit Traefik "
+"%(x_forwarded_for)s von deinen Proxys vertraut. Dieses Vertrauen wirkt sich "
 "auf Logs, CrowdSec, %(ip_allow_list)s und die Login-Begrenzung aus - prüfe "
 "zuerst mit der %(ip_diagnostic)s, was bei der App ankommt."
 
@@ -1027,8 +1030,8 @@ msgid ""
 "certs."
 msgstr ""
 "Fügt einen tls.domains-Block mit main: domain.com und sans: *.domain.com "
-"hinzu. Verwende dies mit DNS-Challenge-Resolvern (Cloudflare, Route 53 usw.)"
-", um Wildcard-Zertifikate auszustellen."
+"hinzu. Verwende dies mit DNS-Challenge-Resolvern (Cloudflare, Route 53 "
+"usw.), um Wildcard-Zertifikate auszustellen."
 
 msgid "Advanced rule"
 msgstr "Erweiterte Regel"
@@ -1413,8 +1416,8 @@ msgid ""
 "Enable and manage profiles via the TLS Options tab in Settings - Interface - "
 "TABS."
 msgstr ""
-"Weist diesem Router ein tls.options-Profil zu (z. B. Mindestversion, Cipher)"
-". Aktiviere und verwalte Profile über den Tab TLS-Optionen unter "
+"Weist diesem Router ein tls.options-Profil zu (z. B. Mindestversion, "
+"Cipher). Aktiviere und verwalte Profile über den Tab TLS-Optionen unter "
 "Einstellungen - Oberfläche - TABS."
 
 msgid "At least 8 characters"
@@ -1695,8 +1698,8 @@ msgid ""
 "Backup retention on this agent is set via the %(backup_keep_count)s "
 "environment variable."
 msgstr ""
-"Die Backup-Aufbewahrung auf diesem Agent wird über die Umgebungsvariable %"
-"(backup_keep_count)s festgelegt."
+"Die Backup-Aufbewahrung auf diesem Agent wird über die Umgebungsvariable "
+"%(backup_keep_count)s festgelegt."
 
 #. Used in the browser
 msgid "Backups"
@@ -1965,8 +1968,8 @@ msgid ""
 "Capture groups are %(n1)s, %(n2)s and so on. In a compose file %(code)s must "
 "be written %(code2)s."
 msgstr ""
-"Capture-Gruppen sind %(n1)s, %(n2)s usw. In einer Compose-Datei muss %(code)"
-"s als %(code2)s geschrieben werden."
+"Capture-Gruppen sind %(n1)s, %(n2)s usw. In einer Compose-Datei muss "
+"%(code)s als %(code2)s geschrieben werden."
 
 #. Used in the browser
 msgid "Card settings"
@@ -2170,8 +2173,8 @@ msgid ""
 "Claim name that contains groups. Keycloak: %(groups)s, some providers: "
 "%(roles)s."
 msgstr ""
-"Claim-Name, der die Gruppen enthält. Keycloak: %(groups)s, manche Provider: %"
-"(roles)s."
+"Claim-Name, der die Gruppen enthält. Keycloak: %(groups)s, manche Provider: "
+"%(roles)s."
 
 #. Used in the browser
 msgctxt "button"
@@ -2217,7 +2220,8 @@ msgstr "Eingrenzung auf {p} aufheben"
 
 #, python-format
 msgid "Clears every saved CrowdSec setting from %(manager_yml)s."
-msgstr "Entfernt alle gespeicherten CrowdSec-Einstellungen aus %(manager_yml)s."
+msgstr ""
+"Entfernt alle gespeicherten CrowdSec-Einstellungen aus %(manager_yml)s."
 
 #, python-format
 msgid "Click %(middleware)s to add one"
@@ -2242,8 +2246,10 @@ msgstr "Klicke, um nur diese anzuzeigen."
 #, python-brace-format
 msgid "Click to filter to the {n} failing request on {name}."
 msgid_plural "Click to filter to the {n} failing requests on {name}."
-msgstr[0] "Klicke, um nach der {n} fehlgeschlagenen Anfrage an {name} zu filtern."
-msgstr[1] "Klicke, um nach den {n} fehlgeschlagenen Anfragen an {name} zu filtern."
+msgstr[0] ""
+"Klicke, um nach der {n} fehlgeschlagenen Anfrage an {name} zu filtern."
+msgstr[1] ""
+"Klicke, um nach den {n} fehlgeschlagenen Anfragen an {name} zu filtern."
 
 #. Used in the browser
 msgid "Click to inspect"
@@ -2848,8 +2854,8 @@ msgstr "CrowdSec-LAPI nicht verfügbar"
 msgid ""
 "CrowdSec Local API URL. Leave blank to use the %(crowdsec_lapi_url)s env var."
 msgstr ""
-"CrowdSec-Local-API-URL. Leer lassen, um die Umgebungsvariable %"
-"(crowdsec_lapi_url)s zu verwenden."
+"CrowdSec-Local-API-URL. Leer lassen, um die Umgebungsvariable "
+"%(crowdsec_lapi_url)s zu verwenden."
 
 msgid "CrowdSec credentials saved"
 msgstr "CrowdSec-Zugangsdaten gespeichert"
@@ -3082,9 +3088,9 @@ msgid ""
 "{ATK_MACHINE_NOTE}"
 msgstr ""
 "Decisions enthalten keinerlei Anreicherung. Alles über einen Bouncer-"
-"Schlüssel stammt aus den sieben Feldern, die {v1_decisions} liefert: {value}"
-", {type}, {scope}, {origin}, {scenario}, {duration}, {id}. Kein Land, keine "
-"ASN, keine Ereignisse, keine Zeit. {ATK_MACHINE_NOTE}"
+"Schlüssel stammt aus den sieben Feldern, die {v1_decisions} liefert: "
+"{value}, {type}, {scope}, {origin}, {scenario}, {duration}, {id}. Kein Land, "
+"keine ASN, keine Ereignisse, keine Zeit. {ATK_MACHINE_NOTE}"
 
 #. Used in the browser
 msgid "Decisions could not be read"
@@ -4581,8 +4587,8 @@ msgid ""
 "%(transport)s. Entry-point %(responding_timeouts)s are global and static - "
 "adjust them in the Static Config editor if long transcodes still cut off."
 msgstr ""
-"Erzwingt %(pass_host_header)s und setzt lange %(forwarding_timeouts)s auf %"
-"(transport)s. Die %(responding_timeouts)s der Entrypoints sind global und "
+"Erzwingt %(pass_host_header)s und setzt lange %(forwarding_timeouts)s auf "
+"%(transport)s. Die %(responding_timeouts)s der Entrypoints sind global und "
 "statisch - passe sie im Editor für die statische Konfiguration an, wenn "
 "lange Transcodes weiterhin abbrechen."
 
@@ -4791,8 +4797,8 @@ msgid ""
 "yourself."
 msgstr ""
 "Gib dieser Oberfläche über Traefik einen eigenen Hostnamen, damit du sie "
-"über TLS statt über einen veröffentlichten Port erreichst. Schreibt %"
-"(traefik_manager_self)s in dein Konfigurationsverzeichnis. Überspringe das, "
+"über TLS statt über einen veröffentlichten Port erreichst. Schreibt "
+"%(traefik_manager_self)s in dein Konfigurationsverzeichnis. Überspringe das, "
 "wenn du diesen Container schon selbst routest."
 
 #. Used in the browser
@@ -5057,8 +5063,8 @@ msgid ""
 "%(crowdsec_alert_limit)s, or 500. %(n0)s reads every alert, which is slow on "
 "a large LAPI. Applies to this server and to agents."
 msgstr ""
-"Wie viele der neuesten Alerts gelesen werden, 0 bis 100000. Leer nutzt %"
-"(crowdsec_alert_limit)s oder 500. %(n0)s liest jeden Alert, was bei einer "
+"Wie viele der neuesten Alerts gelesen werden, 0 bis 100000. Leer nutzt "
+"%(crowdsec_alert_limit)s oder 500. %(n0)s liest jeden Alert, was bei einer "
 "großen LAPI langsam ist. Gilt für diesen Server und für Agents."
 
 msgctxt "setting"
@@ -5336,7 +5342,8 @@ msgstr "Ungültiges Protokoll"
 
 #, python-format
 msgid "Invalid providers throttle: %(throttle)s - use forms like 2s, 500ms"
-msgstr "Ungültiges Provider-Throttle: %(throttle)s - nutze Formen wie 2s, 500ms"
+msgstr ""
+"Ungültiges Provider-Throttle: %(throttle)s - nutze Formen wie 2s, 500ms"
 
 msgid "Invalid repository URL scheme"
 msgstr "Ungültiges Schema der Repository-URL"
@@ -5375,13 +5382,17 @@ msgstr "Es übernimmt eine bestehende Installation"
 #. Used in the browser
 #, python-brace-format
 msgid "It is also removed from {names}, and any left empty are deleted too."
-msgstr "Außerdem wird es aus {names} entfernt, leer gebliebene werden ebenfalls gelöscht."
+msgstr ""
+"Außerdem wird es aus {names} entfernt, leer gebliebene werden ebenfalls "
+"gelöscht."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
 "It is also removed from {names}, which is deleted if nothing is left in it."
-msgstr "Außerdem wird es aus {names} entfernt, das gelöscht wird, wenn darin nichts übrig bleibt."
+msgstr ""
+"Außerdem wird es aus {names} entfernt, das gelöscht wird, wenn darin nichts "
+"übrig bleibt."
 
 msgid "It will not be shown again."
 msgstr "Er wird nicht erneut angezeigt."
@@ -5415,8 +5426,8 @@ msgid ""
 "Keep only the last N %(bak)s files per config file (%(backup_keep_count)s). "
 "0 = keep all."
 msgstr ""
-"Nur die letzten N %(bak)s-Dateien pro Konfigurationsdatei behalten (%"
-"(backup_keep_count)s). 0 = alle behalten."
+"Nur die letzten N %(bak)s-Dateien pro Konfigurationsdatei behalten "
+"(%(backup_keep_count)s). 0 = alle behalten."
 
 #, python-format
 msgid "Keep the name to %(max)d characters or fewer"
@@ -6138,7 +6149,8 @@ msgstr "Name darf nicht leer sein."
 
 #. Used in the browser
 msgid "Name of the HTTPS entrypoint to redirect to, e.g. websecure"
-msgstr "Name des HTTPS-Entrypoints, zu dem weitergeleitet wird, z. B. websecure"
+msgstr ""
+"Name des HTTPS-Entrypoints, zu dem weitergeleitet wird, z. B. websecure"
 
 #. Used in the browser
 msgid "Name, module, and version are required"
@@ -6235,7 +6247,8 @@ msgstr "Neue Route"
 
 #. Used in the browser
 msgid "New entrypoints also need a port mapping in your compose file"
-msgstr "Neue Entrypoints brauchen auch ein Port-Mapping in deiner Compose-Datei"
+msgstr ""
+"Neue Entrypoints brauchen auch ein Port-Mapping in deiner Compose-Datei"
 
 #. Used in the browser
 msgid "New entrypoints need the port open on your system"
@@ -7103,7 +7116,8 @@ msgstr ""
 "Challenges nutzt."
 
 msgid "One per line. Leave empty to use Traefik defaults."
-msgstr "Ein Eintrag pro Zeile. Leer lassen, um die Traefik-Standards zu nutzen."
+msgstr ""
+"Ein Eintrag pro Zeile. Leer lassen, um die Traefik-Standards zu nutzen."
 
 msgid ""
 "One per line. Leave empty to use Traefik defaults. Only applies to TLS "
@@ -7295,9 +7309,9 @@ msgid ""
 "API key and %(alerts)s instead of the machine login - or alongside them."
 msgstr ""
 "Optional - für eine LAPI hinter Mutual TLS. Pfad zu einer PEM-Datei, die in "
-"diesen Container eingebunden ist. Das Zertifikat authentifiziert %(decisions)"
-"s anstelle des API-Schlüssels und %(alerts)s anstelle des Maschinen-Logins - "
-"oder zusätzlich dazu."
+"diesen Container eingebunden ist. Das Zertifikat authentifiziert "
+"%(decisions)s anstelle des API-Schlüssels und %(alerts)s anstelle des "
+"Maschinen-Logins - oder zusätzlich dazu."
 
 #, python-format
 msgid ""
@@ -8128,8 +8142,8 @@ msgid ""
 "Reads active decisions - the bans in force. Generate one with "
 "%(cscli_bouncers_add)s."
 msgstr ""
-"Liest aktive Decisions - die geltenden Sperren. Erzeuge einen mit %"
-"(cscli_bouncers_add)s."
+"Liest aktive Decisions - die geltenden Sperren. Erzeuge einen mit "
+"%(cscli_bouncers_add)s."
 
 msgid ""
 "Reads alerts, which is where scenarios, targeted paths and attacking "
@@ -8425,8 +8439,10 @@ msgstr "{shown} aus acme.json entfernen?"
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
 msgid_plural ""
 "Removed %(num)d certificates, then stopped at %(file)s: %(detail)s"
-msgstr[0] "%(num)d Zertifikat entfernt, dann bei %(file)s abgebrochen: %(detail)s"
-msgstr[1] "%(num)d Zertifikate entfernt, dann bei %(file)s abgebrochen: %(detail)s"
+msgstr[0] ""
+"%(num)d Zertifikat entfernt, dann bei %(file)s abgebrochen: %(detail)s"
+msgstr[1] ""
+"%(num)d Zertifikate entfernt, dann bei %(file)s abgebrochen: %(detail)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -9122,17 +9138,17 @@ msgid ""
 "back. Log in with it straight away."
 msgstr ""
 "Führe diesen Befehl aus und gib ein neues Passwort ein, wenn du dazu "
-"aufgefordert wirst: %(docker_exec_it)s %(podman_exec_it)s %"
-"(flask_reset_password)s Das Passwort wird nicht angezeigt. Melde dich direkt "
-"damit an."
+"aufgefordert wirst: %(docker_exec_it)s %(podman_exec_it)s "
+"%(flask_reset_password)s Das Passwort wird nicht angezeigt. Melde dich "
+"direkt damit an."
 
 #, python-format
 msgid ""
 "Run this command to disable 2FA: %(docker_exec_it)s %(podman_exec_it)s "
 "%(flask_reset_password)s"
 msgstr ""
-"Führe diesen Befehl aus, um 2FA zu deaktivieren: %(docker_exec_it)s %"
-"(podman_exec_it)s %(flask_reset_password)s"
+"Führe diesen Befehl aus, um 2FA zu deaktivieren: %(docker_exec_it)s "
+"%(podman_exec_it)s %(flask_reset_password)s"
 
 #, python-format
 msgid ""
@@ -10222,8 +10238,8 @@ msgstr "Status: {entry}"
 msgid ""
 "Step 1 - Paste the static config snippet from the %(traefik_plugin_page)s"
 msgstr ""
-"Schritt 1 - Füge das Snippet für die statische Konfiguration von der %"
-"(traefik_plugin_page)s ein"
+"Schritt 1 - Füge das Snippet für die statische Konfiguration von der "
+"%(traefik_plugin_page)s ein"
 
 msgid ""
 "Step 2 - Paste the middleware snippet and edit the settings for your needs"
@@ -10356,8 +10372,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Unterstützte Funktionen: %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Unterstützte Funktionen: %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -10677,8 +10693,8 @@ msgstr ""
 "Der Host kann diesen Agent stattdessen in sein eigenes Repository sichern, "
 "auf einem separaten Branch und mit den Zugangsdaten des Hosts. Auf dem Agent "
 "wird nichts konfiguriert und kein Token gespeichert. Wähle diesen Server im "
-"Umschalter aus und aktiviere dann %(use_host_repository)s unter %"
-"(backups_git)s."
+"Umschalter aus und aktiviere dann %(use_host_repository)s unter "
+"%(backups_git)s."
 
 #. Used in the browser
 msgid "The LAPI did not answer"
@@ -10986,7 +11002,8 @@ msgid "The primary view"
 msgstr "Die Hauptansicht"
 
 msgid "The public address where TMA is running on the remote server."
-msgstr "Die öffentliche Adresse, unter der TMA auf dem entfernten Server läuft."
+msgstr ""
+"Die öffentliche Adresse, unter der TMA auf dem entfernten Server läuft."
 
 #. Used in the browser
 msgid ""
@@ -11177,7 +11194,8 @@ msgstr ""
 
 #. Used in the browser
 msgid "These counts only cover the object lists that could be read."
-msgstr "Diese Zahlen umfassen nur die Objektlisten, die gelesen werden konnten."
+msgstr ""
+"Diese Zahlen umfassen nur die Objektlisten, die gelesen werden konnten."
 
 #. Used in the browser
 #, python-brace-format
@@ -11345,8 +11363,8 @@ msgid ""
 "This agent can also push independently using its own %(git_backup)s "
 "environment variables."
 msgstr ""
-"Dieser Agent kann auch eigenständig pushen, mit seinen eigenen %(git_backup)"
-"s-Umgebungsvariablen."
+"Dieser Agent kann auch eigenständig pushen, mit seinen eigenen "
+"%(git_backup)s-Umgebungsvariablen."
 
 #. Used in the browser
 msgid ""
@@ -11366,7 +11384,8 @@ msgstr ""
 "Agent verwaltet. Eine Bearbeitung hier würde damit kollidieren."
 
 msgid "This backup is not valid JSON, nothing was restored"
-msgstr "Dieses Backup ist kein gültiges JSON, es wurde nichts wiederhergestellt"
+msgstr ""
+"Dieses Backup ist kein gültiges JSON, es wurde nichts wiederhergestellt"
 
 #. Used in the browser
 msgid "This browser does not support desktop notifications."
@@ -11856,7 +11875,8 @@ msgstr "Traefik-Sicherheitshinweis"
 
 #. Used in the browser
 msgid "Traefik serves these itself. The dashboard, API and ping live here"
-msgstr "Diese stellt Traefik selbst bereit. Hier liegen Dashboard, API und Ping"
+msgstr ""
+"Diese stellt Traefik selbst bereit. Hier liegen Dashboard, API und Ping"
 
 #, python-format
 msgid ""
@@ -12105,7 +12125,8 @@ msgid "Unsupported Media Type"
 msgstr "Nicht unterstützter Medientyp"
 
 msgid "Unsupported URL - use https://, http://, ssh:// or git://"
-msgstr "Nicht unterstützte URL - verwende https://, http://, ssh:// oder git://"
+msgstr ""
+"Nicht unterstützte URL - verwende https://, http://, ssh:// oder git://"
 
 msgid "Unsupported git repository URL scheme"
 msgstr "Nicht unterstütztes URL-Schema für das Git-Repository"
@@ -12396,8 +12417,8 @@ msgid ""
 "CrowdSec and %(ipallowlist)s."
 msgstr ""
 "Was diese Instanz gerade für deine eigene Anfrage sieht. Prüfe damit, ob die "
-"echte Client-IP die App erreicht, bevor sie in Logs, CrowdSec und %"
-"(ipallowlist)s einfließt."
+"echte Client-IP die App erreicht, bevor sie in Logs, CrowdSec und "
+"%(ipallowlist)s einfließt."
 
 #. Used in the browser
 msgid "Where it fails"
@@ -12412,8 +12433,8 @@ msgid ""
 "Where the CrowdSec local API listens. On the same Docker network that is "
 "usually %(http_crowdsec_8080)s."
 msgstr ""
-"Wo die lokale CrowdSec-API lauscht. Im selben Docker-Netzwerk ist das meist %"
-"(http_crowdsec_8080)s."
+"Wo die lokale CrowdSec-API lauscht. Im selben Docker-Netzwerk ist das meist "
+"%(http_crowdsec_8080)s."
 
 #, python-format
 msgid ""
@@ -12553,8 +12574,8 @@ msgid ""
 "Your password was reset. Choose a new one to get back in - nothing else "
 "about your configuration has changed."
 msgstr ""
-"Dein Passwort wurde zurückgesetzt. Wähle ein neues, um wieder "
-"hineinzukommen - sonst hat sich an deiner Konfiguration nichts geändert."
+"Dein Passwort wurde zurückgesetzt. Wähle ein neues, um wieder hineinzukommen "
+"- sonst hat sich an deiner Konfiguration nichts geändert."
 
 msgid "Your sign-in expired. Enter your password again."
 msgstr "Deine Anmeldung ist abgelaufen. Gib dein Passwort erneut ein."
@@ -15325,7 +15346,8 @@ msgstr[1] "{count} Domains"
 msgid "{count} domain served at least one failing request"
 msgid_plural "{count} domains served at least one failing request"
 msgstr[0] "{count} Domain hat mindestens eine fehlgeschlagene Anfrage bedient"
-msgstr[1] "{count} Domains haben mindestens eine fehlgeschlagene Anfrage bedient"
+msgstr[1] ""
+"{count} Domains haben mindestens eine fehlgeschlagene Anfrage bedient"
 
 #. Used in the browser
 #, python-brace-format
@@ -15487,7 +15509,8 @@ msgstr[1] "{count} davon passen auf alle Filter dieser Zeile zugleich. Klicke, u
 msgid "{count} of them was simulated, so CrowdSec enforced nothing"
 msgid_plural "{count} of them were simulated, so CrowdSec enforced nothing"
 msgstr[0] "{count} davon war simuliert, CrowdSec hat also nichts durchgesetzt"
-msgstr[1] "{count} davon waren simuliert, CrowdSec hat also nichts durchgesetzt"
+msgstr[1] ""
+"{count} davon waren simuliert, CrowdSec hat also nichts durchgesetzt"
 
 #. Used in the browser
 #, python-brace-format
@@ -15599,8 +15622,10 @@ msgstr[1] "{count} Router auf {name}, alle aktiv"
 msgid "{count} router on {name}: {disabled}, {down}, {degraded}, {warnings}"
 msgid_plural ""
 "{count} routers on {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[0] "{count} Router auf {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[1] "{count} Router auf {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[0] ""
+"{count} Router auf {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[1] ""
+"{count} Router auf {name}: {disabled}, {down}, {degraded}, {warnings}"
 
 #. Used in the browser
 #, python-brace-format

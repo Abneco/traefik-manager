@@ -52,8 +52,10 @@ msgid "%(child)s is still used by %(users)s"
 msgstr "%(child)s est encore utilisé par %(users)s"
 
 #, python-format
-msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
-msgstr "%(child)s est encore utilisé par %(users)s et reste un backend de %(parents)s"
+msgid ""
+"%(child)s is still used by %(users)s and is still a backend of %(parents)s"
+msgstr ""
+"%(child)s est encore utilisé par %(users)s et reste un backend de %(parents)s"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -85,7 +87,8 @@ msgstr "%(file)s ne contient pas de table de résolveurs, rien n’a été modif
 
 #, python-format
 msgid "%(file)s is mounted read only on this agent, nothing was changed"
-msgstr "%(file)s est monté en lecture seule sur cet agent, rien n’a été modifié"
+msgstr ""
+"%(file)s est monté en lecture seule sur cet agent, rien n’a été modifié"
 
 #, python-format
 msgid "%(file)s is mounted read only on this agent, nothing was restored"
@@ -160,7 +163,9 @@ msgstr "%(name)s est défini dans %(file)s, qui est en lecture seule."
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s est toujours utilisé par %(users)s. Supprimez ces middlewares d’abord"
+msgstr ""
+"%(name)s est toujours utilisé par %(users)s. Supprimez ces middlewares "
+"d’abord"
 
 #, python-format
 msgid ""
@@ -1114,8 +1119,8 @@ msgstr "Agent supprimé"
 #, python-format
 msgid "Agent static config is not valid YAML: %(error)s"
 msgstr ""
-"La configuration statique de l’agent n’est pas un fichier YAML valide:%"
-"(error)s"
+"La configuration statique de l’agent n’est pas un fichier YAML valide:"
+"%(error)s"
 
 msgid "Agent timed out"
 msgstr "Délai d’attente de l’agent expiré"
@@ -5425,13 +5430,16 @@ msgstr "Adopte une installation existante"
 #. Used in the browser
 #, python-brace-format
 msgid "It is also removed from {names}, and any left empty are deleted too."
-msgstr "Il est aussi retiré de {names}, et ceux qui restent vides sont supprimés aussi."
+msgstr ""
+"Il est aussi retiré de {names}, et ceux qui restent vides sont supprimés "
+"aussi."
 
 #. Used in the browser
 #, python-brace-format
 msgid ""
 "It is also removed from {names}, which is deleted if nothing is left in it."
-msgstr "Il est aussi retiré de {names}, qui est supprimé s’il ne contient plus rien."
+msgstr ""
+"Il est aussi retiré de {names}, qui est supprimé s’il ne contient plus rien."
 
 msgid "It will not be shown again."
 msgstr "Elle ne sera plus affichée."
@@ -6772,7 +6780,8 @@ msgid "No settings match your search"
 msgstr "Aucun paramètre ne correspond à votre recherche"
 
 msgid "No static config entries match your search"
-msgstr "Aucune entrée de configuration statique ne correspond à votre recherche"
+msgstr ""
+"Aucune entrée de configuration statique ne correspond à votre recherche"
 
 #. Used in the browser
 msgid "No traffic yet"
@@ -7022,8 +7031,8 @@ msgstr ""
 #, python-format
 msgid "OIDC login failed - the provider rejected the token request: %(detail)s"
 msgstr ""
-"Échec de la connexion OIDC : le fournisseur a rejeté la demande de jeton : %"
-"(detail)s"
+"Échec de la connexion OIDC : le fournisseur a rejeté la demande de jeton : "
+"%(detail)s"
 
 msgid "OIDC login failed - the provider returned no account details."
 msgstr ""
@@ -7031,7 +7040,8 @@ msgstr ""
 "de compte."
 
 msgid "OIDC login failed - the provider returned no id_token."
-msgstr "Échec de la connexion OIDC : le fournisseur n’a renvoyé aucun id_token."
+msgstr ""
+"Échec de la connexion OIDC : le fournisseur n’a renvoyé aucun id_token."
 
 msgid "OIDC login failed - the provider's id_token could not be verified."
 msgstr ""
@@ -7856,8 +7866,8 @@ msgid ""
 "can deploy yourself. %(tm_cli_docs)s · %(agent_docs)s"
 msgstr ""
 "Vous préférez procéder manuellement ? Tous les éléments ci-dessous génèrent "
-"tout de même un fichier Compose que vous pouvez déployer vous-même. %"
-"(tm_cli_docs)s · %(agent_docs)s"
+"tout de même un fichier Compose que vous pouvez déployer vous-même. "
+"%(tm_cli_docs)s · %(agent_docs)s"
 
 msgctxt "setting"
 msgid "Prefix"
@@ -8496,7 +8506,8 @@ msgstr ""
 #. Used in the browser
 #, python-brace-format
 msgid "Remove {list_count} certificates from acme.json on {agent}: {shown}?"
-msgstr "Supprimer {list_count} certificats de acme.json sur {agent} : {shown} ?"
+msgstr ""
+"Supprimer {list_count} certificats de acme.json sur {agent} : {shown} ?"
 
 #. Used in the browser
 #, python-brace-format
@@ -8688,8 +8699,8 @@ msgstr "Réinitialiser le mot de passe"
 #, python-format
 msgid "Resolved from inside the agent container. Sets %(crowdsec_lapi_url)s."
 msgstr ""
-"Résolu depuis l’intérieur du conteneur de l’agent. Définit %"
-"(crowdsec_lapi_url)s."
+"Résolu depuis l’intérieur du conteneur de l’agent. Définit "
+"%(crowdsec_lapi_url)s."
 
 #. Used in the browser
 msgctxt "label"
@@ -8808,8 +8819,8 @@ msgid_plural "Result: {count} trusted ranges on {entrypoint} (was {before})."
 msgstr[0] ""
 "Résultat : {count} plage approuvée sur {entrypoint} (précédemment {before})."
 msgstr[1] ""
-"Résultat : {count} plages approuvées sur {entrypoint} (précédemment {before})"
-"."
+"Résultat : {count} plages approuvées sur {entrypoint} (précédemment "
+"{before})."
 
 msgid ""
 "Retention is one setting for both kinds of backup. Change it under Dynamic "
@@ -9202,8 +9213,8 @@ msgid ""
 "Run these on the agent itself, where you just installed %(tm)s. It manages "
 "the install it created, including updates."
 msgstr ""
-"Exécutez ces commandes directement sur l’agent où vous venez d’installer %"
-"(tm)s. Celui-ci gère l’installation qu’il a créée, y compris les mises à "
+"Exécutez ces commandes directement sur l’agent où vous venez d’installer "
+"%(tm)s. Celui-ci gère l’installation qu’il a créée, y compris les mises à "
 "jour."
 
 #, python-format
@@ -9222,8 +9233,8 @@ msgid ""
 "back. Log in with it straight away."
 msgstr ""
 "Exécutez cette commande et saisissez un nouveau mot de passe lorsque cela "
-"vous est demandé : %(docker_exec_it)s %(podman_exec_it)s %"
-"(flask_reset_password)s Le mot de passe n’est pas affiché. Connectez-vous "
+"vous est demandé : %(docker_exec_it)s %(podman_exec_it)s "
+"%(flask_reset_password)s Le mot de passe n’est pas affiché. Connectez-vous "
 "immédiatement avec celui-ci."
 
 #, python-format
@@ -9239,8 +9250,8 @@ msgid ""
 "Run this on %(agent_cli_host_name)s. It installs the %(tm)s CLI and opens "
 "its agent installer with the key already set."
 msgstr ""
-"Exécutez cette commande sur %(agent_cli_host_name)s. Elle installe la CLI %"
-"(tm)s et ouvre son programme d’installation de l’agent avec la clé déjà "
+"Exécutez cette commande sur %(agent_cli_host_name)s. Elle installe la CLI "
+"%(tm)s et ouvre son programme d’installation de l’agent avec la clé déjà "
 "configurée."
 
 #. Used in the browser
@@ -9869,9 +9880,9 @@ msgid ""
 msgstr ""
 "Définissez {crowdsec_machine_id} et {crowdsec_machine_password} en "
 "complément de la clé de bouncer. Ces deux identifiants sont complémentaires "
-"et non hiérarchisés : CrowdSec refuse le jeton de machine sur {v1_decisions}"
-", ils doivent donc tous être présents pour le fonctionnement complet de "
-"l’onglet."
+"et non hiérarchisés : CrowdSec refuse le jeton de machine sur "
+"{v1_decisions}, ils doivent donc tous être présents pour le fonctionnement "
+"complet de l’onglet."
 
 #. Used in the browser
 #, python-brace-format
@@ -10339,8 +10350,8 @@ msgstr "État : {entry}"
 msgid ""
 "Step 1 - Paste the static config snippet from the %(traefik_plugin_page)s"
 msgstr ""
-"Étape 1 : collez l’extrait de configuration statique depuis %"
-"(traefik_plugin_page)s"
+"Étape 1 : collez l’extrait de configuration statique depuis "
+"%(traefik_plugin_page)s"
 
 msgid ""
 "Step 2 - Paste the middleware snippet and edit the settings for your needs"
@@ -10474,8 +10485,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Fonctions prises en charge : %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Fonctions prises en charge : %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -11043,8 +11054,8 @@ msgid ""
 msgstr ""
 "La page de connexion tente d’abord OIDC silencieusement (prompt=none) et "
 "vous connecte sans aucun clic si une session existe déjà chez votre "
-"fournisseur. Sinon, elle revient à la page de connexion normale ; /"
-"login?auto=0 l’affiche toujours."
+"fournisseur. Sinon, elle revient à la page de connexion normale ; /login?"
+"auto=0 l’affiche toujours."
 
 #. Used in the browser
 msgid "The machine login works, so every attack card above is live"
@@ -11087,8 +11098,8 @@ msgid ""
 "must be replaced with real values before saving. Edit the middleware in the "
 "editor and replace all %(marker)s placeholders."
 msgstr ""
-"L’extrait du middleware contient des espaces réservés de modèle (%(example)"
-"s) qui doivent être remplacés par des valeurs réelles avant "
+"L’extrait du middleware contient des espaces réservés de modèle "
+"(%(example)s) qui doivent être remplacés par des valeurs réelles avant "
 "l’enregistrement. Modifiez le middleware dans l’éditeur et remplacez tous "
 "les espaces réservés %(marker)s."
 
@@ -11725,8 +11736,8 @@ msgstr "En tête"
 msgid ""
 "Topology connection map (Entry Points - Routes - Middlewares - Services)"
 msgstr ""
-"Carte des connexions de la topologie (points d’entrée - routes - "
-"middlewares - services)"
+"Carte des connexions de la topologie (points d’entrée - routes - middlewares "
+"- services)"
 
 #. Used in the browser
 #, python-brace-format
@@ -12597,7 +12608,8 @@ msgstr ""
 "toutes les catégories."
 
 msgid "Which tabs show the stat cards and entry points"
-msgstr "Onglets qui affichent les cartes de statistiques et les points d’entrée"
+msgstr ""
+"Onglets qui affichent les cartes de statistiques et les points d’entrée"
 
 msgid ""
 "Who gets in, and how. The built-in password, two-factor, API keys for the "
@@ -12616,9 +12628,9 @@ msgid ""
 "With mTLS, the cert paths are resolved %(inside_the_agent)s, so mount them "
 "there too. A client certificate replaces the API key and machine login."
 msgstr ""
-"Avec le mTLS, les chemins des certificats sont résolus %(inside_the_agent)"
-"s ; montez-les donc également à cet emplacement. Un certificat client "
-"remplace la clé API et la connexion de la machine."
+"Avec le mTLS, les chemins des certificats sont résolus "
+"%(inside_the_agent)s ; montez-les donc également à cet emplacement. Un "
+"certificat client remplace la clé API et la connexion de la machine."
 
 msgctxt "button"
 msgid "Wizard"

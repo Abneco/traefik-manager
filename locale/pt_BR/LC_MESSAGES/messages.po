@@ -11,11 +11,11 @@ msgstr ""
 "Last-Translator: chr0nzz <chronzz@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese (Brazil) <https://hosted.weblate.org/projects/"
 "traefik-manager/web-app/pt_BR/>\n"
+"Language: pt_BR\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Language: pt_BR\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 2026.10.dev0\n"
 
@@ -160,7 +160,8 @@ msgstr "%(name)s está definido em %(file)s, que é somente leitura aqui."
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s ainda é usado por %(users)s. Exclua esses middlewares primeiro"
+msgstr ""
+"%(name)s ainda é usado por %(users)s. Exclua esses middlewares primeiro"
 
 #, python-format
 msgid ""
@@ -917,8 +918,8 @@ msgid ""
 "Add this volume to the {traefik_manager} service in your "
 "{docker_compose_yml}:"
 msgstr ""
-"Adicione este volume ao serviço {traefik_manager} no seu {docker_compose_yml}"
-":"
+"Adicione este volume ao serviço {traefik_manager} no seu "
+"{docker_compose_yml}:"
 
 #. Used in the browser
 msgid "Add trusted proxy IPs to an entrypoint"
@@ -977,7 +978,8 @@ msgid "Address"
 msgstr "Endereço"
 
 msgid "Address Traefik uses to reach this container on the internal network."
-msgstr "Endereço que o Traefik usa para acessar este contêiner na rede interna."
+msgstr ""
+"Endereço que o Traefik usa para acessar este contêiner na rede interna."
 
 #, python-format
 msgid ""
@@ -986,8 +988,8 @@ msgid ""
 "%(ip_allow_list)s and the login limiter - check what reaches the app "
 "first with the %(ip_diagnostic)s."
 msgstr ""
-"Adiciona %(trusted_ips)s a um entrypoint para que o Traefik confie no %"
-"(x_forwarded_for)s dos seus proxies. Essa confiança alimenta os logs, o "
+"Adiciona %(trusted_ips)s a um entrypoint para que o Traefik confie no "
+"%(x_forwarded_for)s dos seus proxies. Essa confiança alimenta os logs, o "
 "CrowdSec, o %(ip_allow_list)s e o limitador de login - verifique antes o que "
 "chega ao app com o %(ip_diagnostic)s."
 
@@ -1519,7 +1521,8 @@ msgid "Automatic sign-in"
 msgstr "Login automático"
 
 msgid "Automatically push config changes to your repository"
-msgstr "Enviar automaticamente as alterações de configuração para o repositório"
+msgstr ""
+"Enviar automaticamente as alterações de configuração para o repositório"
 
 #, python-format
 msgid "Average %(req_s)s"
@@ -1679,8 +1682,8 @@ msgid ""
 "Backup retention on this agent is set via the %(backup_keep_count)s "
 "environment variable."
 msgstr ""
-"A retenção de backups neste agente é definida pela variável de ambiente %"
-"(backup_keep_count)s."
+"A retenção de backups neste agente é definida pela variável de ambiente "
+"%(backup_keep_count)s."
 
 #. Used in the browser
 msgid "Backups"
@@ -1785,8 +1788,8 @@ msgid ""
 "blank to use the %(crowdsec_api_key)s env var."
 msgstr ""
 "Chave de API do bouncer, usada para ler %(decisions)s. Armazenada "
-"criptografada. Deixe em branco para usar a variável de ambiente %"
-"(crowdsec_api_key)s."
+"criptografada. Deixe em branco para usar a variável de ambiente "
+"%(crowdsec_api_key)s."
 
 msgid "Bouncer key, reads decisions."
 msgstr "Chave do bouncer, lê as decisões."
@@ -2556,8 +2559,8 @@ msgid ""
 "existing routes are added to the route form automatically, so this list "
 "is optional seeding."
 msgstr ""
-"Lista de conveniência usada para montar regras Host() no formulário de "
-"rota - ela não afeta sua configuração do Traefik, o TLS nem o roteamento. "
+"Lista de conveniência usada para montar regras Host() no formulário de rota "
+"- ela não afeta sua configuração do Traefik, o TLS nem o roteamento. "
 "Domínios encontrados em rotas existentes são adicionados ao formulário de "
 "rota automaticamente, então esta lista é um ponto de partida opcional."
 
@@ -2605,7 +2608,8 @@ msgstr "Copie esta chave agora"
 
 #. Used in the browser
 msgid "Copying needs HTTPS or localhost - select the text and copy it manually"
-msgstr "Copiar exige HTTPS ou localhost - selecione o texto e copie manualmente"
+msgstr ""
+"Copiar exige HTTPS ou localhost - selecione o texto e copie manualmente"
 
 #. Used in the browser
 msgid "Could not change management"
@@ -4570,8 +4574,8 @@ msgid ""
 "- adjust them in the Static Config editor if long transcodes still cut "
 "off."
 msgstr ""
-"Força %(pass_host_header)s e define %(forwarding_timeouts)s longos em %"
-"(transport)s. Os %(responding_timeouts)s do entrypoint são globais e "
+"Força %(pass_host_header)s e define %(forwarding_timeouts)s longos em "
+"%(transport)s. Os %(responding_timeouts)s do entrypoint são globais e "
 "estáticos - ajuste-os no editor de configuração estática se "
 "transcodificações longas ainda forem interrompidas."
 
@@ -5046,8 +5050,8 @@ msgid ""
 "%(crowdsec_alert_limit)s, or 500. %(n0)s reads every alert, which is slow"
 " on a large LAPI. Applies to this server and to agents."
 msgstr ""
-"Quantos dos alertas mais recentes ler, de 0 a 100000. Em branco usa %"
-"(crowdsec_alert_limit)s, ou 500. %(n0)s lê todos os alertas, o que é lento "
+"Quantos dos alertas mais recentes ler, de 0 a 100000. Em branco usa "
+"%(crowdsec_alert_limit)s, ou 500. %(n0)s lê todos os alertas, o que é lento "
 "em uma LAPI grande. Vale para este servidor e para os agentes."
 
 msgctxt "setting"
@@ -5363,7 +5367,8 @@ msgstr "Ele adota uma instalação existente"
 #. Used in the browser
 #, python-brace-format
 msgid "It is also removed from {names}, and any left empty are deleted too."
-msgstr "Também é removido de {names}, e os que ficarem vazios também são excluídos."
+msgstr ""
+"Também é removido de {names}, e os que ficarem vazios também são excluídos."
 
 #. Used in the browser
 #, python-brace-format
@@ -5403,8 +5408,8 @@ msgid ""
 "Keep only the last N %(bak)s files per config file "
 "(%(backup_keep_count)s). 0 = keep all."
 msgstr ""
-"Manter apenas os últimos N arquivos %(bak)s por arquivo de configuração (%"
-"(backup_keep_count)s). 0 = manter todos."
+"Manter apenas os últimos N arquivos %(bak)s por arquivo de configuração "
+"(%(backup_keep_count)s). 0 = manter todos."
 
 #, python-format
 msgid "Keep the name to %(max)d characters or fewer"
@@ -5785,8 +5790,8 @@ msgid ""
 "Machine login enables the Alerts view and unban. Create with "
 "%(cscli_machines_add)s."
 msgstr ""
-"O login de máquina ativa a visão de alertas e o desbanimento. Crie com %"
-"(cscli_machines_add)s."
+"O login de máquina ativa a visão de alertas e o desbanimento. Crie com "
+"%(cscli_machines_add)s."
 
 #, python-format
 msgid "Machine password %(optional)s"
@@ -5866,8 +5871,8 @@ msgstr "Versão máxima"
 #, python-format
 msgid "Max idle conns must be a whole number, got %(max_idle)s"
 msgstr ""
-"O máximo de conexões ociosas deve ser um número inteiro, valor recebido: %"
-"(max_idle)s"
+"O máximo de conexões ociosas deve ser um número inteiro, valor recebido: "
+"%(max_idle)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -6437,7 +6442,8 @@ msgid "No commits yet"
 msgstr "Nenhum commit ainda"
 
 msgid "No commits yet - push your first backup to see history"
-msgstr "Nenhum commit ainda - faça push do primeiro backup para ver o histórico"
+msgstr ""
+"Nenhum commit ainda - faça push do primeiro backup para ver o histórico"
 
 #, python-format
 msgid "No config file matches %(filename)s"
@@ -7285,9 +7291,9 @@ msgid ""
 "bouncer keys cannot access those endpoints. Create one with "
 "%(cscli_machines_add)s."
 msgstr ""
-"Opcional - necessário para ler %(alerts)s e para desbanir (excluir decisões)"
-"; chaves de bouncer não acessam esses endpoints. Crie um com %"
-"(cscli_machines_add)s."
+"Opcional - necessário para ler %(alerts)s e para desbanir (excluir "
+"decisões); chaves de bouncer não acessam esses endpoints. Crie um com "
+"%(cscli_machines_add)s."
 
 msgid "Optional credentials for endpoints that require authentication."
 msgstr "Credenciais opcionais para endpoints que exigem autenticação."
@@ -7624,8 +7630,10 @@ msgstr "Preencha todos os campos."
 #, python-brace-format
 msgid "Plugin \"{names}\" saved to traefik.yml and middleware saved to {file}."
 msgid_plural "Plugins \"{names}\" saved to traefik.yml and middleware saved to {file}."
-msgstr[0] "Plugin \"{names}\" salvo no traefik.yml e middleware salvo em {file}."
-msgstr[1] "Plugins \"{names}\" salvos no traefik.yml e middleware salvo em {file}."
+msgstr[0] ""
+"Plugin \"{names}\" salvo no traefik.yml e middleware salvo em {file}."
+msgstr[1] ""
+"Plugins \"{names}\" salvos no traefik.yml e middleware salvo em {file}."
 
 #. Used in the browser
 #, python-brace-format
@@ -8100,8 +8108,8 @@ msgid ""
 "Reads active decisions - the bans in force. Generate one with "
 "%(cscli_bouncers_add)s."
 msgstr ""
-"Lê as decisões ativas - os banimentos em vigor. Gere uma com %"
-"(cscli_bouncers_add)s."
+"Lê as decisões ativas - os banimentos em vigor. Gere uma com "
+"%(cscli_bouncers_add)s."
 
 msgid ""
 "Reads alerts, which is where scenarios, targeted paths and attacking "
@@ -8322,7 +8330,8 @@ msgstr "Remover backend"
 #. Used in the browser
 #, python-brace-format
 msgid "Remove channel \"{name}\"? Events will stop being delivered to it."
-msgstr "Remover o canal \"{name}\"? Os eventos deixarão de ser entregues a ele."
+msgstr ""
+"Remover o canal \"{name}\"? Os eventos deixarão de ser entregues a ele."
 
 msgid "Remove configuration"
 msgstr "Remover configuração"
@@ -8397,7 +8406,8 @@ msgstr "Remover {shown} do acme.json?"
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
 msgid_plural "Removed %(num)d certificates, then stopped at %(file)s: %(detail)s"
 msgstr[0] "%(num)d certificado removido, e então parou em %(file)s: %(detail)s"
-msgstr[1] "%(num)d certificados removidos, e então parou em %(file)s: %(detail)s"
+msgstr[1] ""
+"%(num)d certificados removidos, e então parou em %(file)s: %(detail)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -8580,8 +8590,8 @@ msgid ""
 "enter %(none)s."
 msgstr ""
 "Nomes de resolvers do seu %(traefik_yml)s, separados por vírgula. O primeiro "
-"vira o padrão por rota. Se você gerencia certificados fora do ACME, informe %"
-"(none)s."
+"vira o padrão por rota. Se você gerencia certificados fora do ACME, informe "
+"%(none)s."
 
 #. Used in the browser
 #, python-brace-format
@@ -8682,8 +8692,10 @@ msgstr "Restaurar substitui todos os certificados em acme.json"
 #, python-brace-format
 msgid "Result: {count} trusted range on {entrypoint} (was {before})."
 msgid_plural "Result: {count} trusted ranges on {entrypoint} (was {before})."
-msgstr[0] "Resultado: {count} faixa confiável em {entrypoint} (antes: {before})."
-msgstr[1] "Resultado: {count} faixas confiáveis em {entrypoint} (antes: {before})."
+msgstr[0] ""
+"Resultado: {count} faixa confiável em {entrypoint} (antes: {before})."
+msgstr[1] ""
+"Resultado: {count} faixas confiáveis em {entrypoint} (antes: {before})."
 
 msgid ""
 "Retention is one setting for both kinds of backup. Change it under "
@@ -9067,8 +9079,8 @@ msgid ""
 "Run these on the agent itself, where you just installed %(tm)s. It "
 "manages the install it created, including updates."
 msgstr ""
-"Execute estes comandos no próprio agente, onde você acabou de instalar o %"
-"(tm)s. Ele gerencia a instalação que criou, incluindo atualizações."
+"Execute estes comandos no próprio agente, onde você acabou de instalar o "
+"%(tm)s. Ele gerencia a instalação que criou, incluindo atualizações."
 
 #, python-format
 msgid ""
@@ -9085,8 +9097,8 @@ msgid ""
 "%(podman_exec_it)s %(flask_reset_password)s The password is not printed "
 "back. Log in with it straight away."
 msgstr ""
-"Execute este comando e informe uma nova senha quando solicitado: %"
-"(docker_exec_it)s %(podman_exec_it)s %(flask_reset_password)s A senha não é "
+"Execute este comando e informe uma nova senha quando solicitado: "
+"%(docker_exec_it)s %(podman_exec_it)s %(flask_reset_password)s A senha não é "
 "exibida de volta. Entre com ela em seguida."
 
 #, python-format
@@ -9094,8 +9106,8 @@ msgid ""
 "Run this command to disable 2FA: %(docker_exec_it)s %(podman_exec_it)s "
 "%(flask_reset_password)s"
 msgstr ""
-"Execute este comando para desativar a 2FA: %(docker_exec_it)s %"
-"(podman_exec_it)s %(flask_reset_password)s"
+"Execute este comando para desativar a 2FA: %(docker_exec_it)s "
+"%(podman_exec_it)s %(flask_reset_password)s"
 
 #, python-format
 msgid ""
@@ -9159,7 +9171,8 @@ msgstr "Referrer Policy same-origin"
 
 #, python-format
 msgid "Sample rate must be a number between 0 and 1, got %(route)s"
-msgstr "A taxa de amostragem deve ser um número entre 0 e 1, recebido %(route)s"
+msgstr ""
+"A taxa de amostragem deve ser um número entre 0 e 1, recebido %(route)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -10108,7 +10121,8 @@ msgstr ""
 "de ambiente STATIC_CONFIG_PATH ou configure o caminho em Configurações."
 
 msgid "Static config not found or STATIC_CONFIG_PATH not set"
-msgstr "Configuração estática não encontrada ou STATIC_CONFIG_PATH não definido"
+msgstr ""
+"Configuração estática não encontrada ou STATIC_CONFIG_PATH não definido"
 
 #, python-format
 msgid "Static config path %(optional)s"
@@ -10303,8 +10317,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Funções suportadas: %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Funções suportadas: %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -10825,7 +10839,8 @@ msgstr ""
 
 #. Used in the browser
 msgid "The first backend serves; the rest receive a copy by percentage."
-msgstr "O primeiro backend atende; os demais recebem uma cópia por porcentagem."
+msgstr ""
+"O primeiro backend atende; os demais recebem uma cópia por porcentagem."
 
 #. Used in the browser
 msgid "The first backend serves; the second takes over if it fails."
@@ -11939,7 +11954,8 @@ msgid "Type %(confirm_word)s to confirm"
 msgstr "Digite %(confirm_word)s para confirmar"
 
 msgid "Type it again so a typo does not lock you out."
-msgstr "Digite novamente para que um erro de digitação não bloqueie seu acesso."
+msgstr ""
+"Digite novamente para que um erro de digitação não bloqueie seu acesso."
 
 msgid "UDP routers don't support rules. Traffic is routed by entry point only."
 msgstr ""
@@ -12039,7 +12055,8 @@ msgstr "Alterações não salvas"
 #. Used in the browser
 #, python-brace-format
 msgid "Unsaved changes - nothing is written to {traefik_yml} until you save"
-msgstr "Alterações não salvas - nada é gravado em {traefik_yml} até você salvar"
+msgstr ""
+"Alterações não salvas - nada é gravado em {traefik_yml} até você salvar"
 
 #. Used in the browser
 msgid "Unsupported Media Type"
@@ -12348,8 +12365,8 @@ msgid ""
 "Where the CrowdSec local API listens. On the same Docker network that is "
 "usually %(http_crowdsec_8080)s."
 msgstr ""
-"Onde a API local do CrowdSec escuta. Na mesma rede Docker, geralmente é %"
-"(http_crowdsec_8080)s."
+"Onde a API local do CrowdSec escuta. Na mesma rede Docker, geralmente é "
+"%(http_crowdsec_8080)s."
 
 #, python-format
 msgid ""
@@ -12455,7 +12472,8 @@ msgstr ""
 
 #. Used in the browser
 msgid "Your Pushover user or group key. Stored encrypted."
-msgstr "Sua chave de usuário ou de grupo do Pushover. Armazenada criptografada."
+msgstr ""
+"Sua chave de usuário ou de grupo do Pushover. Armazenada criptografada."
 
 #. Used in the browser
 #, python-brace-format
@@ -14412,7 +14430,8 @@ msgstr "router"
 #. Used in the browser
 #, python-brace-format
 msgid "router bindings for {name} could not be read from the Traefik API"
-msgstr "os vínculos de router de {name} não puderam ser lidos da API do Traefik"
+msgstr ""
+"os vínculos de router de {name} não puderam ser lidos da API do Traefik"
 
 #. Used in the browser
 #, python-brace-format
@@ -15529,8 +15548,10 @@ msgstr[1] "{count} routers em {name}, todos no ar"
 #, python-brace-format
 msgid "{count} router on {name}: {disabled}, {down}, {degraded}, {warnings}"
 msgid_plural "{count} routers on {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[0] "{count} router em {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[1] "{count} routers em {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[0] ""
+"{count} router em {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[1] ""
+"{count} routers em {name}: {disabled}, {down}, {degraded}, {warnings}"
 
 #. Used in the browser
 #, python-brace-format

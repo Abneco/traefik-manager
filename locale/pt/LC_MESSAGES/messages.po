@@ -11,11 +11,11 @@ msgstr ""
 "Last-Translator: chr0nzz <chronzz@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Portuguese <https://hosted.weblate.org/projects/traefik-"
 "manager/web-app/pt/>\n"
+"Language: pt\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.18.0\n"
-"Language: pt\n"
 "Plural-Forms: nplurals=2; plural=n > 1;\n"
 "X-Generator: Weblate 2026.10.dev0\n"
 
@@ -158,7 +158,8 @@ msgstr "%(name)s está definido em %(file)s, que aqui é só de leitura."
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s ainda é usado por %(users)s. Eliminar primeiro esses middlewares"
+msgstr ""
+"%(name)s ainda é usado por %(users)s. Eliminar primeiro esses middlewares"
 
 #, python-format
 msgid ""
@@ -987,8 +988,8 @@ msgid ""
 "%(ip_allow_list)s and the login limiter - check what reaches the app "
 "first with the %(ip_diagnostic)s."
 msgstr ""
-"Adiciona %(trusted_ips)s a um entrypoint para que o Traefik confie no %"
-"(x_forwarded_for)s enviado pelos proxies. Esta confiança afeta os logs, o "
+"Adiciona %(trusted_ips)s a um entrypoint para que o Traefik confie no "
+"%(x_forwarded_for)s enviado pelos proxies. Esta confiança afeta os logs, o "
 "CrowdSec, o %(ip_allow_list)s e o limitador de início de sessão - verificar "
 "primeiro o que chega à aplicação com o %(ip_diagnostic)s."
 
@@ -1521,7 +1522,8 @@ msgid "Automatic sign-in"
 msgstr "Início de sessão automático"
 
 msgid "Automatically push config changes to your repository"
-msgstr "Enviar automaticamente as alterações de configuração para o repositório"
+msgstr ""
+"Enviar automaticamente as alterações de configuração para o repositório"
 
 #, python-format
 msgid "Average %(req_s)s"
@@ -1827,8 +1829,8 @@ msgstr "Armazenamento em buffer"
 #, python-format
 msgid "Buffering must be a whole number of lines, got %(buffer)s"
 msgstr ""
-"O buffering tem de ser um número inteiro de linhas, valor recebido: %(buffer)"
-"s"
+"O buffering tem de ser um número inteiro de linhas, valor recebido: "
+"%(buffer)s"
 
 msgid "Build backends"
 msgstr "Criar backends"
@@ -2894,8 +2896,8 @@ msgstr ""
 "O CrowdSec resolve o AS e o país por si próprio, no parser "
 "{crowdsecurity_geoip_enrich} da máquina que gerou o alerta. A LAPI nunca os "
 "calcula, guarda o que o agente enviou. Instalar esse parser na máquina que "
-"reporta para que estes alertas passem a incluir {as_name}, {as_number} e {cn}"
-"."
+"reporta para que estes alertas passem a incluir {as_name}, {as_number} e "
+"{cn}."
 
 #. Used in the browser
 msgid ""
@@ -3571,7 +3573,8 @@ msgid "Domain / Rule"
 msgstr "Domínio / regra"
 
 msgid "Domain this Traefik Manager instance should be reachable on."
-msgstr "Domínio no qual esta instância do Traefik Manager deve estar acessível."
+msgstr ""
+"Domínio no qual esta instância do Traefik Manager deve estar acessível."
 
 #. Used in the browser
 msgid "Domains"
@@ -3808,7 +3811,8 @@ msgstr "Ativado"
 
 #. Used in the browser
 msgid "Enabled, stream routes are not reachability checked"
-msgstr "Ativado, as rotas de stream não são verificadas quanto à acessibilidade"
+msgstr ""
+"Ativado, as rotas de stream não são verificadas quanto à acessibilidade"
 
 #. Used in the browser
 msgid "Enables PROXY protocol from these load balancers, one per line."
@@ -4579,8 +4583,8 @@ msgid ""
 "- adjust them in the Static Config editor if long transcodes still cut "
 "off."
 msgstr ""
-"Força %(pass_host_header)s e define %(forwarding_timeouts)s longos em %"
-"(transport)s. Os %(responding_timeouts)s do entrypoint são globais e "
+"Força %(pass_host_header)s e define %(forwarding_timeouts)s longos em "
+"%(transport)s. Os %(responding_timeouts)s do entrypoint são globais e "
 "estáticos - ajustá-los no editor de configuração estática se as "
 "transcodificações longas continuarem a ser cortadas."
 
@@ -4791,8 +4795,8 @@ msgid ""
 "container yourself."
 msgstr ""
 "Dar a esta interface um nome de anfitrião próprio através do Traefik, para "
-"aceder por TLS em vez de uma porta publicada. Escreve um %"
-"(traefik_manager_self)s no diretório de configuração. Ignorar este passo se "
+"aceder por TLS em vez de uma porta publicada. Escreve um "
+"%(traefik_manager_self)s no diretório de configuração. Ignorar este passo se "
 "o encaminhamento para este contentor já estiver configurado."
 
 #. Used in the browser
@@ -5059,8 +5063,8 @@ msgid ""
 "%(crowdsec_alert_limit)s, or 500. %(n0)s reads every alert, which is slow"
 " on a large LAPI. Applies to this server and to agents."
 msgstr ""
-"Quantos dos alertas mais recentes ler, de 0 a 100000. Em branco usa %"
-"(crowdsec_alert_limit)s, ou 500. %(n0)s lê todos os alertas, o que é lento "
+"Quantos dos alertas mais recentes ler, de 0 a 100000. Em branco usa "
+"%(crowdsec_alert_limit)s, ou 500. %(n0)s lê todos os alertas, o que é lento "
 "numa LAPI grande. Aplica-se a este servidor e aos agentes."
 
 msgctxt "setting"
@@ -5378,7 +5382,8 @@ msgstr "Adota uma instalação existente"
 #. Used in the browser
 #, python-brace-format
 msgid "It is also removed from {names}, and any left empty are deleted too."
-msgstr "Também é removido de {names}, e os que ficarem vazios também são eliminados."
+msgstr ""
+"Também é removido de {names}, e os que ficarem vazios também são eliminados."
 
 #. Used in the browser
 #, python-brace-format
@@ -5418,8 +5423,8 @@ msgid ""
 "Keep only the last N %(bak)s files per config file "
 "(%(backup_keep_count)s). 0 = keep all."
 msgstr ""
-"Manter apenas os últimos N ficheiros %(bak)s por ficheiro de configuração (%"
-"(backup_keep_count)s). 0 = manter todos."
+"Manter apenas os últimos N ficheiros %(bak)s por ficheiro de configuração "
+"(%(backup_keep_count)s). 0 = manter todos."
 
 #, python-format
 msgid "Keep the name to %(max)d characters or fewer"
@@ -5881,8 +5886,8 @@ msgstr "Versão máxima"
 #, python-format
 msgid "Max idle conns must be a whole number, got %(max_idle)s"
 msgstr ""
-"O máximo de ligações inativas tem de ser um número inteiro, recebido %"
-"(max_idle)s"
+"O máximo de ligações inativas tem de ser um número inteiro, recebido "
+"%(max_idle)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -6957,8 +6962,8 @@ msgstr ""
 #, python-format
 msgid "OIDC login failed - the provider rejected the token request: %(detail)s"
 msgstr ""
-"Falha no início de sessão OIDC - o fornecedor rejeitou o pedido de token: %"
-"(detail)s"
+"Falha no início de sessão OIDC - o fornecedor rejeitou o pedido de token: "
+"%(detail)s"
 
 msgid "OIDC login failed - the provider returned no account details."
 msgstr ""
@@ -7130,7 +7135,8 @@ msgstr "Online · {latency_ms} ms ({status_code})"
 
 #. Used in the browser
 msgid "Only change this while migrating rules written for Traefik v2."
-msgstr "Alterar apenas durante a migração de regras escritas para o Traefik v2."
+msgstr ""
+"Alterar apenas durante a migração de regras escritas para o Traefik v2."
 
 #. Used in the browser
 msgid ""
@@ -7313,9 +7319,9 @@ msgid ""
 "bouncer keys cannot access those endpoints. Create one with "
 "%(cscli_machines_add)s."
 msgstr ""
-"Opcional - necessário para ler %(alerts)s e para desbanir (eliminar decisões)"
-"; as chaves de bouncer não têm acesso a esses endpoints. Criar uma com %"
-"(cscli_machines_add)s."
+"Opcional - necessário para ler %(alerts)s e para desbanir (eliminar "
+"decisões); as chaves de bouncer não têm acesso a esses endpoints. Criar uma "
+"com %(cscli_machines_add)s."
 
 msgid "Optional credentials for endpoints that require authentication."
 msgstr "Credenciais opcionais para endpoints que exigem autenticação."
@@ -7593,9 +7599,9 @@ msgid ""
 "your own site · %(all)s = any site, including embedded iframes · "
 "%(block)s = no one."
 msgstr ""
-"Permissions-Policy - quem pode usar cada funcionalidade do navegador. %(self)"
-"s = apenas o próprio site · %(all)s = qualquer site, incluindo iframes "
-"incorporados · %(block)s = ninguém."
+"Permissions-Policy - quem pode usar cada funcionalidade do navegador. "
+"%(self)s = apenas o próprio site · %(all)s = qualquer site, incluindo "
+"iframes incorporados · %(block)s = ninguém."
 
 #. Used in the browser
 msgid "Pick an entrypoint"
@@ -8132,8 +8138,8 @@ msgid ""
 "Reads active decisions - the bans in force. Generate one with "
 "%(cscli_bouncers_add)s."
 msgstr ""
-"Lê as decisões ativas - os banimentos em vigor. Gerar uma com %"
-"(cscli_bouncers_add)s."
+"Lê as decisões ativas - os banimentos em vigor. Gerar uma com "
+"%(cscli_bouncers_add)s."
 
 msgid ""
 "Reads alerts, which is where scenarios, targeted paths and attacking "
@@ -8429,7 +8435,8 @@ msgstr "Remover {shown} de acme.json?"
 msgid "Removed %(num)d certificate, then stopped at %(file)s: %(detail)s"
 msgid_plural "Removed %(num)d certificates, then stopped at %(file)s: %(detail)s"
 msgstr[0] "%(num)d certificado removido, depois parou em %(file)s: %(detail)s"
-msgstr[1] "%(num)d certificados removidos, depois parou em %(file)s: %(detail)s"
+msgstr[1] ""
+"%(num)d certificados removidos, depois parou em %(file)s: %(detail)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -8832,7 +8839,8 @@ msgstr "Rodada"
 
 #, python-format
 msgid "Rotation %(yaml_key)s must be a whole number, got %(value)s"
-msgstr "A rotação %(yaml_key)s tem de ser um número inteiro, recebido %(value)s"
+msgstr ""
+"A rotação %(yaml_key)s tem de ser um número inteiro, recebido %(value)s"
 
 #. Used in the browser
 msgid "Rotation failed"
@@ -9137,8 +9145,8 @@ msgid ""
 "Run this command to disable 2FA: %(docker_exec_it)s %(podman_exec_it)s "
 "%(flask_reset_password)s"
 msgstr ""
-"Executar este comando para desativar a 2FA: %(docker_exec_it)s %"
-"(podman_exec_it)s %(flask_reset_password)s"
+"Executar este comando para desativar a 2FA: %(docker_exec_it)s "
+"%(podman_exec_it)s %(flask_reset_password)s"
 
 #, python-format
 msgid ""
@@ -10155,7 +10163,8 @@ msgstr ""
 "de ambiente STATIC_CONFIG_PATH ou configurar o caminho nas Definições."
 
 msgid "Static config not found or STATIC_CONFIG_PATH not set"
-msgstr "Configuração estática não encontrada ou STATIC_CONFIG_PATH não definido"
+msgstr ""
+"Configuração estática não encontrada ou STATIC_CONFIG_PATH não definido"
 
 #, python-format
 msgid "Static config path %(optional)s"
@@ -10350,8 +10359,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Funções suportadas: %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Funções suportadas: %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -10671,8 +10680,8 @@ msgstr ""
 "Em alternativa, o Host pode criar a cópia de segurança deste agente no "
 "próprio repositório, num ramo separado, com as credenciais do Host. Nada é "
 "configurado no agente e nenhum token é guardado nele. Selecionar este "
-"servidor no seletor e depois ativar %(use_host_repository)s em %(backups_git)"
-"s."
+"servidor no seletor e depois ativar %(use_host_repository)s em "
+"%(backups_git)s."
 
 #. Used in the browser
 msgid "The LAPI did not answer"
@@ -12391,8 +12400,8 @@ msgid ""
 "CrowdSec and %(ipallowlist)s."
 msgstr ""
 "O que esta instância vê do pedido atual. Serve para verificar se o IP real "
-"do cliente chega à aplicação antes de alimentar os logs, o CrowdSec e %"
-"(ipallowlist)s."
+"do cliente chega à aplicação antes de alimentar os logs, o CrowdSec e "
+"%(ipallowlist)s."
 
 #. Used in the browser
 msgid "Where it fails"
@@ -12407,16 +12416,16 @@ msgid ""
 "Where the CrowdSec local API listens. On the same Docker network that is "
 "usually %(http_crowdsec_8080)s."
 msgstr ""
-"Onde a API local do CrowdSec escuta. Na mesma rede Docker, é normalmente %"
-"(http_crowdsec_8080)s."
+"Onde a API local do CrowdSec escuta. Na mesma rede Docker, é normalmente "
+"%(http_crowdsec_8080)s."
 
 #, python-format
 msgid ""
 "Where the agent stores local backup zips. Defaults to %(app_backups)s - "
 "set a host path here to persist backups across container restarts."
 msgstr ""
-"Onde o agente guarda os zips locais das cópias de segurança. Predefinição: %"
-"(app_backups)s - definir aqui um caminho do anfitrião para manter as cópias "
+"Onde o agente guarda os zips locais das cópias de segurança. Predefinição: "
+"%(app_backups)s - definir aqui um caminho do anfitrião para manter as cópias "
 "de segurança entre reinícios do contentor."
 
 msgid "Where this agent is reachable from Traefik Manager."
@@ -13809,7 +13818,8 @@ msgstr "sem autenticação"
 
 #. Used in the browser
 msgid "no certificate resolver by this name is configured any more"
-msgstr "já não existe nenhum resolver de certificados configurado com este nome"
+msgstr ""
+"já não existe nenhum resolver de certificados configurado com este nome"
 
 #. Used in the browser
 msgid "no client errors"
@@ -15595,8 +15605,10 @@ msgstr[1] "{count} routers em {name}, todos ativos"
 #, python-brace-format
 msgid "{count} router on {name}: {disabled}, {down}, {degraded}, {warnings}"
 msgid_plural "{count} routers on {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[0] "{count} router em {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[1] "{count} routers em {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[0] ""
+"{count} router em {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[1] ""
+"{count} routers em {name}: {disabled}, {down}, {degraded}, {warnings}"
 
 #. Used in the browser
 #, python-brace-format

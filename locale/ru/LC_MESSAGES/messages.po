@@ -56,7 +56,9 @@ msgstr "%(child)s всё ещё используется в %(users)s"
 
 #, python-format
 msgid "%(child)s is still used by %(users)s and is still a backend of %(parents)s"
-msgstr "%(child)s всё ещё используется в %(users)s и является бэкендом для %(parents)s"
+msgstr ""
+"%(child)s всё ещё используется в %(users)s и является бэкендом для "
+"%(parents)s"
 
 #, python-format
 msgid "%(claimed)s already belongs to %(claimed2)s. Pick a different name"
@@ -167,7 +169,8 @@ msgstr ""
 
 #, python-format
 msgid "%(name)s is still used by %(users)s. Delete those middlewares first"
-msgstr "%(name)s всё ещё используется в %(users)s. Сначала удалите эти middleware"
+msgstr ""
+"%(name)s всё ещё используется в %(users)s. Сначала удалите эти middleware"
 
 #, python-format
 msgid ""
@@ -1002,9 +1005,9 @@ msgid ""
 "%(ip_allow_list)s and the login limiter - check what reaches the app first "
 "with the %(ip_diagnostic)s."
 msgstr ""
-"Добавляет %(trusted_ips)s в точку входа, чтобы Traefik доверял %"
-"(x_forwarded_for)s от ваших прокси. Это доверие влияет на логи, CrowdSec, %"
-"(ip_allow_list)s и ограничитель входа: сначала проверьте, что доходит до "
+"Добавляет %(trusted_ips)s в точку входа, чтобы Traefik доверял "
+"%(x_forwarded_for)s от ваших прокси. Это доверие влияет на логи, CrowdSec, "
+"%(ip_allow_list)s и ограничитель входа: сначала проверьте, что доходит до "
 "приложения, с помощью %(ip_diagnostic)s."
 
 #, python-format
@@ -1668,7 +1671,8 @@ msgstr "Не удалось создать резервную копию"
 
 #, python-format
 msgid "Backup failed, nothing was restored: %(detail)s"
-msgstr "Не удалось создать резервную копию, ничего не восстановлено: %(detail)s"
+msgstr ""
+"Не удалось создать резервную копию, ничего не восстановлено: %(detail)s"
 
 #, python-format
 msgid "Backup failed, nothing was written: %(detail)s"
@@ -1699,8 +1703,8 @@ msgid ""
 "Backup retention on this agent is set via the %(backup_keep_count)s "
 "environment variable."
 msgstr ""
-"Хранение резервных копий в этом агенте задаётся переменной окружения %"
-"(backup_keep_count)s."
+"Хранение резервных копий в этом агенте задаётся переменной окружения "
+"%(backup_keep_count)s."
 
 #. Used in the browser
 msgid "Backups"
@@ -1805,8 +1809,8 @@ msgid ""
 "to use the %(crowdsec_api_key)s env var."
 msgstr ""
 "API-ключ баунсера для чтения %(decisions)s. Хранится в зашифрованном виде. "
-"Оставьте пустым, чтобы использовать переменную окружения %(crowdsec_api_key)"
-"s."
+"Оставьте пустым, чтобы использовать переменную окружения "
+"%(crowdsec_api_key)s."
 
 msgid "Bouncer key, reads decisions."
 msgstr "Ключ баунсера, читает decisions."
@@ -2170,8 +2174,8 @@ msgid ""
 "Claim name that contains groups. Keycloak: %(groups)s, some providers: "
 "%(roles)s."
 msgstr ""
-"Имя claim, содержащего группы. Keycloak: %(groups)s, некоторые провайдеры: %"
-"(roles)s."
+"Имя claim, содержащего группы. Keycloak: %(groups)s, некоторые провайдеры: "
+"%(roles)s."
 
 #. Used in the browser
 msgctxt "button"
@@ -3581,7 +3585,8 @@ msgid "Domain / Rule"
 msgstr "Домен / правило"
 
 msgid "Domain this Traefik Manager instance should be reachable on."
-msgstr "Домен, по которому должен быть доступен этот экземпляр Traefik Manager."
+msgstr ""
+"Домен, по которому должен быть доступен этот экземпляр Traefik Manager."
 
 #. Used in the browser
 msgid "Domains"
@@ -4592,8 +4597,8 @@ msgid ""
 "%(transport)s. Entry-point %(responding_timeouts)s are global and static - "
 "adjust them in the Static Config editor if long transcodes still cut off."
 msgstr ""
-"Включает %(pass_host_header)s и задаёт длинные %(forwarding_timeouts)s в %"
-"(transport)s. %(responding_timeouts)s точек входа глобальные и статические: "
+"Включает %(pass_host_header)s и задаёт длинные %(forwarding_timeouts)s в "
+"%(transport)s. %(responding_timeouts)s точек входа глобальные и статические: "
 "измените их в редакторе статической конфигурации, если длинное "
 "перекодирование всё ещё обрывается."
 
@@ -4800,9 +4805,9 @@ msgid ""
 "yourself."
 msgstr ""
 "Назначьте этому интерфейсу собственное имя хоста через Traefik, чтобы "
-"открывать его по TLS, а не через опубликованный порт. Записывает %"
-"(traefik_manager_self)s в каталог конфигурации. Пропустите, если вы уже сами "
-"маршрутизируете этот контейнер."
+"открывать его по TLS, а не через опубликованный порт. Записывает "
+"%(traefik_manager_self)s в каталог конфигурации. Пропустите, если вы уже "
+"сами маршрутизируете этот контейнер."
 
 #. Used in the browser
 msgid "Go back to the attack evidence, the primary view"
@@ -5034,9 +5039,9 @@ msgid ""
 "the default theme, the language and the tab list."
 msgstr ""
 "Внешний вид Traefik Manager и отображаемые вкладки. Тема, язык и макет, "
-"содержимое дашборда и панели навигации, а также IP-геолокация для вкладок «"
-"Логи» и CrowdSec. Всё это хранится отдельно для каждого браузера, кроме темы "
-"по умолчанию, языка и списка вкладок."
+"содержимое дашборда и панели навигации, а также IP-геолокация для вкладок "
+"«Логи» и CrowdSec. Всё это хранится отдельно для каждого браузера, кроме "
+"темы по умолчанию, языка и списка вкладок."
 
 msgid ""
 "How Traefik Manager reaches your Traefik instance, and the defaults it "
@@ -5066,8 +5071,8 @@ msgid ""
 "%(crowdsec_alert_limit)s, or 500. %(n0)s reads every alert, which is slow on "
 "a large LAPI. Applies to this server and to agents."
 msgstr ""
-"Сколько последних алертов читать, от 0 до 100000. Если пусто, используется %"
-"(crowdsec_alert_limit)s или 500. %(n0)s читает все алерты, что медленно на "
+"Сколько последних алертов читать, от 0 до 100000. Если пусто, используется "
+"%(crowdsec_alert_limit)s или 500. %(n0)s читает все алерты, что медленно на "
 "большом LAPI. Применяется к этому серверу и к агентам."
 
 msgctxt "setting"
@@ -5115,7 +5120,8 @@ msgstr "Требуется IP/диапазон"
 #. Used in the browser
 #, python-brace-format
 msgid "IPs/CIDRs allowed to set {x_forwarded}, one per line. The"
-msgstr "IP/CIDR, которым разрешено задавать {x_forwarded}, по одному на строку."
+msgstr ""
+"IP/CIDR, которым разрешено задавать {x_forwarded}, по одному на строку."
 
 msgctxt "setting"
 msgid "Icon"
@@ -5393,7 +5399,9 @@ msgstr "Он также убирается из {names}, опустевшие т
 #, python-brace-format
 msgid ""
 "It is also removed from {names}, which is deleted if nothing is left in it."
-msgstr "Он также убирается из {names}, который удаляется, если в нём ничего не останется."
+msgstr ""
+"Он также убирается из {names}, который удаляется, если в нём ничего не "
+"останется."
 
 msgid "It will not be shown again."
 msgstr "Он больше не будет показан."
@@ -5427,8 +5435,8 @@ msgid ""
 "Keep only the last N %(bak)s files per config file (%(backup_keep_count)s). "
 "0 = keep all."
 msgstr ""
-"Хранить только последние N файлов %(bak)s для каждого файла конфигурации (%"
-"(backup_keep_count)s). 0 = хранить все."
+"Хранить только последние N файлов %(bak)s для каждого файла конфигурации "
+"(%(backup_keep_count)s). 0 = хранить все."
 
 #, python-format
 msgid "Keep the name to %(max)d characters or fewer"
@@ -5891,8 +5899,8 @@ msgstr "Макс. версия"
 #, python-format
 msgid "Max idle conns must be a whole number, got %(max_idle)s"
 msgstr ""
-"Макс. число простаивающих соединений должно быть целым числом, получено %"
-"(max_idle)s"
+"Макс. число простаивающих соединений должно быть целым числом, получено "
+"%(max_idle)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -6121,7 +6129,8 @@ msgid "Moved Permanently"
 msgstr "Перемещено навсегда"
 
 msgid "Must differ from the Host branch - each server pushes to its own branch"
-msgstr "Должна отличаться от ветки хоста: каждый сервер отправляет в свою ветку"
+msgstr ""
+"Должна отличаться от ветки хоста: каждый сервер отправляет в свою ветку"
 
 msgid "My Protected Area"
 msgstr "Моя защищённая зона"
@@ -6904,7 +6913,8 @@ msgstr "Уведомления"
 #. Used in the browser
 #, python-brace-format
 msgid "Notifications need {field}, or clear the step to skip it."
-msgstr "Для уведомлений укажите {field} или очистите шаг, чтобы пропустить его."
+msgstr ""
+"Для уведомлений укажите {field} или очистите шаг, чтобы пропустить его."
 
 #. Used in the browser
 #, python-brace-format
@@ -6920,8 +6930,8 @@ msgid ""
 "only) = %(n1)s."
 msgstr ""
 "Количество доверенных прокси перед Traefik. Берётся IP на столько позиций "
-"справа в %(x_forwarded_for)s. Один прокси (например, только Cloudflare) = %"
-"(n1)s."
+"справа в %(x_forwarded_for)s. Один прокси (например, только Cloudflare) = "
+"%(n1)s."
 
 msgid "OAuth client ID registered at your provider."
 msgstr "OAuth client ID, зарегистрированный у вашего провайдера."
@@ -7293,8 +7303,8 @@ msgid ""
 "API key and %(alerts)s instead of the machine login - or alongside them."
 msgstr ""
 "Необязательно: для LAPI за взаимным TLS. Путь к PEM-файлу, смонтированному в "
-"этот контейнер. Сертификат аутентифицирует %(decisions)s вместо API-ключа и %"
-"(alerts)s вместо входа машины, или вместе с ними."
+"этот контейнер. Сертификат аутентифицирует %(decisions)s вместо API-ключа и "
+"%(alerts)s вместо входа машины, или вместе с ними."
 
 #, python-format
 msgid ""
@@ -7307,7 +7317,8 @@ msgstr ""
 "командой %(cscli_machines_add)s."
 
 msgid "Optional credentials for endpoints that require authentication."
-msgstr "Необязательные учётные данные для эндпоинтов, требующих аутентификации."
+msgstr ""
+"Необязательные учётные данные для эндпоинтов, требующих аутентификации."
 
 #. Used in the browser
 msgctxt "label"
@@ -7579,8 +7590,8 @@ msgid ""
 "one."
 msgstr ""
 "Permissions-Policy: кто может использовать каждую функцию браузера. %(self)s "
-"= только ваш сайт · %(all)s = любой сайт, включая встроенные iframe · %"
-"(block)s = никто."
+"= только ваш сайт · %(all)s = любой сайт, включая встроенные iframe · "
+"%(block)s = никто."
 
 #. Used in the browser
 msgid "Pick an entrypoint"
@@ -8121,8 +8132,8 @@ msgid ""
 "Reads active decisions - the bans in force. Generate one with "
 "%(cscli_bouncers_add)s."
 msgstr ""
-"Читает активные decisions: действующие блокировки. Создайте ключ командой %"
-"(cscli_bouncers_add)s."
+"Читает активные decisions: действующие блокировки. Создайте ключ командой "
+"%(cscli_bouncers_add)s."
 
 msgid ""
 "Reads alerts, which is where scenarios, targeted paths and attacking "
@@ -8418,7 +8429,8 @@ msgid_plural ""
 "Removed %(num)d certificates, then stopped at %(file)s: %(detail)s"
 msgstr[0] "Убран %(num)d сертификат, затем остановка на %(file)s: %(detail)s"
 msgstr[1] "Убрано %(num)d сертификата, затем остановка на %(file)s: %(detail)s"
-msgstr[2] "Убрано %(num)d сертификатов, затем остановка на %(file)s: %(detail)s"
+msgstr[2] ""
+"Убрано %(num)d сертификатов, затем остановка на %(file)s: %(detail)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -8706,7 +8718,8 @@ msgstr "Восстановление заменит все сертификат�
 #, python-brace-format
 msgid "Result: {count} trusted range on {entrypoint} (was {before})."
 msgid_plural "Result: {count} trusted ranges on {entrypoint} (was {before})."
-msgstr[0] "Результат: {count} доверенный диапазон на {entrypoint} (было {before})."
+msgstr[0] ""
+"Результат: {count} доверенный диапазон на {entrypoint} (было {before})."
 msgstr[1] ""
 "Результат: {count} доверенных диапазона на {entrypoint} (было {before})."
 msgstr[2] ""
@@ -8746,8 +8759,8 @@ msgid ""
 "in the middleware form. Templates are shared across every server, not just "
 "the one selected here."
 msgstr ""
-"Шаблоны YAML, с которых можно начать middleware. Выберите один в поле %"
-"(template)s формы middleware. Шаблоны общие для всех серверов, а не только "
+"Шаблоны YAML, с которых можно начать middleware. Выберите один в поле "
+"%(template)s формы middleware. Шаблоны общие для всех серверов, а не только "
 "для выбранного здесь."
 
 #. Used in the browser
@@ -9116,8 +9129,8 @@ msgid ""
 "%(podman_exec_it)s %(flask_reset_password)s The password is not printed "
 "back. Log in with it straight away."
 msgstr ""
-"Выполните эту команду и введите новый пароль, когда появится запрос: %"
-"(docker_exec_it)s %(podman_exec_it)s %(flask_reset_password)s Пароль не "
+"Выполните эту команду и введите новый пароль, когда появится запрос: "
+"%(docker_exec_it)s %(podman_exec_it)s %(flask_reset_password)s Пароль не "
 "выводится на экран. Сразу войдите с ним."
 
 #, python-format
@@ -9125,8 +9138,8 @@ msgid ""
 "Run this command to disable 2FA: %(docker_exec_it)s %(podman_exec_it)s "
 "%(flask_reset_password)s"
 msgstr ""
-"Выполните эту команду, чтобы отключить 2FA: %(docker_exec_it)s %"
-"(podman_exec_it)s %(flask_reset_password)s"
+"Выполните эту команду, чтобы отключить 2FA: %(docker_exec_it)s "
+"%(podman_exec_it)s %(flask_reset_password)s"
 
 #, python-format
 msgid ""
@@ -9694,7 +9707,8 @@ msgstr ""
 
 #. Used in the browser
 msgid "Set CROWDSEC_API_KEY so the tab can read active decisions"
-msgstr "Задайте CROWDSEC_API_KEY, чтобы вкладка могла читать активные decisions"
+msgstr ""
+"Задайте CROWDSEC_API_KEY, чтобы вкладка могла читать активные decisions"
 
 #. Used in the browser
 msgid "Set CROWDSEC_MACHINE_ID and CROWDSEC_MACHINE_PASSWORD"
@@ -10052,7 +10066,8 @@ msgstr "Режим симуляции: CrowdSec сопоставил сцена�
 
 #. Used in the browser
 msgid "Simulation mode: CrowdSec matched this scenario and enforced nothing"
-msgstr "Режим симуляции: CrowdSec сопоставил этот сценарий и ничего не применил"
+msgstr ""
+"Режим симуляции: CrowdSec сопоставил этот сценарий и ничего не применил"
 
 msgid "Single IP or CIDR range."
 msgstr "Один IP или диапазон CIDR."
@@ -10216,12 +10231,13 @@ msgstr "Статус: {entry}"
 msgid ""
 "Step 1 - Paste the static config snippet from the %(traefik_plugin_page)s"
 msgstr ""
-"Шаг 1: вставьте фрагмент статической конфигурации со страницы %"
-"(traefik_plugin_page)s"
+"Шаг 1: вставьте фрагмент статической конфигурации со страницы "
+"%(traefik_plugin_page)s"
 
 msgid ""
 "Step 2 - Paste the middleware snippet and edit the settings for your needs"
-msgstr "Шаг 2: вставьте фрагмент middleware и измените настройки под свои нужды"
+msgstr ""
+"Шаг 2: вставьте фрагмент middleware и измените настройки под свои нужды"
 
 msgid "Step 3 - Choose which config file the middleware is written to"
 msgstr "Шаг 3: выберите, в какой файл конфигурации записывается middleware"
@@ -10346,8 +10362,8 @@ msgid ""
 "Supported functions: %(networkerrorratio)s, %(responsecoderatio)s, "
 "%(latencyatquantilems)s"
 msgstr ""
-"Поддерживаемые функции: %(networkerrorratio)s, %(responsecoderatio)s, %"
-"(latencyatquantilems)s"
+"Поддерживаемые функции: %(networkerrorratio)s, %(responsecoderatio)s, "
+"%(latencyatquantilems)s"
 
 #. Used in the browser
 msgid "Surface held"
@@ -10667,8 +10683,8 @@ msgstr ""
 "Вместо этого хост может сохранять резервные копии этого агента в свой "
 "репозиторий, в отдельную ветку, с учётными данными хоста. На агенте ничего "
 "не настраивается, и токен на нём не хранится. Выберите этот сервер в "
-"переключателе, затем включите %(use_host_repository)s в разделе %"
-"(backups_git)s."
+"переключателе, затем включите %(use_host_repository)s в разделе "
+"%(backups_git)s."
 
 #. Used in the browser
 msgid "The LAPI did not answer"
@@ -10710,8 +10726,8 @@ msgid ""
 "Traefik Manager. Set %(crowdsec_lapi_url)s on the agent container and "
 "recreate it."
 msgstr ""
-"Агент берёт настройки CrowdSec не из Traefik Manager. Источник: %"
-"(own_container_environment)s. Задайте %(crowdsec_lapi_url)s в контейнере "
+"Агент берёт настройки CrowdSec не из Traefik Manager. Источник: "
+"%(own_container_environment)s. Задайте %(crowdsec_lapi_url)s в контейнере "
 "агента и пересоздайте его."
 
 msgid ""
@@ -10894,7 +10910,8 @@ msgstr ""
 #, python-format
 msgid ""
 "The key is passed through the environment, so it stays out of %(ps)s output."
-msgstr "Ключ передаётся через окружение, поэтому он не попадает в вывод %(ps)s."
+msgstr ""
+"Ключ передаётся через окружение, поэтому он не попадает в вывод %(ps)s."
 
 msgid ""
 "The login page silently tries OIDC first (prompt=none) and signs you in with "
@@ -11779,7 +11796,8 @@ msgstr "Файл лога Traefik {leave_empty_for}"
 #. Used in the browser
 #, python-brace-format
 msgid "Traefik must be restarted after adding {accesslog} to traefik.yml."
-msgstr "После добавления {accesslog} в traefik.yml нужно перезапустить Traefik."
+msgstr ""
+"После добавления {accesslog} в traefik.yml нужно перезапустить Traefik."
 
 msgid "Traefik plugin page"
 msgstr "Страница плагина Traefik"
@@ -12090,7 +12108,8 @@ msgid "Unsupported Media Type"
 msgstr "Неподдерживаемый тип данных"
 
 msgid "Unsupported URL - use https://, http://, ssh:// or git://"
-msgstr "Неподдерживаемый URL - используйте https://, http://, ssh:// или git://"
+msgstr ""
+"Неподдерживаемый URL - используйте https://, http://, ssh:// или git://"
 
 msgid "Unsupported git repository URL scheme"
 msgstr "Неподдерживаемая схема URL git-репозитория"
@@ -12396,16 +12415,16 @@ msgid ""
 "Where the CrowdSec local API listens. On the same Docker network that is "
 "usually %(http_crowdsec_8080)s."
 msgstr ""
-"Где слушает локальный API CrowdSec. В той же сети Docker это обычно %"
-"(http_crowdsec_8080)s."
+"Где слушает локальный API CrowdSec. В той же сети Docker это обычно "
+"%(http_crowdsec_8080)s."
 
 #, python-format
 msgid ""
 "Where the agent stores local backup zips. Defaults to %(app_backups)s - set "
 "a host path here to persist backups across container restarts."
 msgstr ""
-"Где агент хранит локальные zip-архивы резервных копий. По умолчанию %"
-"(app_backups)s - укажите здесь путь на хосте, чтобы резервные копии "
+"Где агент хранит локальные zip-архивы резервных копий. По умолчанию "
+"%(app_backups)s - укажите здесь путь на хосте, чтобы резервные копии "
 "сохранялись при перезапуске контейнера."
 
 msgid "Where this agent is reachable from Traefik Manager."
@@ -12511,7 +12530,8 @@ msgstr "Ваш домен TM может быть недоступен. Испо�
 #, python-brace-format
 msgid ""
 "Your Traefik {v} is affected by {b} ({severity}) - {summary}.{value}{fixedIn}"
-msgstr "Ваш Traefik {v} подвержен {b} ({severity}) - {summary}.{value}{fixedIn}"
+msgstr ""
+"Ваш Traefik {v} подвержен {b} ({severity}) - {summary}.{value}{fixedIn}"
 
 msgid "Your account is not authorized to access this application."
 msgstr "У вашей учётной записи нет доступа к этому приложению."
@@ -12606,7 +12626,8 @@ msgstr "acme.json не смонтирован"
 
 #. Used in the browser
 msgid "acme.json may be empty - certs are issued on first request."
-msgstr "acme.json может быть пуст - сертификаты выпускаются при первом запросе."
+msgstr ""
+"acme.json может быть пуст - сертификаты выпускаются при первом запросе."
 
 #. Used in the browser
 msgid "acme.json not mounted"
@@ -15643,9 +15664,12 @@ msgstr[2] "{count} роутеров на {name}, все в работе"
 msgid "{count} router on {name}: {disabled}, {down}, {degraded}, {warnings}"
 msgid_plural ""
 "{count} routers on {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[0] "{count} роутер на {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[1] "{count} роутера на {name}: {disabled}, {down}, {degraded}, {warnings}"
-msgstr[2] "{count} роутеров на {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[0] ""
+"{count} роутер на {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[1] ""
+"{count} роутера на {name}: {disabled}, {down}, {degraded}, {warnings}"
+msgstr[2] ""
+"{count} роутеров на {name}: {disabled}, {down}, {degraded}, {warnings}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16233,7 +16257,8 @@ msgstr[2] "{name}, определён в {file}, используется в {co
 #, python-brace-format
 msgid "{name}, defined in {file}, used by {count} route: {routes}"
 msgid_plural "{name}, defined in {file}, used by {count} routes: {routes}"
-msgstr[0] "{name}, определение в {file}, используется в {count} маршруте: {routes}"
+msgstr[0] ""
+"{name}, определение в {file}, используется в {count} маршруте: {routes}"
 msgstr[1] ""
 "{name}, определение в {file}, используется в {count} маршрутах: {routes}"
 msgstr[2] ""
