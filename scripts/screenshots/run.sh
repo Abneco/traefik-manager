@@ -105,7 +105,7 @@ capture() {
 apt-get update -qq >/dev/null 2>&1
 apt-get install -y -qq libnspr4 libnss3 libatk1.0-0 libatk-bridge2.0-0 libcups2 libdrm2 \
   libxkbcommon0 libxcomposite1 libxdamage1 libxfixes3 libxrandr2 libgbm1 libpango-1.0-0 \
-  libcairo2 libasound2 libatspi2.0-0 fonts-liberation >/dev/null 2>&1
+  libcairo2 libasound2 libatspi2.0-0 fonts-liberation fonts-noto-cjk >/dev/null 2>&1
 if [ ! -d /tmp/node/node_modules ]; then
   cd /tmp/node && npm install --silent puppeteer >/dev/null 2>&1
 fi

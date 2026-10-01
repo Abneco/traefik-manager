@@ -87,7 +87,7 @@ Click **Add Route** in the top bar. Fields marked with a protocol apply to that 
 | Skip TLS Verification | *(HTTP)* Adds `insecureSkipVerify: true` on a `<service>-transport` serversTransport, for backends with self-signed certificates (Proxmox, Kasm). Flags the card with a warning shield. |
 | Security headers preset | *(HTTP)* Generates a tool-managed `<route>-headers` middleware and attaches it. See [Security headers preset](#security-headers-preset). |
 | Optimize for streaming | *(HTTP)* Sets long `forwardingTimeouts` and forces `passHostHeader`, for media servers. See [Streaming preset](#streaming-preset). |
-| Config File | Shown when multiple config files are mounted (`CONFIG_DIR` / `CONFIG_PATHS`). Pick an existing file, or **+ New file...** to name one - it is created in `CONFIG_DIR`, with `.yml` added if you omit it. |
+| Config File | Shown when multiple config files are mounted (`CONFIG_DIR` / `CONFIG_PATHS`). Pick an existing file, or **+ New file…** to name one - it is created in `CONFIG_DIR`, with `.yml` added if you omit it. |
 
 UDP routers have no rule: they route by entry point only.
 
@@ -100,6 +100,35 @@ Saving rewrites only the parts the form owns: the rule, entry points, service re
 ::: warning Advanced service types
 If a router points at a `weighted`, `mirroring`, `failover` or `highestRandomWeight` service that Traefik Manager does not manage, that service is left untouched, so editing the target field in the route form has no effect on it. Edit it on the [Services tab](tab-services.md), which can also take over managing it. A composite Traefik Manager wrote itself is editable straight from this form. A service referenced by a composite, whether or not a router also points at it, is never removed when a route is deleted or disabled.
 :::
+
+## Raw YAML editor
+
+**More > Raw YAML** opens the route as YAML: its router, its service, and the `serversTransports`, middlewares and TLS options it references. Names complete as you type - services after `service:`, middlewares under a `middlewares:` list, entry points, cert resolvers and transports - and only names that exist in this install are ever offered. There is no Traefik schema behind it, so nothing invents a field.
+
+Definitions the route references may live in another file. Those are shown too, with a line above the editor naming each one and its file.
+
+Saving follows the file each section came from:
+
+- A definition in the route's **own file** is saved with the route, no questions asked.
+- A definition in **another file** that you did not change is left alone and never copied into the route's file.
+- A definition in **another file** that you did change prompts first, naming the file and every route that uses it. Confirm and it is written back to the file that owns it; cancel and only the route is saved.
+
+The save is also refused when the YAML points at something that does not exist. A router naming a middleware, service or TLS option, a service naming a `serversTransport`, a `chain` listing a middleware, or an `errors` middleware naming a service, that is defined in no config file stops the save and says which name is wrong - a typo like `https-redirects@file` for `https-redirect@file` never reaches disk. Names carrying another provider, such as `crowdsec@docker`, are left to Traefik, and `options: default` needs no definition. Only what the save writes is checked, so a chain that is already broken in another file and that you did not touch never blocks an unrelated edit.
+
+Renaming is handled in two ways, depending on what you changed:
+
+- Change a definition's **key alone**, leaving the router still pointing at the old name, and the save is refused - it would orphan the definition. Rename it on the [Middlewares tab](tab-middlewares.md).
+- Change the **key and the reference together**, and if the body is unchanged the editor asks first, because this does not rename anything: it creates a copy under the new name in this route's file and leaves the original where it is, still used by whatever else uses it. The prompt says so and counts those routes. Change the body as well and it is treated as a new definition, with no prompt.
+
+**Saving at all** is refused when one of the files involved is read-only, or changed on disk after you opened the editor. Nothing is written in either case, not even the route.
+
+A definition shown from another file that itself points at something missing - a `chain` listing a middleware that is gone - is flagged in red above the editor when you open it. It does not block the save, since you did not cause it and the save does not write that file.
+
+**Deleting** a block that belongs to another file only removes it from this view. A route's editor never deletes a definition other routes may depend on.
+
+Every file that changes is backed up first, and dependencies are written before the route, so a router is never pointing at a definition that does not exist yet. TLS options are shown as a reference only - they are managed on the [TLS Options tab](tab-tls-options.md).
+
+Remote agents behave the same way. An agent older than v1.15.0 does not collect referenced definitions at all, so its route YAML holds just the router and service, as it did before.
 
 ## Security headers preset
 
@@ -191,7 +220,7 @@ Behavior worth knowing:
 
 ## Deleting a route
 
-Open **More - Delete** on the route card and type `DELETE` to confirm. The route's service entry is removed with it, unless another router still references it. The `<service>-transport` `serversTransport` that traefik-manager generated for that service goes too, unless another service or a disabled route still points at it.
+Open **More - Delete** on the route card and type the route's name to confirm. Deleting several routes at once asks for how many instead. The route's service entry is removed with it, unless another router still references it. The `<service>-transport` `serversTransport` that traefik-manager generated for that service goes too, unless another service or a disabled route still points at it.
 
 ## Entrypoint middlewares
 

@@ -1,5 +1,7 @@
 import re
 
+from flask_babel import gettext
+
 FORBIDDEN = re.compile(r'[@/,:{}]|[\x00-\x1f\x7f]')
 MAX_LEN   = 100
 RESERVED  = ('.', '..')
@@ -8,14 +10,14 @@ MESSAGE   = 'A name cannot contain @ / , : { or }'
 
 def name_error(name) -> str:
     if not isinstance(name, str) or not name.strip():
-        return 'Give it a name'
+        return gettext('Give it a name')
     name = name.strip()
     if name in RESERVED:
-        return 'That name is reserved'
+        return gettext('That name is reserved')
     if len(name) > MAX_LEN:
-        return f'Keep the name to {MAX_LEN} characters or fewer'
+        return gettext('Keep the name to %(max)d characters or fewer', max=MAX_LEN)
     if FORBIDDEN.search(name):
-        return MESSAGE
+        return gettext('A name cannot contain any of these characters: %(chars)s', chars='@ / , : { }')
     return ''
 
 

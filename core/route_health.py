@@ -2,6 +2,7 @@ import time
 from concurrent.futures import ThreadPoolExecutor
 
 from core import config as cfg_mod
+from core import i18n as _i18n
 from core import monitor as monitor_mod
 from core import reachability
 from core import settings as settings_mod
@@ -12,11 +13,7 @@ TICK             = 60
 DEFAULT_INTERVAL = 300
 ROUTE_EVENT_MAX = 5
 SUMMARY_NAMES = 3
-_SUMMARY = {
-    'error':   '{count} routes are unreachable: {names}',
-    'warning': '{count} route backends are degraded: {names}',
-    'success': '{count} routes are reachable again: {names}',
-}
+_SUMMARY = ('error', 'warning', 'success')
 INTERVALS        = (60, 300, 900, 1800)
 FAILS_TO_DOWN    = 2
 WORKERS          = 6
@@ -151,16 +148,55 @@ def observe(app: dict, url: str, index: dict, probe=None, server_probe=None) -> 
 
 def _message(name: str, state: str, obs: dict) -> str:
     if state == 'up':
-        return f"Route {name} is reachable again"
+        return _i18n.lazy_gettext('Route %(name)s is reachable again', name=name)
     servers = obs.get('servers') or {}
     if obs.get('source') in ('traefik', 'servers'):
-        down = obs.get('down_servers') or []
-        tail = f" ({', '.join(down)})" if down else ''
+        down  = ', '.join(obs.get('down_servers') or [])
+        up    = servers.get('up', 0)
+        total = servers.get('total', 0)
         if state == 'degraded':
-            return f"Route {name} backend is degraded, {servers.get('up', 0)} of {servers.get('total', 0)} servers up{tail}"
-        return f"Route {name} backend is down, 0 of {servers.get('total', 0)} servers up{tail}"
-    err = str(obs.get('error') or '').strip()
-    return f"Route {name} is unreachable" + (f" ({err})" if err else '')
+            if down:
+                return _i18n.lazy_ngettext('Route %(name)s backend is degraded, %(up)s of %(num)d server up (%(servers)s)',
+                                           'Route %(name)s backend is degraded, %(up)s of %(num)d servers up (%(servers)s)',
+                                           total, name=name, up=up, servers=down)
+            return _i18n.lazy_ngettext('Route %(name)s backend is degraded, %(up)s of %(num)d server up',
+                                       'Route %(name)s backend is degraded, %(up)s of %(num)d servers up',
+                                       total, name=name, up=up)
+        if down:
+            return _i18n.lazy_ngettext('Route %(name)s backend is down, 0 of %(num)d server up (%(servers)s)',
+                                       'Route %(name)s backend is down, 0 of %(num)d servers up (%(servers)s)',
+                                       total, name=name, servers=down)
+        return _i18n.lazy_ngettext('Route %(name)s backend is down, 0 of %(num)d server up',
+                                   'Route %(name)s backend is down, 0 of %(num)d servers up',
+                                   total, name=name)
+    err = obs.get('error') or ''
+    if not isinstance(err, _i18n.Message):
+        err = str(err).strip()
+    if err:
+        return _i18n.lazy_gettext('Route %(name)s is unreachable (%(error)s)', name=name, error=err)
+    return _i18n.lazy_gettext('Route %(name)s is unreachable', name=name)
+
+
+def _summary(kind: str, names, count: int, all_failed: bool) -> str:
+    if kind == 'error' and all_failed:
+        return _i18n.lazy_ngettext('%(num)d route is unreachable: %(names)s, check that Traefik Manager can reach it',
+                                   '%(num)d routes are unreachable: %(names)s, check that Traefik Manager can reach them',
+                                   count, names=names)
+    if kind == 'error':
+        return _i18n.lazy_ngettext('%(num)d route is unreachable: %(names)s',
+                                   '%(num)d routes are unreachable: %(names)s', count, names=names)
+    if kind == 'warning':
+        return _i18n.lazy_ngettext('%(num)d route backend is degraded: %(names)s',
+                                   '%(num)d route backends are degraded: %(names)s', count, names=names)
+    return _i18n.lazy_ngettext('%(num)d route is reachable again: %(names)s',
+                               '%(num)d routes are reachable again: %(names)s', count, names=names)
+
+
+_STORED_FIELDS = ('error', 'note')
+
+
+def _stored(obs: dict) -> dict:
+    return {key: (_i18n.to_stored(value) if key in _STORED_FIELDS else value) for key, value in obs.items()}
 
 
 def settle(prev, obs: dict, name: str, now: float):
@@ -173,7 +209,7 @@ def settle(prev, obs: dict, name: str, now: float):
     else:
         fails = 0
         state = obs['state']
-    entry = {'state': state, 'fails': fails, 'name': name, 'last': dict(obs, at=int(now))}
+    entry = {'state': state, 'fails': fails, 'name': name, 'last': dict(_stored(obs), at=int(now))}
     event = None
     if state == 'down' and prev_state != 'down':
         event = ('error', _message(name, state, obs))
@@ -259,10 +295,9 @@ def _grouped(name, events, checked) -> list:
         routes = sorted(r for k, r, _m in events if k == kind)
         shown  = ', '.join(routes[:SUMMARY_NAMES])
         if len(routes) > SUMMARY_NAMES:
-            shown += f' and {len(routes) - SUMMARY_NAMES} more'
-        text = _SUMMARY[kind].format(count=len(routes), names=shown)
-        if kind == 'error' and len(routes) == checked:
-            text += ', check that Traefik Manager can reach them'
+            shown = _i18n.lazy_ngettext('%(names)s and %(num)d more', '%(names)s and %(num)d more',
+                                        len(routes) - SUMMARY_NAMES, names=shown)
+        text = _summary(kind, shown, len(routes), kind == 'error' and len(routes) == checked)
         out.append((kind, monitor_mod._server_msg(name, text), CATEGORY))
     return out
 
@@ -274,7 +309,7 @@ def _public(entry: dict) -> dict:
             'source': last.get('source') or ''}
     for field in ('latency_ms', 'status_code', 'error', 'via_target', 'unverified', 'note', 'servers', 'down_servers', 'self', 'at'):
         if last.get(field) is not None:
-            out[field] = last[field]
+            out[field] = _i18n.revive(last[field]) if field in _STORED_FIELDS else last[field]
     return out
 
 

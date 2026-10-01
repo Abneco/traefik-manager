@@ -61,8 +61,8 @@ TM handles authentication automatically when proxying calls through `/api/agents
 | GET | `/api/backup/git/commit/<sha>/diff` | Per-file diff for a commit |
 | POST | `/api/backup/git/restore/<sha>` | Restore configs from a git commit |
 | DELETE | `/api/backup/git/repo` | Reset (delete) local git repo clone |
-| GET | `/api/routes/<id>/raw` | Raw YAML for a single route (router + service block) - `id` is the route name or `configFile::routeName` |
-| POST | `/api/routes/<id>/raw` | Save raw YAML for a route - body: `{"content": "<yaml>"}` |
+| GET | `/api/routes/<id>/raw` | Raw YAML for a single route: router, service, and the `serversTransports`, middlewares and TLS options it references, plus `origins` naming the file each one lives in and `fingerprints` to send back on save - `id` is the route name or `configFile::routeName` |
+| POST | `/api/routes/<id>/raw` | Save raw YAML for a route - body: `{"content": "<yaml>", "applyShared": false, "fingerprints": {}}`. A changed definition that lives in another file answers `409` with `needsConfirm` and `sharedChanges`; repeat with `applyShared: true` to write it to the file that owns it |
 | GET | `/api/keys` | List API keys |
 | POST | `/api/keys` | Create an API key - body: `{"name": "..."}` |
 | DELETE | `/api/keys/<id>` | Delete an API key |
@@ -111,7 +111,17 @@ Response (no auth required):
 | 500 | Internal error |
 | 502 | Cannot reach Traefik or the CrowdSec LAPI |
 
-All errors return `{"error": "message", "ok": false}`.
+All errors return `{"error": "message", "ok": false}`. Most also carry a stable `code` and, when the message has variable parts, a `params` object:
+
+```json
+{"error": "invalid YAML: line 3", "code": "invalid_yaml", "params": {"detail": "line 3"}, "ok": false}
+```
+
+The `error` text from the agent is always English. When a browser session in another language calls the agent through TM, TM swaps `error` for the translated message for that `code` and leaves `code` and `params` as they are. An error without a `code` (from an older agent, or one that only relays git or CrowdSec output) keeps its English text. The certificate status endpoint does the same with `reason` and `reason_code`.
+
+::: tip New in v1.15.0
+`code`, `params` and `reason_code` were added in v1.15.0. The `error` text did not change, so match on `code` rather than the wording.
+:::
 
 ## Backup format
 

@@ -17,7 +17,9 @@ Routes, middlewares, Services, Plugins, certificates, crowdsec and logs, without
 
 [![Stars](https://img.shields.io/github/stars/chr0nzz/traefik-manager?logo=github&color=e3b341)](https://github.com/chr0nzz/traefik-manager/stargazers)
 [![Issues](https://img.shields.io/github/issues/chr0nzz/traefik-manager?logo=github)](https://github.com/chr0nzz/traefik-manager/issues)
+[![Discord](https://img.shields.io/badge/Discord-join-5865F2?logo=discord&logoColor=white)](https://discord.gg/vRQCMrrjtz)
 [![Ko-fi](https://img.shields.io/badge/Ko--fi-Sponsor-ff5f5f?logo=ko-fi&logoColor=white)](https://ko-fi.com/chr0nzz)
+[![Translation status](https://hosted.weblate.org/widget/traefik-manager/svg-badge.svg)](https://hosted.weblate.org/engage/traefik-manager/)
 
 <sub>Built for homelabbers who love Traefik but hate editing YAML at 2am.</sub>
 
@@ -116,6 +118,7 @@ Full [documentation](https://traefik-manager.xyzlab.dev/).
 | <img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/podman.png" width="20" height="20"> Podman              | [Rootless, Quadlet, SELinux](https://traefik-manager.xyzlab.dev/podman.html)          |
 | <img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/linux.png" width="20" height="20"> Linux                | [Native Python and systemd](https://traefik-manager.xyzlab.dev/linux.html)            |
 | <img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/unraid.png" width="20" height="20"> Unraid              | [Community Applications and appdata paths](https://traefik-manager.xyzlab.dev/unraid.html) |
+| <img src="https://cdn.jsdelivr.net/gh/selfhst/icons@main/png/umbrelos.png" width="20" height="20"> umbrelOS          | [Community app store, ports and routing](https://traefik-manager.xyzlab.dev/umbrel.html) |
 | <img src="docs/public/images/icon.png" width="20" height="20"> Agent                                                 | [TMA for multi-server management](https://traefik-manager.xyzlab.dev/agent.html)      |
 
 ---
@@ -132,6 +135,8 @@ Full [documentation](https://traefik-manager.xyzlab.dev/).
 [OIDC](https://traefik-manager.xyzlab.dev/oidc.html) ·
 [Reset password](https://traefik-manager.xyzlab.dev/reset-password.html) ·
 [Beta](https://traefik-manager.xyzlab.dev/beta.html)
+
+Questions, help and release news: [Discord](https://discord.gg/vRQCMrrjtz)
 
 ---
 
@@ -188,15 +193,15 @@ All JS and CSS is bundled at build time - nothing is fetched from a CDN at runti
 v1.15.0 is the first release that is not English-only. The whole interface is ready for translation - every page, dialog, tooltip, toast and server message - and the work happens on Weblate.
 
 <a href="https://hosted.weblate.org/engage/traefik-manager/">
-<img src="https://hosted.weblate.org/widget/traefik-manager/web-app/multi-auto.svg" alt="Translation status per language" />
+<img src="https://hosted.weblate.org/widget/traefik-manager/matrix-auto.svg" alt="Translation status per language" />
 </a>
 
-German, French, Spanish, Russian and Chinese (Simplified) are open now, and any other language is added on request.
+v1.15.0 ships in French, French (Canada), German, Spanish, Portuguese (Portugal), Portuguese (Brazil), Dutch, Chinese (Simplified), Russian, Czech and Danish, plus English spellings for the United States and the United Kingdom. Any other language is added on request.
 
 | You want to | Where |
 | --- | --- |
 | Translate | [Weblate](https://hosted.weblate.org/projects/traefik-manager/web-app/) - an account is needed to write, not to read. Nothing goes live on its own: Weblate opens a pull request here |
-| Review a language | [LANGUAGE-REVIEWERS.md](https://github.com/chr0nzz/tm-locale/blob/main/LANGUAGE-REVIEWERS.md) - one named reviewer per language, and a language only ships once it has one |
+| Review a language | [LANGUAGE-REVIEWERS.md](https://github.com/chr0nzz/tm-locale/blob/main/LANGUAGE-REVIEWERS.md) - one named reviewer per language, and a language ships once it has a reviewer or passes an agent verification |
 | Ask for a language | [Open a language request](https://github.com/chr0nzz/tm-locale/issues/new?template=language-request.yml) |
 | Read first | [Handbook](https://github.com/chr0nzz/tm-locale/blob/main/HANDBOOK.md) · [Glossary](https://github.com/chr0nzz/tm-locale/blob/main/GLOSSARY.md) · [Do not translate](https://github.com/chr0nzz/tm-locale/blob/main/DO-NOT-TRANSLATE.md) |
 | Report a wrong translation | [Open a translation issue](https://github.com/chr0nzz/tm-locale/issues/new?template=translation-issue.yml) |

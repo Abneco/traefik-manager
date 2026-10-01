@@ -16,6 +16,8 @@ SETTINGS_PATH = _CONFIG_DIR / "manager.yml"
 DYNAMIC_PATH = _CONFIG_DIR / "dynamic.yml"
 BACKUP_DIR = _TMP / "backups"
 
+PASSWORD_HASH = '$2b$12$abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQR'
+
 SETTINGS_PATH.write_text(
     "domains:\n"
     "  - example.com\n"
@@ -24,7 +26,7 @@ SETTINGS_PATH.write_text(
     "auth_enabled: true\n"
     "setup_complete: true\n"
     "must_change_password: false\n"
-    "password_hash: '$2b$12$abcdefghijklmnopqrstuvwxyz0123456789ABCDEFGHIJKLMNOPQR'\n"
+    f"password_hash: '{PASSWORD_HASH}'\n"
 )
 DYNAMIC_PATH.write_text("http:\n  routers: {}\n  services: {}\n")
 STATIC_PATH = _CONFIG_DIR / "traefik.yml"
@@ -80,13 +82,14 @@ def _reset_settings():
         domains=s["domains"],
         cert_resolver=s["cert_resolver"],
         traefik_api_url=s["traefik_api_url"],
-        auth_enabled=s["auth_enabled"],
-        password_hash=s["password_hash"],
+        auth_enabled=True,
+        password_hash=PASSWORD_HASH,
         visible_tabs=s["visible_tabs"],
         disabled_routes={},
         managed_middlewares={},
         must_change_password=False,
         setup_password_reset=False,
+        setup_complete=True,
         session_epoch=0,
         admin_password_fp='',
     )

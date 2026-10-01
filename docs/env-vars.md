@@ -44,6 +44,7 @@ from `manager.yml` and restart.
 |---|---|---|---|
 | `OIDC_ENABLED` | `false` | Seeds `oidc_enabled` | Turn on OIDC login |
 | `OIDC_PROVIDER_URL` | _(unset)_ | Seeds `oidc_provider_url` | Issuer URL, without `/.well-known/openid-configuration` |
+| `OIDC_REDIRECT_URI` | _(unset)_ | - | Callback URL sent to the provider. Unset, it is built from the request and follows `X-Forwarded-Host` |
 | `OIDC_CLIENT_ID` | _(unset)_ | Seeds `oidc_client_id` | Client ID from your provider |
 | `OIDC_CLIENT_SECRET` | _(unset)_ | Seeds `oidc_client_secret` | Client secret (stored encrypted) |
 | `OIDC_DISPLAY_NAME` | `OIDC` | Seeds `oidc_display_name` | Name on the login button |
@@ -127,6 +128,8 @@ from `manager.yml` and restart.
 | `GUNICORN_BIND` | `0.0.0.0:5000` | - | Address the server binds inside the container. Change the published port in your compose file instead |
 | `BASE_PATH` | _(none)_ | - | Serve Traefik Manager under a sub path, for example `/traefik-manager` |
 | `LOG_LEVEL` | `INFO` | - | Python log level: `DEBUG`, `INFO`, `WARNING`, `ERROR` |
+| `PUID` | _(unset, runs as root)_ | - | Run the container as this user id instead of root. Everything you mount must be writable by it. [Details](#puid-pgid) |
+| `PGID` | same as `PUID` | - | Group id to run as when `PUID` is set |
 
 ---
 
@@ -278,6 +281,36 @@ Leaving both `OIDC_ALLOWED_EMAILS` and `OIDC_ALLOWED_GROUPS` empty denies every 
 
 ---
 
+### `OIDC_REDIRECT_URI`
+
+**Default:** _(unset - built from the request)_
+
+The callback URL sent to the provider, and sent again at the token exchange. Left unset, it is
+built from the request, which follows `X-Forwarded-Host` when the request came from a
+[trusted proxy](#trusted-proxies). The default trusted range is wide, so on a shared Docker
+network or a flat LAN another host can set that header and make the `redirect_uri` point at
+itself. Whether that is exploitable depends on how strictly your provider matches
+`redirect_uri` against the one registered for the client, which is not something Traefik Manager
+can see.
+
+Set it to the exact URL registered with your provider and the header stops mattering. It must
+match what the provider has registered, character for character, or the provider rejects the
+sign-in.
+
+:::tabs
+== Docker / Podman
+```yaml
+environment:
+  - OIDC_REDIRECT_URI=https://tm.example.com/auth/oidc/callback
+```
+== Linux (systemd)
+```ini
+Environment=OIDC_REDIRECT_URI=https://tm.example.com/auth/oidc/callback
+```
+:::
+
+---
+
 ## Routes & Domains
 
 ### `DOMAINS`
@@ -338,7 +371,7 @@ Traefik Manager can manage one or many dynamic config files. Three variables con
 CONFIG_DIR  >  CONFIG_PATHS  >  CONFIG_PATH
 ```
 
-Only one should be set. When multiple config files are loaded, a **Config File** dropdown appears in the Add/Edit Route and Middleware forms. `CONFIG_DIR` also adds a **+ New file...** option to create files on the fly.
+Only one should be set. When multiple config files are loaded, a **Config File** dropdown appears in the Add/Edit Route and Middleware forms. `CONFIG_DIR` also adds a **+ New file…** option to create files on the fly.
 
 ---
 
@@ -664,7 +697,7 @@ volumes:
 **Default:** _(auto-downloaded to `/app/config/geoip/dbip-country-lite.mmdb`, next to `manager.yml`. The location follows `SETTINGS_PATH`, not `CONFIG_DIR`.)_  
 **Fallback:** `geoip_db_path`
 
-Path to a MaxMind DB format (`.mmdb`) GeoIP database for [IP geolocation](geoip.md) in the Logs and CrowdSec tabs. Leave unset to use the free DB-IP Lite country database TM downloads automatically; set it to use your own (e.g. MaxMind GeoLite2). Geolocation must be enabled in **Settings → Interface → Geolocation**.
+Path to a MaxMind DB format (`.mmdb`) GeoIP database for [IP geolocation](geoip.md) in the Logs and CrowdSec tabs. Leave unset to use the free DB-IP Lite country database TM downloads automatically; set it to use your own (e.g. MaxMind GeoLite2). Geolocation must be enabled in **Settings → Interface → General → Geolocation**.
 
 :::tabs
 == Docker / Podman
@@ -904,6 +937,17 @@ Comma-separated addresses or networks allowed to set forwarding headers. A reque
 
 The active list is shown in the startup log as `Trusted Proxies` and in the Client IP Diagnostic.
 
+The default is deliberately wide, because the usual install has Traefik in another container on
+the same Docker network and Traefik Manager has no way to know that address in advance. It does
+mean that on a shared Docker network or a flat LAN, any other host in those ranges can set its
+own client IP for the login rate limit and the audit log, and can set the host used to build the
+OIDC `redirect_uri`. Narrowing this to your proxy's actual address closes that, and is worth
+doing on a network you share with anything you do not control. Narrow it deliberately rather than
+by trial: if the value no longer covers your proxy, every request looks like it comes from the
+proxy, so all clients share one rate-limit bucket and one failed-login count.
+
+See [`OIDC_REDIRECT_URI`](#oidc-redirect-uri) for pinning the OIDC callback URL independently.
+
 :::tabs
 == Docker / Podman
 ```yaml
@@ -941,3 +985,36 @@ Environment=PROXY_FIX_HOPS=2
 ::: warning
 Only count hops you actually control. Each trusted hop is one more `X-Forwarded-For` entry a client could forge, so setting this higher than your real proxy chain lets callers spoof their source IP past the login rate-limiter and audit log. Set it to `0` to ignore `X-Forwarded-For` entirely and use the direct connection IP.
 :::
+
+---
+
+### `PUID` / `PGID`
+
+Run the container as an unprivileged user instead of root. Both are unset by default, so an existing install keeps running as root and nothing changes when you upgrade.
+
+With `PUID` set, the container starts as root only long enough to create a user with that id, with `PGID` as its group (the same number as `PUID` when `PGID` is unset). It gives that user the image's own `/app/config` and `/app/backups` when you have not mounted them, and adds it to the group that owns `/var/run/docker.sock` when the socket is mounted, so the `socket` restart method keeps working. It then starts Traefik Manager as that user. It never changes the ownership of anything you mount.
+
+Everything you mount has to be writable by that user, so hand the paths over on the host first:
+
+```bash
+sudo chown -R 1000:1000 /path/to/traefik-manager/config /path/to/traefik-manager/backups
+sudo chown 1000:1000 /path/to/traefik/dynamic.yml
+```
+
+:::tabs
+== Docker / Podman
+```yaml
+environment:
+  - PUID=1000
+  - PGID=1000
+```
+:::
+
+If the configuration directory is not writable by that user, the container stops at startup with a message naming the directory and the `chown` to run, instead of starting half-working. Other paths it cannot write, such as the backups directory or a dynamic config file, are reported in the log at startup.
+
+Prefer this over `docker run --user`: `--user` skips preparing the image's own directories and the Docker socket group.
+
+::: tip
+On Unraid the usual values are `PUID=99` and `PGID=100`. The agent image supports the same two variables.
+:::
+

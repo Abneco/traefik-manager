@@ -1,8 +1,10 @@
 function _tvFlag(f) {
-    return '<span class="sig-flag ' + f.cls + ' lg-static" title="' + _esc(f.tip || (f.n + ' ' + f.label)) + '">'
+    const tip = f.tip || (f.n === '' ? f.label : t('{label}: {n}', { label: f.label, n: _sdNum(f.n) }));
+    return '<span class="sig-flag ' + f.cls + ' lg-static" title="' + _esc(tip || '') + '">'
         + '<i class="' + f.ic + '"></i>'
-        + (f.n === '' ? '' : '<b>' + _sdNum(f.n) + '</b>')
-        + (f.label ? '<span class="sig-fl">' + _esc(f.label) + '</span>' : '')
+        + (f.html ? f.html
+            : (f.n === '' ? '' : '<b>' + _sdNum(f.n) + '</b>')
+            + (f.label ? '<span class="sig-fl">' + _esc(f.label) + '</span>' : ''))
         + '</span>';
 }
 
@@ -28,20 +30,25 @@ function renderProviderVerdict(prefix, routes, mws) {
     const err = routes.filter(r => r.status && r.status !== 'enabled').length;
     const by = p => routes.filter(r => r._proto === p).length;
     const flags = [];
-    const h = by('HTTP'), t = by('TCP'), u = by('UDP');
-    if (h) flags.push({ cls: 'd-off', ic: 'ph-bold ph-globe', n: h, label: 'HTTP' });
-    if (t) flags.push({ cls: 'd-off', ic: 'ph-bold ph-arrows-left-right', n: t, label: 'TCP' });
-    if (u) flags.push({ cls: 'd-off', ic: 'ph-bold ph-broadcast', n: u, label: 'UDP' });
-    if (err) flags.push({ cls: 'd-bad', ic: 'ph-fill ph-warning-octagon', n: err, label: 'not serving' });
+    const h = by('HTTP'), tcp = by('TCP'), u = by('UDP');
+    if (h) flags.push({ cls: 'd-off', ic: 'ph-bold ph-globe', n: h, label: 'HTTP',
+        tip: tn('{n} HTTP route', '{n} HTTP routes', h, { n: _sdNum(h) }) });
+    if (tcp) flags.push({ cls: 'd-off', ic: 'ph-bold ph-arrows-left-right', n: tcp, label: 'TCP',
+        tip: tn('{n} TCP route', '{n} TCP routes', tcp, { n: _sdNum(tcp) }) });
+    if (u) flags.push({ cls: 'd-off', ic: 'ph-bold ph-broadcast', n: u, label: 'UDP',
+        tip: tn('{n} UDP route', '{n} UDP routes', u, { n: _sdNum(u) }) });
+    if (err) flags.push({ cls: 'd-bad', ic: 'ph-fill ph-warning-octagon', n: err, label: t('not serving'),
+        tip: tn('{count} route not serving', '{count} routes not serving', err, { count: _sdNum(err) }) });
     if (mws && mws.length) flags.push({ cls: 'd-off', ic: 'ph-bold ph-stack', n: mws.length,
-        label: mws.length === 1 ? 'middleware' : 'middlewares' });
+        html: thn('{n} middleware', '{n} middlewares', mws.length, { n: tmHtml('<b>' + _sdNum(mws.length) + '</b>') }),
+        tip: tn('{n} middleware', '{n} middlewares', mws.length, { n: _sdNum(mws.length) }) });
     _tvStrip(mountId, {
         health: err ? 'down' : 'up',
         ic: err ? 'ph-fill ph-warning-octagon' : 'ph-fill ph-check-circle',
-        txt: err ? _sdNum(err) + (err === 1 ? ' route' : ' routes') + ' not serving'
-                 : _sdNum(routes.length) + (routes.length === 1 ? ' route' : ' routes') + ' live',
+        txt: err ? tn('{count} route not serving', '{count} routes not serving', err, { count: _sdNum(err) })
+                 : tn('{count} route live', '{count} routes live', routes.length, { count: _sdNum(routes.length) }),
         flags,
-        meta: '<b>read-only</b>',
+        meta: '<b>' + th('read-only') + '</b>',
     });
 }
 
@@ -66,7 +73,7 @@ function renderProviderMiddlewareSection(middlewares, containerId) {
     }).join('');
     el.innerHTML = `<div class="mt-6 pt-4" style="border-top:1px solid var(--border)">
         <div class="text-xs font-semibold uppercase tracking-wide mb-3 flex items-center gap-2" style="color:var(--muted)">
-            <i class="ph-bold ph-plugs-connected"></i> Middlewares <span class="font-normal">(${middlewares.length})</span>
+            <i class="ph-bold ph-plugs-connected"></i> ${th('Middlewares {span}', { span: tmHtml(`<span class="font-normal">(${middlewares.length})</span>`) })}
         </div>
         <div class="tm-card-grid">${cards}</div>
     </div>`;
@@ -80,7 +87,7 @@ function _tmProviderCard(r, opts, ctx) {
     const { proto, name, svc, domain, isHTTP, dotCls, extUrl } = ctx;
     const glyphs = proto === 'UDP' ? ''
         : r.tls ? '<i class="ph-bold ph-lock-simple tm-glyph" style="color:var(--muted)" title="TLS"></i>'
-                : '<i class="ph-bold ph-lock-simple-open tm-glyph" style="color:var(--yellow)" title="No TLS"></i>';
+                : `<i class="ph-bold ph-lock-simple-open tm-glyph" style="color:var(--yellow)" title="${th('No TLS')}"></i>`;
 
     const simpleHost = /^Host\(`[^`]+`\)(\s*\|\|\s*Host\(`[^`]+`\))*$/.test((r.rule || '').trim());
     const vals = [];
@@ -104,8 +111,8 @@ function _tmProviderCard(r, opts, ctx) {
     ].filter(Boolean).join('<span class="tm-sep"> · </span>');
 
     const rail = `<span class="tm-rail tm-rail-sm" onclick="event.stopPropagation()">` +
-        (extUrl ? `<a href="${_esc(extUrl)}" target="_blank" rel="noopener" class="tm-btn" title="Open site" onclick="event.stopPropagation()"><i class="ph-bold ph-arrow-square-out"></i></a>` : '') +
-        (opts.onDetailClick ? `<button type="button" class="tm-btn" title="Details" onclick="event.stopPropagation();${opts.onDetailClick}"><i class="ph-bold ph-info"></i></button>` : '') +
+        (extUrl ? `<a href="${_esc(extUrl)}" target="_blank" rel="noopener" class="tm-btn" title="${th('Open site')}" onclick="event.stopPropagation()"><i class="ph-bold ph-arrow-square-out"></i></a>` : '') +
+        (opts.onDetailClick ? `<button type="button" class="tm-btn" title="${thc('tooltip', 'Details')}" onclick="event.stopPropagation();${opts.onDetailClick}"><i class="ph-bold ph-info"></i></button>` : '') +
         '</span>';
 
     return `<div class="tm-card"${opts.onDetailClick ? ` onclick="${opts.onDetailClick}"` : ''} style="--tm-accent:var(--blue)">

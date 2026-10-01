@@ -1,5 +1,7 @@
 from datetime import datetime, timezone
 
+from flask_babel import gettext
+
 from core import config as cfg_mod
 
 FILE_RESOLVER = 'file'
@@ -9,6 +11,18 @@ UNKNOWN_CONFIG      = 'a config file could not be read, so nothing is called unu
 UNKNOWN_REGEXP      = 'a router matches hosts by regular expression, so its certificates cannot be worked out'
 UNKNOWN_CATCH_ALL   = 'a catch-all router can be served any certificate, so nothing is called unused'
 UNKNOWN_NO_STATIC   = 'the static config is not readable, so resolvers cannot be checked'
+NO_DOMAIN           = 'this certificate names no domain'
+
+
+def _shown(reason: str) -> str:
+    return {
+        UNKNOWN_NO_ROUTERS: lambda: gettext('the router list is incomplete, so nothing is called unused'),
+        UNKNOWN_CONFIG:     lambda: gettext('a config file could not be read, so nothing is called unused'),
+        UNKNOWN_REGEXP:     lambda: gettext('a router matches hosts by regular expression, so its certificates cannot be worked out'),
+        UNKNOWN_CATCH_ALL:  lambda: gettext('a catch-all router can be served any certificate, so nothing is called unused'),
+        UNKNOWN_NO_STATIC:  lambda: gettext('the static config is not readable, so resolvers cannot be checked'),
+        NO_DOMAIN:          lambda: gettext('this certificate names no domain'),
+    }.get(reason, lambda: reason)()
 
 
 def normalize(name) -> str:
@@ -161,18 +175,18 @@ def analyze(certs, apps, configs=(), resolvers=None, routers_ok=True, configs_ok
                'source': cert.get('source', ''), 'expired': is_expired(cert, now),
                'unused': False, 'orphaned': False, 'why': ''}
         if unused_block:
-            row['why'] = unused_block
+            row['why'] = _shown(unused_block)
         elif not domains:
-            row['why'] = 'this certificate names no domain'
+            row['why'] = _shown(NO_DOMAIN)
         else:
             serves_a_host = any(router_pattern_covers(served, domain)
                                 for served in hosts for domain in domains)
             row['unused'] = not (serves_a_host or (domains & requested))
         if cert.get('resolver') and cert.get('resolver') != FILE_RESOLVER:
             if known is None:
-                row['resolver_why'] = UNKNOWN_NO_STATIC
+                row['resolver_why'] = _shown(UNKNOWN_NO_STATIC)
             else:
                 row['orphaned'] = cert['resolver'] not in known
         rows.append(row)
-    return {'certs': rows, 'unused_known': not unused_block, 'why': unused_block,
+    return {'certs': rows, 'unused_known': not unused_block, 'why': _shown(unused_block),
             'resolvers_known': known is not None}

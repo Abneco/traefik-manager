@@ -6,7 +6,7 @@ import shutil
 import subprocess
 import time
 
-from core import agents_http, backups, env, notifications
+from core import agents_http, backups, env, i18n, notifications
 from core import settings as settings_mod
 from core.env import logger
 
@@ -71,7 +71,7 @@ def _git_ensure_repo_at(repo_dir, repo_url, branch, creds):
         _, _, rc = _git_run(['clone', '--branch', branch, '--', repo_url, '.'], cwd=repo_dir, credentials=creds)
         if rc != 0:
             _git_run(['init'], cwd=repo_dir)
-            _git_run(['remote', 'add', 'origin', repo_url], cwd=repo_dir)
+            _git_run(['remote', 'add', '--', 'origin', repo_url], cwd=repo_dir)
             _git_run(['pull', 'origin', branch], cwd=repo_dir, credentials=creds)
         _git_run(['config', 'user.email', 'traefik-manager@localhost'], cwd=repo_dir)
         _git_run(['config', 'user.name', 'Traefik Manager'], cwd=repo_dir)
@@ -85,11 +85,11 @@ def _git_ensure_repo_at(repo_dir, repo_url, branch, creds):
     else:
         _, _, rc = _git_run(['remote', 'get-url', 'origin'], cwd=repo_dir)
         if rc != 0:
-            _, _, arc = _git_run(['remote', 'add', 'origin', repo_url], cwd=repo_dir)
+            _, _, arc = _git_run(['remote', 'add', '--', 'origin', repo_url], cwd=repo_dir)
             if arc != 0:
                 _fresh_clone()
         else:
-            _git_run(['remote', 'set-url', 'origin', repo_url], cwd=repo_dir)
+            _git_run(['remote', 'set-url', '--', 'origin', repo_url], cwd=repo_dir)
         _git_run(['config', 'user.email', 'traefik-manager@localhost'], cwd=repo_dir)
         _git_run(['config', 'user.name', 'Traefik Manager'], cwd=repo_dir)
     return repo_dir
@@ -101,7 +101,7 @@ def _git_ensure_repo():
     username = s.get('git_backup_username', '').strip()
     token    = s.get('git_backup_token', '').strip()
     if not _valid_git_url(repo_url):
-        raise ValueError('Unsupported git repository URL scheme')
+        raise ValueError(i18n.lazy_gettext('Unsupported git repository URL scheme'))
     creds    = {'username': username, 'token': token} if token else None
     return _git_ensure_repo_at(_git_repo_dir(), repo_url, branch, creds)
 
@@ -118,10 +118,25 @@ def _git_lock():
         finally:
             f.close()
 
+def _failed(step, detail):
+    if step == 'init':
+        return i18n.lazy_gettext('Repo init failed: %(error)s', error=detail)
+    if step == 'commit':
+        return i18n.lazy_gettext('Commit failed: %(error)s', error=detail)
+    return i18n.lazy_gettext('Push failed: %(error)s', error=detail)
+
+
+def _init_detail(exc, redact):
+    args = getattr(exc, 'args', ())
+    if len(args) == 1 and isinstance(args[0], i18n.Message):
+        return args[0]
+    return redact(str(exc))
+
+
 def _git_push_configs(action='backup', custom_message=None):
     s = settings_mod.load_settings()
     if not s.get('git_backup_repo', '').strip():
-        return False, 'No repository configured'
+        return False, i18n.lazy_gettext('No repository configured')
     branch = _safe_git_branch(s.get('git_backup_branch', 'main'))
     token  = s.get('git_backup_token', '').strip()
     creds  = {'username': s.get('git_backup_username', '').strip(), 'token': token} if token else None
@@ -134,7 +149,7 @@ def _git_push_configs(action='backup', custom_message=None):
         try:
             repo_dir = _git_ensure_repo()
         except Exception as e:
-            return False, f'Repo init failed: {_redact(str(e))}'
+            return False, _failed('init', _init_detail(e, _redact))
         dyn_dir    = os.path.join(repo_dir, 'dynamic')
         static_dir = os.path.join(repo_dir, 'static')
         ts  = time.strftime('%Y-%m-%d %H:%M:%S')
@@ -167,15 +182,15 @@ def _git_push_configs(action='backup', custom_message=None):
             _git_run(['add', '-A'])
             _, _, rc = _git_run(['diff', '--cached', '--quiet'])
             if rc == 0:
-                return True, 'No changes'
+                return True, i18n.lazy_gettext('No changes')
             _, err, rc = _git_run(['commit', '-m', msg])
             if rc != 0:
-                return False, f'Commit failed: {_redact(err)}'
+                return False, _failed('commit', _redact(err))
             _, err, rc = _git_run(['push', 'origin', f'HEAD:{branch}'], credentials=creds)
             if rc == 0:
                 logger.info(f"Git backup: {msg}")
                 return True, ''
-        return False, f'Push failed: {_redact(err)}'
+        return False, _failed('push', _redact(err))
 
 def _git_push_if_enabled(action='backup'):
     try:
@@ -186,10 +201,13 @@ def _git_push_if_enabled(action='backup'):
         if enabled and auto_push and repo:
             ok, err = _git_push_configs(action)
             if ok and err != 'No changes':
-                notifications.add_notification('success', f'Git backup pushed ({action})', category='backup')
+                notifications.add_notification('success', i18n.lazy_gettext('Git backup pushed (%(action)s)', action=action),
+                                               category='backup')
             elif not ok:
                 logger.warning(f"Git backup failed: {err}")
-                notifications.add_notification('error', f'Git backup failed ({action}): {err}', category='backup')
+                notifications.add_notification('error', i18n.lazy_gettext('Git backup failed (%(action)s): %(error)s',
+                                                                         action=action, error=err),
+                                               category='backup')
     except Exception:
         logger.exception("Git push error")
 
@@ -209,13 +227,14 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
     s        = settings_mod.load_settings()
     repo_url = s.get('git_backup_repo', '').strip()
     if not repo_url:
-        return False, 'No repository configured on the Host'
+        return False, i18n.lazy_gettext('No repository configured on the Host')
     if not _valid_git_url(repo_url):
-        return False, 'Unsupported git repository URL scheme'
+        return False, i18n.lazy_gettext('Unsupported git repository URL scheme')
     branch      = _agent_git_branch(agent)
     host_branch = _safe_git_branch(s.get('git_backup_branch', 'main'))
     if branch == host_branch:
-        return False, f'Agent branch "{branch}" must differ from the Host branch'
+        return False, i18n.lazy_gettext('Agent branch "%(branch)s" must differ from the Host branch',
+                                        branch=branch)
     token = s.get('git_backup_token', '').strip()
     creds = {'username': s.get('git_backup_username', '').strip(), 'token': token} if token else None
     tmpl  = s.get('git_backup_commit_message', 'traefik-manager: {action} at {timestamp}')
@@ -228,7 +247,7 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
         resp.raise_for_status()
         files = (resp.json() or {}).get('files') or []
     except Exception as e:
-        return False, f'Could not read agent configs: {e}'
+        return False, i18n.lazy_gettext('Could not read agent configs: %(error)s', error=str(e))
     static_content = ''
     static_name    = ''
     try:
@@ -249,7 +268,7 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
         try:
             _git_ensure_repo_at(repo_dir, repo_url, branch, creds)
         except Exception as e:
-            return False, f'Repo init failed: {_redact(str(e))}'
+            return False, _failed('init', _init_detail(e, _redact))
         dyn_dir    = os.path.join(repo_dir, 'dynamic')
         static_dir = os.path.join(repo_dir, 'static')
         err = ''
@@ -271,15 +290,15 @@ def _git_push_agent_configs(agent, action='backup', custom_message=None):
             _git_run(['add', '-A'], cwd=repo_dir)
             _, _, rc = _git_run(['diff', '--cached', '--quiet'], cwd=repo_dir)
             if rc == 0:
-                return True, 'No changes'
+                return True, i18n.lazy_gettext('No changes')
             _, err, rc = _git_run(['commit', '-m', msg], cwd=repo_dir)
             if rc != 0:
-                return False, f'Commit failed: {_redact(err)}'
+                return False, _failed('commit', _redact(err))
             _, err, rc = _git_run(['push', 'origin', f'HEAD:{branch}'], cwd=repo_dir, credentials=creds)
             if rc == 0:
                 logger.info(f"Git backup ({agent.get('name')}): {msg}")
                 return True, ''
-        return False, f'Push failed: {_redact(err)}'
+        return False, _failed('push', _redact(err))
 
 def _git_push_agent_if_enabled(agent, action='backup'):
     try:
@@ -290,11 +309,13 @@ def _git_push_agent_if_enabled(agent, action='backup'):
             return
         ok, err = _git_push_agent_configs(agent, action)
         if ok and err != 'No changes':
-            notifications.add_notification('success', f"Git backup pushed ({agent.get('name')}: {action})",
+            notifications.add_notification('success', i18n.lazy_gettext('Git backup pushed (%(agent)s: %(action)s)',
+                                                                       agent=agent.get('name'), action=action),
                                            category='backup')
         elif not ok:
             logger.warning(f"Agent git backup failed: {err}")
-            notifications.add_notification('error', f"Git backup failed ({agent.get('name')}): {err}",
+            notifications.add_notification('error', i18n.lazy_gettext('Git backup failed (%(agent)s): %(error)s',
+                                                                     agent=agent.get('name'), error=err),
                                            category='backup')
     except Exception:
         logger.exception("Agent git push error")

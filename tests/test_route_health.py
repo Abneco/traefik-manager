@@ -1,4 +1,7 @@
+import json
+
 import pytest
+from babel.support import NullTranslations
 
 from core import route_health as rh
 
@@ -91,7 +94,7 @@ def test_traefik_health_data_wins_over_pinging(mon):
     services = {'http': [{'name': 'svc@file', 'loadBalancer': {'healthCheck': {'path': '/'}}, 'serverStatus': {'http://10.0.0.5:80': 'DOWN'}}]}
     raised   = rh.check(_host([_app('photos')], services), now=0, probe=probe, settings=ON)
     assert probe.calls == [], 'Traefik already knows the backend state, do not ping it'
-    assert [(t, m) for t, m, _c in raised] == [('error', 'Route photos backend is down, 0 of 1 servers up')]
+    assert [(t, m) for t, m, _c in raised] == [('error', 'Route photos backend is down, 0 of 1 server up')]
     assert _state(mon, 'photos')['state'] == 'down', 'a Traefik health check is authoritative, no hysteresis'
 
 
@@ -344,3 +347,65 @@ def test_the_reachability_hint_needs_every_checked_route_down(mon):
     rh.check(_host(down + up), now=0, probe=_Mixed(), settings=ON)
     raised = rh.check(_host(down + up), now=300, probe=_Mixed(), settings=ON)
     assert [m for _t, m, _c in raised] == ['6 routes are unreachable: d00, d01, d02 and 3 more']
+
+
+def test_route_messages_keep_their_spec_and_render_in_german(mon):
+    from core import i18n
+    from core import reachability as reach
+
+    note = reach.redirect_reason('auth.example.com', ('error', i18n.lazy_gettext('Timeout')))
+
+    def probe(url, fallback=''):
+        return {'ok': False, 'latency_ms': 8, 'status_code': 502,
+                'error': i18n.lazy_gettext('The proxy answered %(code)s, the backend is not reachable', code=502),
+                'note': note}
+
+    rh.check(_host([_app('photos')]), now=0, probe=probe, settings=ON)
+    raised = rh.check(_host([_app('photos')]), now=300, probe=probe, settings=ON)
+    msg = raised[0][1]
+    assert isinstance(msg, i18n.Message)
+    de = NullTranslations()
+    assert i18n.render(msg.spec, de) == 'Route photos is unreachable (The proxy answered 502, the backend is not reachable)'
+    assert i18n.render(note.spec, de) == ('The proxy redirected to auth.example.com before reaching the backend, and the '
+                                          'backend could not be reached from Traefik Manager (Timeout)')
+    mon._write_state()
+    with open(mon._state_path()) as fh:
+        stored = json.load(fh)
+    last = next(iter(stored[rh.SECTION].values()))['last']
+    assert last['error'] == json.loads(json.dumps(last['error'])) and i18n.is_spec(last['error'])
+    shown = rh.snapshot('host', settings=ON)['routes']['photos']
+    assert isinstance(shown['error'], i18n.Message) and shown['error'].spec == last['error']
+    assert shown['note'] == note and shown['note'].spec == note.spec
+
+
+def test_monitor_messages_render_in_german_with_the_server_prefix(mon):
+    from core import i18n
+    _t, msg, _c = mon._cert_alert('VPS One', 'a.example.com', 'le', 1)
+    assert msg == 'VPS One: Certificate for a.example.com (le) expires in 1 day'
+    de = NullTranslations()
+    assert i18n.render(msg.spec, de) == 'VPS One: Certificate for a.example.com (le) expires in 1 day'
+    assert json.loads(json.dumps(msg.spec)) == msg.spec
+
+
+def test_the_monitor_hands_the_message_with_its_spec_to_the_bell(mon, monkeypatch):
+    from core import i18n
+    sent = []
+    monkeypatch.setattr(mon.notifications, 'add_notification',
+                        lambda type_, msg, category='config', webhook=True: sent.append(msg))
+    monkeypatch.setattr(mon, '_checks', [('t', 1, lambda: [('error', mon._server_msg('VPS One', i18n.lazy_gettext(
+        'Traefik API is unreachable')), 'traefik')])])
+    mon.run_checks_once(force=True)
+    assert sent == ['VPS One: Traefik API is unreachable']
+    assert sent[0].spec == {'id': '%(server)s: %(message)s',
+                            'params': {'server': 'VPS One', 'message': {'id': 'Traefik API is unreachable'}}}
+
+
+def test_traefiks_own_routers_are_handed_to_the_check(app_module, monkeypatch):
+    from core import traefik as traefik_mod
+    ping = {'name': 'ping@internal', 'provider': 'internal', 'rule': 'PathPrefix(`/ping`)',
+            'service': 'ping@internal', 'entryPoints': ['traefik'], 'status': 'enabled'}
+    monkeypatch.setattr(traefik_mod, '_fetch_traefik_routers_and_services',
+                        lambda complete=None: ({'http': [ping]}, {}))
+    monkeypatch.setattr(app_module, 'traefik_api_get_all', lambda path: [])
+    ids = [a['id'] for _server, _name, apps, _svcs in app_module._route_health_sources() for a in apps]
+    assert 'ping@internal' in ids, 'an internal router with a dashboard link must be checked, not left grey: %r' % ids

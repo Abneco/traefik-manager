@@ -155,6 +155,13 @@ Installed Traefik plugins with the middlewares using each one, and a guided inst
 <img class="screenshot dark-only" src="/images/dark-plugins-add.png" alt="Install a plugin">
 <img class="screenshot light-only" src="/images/light-plugins-add.png" alt="Install a plugin">
 
+## Languages
+
+The whole interface in 14 languages. Pick one from the language button in the nav bar or in **Settings - Interface - General**. See [Languages](/languages).
+
+<img class="screenshot dark-only" src="/images/dark-multilingual.png" alt="Traefik Manager in four languages">
+<img class="screenshot light-only" src="/images/light-multilingual.png" alt="Traefik Manager in four languages">
+
 ## Settings
 
 Interface, authentication with API keys and OIDC, backups, system and route monitoring, notification channels, and the connection to Traefik itself.

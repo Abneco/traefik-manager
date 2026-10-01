@@ -36,6 +36,7 @@ export default defineConfig({
           { text: 'Podman', link: '/podman' },
           { text: 'Linux (native)', link: '/linux' },
           { text: 'Unraid', link: '/unraid' },
+          { text: 'umbrelOS', link: '/umbrel' },
         ],
       },
       {
@@ -49,9 +50,9 @@ export default defineConfig({
       },
       { text: 'Security', link: '/security' },
       {
-        text: 'v1.14.2',
+        text: 'v1.15.0',
         items: [
-          { text: 'v1.14.2', link: 'https://github.com/chr0nzz/traefik-manager/releases/tag/v1.14.2' },
+          { text: 'v1.15.0', link: 'https://github.com/chr0nzz/traefik-manager/releases/tag/v1.15.0' },
           { text: 'All releases', link: 'https://github.com/chr0nzz/traefik-manager/releases' },
         ],
       },
@@ -75,6 +76,7 @@ export default defineConfig({
           { text: 'Podman', link: '/podman' },
           { text: 'Linux (native)', link: '/linux' },
           { text: 'Unraid', link: '/unraid' },
+          { text: 'umbrelOS', link: '/umbrel' },
           { text: 'Beta Channel', link: '/beta' },
         ],
       },
@@ -138,6 +140,7 @@ export default defineConfig({
           { text: 'Environment Variables', link: '/env-vars' },
           { text: 'manager.yml', link: '/manager-yml' },
           { text: 'OIDC / SSO Login', link: '/oidc' },
+          { text: 'Languages', link: '/languages' },
           { text: 'Notification Webhooks', link: '/webhooks' },
           { text: 'Git Repository Backup', link: '/git-backup' },
         ],

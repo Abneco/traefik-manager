@@ -1,0 +1,70 @@
+{% macro flag_or_globe(lang) %}{% if lang and lang.region %}<span class="tm-flag tm-lang-flag lang-link-icon" translate="no" aria-hidden="true">{{ lang.region | flag }}</span>{% else %}<i class="ph-bold ph-globe lang-link-icon" style="color:var(--muted)"></i>{% endif %}{% endmacro %}
+
+{% macro items(current, with_system) %}
+    {% if with_system %}
+    <a class="lang-link{% if not current %} active{% endif %}" href="{{ language_href('', base_path) }}" role="option" aria-selected="{{ 'true' if not current else 'false' }}">
+        <i class="ph-bold ph-desktop lang-link-icon" style="color:var(--muted)"></i>
+        <span class="lang-link-name">{{ _('Follow system') }}</span>
+        {% if not current %}<i class="ph-bold ph-check" style="color:var(--blue)"></i>{% endif %}
+    </a>
+    {% endif %}
+    {% for lang in language_options %}
+    <a class="lang-link{% if current == lang.tag %} active{% endif %}" href="{{ language_href(lang.tag, base_path) }}" hreflang="{{ lang.tag }}" lang="{{ lang.tag }}" role="option" aria-selected="{{ 'true' if current == lang.tag else 'false' }}">
+        {{ flag_or_globe(lang) }}
+        <span class="lang-link-name">{{ lang.name }}</span>
+        {% if current == lang.tag %}<i class="ph-bold ph-check" style="color:var(--blue)"></i>{% endif %}
+    </a>
+    {% endfor %}
+{% endmacro %}
+
+{% macro field(current) %}
+{% set picked = language_options | selectattr('tag', 'equalto', current) | first %}
+<div class="lang-select" data-lang-menu>
+    <button type="button" class="input-field lang-select-btn" onclick="tmToggleLangLinks(this)" aria-haspopup="listbox" aria-expanded="false">
+        {% if picked %}<span class="lang-select-cur" lang="{{ picked.tag }}">{{ flag_or_globe(picked) }}{{ picked.name }}</span>
+        {% else %}<span class="lang-select-cur"><i class="ph-bold ph-desktop lang-link-icon" style="color:var(--muted)"></i>{{ _('Follow system') }}</span>{% endif %}
+        <i class="ph-bold ph-caret-down lang-select-caret"></i>
+    </button>
+    <div class="lang-select-menu" role="listbox">{{ items(current, true) }}</div>
+</div>
+{% endmacro %}
+
+{% macro corner(current) %}
+{% set picked = language_options | selectattr('tag', 'equalto', current) | first %}
+<div class="lang-corner lang-select" data-lang-menu>
+    <button type="button" class="theme-toggle lang-corner-btn" onclick="tmToggleLangLinks(this)" title="{{ _('Language') }}" aria-label="{{ _('Language') }}" aria-haspopup="listbox" aria-expanded="false">
+        {{ flag_or_globe(picked) }}<span translate="no">{{ html_lang_code }}</span>
+        <i class="ph-bold ph-caret-down lang-select-caret"></i>
+    </button>
+    <div class="lang-select-menu lang-corner-menu" role="listbox">{{ items(current, false) }}</div>
+</div>
+{% endmacro %}
+
+{% macro script() %}
+<script>
+function tmToggleLangLinks(btn, force) {
+    const menu = btn.parentElement.querySelector('.lang-select-menu');
+    const open = force === undefined ? !menu.classList.contains('open') : force;
+    menu.classList.toggle('open', open);
+    btn.setAttribute('aria-expanded', String(open));
+    if (!open) return;
+    const r = btn.getBoundingClientRect();
+    const below = window.innerHeight - r.bottom - 12;
+    const above = r.top - 12;
+    const up = below < 240 && above > below;
+    menu.classList.toggle('up', up);
+    menu.style.maxHeight = Math.max(120, Math.min(320, up ? above : below)) + 'px';
+    const active = menu.querySelector('.lang-link.active');
+    menu.scrollTop = active ? Math.max(0, active.offsetTop - (menu.clientHeight - active.offsetHeight) / 2) : 0;
+}
+document.addEventListener('click', e => {
+    document.querySelectorAll('[data-lang-menu]').forEach(wrap => {
+        if (!wrap.contains(e.target)) tmToggleLangLinks(wrap.querySelector('button'), false);
+    });
+});
+document.addEventListener('keydown', e => {
+    if (e.key !== 'Escape') return;
+    document.querySelectorAll('[data-lang-menu]').forEach(wrap => tmToggleLangLinks(wrap.querySelector('button'), false));
+});
+</script>
+{% endmacro %}
