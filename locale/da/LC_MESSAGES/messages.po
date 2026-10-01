@@ -5423,7 +5423,9 @@ msgstr "IP/interval er påkrævet"
 msgid ""
 "IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
 "above can bulk-add Cloudflare ranges."
-msgstr "IP'er/CIDR'er, der må sætte {x_forwarded}, én pr. linje. {icon} Hjælperen ovenfor kan tilføje Cloudflare-intervaller samlet."
+msgstr ""
+"IP'er/CIDR'er, der må sætte {x_forwarded}, én pr. linje. {icon} Hjælperen "
+"ovenfor kan tilføje Cloudflare-intervaller samlet."
 
 msgctxt "setting"
 msgid "Icon"
@@ -11765,7 +11767,9 @@ msgstr ""
 msgid ""
 "These rows are what {traefik_yml} declares. The Plugins tab installs and "
 "removes them for you, and writes the middleware that uses them."
-msgstr "Disse rækker er det, {traefik_yml} erklærer. Fanen Plugins installerer og fjerner dem for dig og skriver den middleware, der bruger dem."
+msgstr ""
+"Disse rækker er det, {traefik_yml} erklærer. Fanen Plugins installerer og "
+"fjerner dem for dig og skriver den middleware, der bruger dem."
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -15785,8 +15789,10 @@ msgstr[1] "{count} decisions"
 msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} decisions drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} decision tegnet som {drawn} celler, så nogle få celler står for to"
-msgstr[1] "{count} decisions tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[0] ""
+"{count} decision tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] ""
+"{count} decisions tegnet som {drawn} celler, så nogle få celler står for to"
 
 #. Used in the browser
 #, python-brace-format
@@ -15795,8 +15801,11 @@ msgid ""
 msgid_plural ""
 "{count} decisions drawn as {drawn} cells, so each cell stands for about "
 "{each}"
-msgstr[0] "{count} decision tegnet som {drawn} celler, så hver celle står for ca. {each}"
-msgstr[1] "{count} decisions tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[0] ""
+"{count} decision tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] ""
+"{count} decisions tegnet som {drawn} celler, så hver celle står for ca. "
+"{each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15845,8 +15854,10 @@ msgstr[1] "{count} hændelser"
 msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} events drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} hændelse tegnet som {drawn} celler, så nogle få celler står for to"
-msgstr[1] "{count} hændelser tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[0] ""
+"{count} hændelse tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] ""
+"{count} hændelser tegnet som {drawn} celler, så nogle få celler står for to"
 
 #. Used in the browser
 #, python-brace-format
@@ -15854,8 +15865,11 @@ msgid ""
 "{count} event drawn as {drawn} cells, so each cell stands for about {each}"
 msgid_plural ""
 "{count} events drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr[0] "{count} hændelse tegnet som {drawn} celler, så hver celle står for ca. {each}"
-msgstr[1] "{count} hændelser tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[0] ""
+"{count} hændelse tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] ""
+"{count} hændelser tegnet som {drawn} celler, så hver celle står for ca. "
+"{each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15981,8 +15995,10 @@ msgstr[1] "{count} objekter"
 msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} objects drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} objekt tegnet som {drawn} celler, så nogle få celler står for to"
-msgstr[1] "{count} objekter tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[0] ""
+"{count} objekt tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] ""
+"{count} objekter tegnet som {drawn} celler, så nogle få celler står for to"
 
 #. Used in the browser
 #, python-brace-format
@@ -15990,8 +16006,10 @@ msgid ""
 "{count} object drawn as {drawn} cells, so each cell stands for about {each}"
 msgid_plural ""
 "{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr[0] "{count} objekt tegnet som {drawn} celler, så hver celle står for ca. {each}"
-msgstr[1] "{count} objekter tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[0] ""
+"{count} objekt tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] ""
+"{count} objekter tegnet som {drawn} celler, så hver celle står for ca. {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16197,8 +16215,10 @@ msgstr[1] "{count} kilder"
 msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} sources drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} kilde tegnet som {drawn} celler, så nogle få celler står for to"
-msgstr[1] "{count} kilder tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[0] ""
+"{count} kilde tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] ""
+"{count} kilder tegnet som {drawn} celler, så nogle få celler står for to"
 
 #. Used in the browser
 #, python-brace-format
@@ -16206,8 +16226,10 @@ msgid ""
 "{count} source drawn as {drawn} cells, so each cell stands for about {each}"
 msgid_plural ""
 "{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr[0] "{count} kilde tegnet som {drawn} celler, så hver celle står for ca. {each}"
-msgstr[1] "{count} kilder tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[0] ""
+"{count} kilde tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] ""
+"{count} kilder tegnet som {drawn} celler, så hver celle står for ca. {each}"
 
 #. Used in the browser
 #, python-brace-format

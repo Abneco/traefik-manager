@@ -5552,7 +5552,9 @@ msgstr "L’adresse IP ou la plage est requise"
 msgid ""
 "IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
 "above can bulk-add Cloudflare ranges."
-msgstr "Adresses IP/CIDR autorisées à définir {x_forwarded}, une par ligne. Le {icon} bouton ci-dessus permet d’ajouter en bloc les plages Cloudflare."
+msgstr ""
+"Adresses IP/CIDR autorisées à définir {x_forwarded}, une par ligne. Le "
+"{icon} bouton ci-dessus permet d’ajouter en bloc les plages Cloudflare."
 
 msgctxt "setting"
 msgid "Icon"
@@ -12091,7 +12093,10 @@ msgstr ""
 msgid ""
 "These rows are what {traefik_yml} declares. The Plugins tab installs and "
 "removes them for you, and writes the middleware that uses them."
-msgstr "Ces lignes correspondent à ce que déclare {traefik_yml}. L’onglet Plugins les installe et les supprime pour vous, et écrit le middleware qui les utilise."
+msgstr ""
+"Ces lignes correspondent à ce que déclare {traefik_yml}. L’onglet Plugins "
+"les installe et les supprime pour vous, et écrit le middleware qui les "
+"utilise."
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -14536,7 +14541,8 @@ msgstr ""
 
 #. Used in the browser
 msgid "minimum time between config reloads (default 2s)"
-msgstr "délai minimal entre les rechargements de configuration (2 s par défaut)"
+msgstr ""
+"délai minimal entre les rechargements de configuration (2 s par défaut)"
 
 #. Used in the browser
 msgid "mirroring service, health lives on its children"
@@ -16179,8 +16185,12 @@ msgstr[1] "{count} décisions"
 msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} decisions drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} décision sur {drawn} cellules : quelques cellules en représentent donc deux"
-msgstr[1] "{count} décisions sur {drawn} cellules : quelques cellules en représentent donc deux"
+msgstr[0] ""
+"{count} décision sur {drawn} cellules : quelques cellules en représentent "
+"donc deux"
+msgstr[1] ""
+"{count} décisions sur {drawn} cellules : quelques cellules en représentent "
+"donc deux"
 
 #. Used in the browser
 #, python-brace-format
@@ -16189,8 +16199,12 @@ msgid ""
 msgid_plural ""
 "{count} decisions drawn as {drawn} cells, so each cell stands for about "
 "{each}"
-msgstr[0] "{count} décision sur {drawn} cellules : chaque cellule représente donc environ {each}"
-msgstr[1] "{count} décisions sur {drawn} cellules : chaque cellule représente donc environ {each}"
+msgstr[0] ""
+"{count} décision sur {drawn} cellules : chaque cellule représente donc "
+"environ {each}"
+msgstr[1] ""
+"{count} décisions sur {drawn} cellules : chaque cellule représente donc "
+"environ {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16239,8 +16253,12 @@ msgstr[1] "{count} événements"
 msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} events drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} événement sur {drawn} cellules : quelques cellules en représentent donc deux"
-msgstr[1] "{count} événements sur {drawn} cellules : quelques cellules en représentent donc deux"
+msgstr[0] ""
+"{count} événement sur {drawn} cellules : quelques cellules en représentent "
+"donc deux"
+msgstr[1] ""
+"{count} événements sur {drawn} cellules : quelques cellules en représentent "
+"donc deux"
 
 #. Used in the browser
 #, python-brace-format
@@ -16248,8 +16266,12 @@ msgid ""
 "{count} event drawn as {drawn} cells, so each cell stands for about {each}"
 msgid_plural ""
 "{count} events drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr[0] "{count} événement sur {drawn} cellules : chaque cellule représente donc environ {each}"
-msgstr[1] "{count} événements sur {drawn} cellules : chaque cellule représente donc environ {each}"
+msgstr[0] ""
+"{count} événement sur {drawn} cellules : chaque cellule représente donc "
+"environ {each}"
+msgstr[1] ""
+"{count} événements sur {drawn} cellules : chaque cellule représente donc "
+"environ {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16375,8 +16397,12 @@ msgstr[1] "{count} objets"
 msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} objects drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} objet sur {drawn} cellules : quelques cellules en représentent donc deux"
-msgstr[1] "{count} objets sur {drawn} cellules : quelques cellules en représentent donc deux"
+msgstr[0] ""
+"{count} objet sur {drawn} cellules : quelques cellules en représentent donc "
+"deux"
+msgstr[1] ""
+"{count} objets sur {drawn} cellules : quelques cellules en représentent donc "
+"deux"
 
 #. Used in the browser
 #, python-brace-format
@@ -16384,8 +16410,12 @@ msgid ""
 "{count} object drawn as {drawn} cells, so each cell stands for about {each}"
 msgid_plural ""
 "{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr[0] "{count} objet sur {drawn} cellules : chaque cellule représente donc environ {each}"
-msgstr[1] "{count} objets sur {drawn} cellules : chaque cellule représente donc environ {each}"
+msgstr[0] ""
+"{count} objet sur {drawn} cellules : chaque cellule représente donc environ "
+"{each}"
+msgstr[1] ""
+"{count} objets sur {drawn} cellules : chaque cellule représente donc environ "
+"{each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16421,8 +16451,10 @@ msgstr[1] ""
 #, python-brace-format
 msgid "{count} of them was simulated, so CrowdSec enforced nothing"
 msgid_plural "{count} of them were simulated, so CrowdSec enforced nothing"
-msgstr[0] "{count} d’entre elles a été simulée, CrowdSec n’a donc rien appliqué"
-msgstr[1] "{count} d’entre elles ont été simulées, CrowdSec n’a donc rien appliqué"
+msgstr[0] ""
+"{count} d’entre elles a été simulée, CrowdSec n’a donc rien appliqué"
+msgstr[1] ""
+"{count} d’entre elles ont été simulées, CrowdSec n’a donc rien appliqué"
 
 #. Used in the browser
 #, python-brace-format
@@ -16595,8 +16627,12 @@ msgstr[1] "{count} sources"
 msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
 msgid_plural ""
 "{count} sources drawn as {drawn} cells, so a few cells stand for two"
-msgstr[0] "{count} source sur {drawn} cellules : quelques cellules en représentent donc deux"
-msgstr[1] "{count} sources sur {drawn} cellules : quelques cellules en représentent donc deux"
+msgstr[0] ""
+"{count} source sur {drawn} cellules : quelques cellules en représentent donc "
+"deux"
+msgstr[1] ""
+"{count} sources sur {drawn} cellules : quelques cellules en représentent "
+"donc deux"
 
 #. Used in the browser
 #, python-brace-format
@@ -16604,8 +16640,12 @@ msgid ""
 "{count} source drawn as {drawn} cells, so each cell stands for about {each}"
 msgid_plural ""
 "{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr[0] "{count} source sur {drawn} cellules : chaque cellule représente donc environ {each}"
-msgstr[1] "{count} sources sur {drawn} cellules : chaque cellule représente donc environ {each}"
+msgstr[0] ""
+"{count} source sur {drawn} cellules : chaque cellule représente donc environ "
+"{each}"
+msgstr[1] ""
+"{count} sources sur {drawn} cellules : chaque cellule représente donc "
+"environ {each}"
 
 #. Used in the browser
 #, python-brace-format
