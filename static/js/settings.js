@@ -359,62 +359,6 @@ function dismissTmUpdatePopup() {
     if (ver) localStorage.setItem('tmUpdateDismissed', ver);
 }
 
-const TRANSLATE_INVITE_KEY = 'tmTranslateInvite';
-const TRANSLATE_INVITE_SNOOZE_DAYS = 14;
-const TRANSLATE_LANGUAGES = () => ({
-    de: t('German'), fr: t('French'), es: t('Spanish'), ru: t('Russian'), zh: t('Chinese'),
-    pt: t('Portuguese'), it: t('Italian'), nl: t('Dutch'), pl: t('Polish'), tr: t('Turkish'),
-    sv: t('Swedish'), da: t('Danish'), nb: t('Norwegian'), fi: t('Finnish'), cs: t('Czech'),
-    uk: t('Ukrainian'), ja: t('Japanese'), ko: t('Korean'), ar: t('Arabic'), hu: t('Hungarian'),
-});
-
-function _translateInviteState() {
-    try {
-        return JSON.parse(localStorage.getItem(TRANSLATE_INVITE_KEY) || '{}') || {};
-    } catch (e) {
-        return {};
-    }
-}
-
-function _saveTranslateInvite(state) {
-    try {
-        localStorage.setItem(TRANSLATE_INVITE_KEY, JSON.stringify(state));
-    } catch (e) { /* private mode, the popup simply returns next load */ }
-}
-
-function showTranslateInvite() {
-    const state = _translateInviteState();
-    if (state.dismissed) return;
-    if (state.snoozedUntil && Date.now() < state.snoozedUntil) return;
-    const popup = document.getElementById('translateInvitePopup');
-    if (!popup) return;
-    const stacked = ['tmUpdatePopup', 'securityAdvisoryPopup']
-        .map(id => document.getElementById(id))
-        .filter(el => el && !el.classList.contains('hidden'));
-    popup.style.bottom = stacked.length
-        ? (24 + stacked.reduce((a, el) => a + el.offsetHeight + 12, 0)) + 'px'
-        : '24px';
-    const lang = String(navigator.language || '').toLowerCase().split('-')[0];
-    const name = TRANSLATE_LANGUAGES()[lang];
-    const txt = document.getElementById('translateInviteText');
-    if (txt && name && lang !== 'en') {
-        txt.textContent = th('The next release speaks more than English. {language} is open on Weblate, and nobody has started it yet.', { language: name });
-    }
-    popup.classList.remove('hidden');
-}
-
-function snoozeTranslateInvite() {
-    const popup = document.getElementById('translateInvitePopup');
-    if (popup) popup.classList.add('hidden');
-    _saveTranslateInvite({ snoozedUntil: Date.now() + TRANSLATE_INVITE_SNOOZE_DAYS * 86400000 });
-}
-
-function dismissTranslateInvite() {
-    const popup = document.getElementById('translateInvitePopup');
-    if (popup) popup.classList.add('hidden');
-    _saveTranslateInvite({ dismissed: true });
-}
-
 const TRAEFIK_ADVISORIES = [
     {
         id: 'CVE-2026-88007',

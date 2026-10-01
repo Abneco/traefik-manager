@@ -4,7 +4,7 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
 const browser = await puppeteer.launch({ args: ['--no-sandbox', '--disable-dev-shm-usage', '--force-color-profile=srgb', '--lang=en'] });
 const missing = [];
 const LANGUAGES = ['fr-CA', 'de', 'zh-Hans', 'es'];
-const HIDE_POPUPS = '#translateInvitePopup, #securityAdvisoryPopup, #tmUpdatePopup { display: none !important; }';
+const HIDE_POPUPS = '#securityAdvisoryPopup, #tmUpdatePopup { display: none !important; }';
 
 async function capture(theme) {
     const ctx  = await browser.createBrowserContext();
