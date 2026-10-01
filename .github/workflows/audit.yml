@@ -48,7 +48,7 @@ jobs:
           cache-dependency-path: agent/go.sum
 
       - name: Install govulncheck
-        run: go install golang.org/x/vuln/cmd/govulncheck@v1.8.0
+        run: go install golang.org/x/vuln/cmd/govulncheck@v1.7.0
 
       - name: Fail on an agent dependency with a known vulnerability
         working-directory: agent
