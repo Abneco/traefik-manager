@@ -124,7 +124,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <input type="checkbox" id="wizFaTrust" checked class="rounded" style="accent-color:var(--blue)">
-                            <span class="text-sm" style="color:var(--text)">{{ _('Trust Forward Header') }}</span>
+                            <span class="text-sm" style="color:var(--text)">{{ _('Trust the existing %(x_forwarded)s headers', x_forwarded=tag('code', 'X-Forwarded-*', class_='font-mono')) }}</span>
                         </div>
                         <div>
                             <label>{{ _('Auth Response Headers %(one_per_line)s', one_per_line=tag('span', _('(one per line)'), class_='text-xs font-normal', style_='color:var(--muted)')) }}</label>
@@ -150,7 +150,7 @@
                         </div>
                         <div class="flex items-center gap-2">
                             <input type="checkbox" id="wizGkTrust" class="rounded" style="accent-color:var(--blue)">
-                            <span class="text-sm" style="color:var(--text)">{{ _('Trust Forward Header') }}</span>
+                            <span class="text-sm" style="color:var(--text)">{{ _('Trust the existing %(x_forwarded)s headers', x_forwarded=tag('code', 'X-Forwarded-*', class_='font-mono')) }}</span>
                         </div>
                         <div class="flex items-center gap-2">
                             <input type="checkbox" id="wizGkAuthorization" class="rounded" style="accent-color:var(--blue)">

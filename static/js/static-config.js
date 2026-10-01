@@ -1290,7 +1290,7 @@ function _renderStaticPluginNotice() {
     const el = document.getElementById('staticPluginNotice');
     if (!el) return;
     el.innerHTML = _scNotice(t('plugins'), t('Installing plugins'),
-        `${th('These rows are what {traefik_yml} declares. The', { traefik_yml: tmHtml(`<code class="font-mono" style="background:var(--input-bg);padding:1px 4px;border-radius:3px">traefik.yml</code>`) })} <button type="button" onclick="closeSettingsModal();switchTab('plugins')" style="color:var(--blue);background:none;border:none;cursor:pointer;padding:0;font:inherit;text-decoration:underline">${th('Plugins tab')}</button> ${th('installs and removes them for you, and writes the middleware that uses them.')}`);
+        `${th('These rows are what {traefik_yml} declares. The Plugins tab installs and removes them for you, and writes the middleware that uses them.', { traefik_yml: tmHtml(`<code class="font-mono" style="background:var(--input-bg);padding:1px 4px;border-radius:3px">traefik.yml</code>`) })} <button type="button" onclick="closeSettingsModal();switchTab('plugins')" style="color:var(--blue);background:none;border:none;cursor:pointer;padding:0;font:inherit;text-decoration:underline">${th('Open the Plugins tab')}</button>`);
 }
 
 function _scSetState(key, txt) {
@@ -1911,7 +1911,7 @@ function _buildStaticClassicHTML() {
                 <div>
                     <label class="text-xs block mb-1" style="color:var(--muted)">${th('Trusted IPs - forwarded headers {optional}', { optional: tmHtml(`<span style="font-weight:400">${th('(optional)')}</span>`) })}</label>
                     <textarea id="sfEpTrustedIps" class="input-field text-sm font-mono" rows="3" placeholder="173.245.48.0/20&#10;10.0.0.0/8" style="resize:vertical"></textarea>
-                    <p class="text-xs mt-1" style="color:var(--muted)">${th('IPs/CIDRs allowed to set {x_forwarded}, one per line. The', { x_forwarded: tmHtml(`<code class="font-mono">X-Forwarded-*</code>`) })} <i class="ph-bold ph-shield-check"></i> ${th('helper above can bulk-add Cloudflare ranges.')}</p>
+                    <p class="text-xs mt-1" style="color:var(--muted)">${th('IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper above can bulk-add Cloudflare ranges.', { x_forwarded: tmHtml(`<code class="font-mono">X-Forwarded-*</code>`), icon: tmHtml(`<i class="ph-bold ph-shield-check"></i>`) })}</p>
                 </div>
                 <div>
                     <label class="text-xs block mb-1" style="color:var(--muted)">${th('Trusted IPs - PROXY protocol {optional}', { optional: tmHtml(`<span style="font-weight:400">${th('(optional)')}</span>`) })}</label>

@@ -235,6 +235,25 @@ function _atkRow(r) {
         + '</div>';
 }
 
+const ATK_STRIP_TIP = {
+    objects: {
+        few:  (n, p) => tn('{count} object drawn as {drawn} cells, so a few cells stand for two', '{count} objects drawn as {drawn} cells, so a few cells stand for two', n, p),
+        each: (n, p) => tn('{count} object drawn as {drawn} cells, so each cell stands for about {each}', '{count} objects drawn as {drawn} cells, so each cell stands for about {each}', n, p),
+    },
+    sources: {
+        few:  (n, p) => tn('{count} source drawn as {drawn} cells, so a few cells stand for two', '{count} sources drawn as {drawn} cells, so a few cells stand for two', n, p),
+        each: (n, p) => tn('{count} source drawn as {drawn} cells, so each cell stands for about {each}', '{count} sources drawn as {drawn} cells, so each cell stands for about {each}', n, p),
+    },
+    decisions: {
+        few:  (n, p) => tn('{count} decision drawn as {drawn} cells, so a few cells stand for two', '{count} decisions drawn as {drawn} cells, so a few cells stand for two', n, p),
+        each: (n, p) => tn('{count} decision drawn as {drawn} cells, so each cell stands for about {each}', '{count} decisions drawn as {drawn} cells, so each cell stands for about {each}', n, p),
+    },
+    events: {
+        few:  (n, p) => tn('{count} event drawn as {drawn} cells, so a few cells stand for two', '{count} events drawn as {drawn} cells, so a few cells stand for two', n, p),
+        each: (n, p) => tn('{count} event drawn as {drawn} cells, so each cell stands for about {each}', '{count} events drawn as {drawn} cells, so each cell stands for about {each}', n, p),
+    },
+};
+
 function _atkStrip(groups, aria, opts) {
     const o = opts || {};
     const noun = o.noun || 'objects';
@@ -261,9 +280,7 @@ function _atkStrip(groups, aria, opts) {
         });
         const each = per >= 10 ? Math.round(per) : Math.round(per * 10) / 10;
         const legend = per < 1.5 ? t('{total} in {drawn}', { total: _sdNum(total), drawn: _sdNum(drawn) }) : t('1 cell = {each}', { each });
-        const tip = per < 1.5
-            ? t('{total} drawn as {drawn} cells, so a few cells stand for two', { total: _lgCount(noun, total), drawn: _sdNum(drawn) })
-            : t('{total} drawn as {drawn} cells, so each cell stands for about {each}', { total: _lgCount(noun, total), drawn: _sdNum(drawn), each: _lgCount(noun, each) });
+        const tip = (ATK_STRIP_TIP[noun] || ATK_STRIP_TIP.objects)[per < 1.5 ? 'few' : 'each'](total, { count: _sdNum(total), drawn: _sdNum(drawn), each: _sdNum(each) });
         html += '<span class="sig-more" title="' + _esc(tip) + '">' + _esc(legend) + '</span>';
     }
     return '<div class="sig-strip' + (o.cls ? ' ' + o.cls : '') + '" role="img" aria-label="' + _esc(aria) + '">' + html + '</div>';
