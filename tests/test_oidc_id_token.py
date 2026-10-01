@@ -1,3 +1,7 @@
+import base64
+import hashlib
+import hmac
+import json
 import time
 from urllib.parse import parse_qs, urlparse
 
@@ -109,6 +113,17 @@ def test_a_shared_secret_token_is_verified_against_the_client_secret():
     assert claims['email'] == 'admin@example.com'
     with pytest.raises(oidc_tokens.IdTokenError):
         oidc_tokens.verify(_token(key='not-the-secret', alg='HS256'), _cfg(), CLIENT_ID, CLIENT_SECRET)
+
+
+def test_a_deeply_nested_token_is_refused_instead_of_crashing_the_sign_in():
+    def b64(raw):
+        return base64.urlsafe_b64encode(raw).rstrip(b'=')
+    header = b64(json.dumps({'alg': 'HS256', 'typ': 'JWT'}).encode())
+    payload = b64(('{"a":' * 30000 + '1' + '}' * 30000).encode())
+    signature = b64(hmac.new(CLIENT_SECRET.encode(), header + b'.' + payload, hashlib.sha256).digest())
+    token = (header + b'.' + payload + b'.' + signature).decode()
+    with pytest.raises(oidc_tokens.IdTokenError):
+        oidc_tokens.verify(token, _cfg(), CLIENT_ID, CLIENT_SECRET)
 
 
 def test_an_algorithm_the_provider_does_not_advertise_is_refused():
