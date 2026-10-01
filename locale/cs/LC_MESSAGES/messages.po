@@ -1614,10 +1614,6 @@ msgstr "Použito přes vstupní bod"
 msgid "Apply & Save"
 msgstr "Použít a uložit"
 
-#. Used in the browser
-msgid "Arabic"
-msgstr "Arabština"
-
 msgid ""
 "Assign a route to a group with the pencil on its card. A group disappears "
 "when nothing uses it."
@@ -2422,10 +2418,6 @@ msgstr "Kontrola…"
 msgctxt "tooltip"
 msgid "Checking…"
 msgstr "Kontrola…"
-
-#. Used in the browser
-msgid "Chinese"
-msgstr "Čínština"
 
 #. Used in the browser
 msgid "Choose a notification destination."
@@ -3306,10 +3298,6 @@ msgid "Custom…"
 msgstr "Vlastní…"
 
 #. Used in the browser
-msgid "Czech"
-msgstr "Čeština"
-
-#. Used in the browser
 msgid "DNS Challenge"
 msgstr "DNS Challenge"
 
@@ -3330,10 +3318,6 @@ msgstr "DOWN"
 #. Used in the browser
 msgid "Daily"
 msgstr "Denně"
-
-#. Used in the browser
-msgid "Danish"
-msgstr "Dánština"
 
 msgctxt "button"
 msgid "Dark"
@@ -3859,9 +3843,6 @@ msgstr "Nedělat tuto kartu klikací"
 msgid "Do not show it anywhere"
 msgstr "Nikde nezobrazovat"
 
-msgid "Do not show this again"
-msgstr "Už nezobrazovat"
-
 #. Used in the browser
 msgid "Docker / Podman / Unraid:"
 msgstr "Docker / Podman / Unraid:"
@@ -3990,10 +3971,6 @@ msgid ""
 msgstr ""
 "Doby trvání se čtou z pole Duration v nanosekundách, ne znovu ze "
 "zaokrouhleného zobrazeného řetězce."
-
-#. Used in the browser
-msgid "Dutch"
-msgstr "Nizozemština"
 
 msgid "Dynamic Config"
 msgstr "Dynamická konfigurace"
@@ -4890,10 +4867,6 @@ msgctxt "button"
 msgid "Finish setup"
 msgstr "Dokončit nastavení"
 
-#. Used in the browser
-msgid "Finnish"
-msgstr "Finština"
-
 msgid "Fit to screen"
 msgstr "Přizpůsobit obrazovce"
 
@@ -5036,10 +5009,6 @@ msgstr ""
 "Fulltextové hledání v adrese, scénáři, názvu AS, zprávě, stroji, cestách, "
 "agentech a účtech"
 
-#. Used in the browser
-msgid "French"
-msgstr "Francouzština"
-
 #, python-format
 msgid "Full reference: %(tm_cli_docs)s"
 msgstr "Kompletní reference: %(tm_cli_docs)s"
@@ -5116,10 +5085,6 @@ msgstr "Geolokace"
 #. Used in the browser
 msgid "Geolocation on - downloading database…"
 msgstr "Geolokace zapnuta: stahování databáze…"
-
-#. Used in the browser
-msgid "German"
-msgstr "Němčina"
 
 #. Used in the browser
 msgctxt "button"
@@ -5372,9 +5337,6 @@ msgstr "Hlavičky"
 msgid "Health check"
 msgstr "Kontrola stavu"
 
-msgid "Help translate"
-msgstr "Pomoci s překladem"
-
 msgid "Hidden apps"
 msgstr "Skryté aplikace"
 
@@ -5464,9 +5426,6 @@ msgstr ""
 "Jak Traefik dosáhne na tento kontejner zevnitř sítě. Obvykle název služby v "
 "compose a port."
 
-msgid "How it works"
-msgstr "Jak to funguje"
-
 #, python-format
 msgid ""
 "How many of the most recent alerts to read, 0 to 100000. Blank uses "
@@ -5480,10 +5439,6 @@ msgstr ""
 msgctxt "setting"
 msgid "HttpOnly"
 msgstr "HttpOnly"
-
-#. Used in the browser
-msgid "Hungarian"
-msgstr "Maďarština"
 
 #. Used in the browser
 msgid "I am a teapot"
@@ -5521,8 +5476,10 @@ msgstr "IP/rozsah je povinný"
 
 #. Used in the browser
 #, python-brace-format
-msgid "IPs/CIDRs allowed to set {x_forwarded}, one per line. The"
-msgstr "IP/CIDR, které smějí nastavovat {x_forwarded}, jeden na řádek."
+msgid ""
+"IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
+"above can bulk-add Cloudflare ranges."
+msgstr "IP/CIDR, které smějí nastavovat {x_forwarded}, jeden na řádek. {icon} Pomocník výše umí hromadně přidat rozsahy Cloudflare."
 
 msgctxt "setting"
 msgid "Icon"
@@ -5805,14 +5762,6 @@ msgid "It will not be shown again."
 msgstr "Znovu se už nezobrazí."
 
 #. Used in the browser
-msgid "Italian"
-msgstr "Italština"
-
-#. Used in the browser
-msgid "Japanese"
-msgstr "Japonština"
-
-#. Used in the browser
 msgid "Jump to the decisions view filtered to this source"
 msgstr "Přejít na zobrazení decisions filtrované na tento zdroj"
 
@@ -5874,10 +5823,6 @@ msgstr ""
 "Klíče, přes které s tímto agentem komunikují externí klienti: mobilní "
 "aplikace, skript, jiný nástroj. Každý klíč se zobrazí jednou při vytvoření a "
 "uloží se jako hash, takže ztracený klíč se nahradí, ne obnoví."
-
-#. Used in the browser
-msgid "Korean"
-msgstr "Korejština"
 
 #. Used in the browser
 msgid "Kubernetes (CRD)"
@@ -7170,10 +7115,6 @@ msgid "None (external / custom cert)"
 msgstr "Žádný (externí / vlastní certifikát)"
 
 #. Used in the browser
-msgid "Norwegian"
-msgstr "Norština"
-
-#. Used in the browser
 msgid "Not Acceptable"
 msgstr "Nepřijatelné"
 
@@ -7667,6 +7608,10 @@ msgid "Open site"
 msgstr "Otevřít web"
 
 #. Used in the browser
+msgid "Open the Plugins tab"
+msgstr "Otevřít kartu Pluginy"
+
+#. Used in the browser
 msgid "Open the Static Config tab"
 msgstr "Otevřít kartu Statická konfigurace"
 
@@ -8158,10 +8103,6 @@ msgstr ""
 "aktivaci pluginu nutný restart Traefiku."
 
 #. Used in the browser
-msgid "Plugins tab"
-msgstr "Karta Pluginy"
-
-#. Used in the browser
 #, python-brace-format
 msgid "Plugins {staticPluginCount}"
 msgstr "Pluginy {staticPluginCount}"
@@ -8173,10 +8114,6 @@ msgstr "Poison Pill"
 msgid "Policy %(optional)s"
 msgstr "Zásady %(optional)s"
 
-#. Used in the browser
-msgid "Polish"
-msgstr "Polština"
-
 msgid "Poll the servers"
 msgstr "Dotazovat servery"
 
@@ -8186,10 +8123,6 @@ msgstr "Port"
 
 msgid "Port and rate limit"
 msgstr "Port a limit požadavků"
-
-#. Used in the browser
-msgid "Portuguese"
-msgstr "Portugalština"
 
 #, python-format
 msgid ""
@@ -8958,9 +8891,6 @@ msgstr "Příliš velká pole hlavičky požadavku"
 msgid "Request Timeout"
 msgstr "Časový limit požadavku"
 
-msgid "Request a language"
-msgstr "Požádat o jazyk"
-
 #. Used in the browser
 msgid "Request failed"
 msgstr "Požadavek se nezdařil"
@@ -9645,10 +9575,6 @@ msgid ""
 msgstr ""
 "Spusťte to na %(agent_cli_host_name)s. Nainstaluje CLI %(tm)s a otevře jeho "
 "instalátor agenta s již nastaveným klíčem."
-
-#. Used in the browser
-msgid "Russian"
-msgstr "Ruština"
 
 msgid "SIGNAL_FILE_PATH not configured"
 msgstr "SIGNAL_FILE_PATH není nastaveno"
@@ -10407,9 +10333,6 @@ msgstr "Zobrazit tlačítko klávesových zkratek"
 msgid "Show language selector"
 msgstr "Zobrazit výběr jazyka"
 
-msgid "Show me later"
-msgstr "Připomenout později"
-
 msgid "Show on"
 msgstr "Zobrazit na"
 
@@ -10630,10 +10553,6 @@ msgstr "Protější strana socketu"
 
 msgid "Sources to add"
 msgstr "Zdroje k přidání"
-
-#. Used in the browser
-msgid "Spanish"
-msgstr "Španělština"
 
 msgctxt "label"
 msgid "Start"
@@ -10899,10 +10818,6 @@ msgstr ""
 #. Used in the browser
 msgid "Surface held"
 msgstr "Obrana odolala"
-
-#. Used in the browser
-msgid "Swedish"
-msgstr "Švédština"
 
 #. Used in the browser
 msgid "Switch server"
@@ -11508,22 +11423,6 @@ msgstr ""
 "třeba před uložením nahradit skutečnými hodnotami. Upravte middleware v "
 "editoru a nahraďte všechny zástupné symboly %(marker)s."
 
-msgid ""
-"The next release speaks more than English, and the whole interface is "
-"waiting for translators."
-msgstr ""
-"Příští vydání bude mluvit nejen anglicky a celé rozhraní čeká na "
-"překladatele."
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"The next release speaks more than English. {language} is open on Weblate, "
-"and nobody has started it yet."
-msgstr ""
-"Příští vydání bude mluvit nejen anglicky. Jazyk {language} je otevřený na "
-"Weblate a zatím ho nikdo nezačal překládat."
-
 #. Used in the browser
 msgid "The primary view"
 msgstr "Hlavní zobrazení"
@@ -11981,8 +11880,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "These rows are what {traefik_yml} declares. The"
-msgstr "Tyto řádky odpovídají tomu, co deklaruje {traefik_yml}."
+msgid ""
+"These rows are what {traefik_yml} declares. The Plugins tab installs and "
+"removes them for you, and writes the middleware that uses them."
+msgstr "Tyto řádky odpovídají tomu, co deklaruje {traefik_yml}. Karta Pluginy je za vás nainstaluje a odebere a zapíše middleware, které je používá."
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -12332,9 +12233,6 @@ msgstr "Dokumentace Traefik Manageru."
 msgid "Traefik Manager installed as app!"
 msgstr "Traefik Manager byl nainstalován jako aplikace."
 
-msgid "Traefik Manager is being translated"
-msgstr "Traefik Manager se překládá"
-
 msgid ""
 "Traefik Manager manages one Traefik instance. To manage more, run a "
 "lightweight agent next to each and register it here, then switch between "
@@ -12623,12 +12521,13 @@ msgstr ""
 "Trigger buckety mají kapacitu 0 a spustí se při první odpovídající události. "
 "Capacity a leakspeed u nich nemají žádný význam"
 
-msgid "Trust Forward Header"
-msgstr "Důvěřovat přeposlaným hlavičkám"
-
 #. Used in the browser
 msgid "Trust forwarded headers from everyone"
 msgstr "Důvěřovat přeposlaným hlavičkám od všech"
+
+#, python-format
+msgid "Trust the existing %(x_forwarded)s headers"
+msgstr "Důvěřovat stávajícím hlavičkám %(x_forwarded)s"
 
 #. Used in the browser
 #, python-brace-format
@@ -12649,10 +12548,6 @@ msgstr "Hloubka důvěryhodných skoků"
 #. Used in the browser
 msgid "Trusted hops"
 msgstr "Důvěryhodné skoky"
-
-#. Used in the browser
-msgid "Turkish"
-msgstr "Turečtina"
 
 msgctxt "heading"
 msgid "Two-factor"
@@ -12706,10 +12601,6 @@ msgstr "UP, nekontrolováno"
 #. Used in the browser
 msgid "URI Too Long"
 msgstr "URI je příliš dlouhé"
-
-#. Used in the browser
-msgid "Ukrainian"
-msgstr "Ukrajinština"
 
 #. Used in the browser
 msgid "Unauthorized"
@@ -14120,10 +14011,6 @@ msgid "healthy"
 msgstr "v pořádku"
 
 #. Used in the browser
-msgid "helper above can bulk-add Cloudflare ranges."
-msgstr "Pomocník výše umí hromadně přidat rozsahy Cloudflare."
-
-#. Used in the browser
 msgid "highest random weight service, health lives on its children"
 msgstr "služba typu highest random weight, stav nesou její podřízené služby"
 
@@ -14195,11 +14082,6 @@ msgstr "uvnitř kontejneru agenta"
 
 msgid "inside this container"
 msgstr "uvnitř tohoto kontejneru"
-
-#. Used in the browser
-msgid ""
-"installs and removes them for you, and writes the middleware that uses them."
-msgstr "je za vás nainstaluje a odebere a zapíše middleware, které je používá."
 
 #. Used in the browser
 msgctxt "label"
@@ -16051,6 +15933,26 @@ msgstr[2] "{count} decisions"
 
 #. Used in the browser
 #, python-brace-format
+msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} decision vykresleno v {drawn} buňkách, takže několik buněk představuje dvě"
+msgstr[1] "{count} decisions vykreslena v {drawn} buňkách, takže několik buněk představuje dvě"
+msgstr[2] "{count} decisions vykresleno v {drawn} buňkách, takže několik buněk představuje dvě"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} decision drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so each cell stands for about "
+"{each}"
+msgstr[0] "{count} decision vykresleno v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[1] "{count} decisions vykreslena v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[2] "{count} decisions vykresleno v {drawn} buňkách, takže každá buňka představuje asi {each}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{count} degraded"
 msgid_plural "{count} degraded"
 msgstr[0] "omezené: {count}"
@@ -16096,6 +15998,25 @@ msgid_plural "{count} events"
 msgstr[0] "{count} událost"
 msgstr[1] "{count} události"
 msgstr[2] "{count} událostí"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} událost vykreslena v {drawn} buňkách, takže několik buněk představuje dvě"
+msgstr[1] "{count} události vykresleny v {drawn} buňkách, takže několik buněk představuje dvě"
+msgstr[2] "{count} událostí vykresleno v {drawn} buňkách, takže několik buněk představuje dvě"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} event drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} událost vykreslena v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[1] "{count} události vykresleny v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[2] "{count} událostí vykresleno v {drawn} buňkách, takže každá buňka představuje asi {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16232,6 +16153,25 @@ msgid_plural "{count} objects"
 msgstr[0] "{count} objekt"
 msgstr[1] "{count} objekty"
 msgstr[2] "{count} objektů"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} objekt vykreslen v {drawn} buňkách, takže několik buněk představuje dva"
+msgstr[1] "{count} objekty vykresleny v {drawn} buňkách, takže několik buněk představuje dva"
+msgstr[2] "{count} objektů vykresleno v {drawn} buňkách, takže několik buněk představuje dva"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} object drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} objekt vykreslen v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[1] "{count} objekty vykresleny v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[2] "{count} objektů vykresleno v {drawn} buňkách, takže každá buňka představuje asi {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16461,6 +16401,25 @@ msgid_plural "{count} sources"
 msgstr[0] "{count} zdroj"
 msgstr[1] "{count} zdroje"
 msgstr[2] "{count} zdrojů"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} zdroj vykreslen v {drawn} buňkách, takže několik buněk představuje dva"
+msgstr[1] "{count} zdroje vykresleny v {drawn} buňkách, takže několik buněk představuje dva"
+msgstr[2] "{count} zdrojů vykresleno v {drawn} buňkách, takže několik buněk představuje dva"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} source drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} zdroj vykreslen v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[1] "{count} zdroje vykresleny v {drawn} buňkách, takže každá buňka představuje asi {each}"
+msgstr[2] "{count} zdrojů vykresleno v {drawn} buňkách, takže každá buňka představuje asi {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -18297,19 +18256,6 @@ msgid_plural "{total} decisions, {own} from this host"
 msgstr[0] "decisions: {total}, z tohoto hostu: {own}"
 msgstr[1] "decisions: {total}, z tohoto hostu: {own}"
 msgstr[2] "decisions: {total}, z tohoto hostu: {own}"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so a few cells stand for two"
-msgstr ""
-"{total} vykresleno v {drawn} buňkách, takže několik buněk představuje dvě"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr ""
-"{total} vykresleno v {drawn} buňkách, takže každá buňka představuje asi "
-"{each}"
 
 #. Used in the browser
 #, python-brace-format

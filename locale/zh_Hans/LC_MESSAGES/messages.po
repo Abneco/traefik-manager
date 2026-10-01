@@ -1495,10 +1495,6 @@ msgstr "通过入口点应用"
 msgid "Apply & Save"
 msgstr "应用并保存"
 
-#. Used in the browser
-msgid "Arabic"
-msgstr "阿拉伯语"
-
 msgid ""
 "Assign a route to a group with the pencil on its card. A group disappears "
 "when nothing uses it."
@@ -2252,10 +2248,6 @@ msgstr "检查中…"
 msgctxt "tooltip"
 msgid "Checking…"
 msgstr "检查中…"
-
-#. Used in the browser
-msgid "Chinese"
-msgstr "中文"
 
 #. Used in the browser
 msgid "Choose a notification destination."
@@ -3086,10 +3078,6 @@ msgid "Custom…"
 msgstr "自定义…"
 
 #. Used in the browser
-msgid "Czech"
-msgstr "捷克语"
-
-#. Used in the browser
 msgid "DNS Challenge"
 msgstr "DNS 质询"
 
@@ -3110,10 +3098,6 @@ msgstr "DOWN"
 #. Used in the browser
 msgid "Daily"
 msgstr "每天"
-
-#. Used in the browser
-msgid "Danish"
-msgstr "丹麦语"
 
 msgctxt "button"
 msgid "Dark"
@@ -3610,9 +3594,6 @@ msgstr "此卡片不可点击"
 msgid "Do not show it anywhere"
 msgstr "不在任何位置显示"
 
-msgid "Do not show this again"
-msgstr "不再显示"
-
 #. Used in the browser
 msgid "Docker / Podman / Unraid:"
 msgstr "Docker / Podman / Unraid："
@@ -3739,10 +3720,6 @@ msgid ""
 msgstr ""
 "时长读取自以纳秒为单位的 Duration 字段，而非从四舍五入后的显示字符串重新解"
 "析。"
-
-#. Used in the browser
-msgid "Dutch"
-msgstr "荷兰语"
 
 msgid "Dynamic Config"
 msgstr "动态配置"
@@ -4589,10 +4566,6 @@ msgctxt "button"
 msgid "Finish setup"
 msgstr "完成设置"
 
-#. Used in the browser
-msgid "Finnish"
-msgstr "芬兰语"
-
 msgid "Fit to screen"
 msgstr "适应屏幕"
 
@@ -4728,10 +4701,6 @@ msgid ""
 "agents and accounts"
 msgstr "在地址、场景、AS 名称、消息、机器、路径、Agent 和账户中进行全文搜索"
 
-#. Used in the browser
-msgid "French"
-msgstr "法语"
-
 #, python-format
 msgid "Full reference: %(tm_cli_docs)s"
 msgstr "完整参考：%(tm_cli_docs)s"
@@ -4808,10 +4777,6 @@ msgstr "地理定位"
 #. Used in the browser
 msgid "Geolocation on - downloading database…"
 msgstr "地理定位已开启：正在下载数据库…"
-
-#. Used in the browser
-msgid "German"
-msgstr "德语"
 
 #. Used in the browser
 msgctxt "button"
@@ -5059,9 +5024,6 @@ msgstr "标头"
 msgid "Health check"
 msgstr "健康检查"
 
-msgid "Help translate"
-msgstr "帮助翻译"
-
 msgid "Hidden apps"
 msgstr "隐藏的应用"
 
@@ -5144,9 +5106,6 @@ msgid ""
 "compose service name and port."
 msgstr "Traefik 在网络内部如何访问此容器。通常是 compose 服务名和端口。"
 
-msgid "How it works"
-msgstr "工作原理"
-
 #, python-format
 msgid ""
 "How many of the most recent alerts to read, 0 to 100000. Blank uses "
@@ -5159,10 +5118,6 @@ msgstr ""
 msgctxt "setting"
 msgid "HttpOnly"
 msgstr "HttpOnly"
-
-#. Used in the browser
-msgid "Hungarian"
-msgstr "匈牙利语"
 
 #. Used in the browser
 msgid "I am a teapot"
@@ -5200,8 +5155,10 @@ msgstr "IP/范围为必填项"
 
 #. Used in the browser
 #, python-brace-format
-msgid "IPs/CIDRs allowed to set {x_forwarded}, one per line. The"
-msgstr "允许设置 {x_forwarded} 的 IP/CIDR，每行一个。"
+msgid ""
+"IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
+"above can bulk-add Cloudflare ranges."
+msgstr "允许设置 {x_forwarded} 的 IP/CIDR，每行一个。上方的 {icon} 助手可以批量添加 Cloudflare IP 段。"
 
 msgctxt "setting"
 msgid "Icon"
@@ -5475,14 +5432,6 @@ msgid "It will not be shown again."
 msgstr "它不会再次显示。"
 
 #. Used in the browser
-msgid "Italian"
-msgstr "意大利语"
-
-#. Used in the browser
-msgid "Japanese"
-msgstr "日语"
-
-#. Used in the browser
 msgid "Jump to the decisions view filtered to this source"
 msgstr "跳转到按此来源筛选的决策视图"
 
@@ -5543,10 +5492,6 @@ msgid ""
 msgstr ""
 "允许外部客户端与此 Agent 通信的密钥，例如移动应用、脚本或其他工具。每个密钥仅"
 "在创建时显示一次，并以哈希形式存储，因此丢失的密钥只能替换，无法找回。"
-
-#. Used in the browser
-msgid "Korean"
-msgstr "韩语"
 
 #. Used in the browser
 msgid "Kubernetes (CRD)"
@@ -6804,10 +6749,6 @@ msgid "None (external / custom cert)"
 msgstr "无（外部 / 自定义证书）"
 
 #. Used in the browser
-msgid "Norwegian"
-msgstr "挪威语"
-
-#. Used in the browser
 msgid "Not Acceptable"
 msgstr "不可接受"
 
@@ -7264,6 +7205,10 @@ msgstr "打开设置"
 #. Used in the browser
 msgid "Open site"
 msgstr "打开站点"
+
+#. Used in the browser
+msgid "Open the Plugins tab"
+msgstr "打开插件标签页"
 
 #. Used in the browser
 msgid "Open the Static Config tab"
@@ -7727,10 +7672,6 @@ msgstr ""
 "源代码。保存后需要重启 Traefik 才能激活插件。"
 
 #. Used in the browser
-msgid "Plugins tab"
-msgstr "插件标签页"
-
-#. Used in the browser
 #, python-brace-format
 msgid "Plugins {staticPluginCount}"
 msgstr "插件 {staticPluginCount}"
@@ -7742,10 +7683,6 @@ msgstr "Poison Pill"
 msgid "Policy %(optional)s"
 msgstr "策略 %(optional)s"
 
-#. Used in the browser
-msgid "Polish"
-msgstr "波兰语"
-
 msgid "Poll the servers"
 msgstr "轮询服务器"
 
@@ -7755,10 +7692,6 @@ msgstr "端口"
 
 msgid "Port and rate limit"
 msgstr "端口和速率限制"
-
-#. Used in the browser
-msgid "Portuguese"
-msgstr "葡萄牙语"
 
 #, python-format
 msgid ""
@@ -8473,9 +8406,6 @@ msgstr "请求标头字段过大"
 msgid "Request Timeout"
 msgstr "请求超时"
 
-msgid "Request a language"
-msgstr "申请添加语言"
-
 #. Used in the browser
 msgid "Request failed"
 msgstr "请求失败"
@@ -9106,10 +9036,6 @@ msgid ""
 msgstr ""
 "在 %(agent_cli_host_name)s 上运行此命令。它会安装 %(tm)s CLI，并打开已预设密"
 "钥的 Agent 安装程序。"
-
-#. Used in the browser
-msgid "Russian"
-msgstr "俄语"
 
 msgid "SIGNAL_FILE_PATH not configured"
 msgstr "未配置 SIGNAL_FILE_PATH"
@@ -9849,9 +9775,6 @@ msgstr "显示键盘快捷键按钮"
 msgid "Show language selector"
 msgstr "显示语言选择器"
 
-msgid "Show me later"
-msgstr "稍后提醒"
-
 msgid "Show on"
 msgstr "显示位置"
 
@@ -10036,10 +9959,6 @@ msgstr "Socket 对端"
 
 msgid "Sources to add"
 msgstr "要添加的来源"
-
-#. Used in the browser
-msgid "Spanish"
-msgstr "西班牙语"
 
 msgctxt "label"
 msgid "Start"
@@ -10299,10 +10218,6 @@ msgstr ""
 #. Used in the browser
 msgid "Surface held"
 msgstr "防线稳固"
-
-#. Used in the browser
-msgid "Swedish"
-msgstr "瑞典语"
 
 #. Used in the browser
 msgid "Switch server"
@@ -10863,20 +10778,6 @@ msgstr ""
 "中间件片段包含模板占位符（%(example)s），保存前必须替换为实际值。在编辑器中编"
 "辑该中间件，并替换所有 %(marker)s 占位符。"
 
-msgid ""
-"The next release speaks more than English, and the whole interface is "
-"waiting for translators."
-msgstr "下一个版本将支持英语以外的语言，整个界面正等待译者参与翻译。"
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"The next release speaks more than English. {language} is open on Weblate, "
-"and nobody has started it yet."
-msgstr ""
-"下一个版本将支持英语以外的语言。{language} 已在 Weblate 上开放，但尚无人开始"
-"翻译。"
-
 #. Used in the browser
 msgid "The primary view"
 msgstr "主视图"
@@ -11227,8 +11128,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "These rows are what {traefik_yml} declares. The"
-msgstr "这些行是 {traefik_yml} 中声明的内容。"
+msgid ""
+"These rows are what {traefik_yml} declares. The Plugins tab installs and "
+"removes them for you, and writes the middleware that uses them."
+msgstr "这些行是 {traefik_yml} 中声明的内容。插件标签页会为您安装和移除它们，并写入使用它们的中间件。"
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -11541,9 +11444,6 @@ msgstr "Traefik Manager 文档。"
 msgid "Traefik Manager installed as app!"
 msgstr "Traefik Manager 已安装为应用。"
 
-msgid "Traefik Manager is being translated"
-msgstr "Traefik Manager 正在翻译中"
-
 msgid ""
 "Traefik Manager manages one Traefik instance. To manage more, run a "
 "lightweight agent next to each and register it here, then switch between "
@@ -11811,12 +11711,13 @@ msgstr ""
 "触发型桶的容量为 0，在第一个匹配事件时即触发。容量和 leakspeed 对这些桶没有意"
 "义"
 
-msgid "Trust Forward Header"
-msgstr "信任转发标头"
-
 #. Used in the browser
 msgid "Trust forwarded headers from everyone"
 msgstr "信任来自任何来源的转发标头"
+
+#, python-format
+msgid "Trust the existing %(x_forwarded)s headers"
+msgstr "信任已有的 %(x_forwarded)s 标头"
 
 #. Used in the browser
 #, python-brace-format
@@ -11837,10 +11738,6 @@ msgstr "受信任跳数深度"
 #. Used in the browser
 msgid "Trusted hops"
 msgstr "受信任跳数"
-
-#. Used in the browser
-msgid "Turkish"
-msgstr "土耳其语"
 
 msgctxt "heading"
 msgid "Two-factor"
@@ -11891,10 +11788,6 @@ msgstr "UP，未检查"
 #. Used in the browser
 msgid "URI Too Long"
 msgstr "URI 过长"
-
-#. Used in the browser
-msgid "Ukrainian"
-msgstr "乌克兰语"
 
 #. Used in the browser
 msgid "Unauthorized"
@@ -13251,10 +13144,6 @@ msgid "healthy"
 msgstr "健康"
 
 #. Used in the browser
-msgid "helper above can bulk-add Cloudflare ranges."
-msgstr "上方的助手可以批量添加 Cloudflare IP 段。"
-
-#. Used in the browser
 msgid "highest random weight service, health lives on its children"
 msgstr "highest random weight 服务，健康状态取决于其子服务"
 
@@ -13326,11 +13215,6 @@ msgstr "Agent 容器内"
 
 msgid "inside this container"
 msgstr "此容器内"
-
-#. Used in the browser
-msgid ""
-"installs and removes them for you, and writes the middleware that uses them."
-msgstr "会为您安装和移除它们，并写入使用它们的中间件。"
 
 #. Used in the browser
 msgctxt "label"
@@ -15099,6 +14983,22 @@ msgstr[0] "{count} 个决策"
 
 #. Used in the browser
 #, python-brace-format
+msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} 个决策绘制为 {drawn} 格，因此部分格代表两个"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} decision drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so each cell stands for about "
+"{each}"
+msgstr[0] "{count} 个决策绘制为 {drawn} 格，因此每格约代表 {each}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{count} degraded"
 msgid_plural "{count} degraded"
 msgstr[0] "{count} 个降级"
@@ -15132,6 +15032,21 @@ msgstr[0] "{count} 个条目"
 msgid "{count} event"
 msgid_plural "{count} events"
 msgstr[0] "{count} 个事件"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} 个事件绘制为 {drawn} 格，因此部分格代表两个"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} event drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} 个事件绘制为 {drawn} 格，因此每格约代表 {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15234,6 +15149,21 @@ msgstr[0] "{count} 个网络"
 msgid "{count} object"
 msgid_plural "{count} objects"
 msgstr[0] "{count} 个对象"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} 个对象绘制为 {drawn} 格，因此部分格代表两个"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} object drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} 个对象绘制为 {drawn} 格，因此每格约代表 {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -15398,6 +15328,21 @@ msgstr[0] "{count} 个慢请求"
 msgid "{count} source"
 msgid_plural "{count} sources"
 msgstr[0] "{count} 个来源"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} 个来源绘制为 {drawn} 格，因此部分格代表两个"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} source drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} 个来源绘制为 {drawn} 格，因此每格约代表 {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16836,16 +16781,6 @@ msgstr "{toLowerCase} x{v1}"
 msgid "{total} decision, {own} from this host"
 msgid_plural "{total} decisions, {own} from this host"
 msgstr[0] "{total} 个决策，{own} 个来自此主机"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so a few cells stand for two"
-msgstr "{total} 绘制为 {drawn} 格，因此部分格代表两个"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr "{total} 绘制为 {drawn} 格，因此每格约代表 {each}"
 
 #. Used in the browser
 #, python-brace-format

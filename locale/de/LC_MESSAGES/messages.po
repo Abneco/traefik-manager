@@ -1622,10 +1622,6 @@ msgstr "Über Entrypoint angewendet"
 msgid "Apply & Save"
 msgstr "Anwenden & Speichern"
 
-#. Used in the browser
-msgid "Arabic"
-msgstr "Arabisch"
-
 msgid ""
 "Assign a route to a group with the pencil on its card. A group disappears "
 "when nothing uses it."
@@ -2430,10 +2426,6 @@ msgstr "Wird geprüft…"
 msgctxt "tooltip"
 msgid "Checking…"
 msgstr "Wird geprüft…"
-
-#. Used in the browser
-msgid "Chinese"
-msgstr "Chinesisch"
 
 #. Used in the browser
 msgid "Choose a notification destination."
@@ -3320,10 +3312,6 @@ msgid "Custom…"
 msgstr "Benutzerdefiniert…"
 
 #. Used in the browser
-msgid "Czech"
-msgstr "Tschechisch"
-
-#. Used in the browser
 msgid "DNS Challenge"
 msgstr "DNS-Challenge"
 
@@ -3344,10 +3332,6 @@ msgstr "DOWN"
 #. Used in the browser
 msgid "Daily"
 msgstr "Täglich"
-
-#. Used in the browser
-msgid "Danish"
-msgstr "Dänisch"
 
 msgctxt "button"
 msgid "Dark"
@@ -3872,9 +3856,6 @@ msgstr "Diese Karte nicht anklickbar machen"
 msgid "Do not show it anywhere"
 msgstr "Nirgends anzeigen"
 
-msgid "Do not show this again"
-msgstr "Nicht mehr anzeigen"
-
 #. Used in the browser
 msgid "Docker / Podman / Unraid:"
 msgstr "Docker / Podman / Unraid:"
@@ -4003,10 +3984,6 @@ msgid ""
 msgstr ""
 "Dauern werden aus dem Nanosekunden-Feld Duration gelesen, nicht aus einem "
 "gerundeten Anzeigetext neu geparst."
-
-#. Used in the browser
-msgid "Dutch"
-msgstr "Niederländisch"
 
 msgid "Dynamic Config"
 msgstr "Dynamische Konfiguration"
@@ -4900,10 +4877,6 @@ msgctxt "button"
 msgid "Finish setup"
 msgstr "Einrichtung abschließen"
 
-#. Used in the browser
-msgid "Finnish"
-msgstr "Finnisch"
-
 msgid "Fit to screen"
 msgstr "An Bildschirm anpassen"
 
@@ -5050,10 +5023,6 @@ msgstr ""
 "Freitextsuche über Adresse, Szenario, AS-Name, Nachricht, Maschine, Pfade, "
 "Agents und Konten"
 
-#. Used in the browser
-msgid "French"
-msgstr "Französisch"
-
 #, python-format
 msgid "Full reference: %(tm_cli_docs)s"
 msgstr "Vollständige Referenz: %(tm_cli_docs)s"
@@ -5131,10 +5100,6 @@ msgstr "Geolokalisierung"
 #. Used in the browser
 msgid "Geolocation on - downloading database…"
 msgstr "Geolokalisierung an - Datenbank wird heruntergeladen…"
-
-#. Used in the browser
-msgid "German"
-msgstr "Deutsch"
 
 #. Used in the browser
 msgctxt "button"
@@ -5388,9 +5353,6 @@ msgstr "Header"
 msgid "Health check"
 msgstr "Health-Check"
 
-msgid "Help translate"
-msgstr "Beim Übersetzen helfen"
-
 msgid "Hidden apps"
 msgstr "Ausgeblendete Apps"
 
@@ -5481,9 +5443,6 @@ msgstr ""
 "Wie Traefik diesen Container innerhalb des Netzwerks erreicht. Normalerweise "
 "der Compose-Service-Name und der Port."
 
-msgid "How it works"
-msgstr "Funktionsweise"
-
 #, python-format
 msgid ""
 "How many of the most recent alerts to read, 0 to 100000. Blank uses "
@@ -5497,10 +5456,6 @@ msgstr ""
 msgctxt "setting"
 msgid "HttpOnly"
 msgstr "HttpOnly"
-
-#. Used in the browser
-msgid "Hungarian"
-msgstr "Ungarisch"
 
 #. Used in the browser
 msgid "I am a teapot"
@@ -5538,8 +5493,10 @@ msgstr "IP/Bereich ist erforderlich"
 
 #. Used in the browser
 #, python-brace-format
-msgid "IPs/CIDRs allowed to set {x_forwarded}, one per line. The"
-msgstr "IPs/CIDRs, die {x_forwarded} setzen dürfen, eine pro Zeile. Der"
+msgid ""
+"IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
+"above can bulk-add Cloudflare ranges."
+msgstr "IPs/CIDRs, die {x_forwarded} setzen dürfen, eine pro Zeile. Der {icon} Helfer oben kann Cloudflare-Bereiche gesammelt hinzufügen."
 
 msgctxt "setting"
 msgid "Icon"
@@ -5829,14 +5786,6 @@ msgid "It will not be shown again."
 msgstr "Er wird nicht erneut angezeigt."
 
 #. Used in the browser
-msgid "Italian"
-msgstr "Italienisch"
-
-#. Used in the browser
-msgid "Japanese"
-msgstr "Japanisch"
-
-#. Used in the browser
 msgid "Jump to the decisions view filtered to this source"
 msgstr "Zur Decisions-Ansicht springen, gefiltert auf diese Quelle"
 
@@ -5899,10 +5848,6 @@ msgstr ""
 "App, ein Skript, ein anderes Tool. Jeder Schlüssel wird beim Erstellen "
 "einmal angezeigt und als Hash gespeichert, ein verlorener Schlüssel wird "
 "also ersetzt statt wiederhergestellt."
-
-#. Used in the browser
-msgid "Korean"
-msgstr "Koreanisch"
 
 #. Used in the browser
 msgid "Kubernetes (CRD)"
@@ -7205,10 +7150,6 @@ msgid "None (external / custom cert)"
 msgstr "Keiner (externes / eigenes Zertifikat)"
 
 #. Used in the browser
-msgid "Norwegian"
-msgstr "Norwegisch"
-
-#. Used in the browser
 msgid "Not Acceptable"
 msgstr "Nicht akzeptabel"
 
@@ -7719,6 +7660,10 @@ msgid "Open site"
 msgstr "Website öffnen"
 
 #. Used in the browser
+msgid "Open the Plugins tab"
+msgstr "Tab Plugins öffnen"
+
+#. Used in the browser
 msgid "Open the Static Config tab"
 msgstr "Tab Statische Konfiguration öffnen"
 
@@ -8218,10 +8163,6 @@ msgstr ""
 "Speichern ist ein Neustart von Traefik nötig, um das Plugin zu aktivieren."
 
 #. Used in the browser
-msgid "Plugins tab"
-msgstr "Tab Plugins"
-
-#. Used in the browser
 #, python-brace-format
 msgid "Plugins {staticPluginCount}"
 msgstr "Plugins {staticPluginCount}"
@@ -8233,10 +8174,6 @@ msgstr "Poison Pill"
 msgid "Policy %(optional)s"
 msgstr "Richtlinie %(optional)s"
 
-#. Used in the browser
-msgid "Polish"
-msgstr "Polnisch"
-
 msgid "Poll the servers"
 msgstr "Server abfragen"
 
@@ -8246,10 +8183,6 @@ msgstr "Port"
 
 msgid "Port and rate limit"
 msgstr "Port und Rate-Limit"
-
-#. Used in the browser
-msgid "Portuguese"
-msgstr "Portugiesisch"
 
 #, python-format
 msgid ""
@@ -9016,9 +8949,6 @@ msgstr "Header-Felder der Anfrage zu groß"
 msgid "Request Timeout"
 msgstr "Zeitüberschreitung der Anfrage"
 
-msgid "Request a language"
-msgstr "Sprache anfragen"
-
 #. Used in the browser
 msgid "Request failed"
 msgstr "Anfrage fehlgeschlagen"
@@ -9708,10 +9638,6 @@ msgid ""
 msgstr ""
 "Führe dies auf %(agent_cli_host_name)s aus. Es installiert die %(tm)s-CLI "
 "und öffnet deren Agent-Installer mit bereits gesetztem Schlüssel."
-
-#. Used in the browser
-msgid "Russian"
-msgstr "Russisch"
 
 msgid "SIGNAL_FILE_PATH not configured"
 msgstr "SIGNAL_FILE_PATH nicht konfiguriert"
@@ -10478,9 +10404,6 @@ msgstr "Schaltfläche für Tastenkürzel anzeigen"
 msgid "Show language selector"
 msgstr "Sprachauswahl anzeigen"
 
-msgid "Show me later"
-msgstr "Später anzeigen"
-
 msgid "Show on"
 msgstr "Anzeigen auf"
 
@@ -10690,10 +10613,6 @@ msgstr "Socket-Gegenstelle"
 
 msgid "Sources to add"
 msgstr "Hinzuzufügende Quellen"
-
-#. Used in the browser
-msgid "Spanish"
-msgstr "Spanisch"
 
 msgctxt "label"
 msgid "Start"
@@ -10968,10 +10887,6 @@ msgstr ""
 #. Used in the browser
 msgid "Surface held"
 msgstr "Abwehr hält"
-
-#. Used in the browser
-msgid "Swedish"
-msgstr "Schwedisch"
 
 #. Used in the browser
 msgid "Switch server"
@@ -11587,22 +11502,6 @@ msgstr ""
 "dem Speichern durch echte Werte ersetzt werden müssen. Bearbeite die "
 "Middleware im Editor und ersetze alle %(marker)s-Platzhalter."
 
-msgid ""
-"The next release speaks more than English, and the whole interface is "
-"waiting for translators."
-msgstr ""
-"Das nächste Release spricht mehr als Englisch, und die ganze Oberfläche "
-"wartet auf Übersetzer."
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"The next release speaks more than English. {language} is open on Weblate, "
-"and nobody has started it yet."
-msgstr ""
-"Das nächste Release spricht mehr als Englisch. {language} ist auf Weblate "
-"offen, und noch niemand hat damit angefangen."
-
 #. Used in the browser
 msgid "The primary view"
 msgstr "Die Hauptansicht"
@@ -12047,8 +11946,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "These rows are what {traefik_yml} declares. The"
-msgstr "Diese Zeilen zeigen, was {traefik_yml} deklariert. Der"
+msgid ""
+"These rows are what {traefik_yml} declares. The Plugins tab installs and "
+"removes them for you, and writes the middleware that uses them."
+msgstr "Diese Zeilen zeigen, was {traefik_yml} deklariert. Der Tab Plugins installiert und entfernt sie für dich und schreibt die Middleware, die sie verwendet."
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -12404,9 +12305,6 @@ msgstr "Traefik-Manager-Dokumentation."
 msgid "Traefik Manager installed as app!"
 msgstr "Traefik Manager als App installiert"
 
-msgid "Traefik Manager is being translated"
-msgstr "Traefik Manager wird übersetzt"
-
 msgid ""
 "Traefik Manager manages one Traefik instance. To manage more, run a "
 "lightweight agent next to each and register it here, then switch between "
@@ -12695,12 +12593,13 @@ msgstr ""
 "Trigger-Buckets haben Kapazität 0 und lösen beim ersten passenden Ereignis "
 "aus. Kapazität und leakspeed sind für diese bedeutungslos"
 
-msgid "Trust Forward Header"
-msgstr "Forward-Header vertrauen"
-
 #. Used in the browser
 msgid "Trust forwarded headers from everyone"
 msgstr "Weitergeleiteten Headern von allen vertrauen"
+
+#, python-format
+msgid "Trust the existing %(x_forwarded)s headers"
+msgstr "Vorhandenen %(x_forwarded)s-Headern vertrauen"
 
 #. Used in the browser
 #, python-brace-format
@@ -12721,10 +12620,6 @@ msgstr "Vertrauenswürdige Hop-Tiefe"
 #. Used in the browser
 msgid "Trusted hops"
 msgstr "Vertrauenswürdige Hops"
-
-#. Used in the browser
-msgid "Turkish"
-msgstr "Türkisch"
 
 msgctxt "heading"
 msgid "Two-factor"
@@ -12779,10 +12674,6 @@ msgstr "UP, nicht geprüft"
 #. Used in the browser
 msgid "URI Too Long"
 msgstr "URI zu lang"
-
-#. Used in the browser
-msgid "Ukrainian"
-msgstr "Ukrainisch"
 
 #. Used in the browser
 msgid "Unauthorized"
@@ -14205,10 +14096,6 @@ msgid "healthy"
 msgstr "in Ordnung"
 
 #. Used in the browser
-msgid "helper above can bulk-add Cloudflare ranges."
-msgstr "Helfer oben kann Cloudflare-Bereiche gesammelt hinzufügen."
-
-#. Used in the browser
 msgid "highest random weight service, health lives on its children"
 msgstr ""
 "Highest-Random-Weight-Service, der Zustand hängt an seinen Kind-Services"
@@ -14281,13 +14168,6 @@ msgstr "im Agent-Container"
 
 msgid "inside this container"
 msgstr "in diesem Container"
-
-#. Used in the browser
-msgid ""
-"installs and removes them for you, and writes the middleware that uses them."
-msgstr ""
-"installiert und entfernt sie für dich und schreibt die Middleware, die sie "
-"verwendet."
 
 #. Used in the browser
 msgctxt "label"
@@ -16121,6 +16001,24 @@ msgstr[1] "{count} Decisions"
 
 #. Used in the browser
 #, python-brace-format
+msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} Decision als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+msgstr[1] "{count} Decisions als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} decision drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so each cell stands for about "
+"{each}"
+msgstr[0] "{count} Decision als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
+msgstr[1] "{count} Decisions als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{count} degraded"
 msgid_plural "{count} degraded"
 msgstr[0] "{count} beeinträchtigt"
@@ -16161,6 +16059,23 @@ msgid "{count} event"
 msgid_plural "{count} events"
 msgstr[0] "{count} Ereignis"
 msgstr[1] "{count} Ereignisse"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} Ereignis als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+msgstr[1] "{count} Ereignisse als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} event drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} Ereignis als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
+msgstr[1] "{count} Ereignisse als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16280,6 +16195,23 @@ msgid "{count} object"
 msgid_plural "{count} objects"
 msgstr[0] "{count} Objekt"
 msgstr[1] "{count} Objekte"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} Objekt als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+msgstr[1] "{count} Objekte als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} object drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} Objekt als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
+msgstr[1] "{count} Objekte als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16482,6 +16414,23 @@ msgid "{count} source"
 msgid_plural "{count} sources"
 msgstr[0] "{count} Quelle"
 msgstr[1] "{count} Quellen"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} Quelle als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+msgstr[1] "{count} Quellen als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} source drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} Quelle als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
+msgstr[1] "{count} Quellen als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -18179,19 +18128,6 @@ msgid "{total} decision, {own} from this host"
 msgid_plural "{total} decisions, {own} from this host"
 msgstr[0] "{total} Decision, {own} von diesem Host"
 msgstr[1] "{total} Decisions, {own} von diesem Host"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so a few cells stand for two"
-msgstr ""
-"{total} als {drawn} Zellen dargestellt, daher stehen einige Zellen für zwei"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr ""
-"{total} als {drawn} Zellen dargestellt, daher steht jede Zelle für etwa "
-"{each}"
 
 #. Used in the browser
 #, python-brace-format

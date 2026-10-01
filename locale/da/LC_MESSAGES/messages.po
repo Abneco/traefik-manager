@@ -1586,10 +1586,6 @@ msgstr "Anvendt via entrypoint"
 msgid "Apply & Save"
 msgstr "Anvend og gem"
 
-#. Used in the browser
-msgid "Arabic"
-msgstr "Arabisk"
-
 msgid ""
 "Assign a route to a group with the pencil on its card. A group disappears "
 "when nothing uses it."
@@ -2383,10 +2379,6 @@ msgstr "Tjekker…"
 msgctxt "tooltip"
 msgid "Checking…"
 msgstr "Tjekker…"
-
-#. Used in the browser
-msgid "Chinese"
-msgstr "Kinesisk"
 
 #. Used in the browser
 msgid "Choose a notification destination."
@@ -3261,10 +3253,6 @@ msgid "Custom…"
 msgstr "Brugerdefineret…"
 
 #. Used in the browser
-msgid "Czech"
-msgstr "Tjekkisk"
-
-#. Used in the browser
 msgid "DNS Challenge"
 msgstr "DNS-challenge"
 
@@ -3285,10 +3273,6 @@ msgstr "DOWN"
 #. Used in the browser
 msgid "Daily"
 msgstr "Dagligt"
-
-#. Used in the browser
-msgid "Danish"
-msgstr "Dansk"
 
 msgctxt "button"
 msgid "Dark"
@@ -3809,9 +3793,6 @@ msgstr "Gør ikke dette kort klikbart"
 msgid "Do not show it anywhere"
 msgstr "Vis det ikke nogen steder"
 
-msgid "Do not show this again"
-msgstr "Vis ikke dette igen"
-
 #. Used in the browser
 msgid "Docker / Podman / Unraid:"
 msgstr "Docker / Podman / Unraid:"
@@ -3940,10 +3921,6 @@ msgid ""
 msgstr ""
 "Varigheder læses fra Duration-feltet i nanosekunder, ikke fortolket igen fra "
 "en afrundet visningstekst."
-
-#. Used in the browser
-msgid "Dutch"
-msgstr "Hollandsk"
 
 msgid "Dynamic Config"
 msgstr "Dynamisk konfiguration"
@@ -4834,10 +4811,6 @@ msgctxt "button"
 msgid "Finish setup"
 msgstr "Afslut opsætning"
 
-#. Used in the browser
-msgid "Finnish"
-msgstr "Finsk"
-
 msgid "Fit to screen"
 msgstr "Tilpas til skærm"
 
@@ -4980,10 +4953,6 @@ msgstr ""
 "Fritekstsøgning i adresse, scenarie, AS-navn, besked, maskine, stier, "
 "agenter og konti"
 
-#. Used in the browser
-msgid "French"
-msgstr "Fransk"
-
 #, python-format
 msgid "Full reference: %(tm_cli_docs)s"
 msgstr "Fuld reference: %(tm_cli_docs)s"
@@ -5060,10 +5029,6 @@ msgstr "Geolokation"
 #. Used in the browser
 msgid "Geolocation on - downloading database…"
 msgstr "Geolokation slået til - henter database…"
-
-#. Used in the browser
-msgid "German"
-msgstr "Tysk"
 
 #. Used in the browser
 msgctxt "button"
@@ -5316,9 +5281,6 @@ msgstr "Headers"
 msgid "Health check"
 msgstr "Health check"
 
-msgid "Help translate"
-msgstr "Hjælp med at oversætte"
-
 msgid "Hidden apps"
 msgstr "Skjulte apps"
 
@@ -5408,9 +5370,6 @@ msgstr ""
 "Hvordan Traefik når denne container inde fra netværket. Normalt compose-"
 "servicenavnet og porten."
 
-msgid "How it works"
-msgstr "Sådan virker det"
-
 #, python-format
 msgid ""
 "How many of the most recent alerts to read, 0 to 100000. Blank uses "
@@ -5424,10 +5383,6 @@ msgstr ""
 msgctxt "setting"
 msgid "HttpOnly"
 msgstr "HttpOnly"
-
-#. Used in the browser
-msgid "Hungarian"
-msgstr "Ungarsk"
 
 #. Used in the browser
 msgid "I am a teapot"
@@ -5465,8 +5420,10 @@ msgstr "IP/interval er påkrævet"
 
 #. Used in the browser
 #, python-brace-format
-msgid "IPs/CIDRs allowed to set {x_forwarded}, one per line. The"
-msgstr "IP'er/CIDR'er, der må sætte {x_forwarded}, én pr. linje."
+msgid ""
+"IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
+"above can bulk-add Cloudflare ranges."
+msgstr "IP'er/CIDR'er, der må sætte {x_forwarded}, én pr. linje. {icon} Hjælperen ovenfor kan tilføje Cloudflare-intervaller samlet."
 
 msgctxt "setting"
 msgid "Icon"
@@ -5751,14 +5708,6 @@ msgid "It will not be shown again."
 msgstr "Den vises ikke igen."
 
 #. Used in the browser
-msgid "Italian"
-msgstr "Italiensk"
-
-#. Used in the browser
-msgid "Japanese"
-msgstr "Japansk"
-
-#. Used in the browser
 msgid "Jump to the decisions view filtered to this source"
 msgstr "Gå til decisions-visningen filtreret på denne kilde"
 
@@ -5820,10 +5769,6 @@ msgstr ""
 "Nøgler, der lader eksterne klienter tale med denne agent - mobilappen, et "
 "script, et andet værktøj. Hver nøgle vises én gang ved oprettelsen og gemmes "
 "som en hash, så en mistet nøgle erstattes i stedet for at blive gendannet."
-
-#. Used in the browser
-msgid "Korean"
-msgstr "Koreansk"
 
 #. Used in the browser
 msgid "Kubernetes (CRD)"
@@ -7119,10 +7064,6 @@ msgid "None (external / custom cert)"
 msgstr "Ingen (eksternt / eget certifikat)"
 
 #. Used in the browser
-msgid "Norwegian"
-msgstr "Norsk"
-
-#. Used in the browser
 msgid "Not Acceptable"
 msgstr "Ikke acceptabel"
 
@@ -7614,6 +7555,10 @@ msgid "Open site"
 msgstr "Åbn site"
 
 #. Used in the browser
+msgid "Open the Plugins tab"
+msgstr "Åbn fanen Plugins"
+
+#. Used in the browser
 msgid "Open the Static Config tab"
 msgstr "Åbn fanen Statisk konfiguration"
 
@@ -8102,10 +8047,6 @@ msgstr ""
 "genstartes for at aktivere pluginet, når du har gemt."
 
 #. Used in the browser
-msgid "Plugins tab"
-msgstr "Fanen Plugins"
-
-#. Used in the browser
 #, python-brace-format
 msgid "Plugins {staticPluginCount}"
 msgstr "Plugins {staticPluginCount}"
@@ -8117,10 +8058,6 @@ msgstr "Poison Pill"
 msgid "Policy %(optional)s"
 msgstr "Politik %(optional)s"
 
-#. Used in the browser
-msgid "Polish"
-msgstr "Polsk"
-
 msgid "Poll the servers"
 msgstr "Poll serverne"
 
@@ -8130,10 +8067,6 @@ msgstr "Port"
 
 msgid "Port and rate limit"
 msgstr "Port og rate limit"
-
-#. Used in the browser
-msgid "Portuguese"
-msgstr "Portugisisk"
 
 #, python-format
 msgid ""
@@ -8896,9 +8829,6 @@ msgstr "Request-headerfelter for store"
 msgid "Request Timeout"
 msgstr "Timeout for forespørgsel"
 
-msgid "Request a language"
-msgstr "Anmod om et sprog"
-
 #. Used in the browser
 msgid "Request failed"
 msgstr "Forespørgsel mislykkedes"
@@ -9570,10 +9500,6 @@ msgid ""
 msgstr ""
 "Kør dette på %(agent_cli_host_name)s. Det installerer %(tm)s-CLI'en og åbner "
 "dens agent-installationsprogram med nøglen allerede angivet."
-
-#. Used in the browser
-msgid "Russian"
-msgstr "Russisk"
 
 msgid "SIGNAL_FILE_PATH not configured"
 msgstr "SIGNAL_FILE_PATH er ikke konfigureret"
@@ -10332,9 +10258,6 @@ msgstr "Vis knap til tastaturgenveje"
 msgid "Show language selector"
 msgstr "Vis sprogvælger"
 
-msgid "Show me later"
-msgstr "Vis mig senere"
-
 msgid "Show on"
 msgstr "Vis på"
 
@@ -10532,10 +10455,6 @@ msgstr "Socket-peer"
 
 msgid "Sources to add"
 msgstr "Kilder, der skal tilføjes"
-
-#. Used in the browser
-msgid "Spanish"
-msgstr "Spansk"
 
 msgctxt "label"
 msgid "Start"
@@ -10804,10 +10723,6 @@ msgstr ""
 #. Used in the browser
 msgid "Surface held"
 msgstr "Forsvaret holdt"
-
-#. Used in the browser
-msgid "Swedish"
-msgstr "Svensk"
 
 #. Used in the browser
 msgid "Switch server"
@@ -11415,22 +11330,6 @@ msgstr ""
 "erstattes med rigtige værdier, før der gemmes. Rediger middlewaren i "
 "editoren, og erstat alle %(marker)s-pladsholdere."
 
-msgid ""
-"The next release speaks more than English, and the whole interface is "
-"waiting for translators."
-msgstr ""
-"Næste udgivelse taler mere end engelsk, og hele brugerfladen venter på "
-"oversættere."
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"The next release speaks more than English. {language} is open on Weblate, "
-"and nobody has started it yet."
-msgstr ""
-"Næste udgivelse taler mere end engelsk. {language} er åben på Weblate, og "
-"ingen er gået i gang endnu."
-
 #. Used in the browser
 msgid "The primary view"
 msgstr "Den primære visning"
@@ -11863,8 +11762,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "These rows are what {traefik_yml} declares. The"
-msgstr "Disse rækker er det, {traefik_yml} erklærer."
+msgid ""
+"These rows are what {traefik_yml} declares. The Plugins tab installs and "
+"removes them for you, and writes the middleware that uses them."
+msgstr "Disse rækker er det, {traefik_yml} erklærer. Fanen Plugins installerer og fjerner dem for dig og skriver den middleware, der bruger dem."
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -12211,9 +12112,6 @@ msgstr "Dokumentation til Traefik Manager."
 msgid "Traefik Manager installed as app!"
 msgstr "Traefik Manager installeret som app."
 
-msgid "Traefik Manager is being translated"
-msgstr "Traefik Manager bliver oversat"
-
 msgid ""
 "Traefik Manager manages one Traefik instance. To manage more, run a "
 "lightweight agent next to each and register it here, then switch between "
@@ -12499,12 +12397,13 @@ msgstr ""
 "Trigger-buckets har kapacitet 0 og udløses ved den første matchende "
 "hændelse. Kapacitet og leakspeed har ingen betydning for disse"
 
-msgid "Trust Forward Header"
-msgstr "Stol på forward-header"
-
 #. Used in the browser
 msgid "Trust forwarded headers from everyone"
 msgstr "Stol på videresendte headers fra alle"
+
+#, python-format
+msgid "Trust the existing %(x_forwarded)s headers"
+msgstr "Stol på de eksisterende %(x_forwarded)s-headers"
 
 #. Used in the browser
 #, python-brace-format
@@ -12525,10 +12424,6 @@ msgstr "Betroet hop-dybde"
 #. Used in the browser
 msgid "Trusted hops"
 msgstr "Betroede hops"
-
-#. Used in the browser
-msgid "Turkish"
-msgstr "Tyrkisk"
 
 msgctxt "heading"
 msgid "Two-factor"
@@ -12581,10 +12476,6 @@ msgstr "UP, ikke kontrolleret"
 #. Used in the browser
 msgid "URI Too Long"
 msgstr "URI for lang"
-
-#. Used in the browser
-msgid "Ukrainian"
-msgstr "Ukrainsk"
 
 #. Used in the browser
 msgid "Unauthorized"
@@ -13991,10 +13882,6 @@ msgid "healthy"
 msgstr "sund"
 
 #. Used in the browser
-msgid "helper above can bulk-add Cloudflare ranges."
-msgstr "Hjælperen ovenfor kan tilføje Cloudflare-intervaller samlet."
-
-#. Used in the browser
 msgid "highest random weight service, health lives on its children"
 msgstr "highest random weight-service, status ligger på dens underservices"
 
@@ -14066,12 +13953,6 @@ msgstr "inde i agent-containeren"
 
 msgid "inside this container"
 msgstr "inde i denne container"
-
-#. Used in the browser
-msgid ""
-"installs and removes them for you, and writes the middleware that uses them."
-msgstr ""
-"installerer og fjerner dem for dig og skriver den middleware, der bruger dem."
 
 #. Used in the browser
 msgctxt "label"
@@ -15901,6 +15782,24 @@ msgstr[1] "{count} decisions"
 
 #. Used in the browser
 #, python-brace-format
+msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} decision tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] "{count} decisions tegnet som {drawn} celler, så nogle få celler står for to"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} decision drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so each cell stands for about "
+"{each}"
+msgstr[0] "{count} decision tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] "{count} decisions tegnet som {drawn} celler, så hver celle står for ca. {each}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{count} degraded"
 msgid_plural "{count} degraded"
 msgstr[0] "{count} forringet"
@@ -15940,6 +15839,23 @@ msgid "{count} event"
 msgid_plural "{count} events"
 msgstr[0] "{count} hændelse"
 msgstr[1] "{count} hændelser"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} hændelse tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] "{count} hændelser tegnet som {drawn} celler, så nogle få celler står for to"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} event drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} hændelse tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] "{count} hændelser tegnet som {drawn} celler, så hver celle står for ca. {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16059,6 +15975,23 @@ msgid "{count} object"
 msgid_plural "{count} objects"
 msgstr[0] "{count} objekt"
 msgstr[1] "{count} objekter"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} objekt tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] "{count} objekter tegnet som {drawn} celler, så nogle få celler står for to"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} object drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} objekt tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] "{count} objekter tegnet som {drawn} celler, så hver celle står for ca. {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16258,6 +16191,23 @@ msgid "{count} source"
 msgid_plural "{count} sources"
 msgstr[0] "{count} kilde"
 msgstr[1] "{count} kilder"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} kilde tegnet som {drawn} celler, så nogle få celler står for to"
+msgstr[1] "{count} kilder tegnet som {drawn} celler, så nogle få celler står for to"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} source drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} kilde tegnet som {drawn} celler, så hver celle står for ca. {each}"
+msgstr[1] "{count} kilder tegnet som {drawn} celler, så hver celle står for ca. {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -17933,16 +17883,6 @@ msgid "{total} decision, {own} from this host"
 msgid_plural "{total} decisions, {own} from this host"
 msgstr[0] "{total} decision, {own} fra denne vært"
 msgstr[1] "{total} decisions, {own} fra denne vært"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so a few cells stand for two"
-msgstr "{total} tegnet som {drawn} celler, så nogle få celler står for to"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr "{total} tegnet som {drawn} celler, så hver celle står for ca. {each}"
 
 #. Used in the browser
 #, python-brace-format

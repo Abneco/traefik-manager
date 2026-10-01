@@ -1606,10 +1606,6 @@ msgstr "Toegepast via entrypoint"
 msgid "Apply & Save"
 msgstr "Toepassen en opslaan"
 
-#. Used in the browser
-msgid "Arabic"
-msgstr "Arabisch"
-
 msgid ""
 "Assign a route to a group with the pencil on its card. A group disappears "
 "when nothing uses it."
@@ -2412,10 +2408,6 @@ msgstr "Controleren…"
 msgctxt "tooltip"
 msgid "Checking…"
 msgstr "Controleren…"
-
-#. Used in the browser
-msgid "Chinese"
-msgstr "Chinees"
 
 #. Used in the browser
 msgid "Choose a notification destination."
@@ -3292,10 +3284,6 @@ msgid "Custom…"
 msgstr "Aangepast…"
 
 #. Used in the browser
-msgid "Czech"
-msgstr "Tsjechisch"
-
-#. Used in the browser
 msgid "DNS Challenge"
 msgstr "DNS-challenge"
 
@@ -3316,10 +3304,6 @@ msgstr "DOWN"
 #. Used in the browser
 msgid "Daily"
 msgstr "Dagelijks"
-
-#. Used in the browser
-msgid "Danish"
-msgstr "Deens"
 
 msgctxt "button"
 msgid "Dark"
@@ -3844,9 +3828,6 @@ msgstr "Deze kaart niet klikbaar maken"
 msgid "Do not show it anywhere"
 msgstr "Nergens tonen"
 
-msgid "Do not show this again"
-msgstr "Dit niet meer tonen"
-
 #. Used in the browser
 msgid "Docker / Podman / Unraid:"
 msgstr "Docker / Podman / Unraid:"
@@ -3975,10 +3956,6 @@ msgid ""
 msgstr ""
 "De duur wordt gelezen uit het nanosecondeveld Duration, niet opnieuw "
 "geparsed uit een afgeronde weergavetekst."
-
-#. Used in the browser
-msgid "Dutch"
-msgstr "Nederlands"
 
 msgid "Dynamic Config"
 msgstr "Dynamische configuratie"
@@ -4871,10 +4848,6 @@ msgctxt "button"
 msgid "Finish setup"
 msgstr "Instellen afronden"
 
-#. Used in the browser
-msgid "Finnish"
-msgstr "Fins"
-
 msgid "Fit to screen"
 msgstr "Aanpassen aan scherm"
 
@@ -5018,10 +4991,6 @@ msgstr ""
 "Vrij zoeken in adres, scenario, AS-naam, bericht, machine, paden, agents en "
 "accounts"
 
-#. Used in the browser
-msgid "French"
-msgstr "Frans"
-
 #, python-format
 msgid "Full reference: %(tm_cli_docs)s"
 msgstr "Volledige referentie: %(tm_cli_docs)s"
@@ -5098,10 +5067,6 @@ msgstr "Geolocatie"
 #. Used in the browser
 msgid "Geolocation on - downloading database…"
 msgstr "Geolocatie aan - database downloaden…"
-
-#. Used in the browser
-msgid "German"
-msgstr "Duits"
 
 #. Used in the browser
 msgctxt "button"
@@ -5356,9 +5321,6 @@ msgstr "Headers"
 msgid "Health check"
 msgstr "Healthcheck"
 
-msgid "Help translate"
-msgstr "Help met vertalen"
-
 msgid "Hidden apps"
 msgstr "Verborgen apps"
 
@@ -5448,9 +5410,6 @@ msgstr ""
 "Hoe Traefik deze container vanuit het netwerk bereikt. Normaal de naam van "
 "de compose-service en de poort."
 
-msgid "How it works"
-msgstr "Hoe het werkt"
-
 #, python-format
 msgid ""
 "How many of the most recent alerts to read, 0 to 100000. Blank uses "
@@ -5464,10 +5423,6 @@ msgstr ""
 msgctxt "setting"
 msgid "HttpOnly"
 msgstr "HttpOnly"
-
-#. Used in the browser
-msgid "Hungarian"
-msgstr "Hongaars"
 
 #. Used in the browser
 msgid "I am a teapot"
@@ -5505,8 +5460,10 @@ msgstr "IP/bereik is verplicht"
 
 #. Used in the browser
 #, python-brace-format
-msgid "IPs/CIDRs allowed to set {x_forwarded}, one per line. The"
-msgstr "IP’s/CIDR’s die {x_forwarded} mogen instellen, één per regel. De"
+msgid ""
+"IPs/CIDRs allowed to set {x_forwarded}, one per line. The {icon} helper "
+"above can bulk-add Cloudflare ranges."
+msgstr "IP’s/CIDR’s die {x_forwarded} mogen instellen, één per regel. De {icon} helper hierboven kan Cloudflare-ranges in bulk toevoegen."
 
 msgctxt "setting"
 msgid "Icon"
@@ -5795,14 +5752,6 @@ msgid "It will not be shown again."
 msgstr "Deze wordt niet opnieuw getoond."
 
 #. Used in the browser
-msgid "Italian"
-msgstr "Italiaans"
-
-#. Used in the browser
-msgid "Japanese"
-msgstr "Japans"
-
-#. Used in the browser
 msgid "Jump to the decisions view filtered to this source"
 msgstr "Naar de decisions-weergave, gefilterd op deze bron"
 
@@ -5865,10 +5814,6 @@ msgstr ""
 "script, een andere tool. Elke sleutel wordt eenmalig getoond bij het "
 "aanmaken en als hash opgeslagen, dus een verloren sleutel wordt vervangen in "
 "plaats van hersteld."
-
-#. Used in the browser
-msgid "Korean"
-msgstr "Koreaans"
 
 #. Used in the browser
 msgid "Kubernetes (CRD)"
@@ -7169,10 +7114,6 @@ msgid "None (external / custom cert)"
 msgstr "Geen (extern / eigen certificaat)"
 
 #. Used in the browser
-msgid "Norwegian"
-msgstr "Noors"
-
-#. Used in the browser
 msgid "Not Acceptable"
 msgstr "Niet acceptabel"
 
@@ -7673,6 +7614,10 @@ msgid "Open site"
 msgstr "Site openen"
 
 #. Used in the browser
+msgid "Open the Plugins tab"
+msgstr "Tabblad Plug-ins openen"
+
+#. Used in the browser
 msgid "Open the Static Config tab"
 msgstr "Tabblad Statische configuratie openen"
 
@@ -8169,10 +8114,6 @@ msgstr ""
 "Na het opslaan moet Traefik worden herstart om de plug-in te activeren."
 
 #. Used in the browser
-msgid "Plugins tab"
-msgstr "tabblad Plug-ins"
-
-#. Used in the browser
 #, python-brace-format
 msgid "Plugins {staticPluginCount}"
 msgstr "Plug-ins {staticPluginCount}"
@@ -8184,10 +8125,6 @@ msgstr "Poison Pill"
 msgid "Policy %(optional)s"
 msgstr "Beleid %(optional)s"
 
-#. Used in the browser
-msgid "Polish"
-msgstr "Pools"
-
 msgid "Poll the servers"
 msgstr "Servers pollen"
 
@@ -8197,10 +8134,6 @@ msgstr "Poort"
 
 msgid "Port and rate limit"
 msgstr "Poort en snelheidslimiet"
-
-#. Used in the browser
-msgid "Portuguese"
-msgstr "Portugees"
 
 #, python-format
 msgid ""
@@ -8968,9 +8901,6 @@ msgstr "Headervelden van verzoek te groot"
 msgid "Request Timeout"
 msgstr "Time-out van verzoek"
 
-msgid "Request a language"
-msgstr "Een taal aanvragen"
-
 #. Used in the browser
 msgid "Request failed"
 msgstr "Verzoek mislukt"
@@ -9655,10 +9585,6 @@ msgid ""
 msgstr ""
 "Voer dit uit op %(agent_cli_host_name)s. Het installeert de %(tm)s-CLI en "
 "opent het agentinstallatieprogramma met de sleutel al ingesteld."
-
-#. Used in the browser
-msgid "Russian"
-msgstr "Russisch"
 
 msgid "SIGNAL_FILE_PATH not configured"
 msgstr "SIGNAL_FILE_PATH niet geconfigureerd"
@@ -10424,9 +10350,6 @@ msgstr "Knop voor sneltoetsen tonen"
 msgid "Show language selector"
 msgstr "Taalkeuze tonen"
 
-msgid "Show me later"
-msgstr "Later tonen"
-
 msgid "Show on"
 msgstr "Tonen op"
 
@@ -10634,10 +10557,6 @@ msgstr "Socketpeer"
 
 msgid "Sources to add"
 msgstr "Toe te voegen bronnen"
-
-#. Used in the browser
-msgid "Spanish"
-msgstr "Spaans"
 
 msgctxt "label"
 msgid "Start"
@@ -10909,10 +10828,6 @@ msgstr ""
 #. Used in the browser
 msgid "Surface held"
 msgstr "Verdediging houdt stand"
-
-#. Used in the browser
-msgid "Swedish"
-msgstr "Zweeds"
 
 #. Used in the browser
 msgid "Switch server"
@@ -11527,22 +11442,6 @@ msgstr ""
 "opslaan door echte waarden moeten worden vervangen. Bewerk de middleware in "
 "de editor en vervang alle %(marker)s-placeholders."
 
-msgid ""
-"The next release speaks more than English, and the whole interface is "
-"waiting for translators."
-msgstr ""
-"De volgende release spreekt meer dan Engels, en de hele interface wacht op "
-"vertalers."
-
-#. Used in the browser
-#, python-brace-format
-msgid ""
-"The next release speaks more than English. {language} is open on Weblate, "
-"and nobody has started it yet."
-msgstr ""
-"De volgende release spreekt meer dan Engels. {language} staat open op "
-"Weblate, en nog niemand is eraan begonnen."
-
 #. Used in the browser
 msgid "The primary view"
 msgstr "De primaire weergave"
@@ -11983,8 +11882,10 @@ msgstr ""
 
 #. Used in the browser
 #, python-brace-format
-msgid "These rows are what {traefik_yml} declares. The"
-msgstr "Deze rijen zijn wat {traefik_yml} declareert. Het"
+msgid ""
+"These rows are what {traefik_yml} declares. The Plugins tab installs and "
+"removes them for you, and writes the middleware that uses them."
+msgstr "Deze rijen zijn wat {traefik_yml} declareert. Het tabblad Plug-ins installeert en verwijdert ze voor je, en schrijft de middleware die ze gebruikt."
 
 msgid ""
 "These settings change how this app appears on the dashboard. They do not "
@@ -12334,9 +12235,6 @@ msgstr "Documentatie van Traefik Manager."
 msgid "Traefik Manager installed as app!"
 msgstr "Traefik Manager als app geïnstalleerd"
 
-msgid "Traefik Manager is being translated"
-msgstr "Traefik Manager wordt vertaald"
-
 msgid ""
 "Traefik Manager manages one Traefik instance. To manage more, run a "
 "lightweight agent next to each and register it here, then switch between "
@@ -12625,12 +12523,13 @@ msgstr ""
 "overeenkomende gebeurtenis. Capaciteit en leakspeed hebben hiervoor geen "
 "betekenis"
 
-msgid "Trust Forward Header"
-msgstr "Forward-header vertrouwen"
-
 #. Used in the browser
 msgid "Trust forwarded headers from everyone"
 msgstr "Doorgestuurde headers van iedereen vertrouwen"
+
+#, python-format
+msgid "Trust the existing %(x_forwarded)s headers"
+msgstr "Bestaande %(x_forwarded)s-headers vertrouwen"
 
 #. Used in the browser
 #, python-brace-format
@@ -12651,10 +12550,6 @@ msgstr "Vertrouwde hopdiepte"
 #. Used in the browser
 msgid "Trusted hops"
 msgstr "Vertrouwde hops"
-
-#. Used in the browser
-msgid "Turkish"
-msgstr "Turks"
 
 msgctxt "heading"
 msgid "Two-factor"
@@ -12709,10 +12604,6 @@ msgstr "UP, niet gecontroleerd"
 #. Used in the browser
 msgid "URI Too Long"
 msgstr "URI te lang"
-
-#. Used in the browser
-msgid "Ukrainian"
-msgstr "Oekraïens"
 
 #. Used in the browser
 msgid "Unauthorized"
@@ -14131,10 +14022,6 @@ msgid "healthy"
 msgstr "gezond"
 
 #. Used in the browser
-msgid "helper above can bulk-add Cloudflare ranges."
-msgstr "helper hierboven kan Cloudflare-ranges in bulk toevoegen."
-
-#. Used in the browser
 msgid "highest random weight service, health lives on its children"
 msgstr ""
 "highest-random-weight-service, de gezondheid hangt af van de onderliggende "
@@ -14208,13 +14095,6 @@ msgstr "in de agentcontainer"
 
 msgid "inside this container"
 msgstr "in deze container"
-
-#. Used in the browser
-msgid ""
-"installs and removes them for you, and writes the middleware that uses them."
-msgstr ""
-"installeert en verwijdert ze voor je, en schrijft de middleware die ze "
-"gebruikt."
 
 #. Used in the browser
 msgctxt "label"
@@ -16046,6 +15926,24 @@ msgstr[1] "{count} decisions"
 
 #. Used in the browser
 #, python-brace-format
+msgid "{count} decision drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} decision getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+msgstr[1] "{count} decisions getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} decision drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} decisions drawn as {drawn} cells, so each cell stands for about "
+"{each}"
+msgstr[0] "{count} decision getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
+msgstr[1] "{count} decisions getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
+
+#. Used in the browser
+#, python-brace-format
 msgid "{count} degraded"
 msgid_plural "{count} degraded"
 msgstr[0] "{count} gedegradeerd"
@@ -16085,6 +15983,23 @@ msgid "{count} event"
 msgid_plural "{count} events"
 msgstr[0] "{count} event"
 msgstr[1] "{count} events"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} event drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} event getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+msgstr[1] "{count} events getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} event drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} events drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} event getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
+msgstr[1] "{count} events getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16204,6 +16119,23 @@ msgid "{count} object"
 msgid_plural "{count} objects"
 msgstr[0] "{count} object"
 msgstr[1] "{count} objecten"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} object drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} object getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+msgstr[1] "{count} objecten getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} object drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} objects drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} object getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
+msgstr[1] "{count} objecten getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -16408,6 +16340,23 @@ msgid "{count} source"
 msgid_plural "{count} sources"
 msgstr[0] "{count} bron"
 msgstr[1] "{count} bronnen"
+
+#. Used in the browser
+#, python-brace-format
+msgid "{count} source drawn as {drawn} cells, so a few cells stand for two"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so a few cells stand for two"
+msgstr[0] "{count} bron getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+msgstr[1] "{count} bronnen getekend als {drawn} cellen, dus enkele cellen staan voor twee"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"{count} source drawn as {drawn} cells, so each cell stands for about {each}"
+msgid_plural ""
+"{count} sources drawn as {drawn} cells, so each cell stands for about {each}"
+msgstr[0] "{count} bron getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
+msgstr[1] "{count} bronnen getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
 
 #. Used in the browser
 #, python-brace-format
@@ -18094,17 +18043,6 @@ msgid "{total} decision, {own} from this host"
 msgid_plural "{total} decisions, {own} from this host"
 msgstr[0] "{total} decision, {own} van deze host"
 msgstr[1] "{total} decisions, {own} van deze host"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so a few cells stand for two"
-msgstr "{total} getekend als {drawn} cellen, dus enkele cellen staan voor twee"
-
-#. Used in the browser
-#, python-brace-format
-msgid "{total} drawn as {drawn} cells, so each cell stands for about {each}"
-msgstr ""
-"{total} getekend als {drawn} cellen, dus elke cel staat voor ongeveer {each}"
 
 #. Used in the browser
 #, python-brace-format
