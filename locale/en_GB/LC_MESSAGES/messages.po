@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traefik Manager 1.15\n"
 "Report-Msgid-Bugs-To: https://github.com/chr0nzz/tm-locale/issues\n"
-"POT-Creation-Date: 2026-09-25 15:20+0000\n"
+"POT-Creation-Date: 2026-10-03 16:47+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: en_GB <LL@li.org>\n"
@@ -11816,6 +11816,13 @@ msgid ""
 "mobile app and scripts, and OIDC single sign-on. If a forward-auth provider "
 "already sits in front of Traefik Manager you can leave the built-in login "
 "off and acknowledge the banner."
+msgstr ""
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"With TLS on, this route only answers HTTPS, so plain http on {eps} returns "
+"404 page not found. Choose No TLS for an http-only route."
 msgstr ""
 
 #, python-format

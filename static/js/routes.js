@@ -1289,8 +1289,9 @@ async function _initEntrypointChips(proto, selectedEntrypoints) {
     const eps = (epList || []).map(e => e.name || e).filter(Boolean);
     const isSingle = proto === 'udp';
     if (!eps.length) {
-        container.innerHTML = `<input type="text" id="${hiddenId}_fallback" class="input-field" placeholder="${proto === 'http' ? 'https' : proto}" style="flex:1" oninput="document.getElementById(${_jsArg(hiddenId)}).value=this.value">`;
+        container.innerHTML = `<input type="text" id="${hiddenId}_fallback" class="input-field" placeholder="${proto === 'http' ? 'https' : proto}" style="flex:1" oninput="document.getElementById(${_jsArg(hiddenId)}).value=this.value${proto === 'http' ? ';_updateTlsEpNote()' : ''}">`;
         hidden.value = selectedEntrypoints ? (isSingle ? (selectedEntrypoints[0] || '') : selectedEntrypoints.join(', ')) : (proto === 'http' ? 'https' : '');
+        if (proto === 'http') _updateTlsEpNote();
         return;
     }
 
@@ -1311,6 +1312,7 @@ async function _initEntrypointChips(proto, selectedEntrypoints) {
             const titleAttr = isOrphan ? th('{ep} (not found in Traefik entrypoints - click to remove)', { ep }) : _esc(ep);
             return `<button type="button" onclick="_toggleEpChip(this,${_jsArg(ep)},${_jsArg(proto)})" style="padding:3px 10px;border-radius:6px;border:1px solid ${borderColor};background:${bgColor};color:${textColor};font-size:12px;font-family:monospace;cursor:pointer" title="${titleAttr}">${_esc(ep)}</button>`;
         }).join('');
+        if (proto === 'http') _updateTlsEpNote();
     }
     render();
     if (!window._epChipState) window._epChipState = {};
@@ -1795,6 +1797,29 @@ function toggleWildcardSection(resolverVal) {
         if (chk) chk.checked = false;
         _onWildcardToggle(false);
     }
+    _updateTlsEpNote();
+}
+
+function _isPlainHttpEp(name, list) {
+    const ep = (list || []).find(e => (e.name || e) === name);
+    const http = (ep && ep.http) || {};
+    if (http.tls || http.redirections) return false;
+    const port = String((ep && ep.address) || '').split(':').pop();
+    return port === '80' || ['web', 'http'].includes(name);
+}
+
+function _updateTlsEpNote() {
+    const note = document.getElementById('tlsPlainEpNote');
+    if (!note) return;
+    const cr = document.getElementById('certResolver');
+    const tlsOn = !!cr && cr.value !== '__disabled__';
+    const hidden = document.getElementById('entryPoints');
+    const eps = ((hidden && hidden.value) || '').split(',').map(s => s.trim()).filter(Boolean);
+    const plain = tlsOn ? eps.filter(ep => _isPlainHttpEp(ep, _cachedEntrypoints)) : [];
+    note.style.display = plain.length ? '' : 'none';
+    note.innerHTML = plain.length
+        ? '<i class="ph-bold ph-warning"></i> ' + th('With TLS on, this route only answers HTTPS, so plain http on {eps} returns 404 page not found. Choose No TLS for an http-only route.', { eps: tmList(plain) })
+        : '';
 }
 
 function _showWildcardFields(on) {
