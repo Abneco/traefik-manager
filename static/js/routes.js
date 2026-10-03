@@ -1911,7 +1911,7 @@ async function cloneRoute(btn) {
         _applyStreamingPreset(app.streaming);
         const crHttp = document.getElementById('certResolver');
         if (crHttp) {
-            if (!app.tls && app.tls !== false) crHttp.value = '__disabled__';
+            if (!app.tls) crHttp.value = '__disabled__';
             else if (app.certResolver) _ensureResolverOption(crHttp, app.certResolver);
             else crHttp.value = '__none__';
             toggleWildcardSection(crHttp.value);
@@ -2018,7 +2018,7 @@ async function handleEdit(btn) {
         _applyStreamingPreset(app.streaming);
         const crHttp = document.getElementById('certResolver');
         if (crHttp) {
-            if (!app.tls && app.tls !== false) crHttp.value = '__disabled__';
+            if (!app.tls) crHttp.value = '__disabled__';
             else if (app.certResolver) _ensureResolverOption(crHttp, app.certResolver);
             else crHttp.value = '__none__';
             toggleWildcardSection(crHttp.value);
