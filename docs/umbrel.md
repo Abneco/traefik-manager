@@ -8,7 +8,7 @@ Traefik Manager and its agent are in a community app store for umbrelOS, kept in
 | Traefik Manager Agent | You run Traefik Manager on another machine and want it to manage a Traefik on your Umbrel. Needs umbrelOS 2.0 or later. See [Agent](agent.md) |
 
 ::: warning Setup outside umbrelOS is required
-umbrelOS keeps ports 80 and 443 for its own reverse proxy, so the Traefik in these apps listens on other ports. Nothing outside your network reaches it until you forward ports on your router, point your DNS at your public IP, and route your apps as described below.
+umbrelOS keeps ports 80 and 443 for its own reverse proxy, so the Traefik in these apps listens on other ports. Nothing outside your network reaches it until you forward ports on your router, point your DNS at your public IP, and route your apps as described below. Behind CGNAT, or for your own network only, see [Local network only or behind CGNAT](#local-network-only-or-behind-cgnat).
 :::
 
 ---
@@ -65,6 +65,21 @@ A route published through this Traefik is not behind the Umbrel login. Protect a
 
 ---
 
+## Local network only or behind CGNAT
+
+Behind CGNAT nothing from the internet can reach your Umbrel, so port forwarding and the Let's Encrypt HTTP challenge cannot work. The same goes when you only want your apps on your own network. Let something else hold the certificate and send plain http to this Traefik:
+
+- **Behind a reverse proxy you already run.** Point it at `http://<umbrel-ip>:43080` for the agent app, or `42080` for the Traefik Manager app, and keep the certificate there. A local DNS rewrite (AdGuard Home, Pi-hole) sends your domain to that proxy.
+- **Through a tunnel**, such as Cloudflare Tunnel. It takes the HTTPS connection and passes plain http on to `http://<umbrel-ip>:43080` (or `42080`).
+
+Either way, create the route with Cert Resolver set to **No TLS** and only the `web` entry point.
+
+::: warning A route with TLS returns 404 on plain http
+A router with a `tls` block only matches HTTPS connections, so plain http on `web` gets `404 page not found`, even when `web` is listed on the route. The route form warns when TLS is on and `web` is selected.
+:::
+
+---
+
 ## Traefik Manager app
 
 The first time you open it, the setup wizard asks you to create a Traefik Manager login. The Umbrel login is switched off for this app, so the Traefik Manager login, API keys and the [mobile app](mobile.md) all work.
@@ -75,7 +90,7 @@ Data lives in `~/umbrel/app-data/tm-traefik-manager/data/` by default. App updat
 
 | Path | Holds |
 |---|---|
-| `traefik/traefik.yml` | Traefik's static config, editable in Traefik Manager |
+| `traefik/static/traefik.yml` | Traefik's static config, editable in Traefik Manager |
 | `traefik/dynamic/` | Your routes, middlewares and services |
 | `traefik/acme/` | Certificates |
 | `tm/config/` | `manager.yml`, its companion files and the generated keys |

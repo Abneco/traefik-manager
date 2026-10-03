@@ -91,6 +91,10 @@ Click **Add Route** in the top bar. Fields marked with a protocol apply to that 
 
 UDP routers have no rule: they route by entry point only.
 
+::: warning A route with TLS does not answer plain http
+A router with a `tls` block only matches HTTPS connections. Plain http on an entry point such as `web` gets `404 page not found`, even when that entry point is listed on the route. For an http-only route, for example behind another reverse proxy, set Cert Resolver to **No TLS**. The form warns when TLS is on and a plain http entry point (port 80, or named `web` or `http`, with no TLS or redirect of its own) is selected.
+:::
+
 ## Editing a route
 
 Click the pencil icon on any route card, or open the detail panel and click **Edit**.

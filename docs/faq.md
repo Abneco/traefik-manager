@@ -67,6 +67,21 @@ Both seed `manager.yml` on first start only. After that the Settings values win 
 
 ---
 
+### My route returns `404 page not found`
+
+That page comes from Traefik itself: the request reached it, but no router matched. The usual causes:
+
+| Cause | Fix |
+|---|---|
+| Opening it by IP or `host:port` | A router only matches its rule, so open it by the domain in its `Host()` rule |
+| http on a route with TLS | A router with a `tls` block only matches HTTPS, so http on `web` never matches it. Use https, or set Cert Resolver to **No TLS** for an http-only route |
+| https on a route without TLS | The other way round: a route on `websecure` with no `tls` block only matches plain http. Pick a cert resolver, or **None (external / custom cert)** |
+| The domain resolves to another proxy | On your own network the domain may point at a different reverse proxy (umbrelOS keeps 80 and 443 for its own). Check where the name resolves from the device you test on |
+
+Traefik's access log shows which: a request with no `RouterName` matched nothing, and `entryPointName` and `RequestScheme` show where and how it arrived.
+
+---
+
 ### Why can't I edit this route's backend?
 
 The route points at a `weighted`, `mirroring`, `failover` or `highestRandomWeight` service that
