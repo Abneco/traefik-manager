@@ -299,6 +299,30 @@ def restore_go_templates(obj, mapping):
     return obj
 
 
+_PROTO_SECTIONS = {
+    'http': ('routers', 'services', 'middlewares', 'serversTransports'),
+    'tcp':  ('routers', 'services', 'middlewares', 'serversTransports'),
+    'udp':  ('routers', 'services'),
+    'tls':  ('options', 'stores'),
+}
+
+
+def normalize_empty_sections(data: dict) -> dict:
+    # `http:` with every child line deleted parses as None; Traefik ignores it, so treat it as empty
+    for proto, sections in _PROTO_SECTIONS.items():
+        if proto not in data:
+            continue
+        if data[proto] is None:
+            data[proto] = {}
+        block = data[proto]
+        if not isinstance(block, dict):
+            continue
+        for section in sections:
+            if section in block and block[section] is None:
+                block[section] = {}
+    return data
+
+
 def load_config(path=None):
     if path is None:
         path = env.CONFIG_PATH
@@ -308,7 +332,7 @@ def load_config(path=None):
         raw = f.read()
     sanitized, _ = sanitize_go_templates(raw)
     data = yaml.load(sanitized)
-    return data if data and isinstance(data, dict) else {}
+    return normalize_empty_sections(data) if data and isinstance(data, dict) else {}
 
 
 def strip_empty_sections(config: dict) -> dict:
@@ -407,6 +431,7 @@ def _load_config_display(path):
             return {}
     if not data or not isinstance(data, dict):
         return {}
+    normalize_empty_sections(data)
     return restore_go_templates(data, mapping) if mapping else data
 
 
