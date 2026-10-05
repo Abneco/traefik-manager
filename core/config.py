@@ -308,7 +308,6 @@ _PROTO_SECTIONS = {
 
 
 def normalize_empty_sections(data: dict) -> dict:
-    # `http:` with every child line deleted parses as None; Traefik ignores it, so treat it as empty
     for proto, sections in _PROTO_SECTIONS.items():
         if proto not in data:
             continue

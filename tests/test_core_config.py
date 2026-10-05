@@ -63,7 +63,6 @@ def test_load_config_on_garbage_returns_empty(config_path):
 
 @pytest.mark.parametrize('loader', ['load_config', '_load_config_display'])
 def test_bare_section_keys_load_as_empty_maps(config_path, loader):
-    # discussion #209: deleting every line under `http:` left it null and broke setup
     config_path.write_text("http:\ntcp:\n  routers:\ntls:\n")
     data = getattr(cfg, loader)(str(config_path))
     assert data['http'] == {}
