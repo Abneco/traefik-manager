@@ -224,6 +224,13 @@ Pull requests are welcome. See [CONTRIBUTING.md](CONTRIBUTING.md) for reporting 
 <a href="https://github.com/maca134" title="@maca134 - horizontally resizable modals"><img src="https://images.weserv.nl/?url=github.com/maca134.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="maca134"></a>
 <a href="https://github.com/nofuturekid" title="Thomas Kroll (@nofuturekid) - route health check for Traefik internal routers"><img src="https://images.weserv.nl/?url=github.com/nofuturekid.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="nofuturekid"></a>
 <a href="https://github.com/slywalker01" title="@slywalker01 - French translation"><img src="https://images.weserv.nl/?url=github.com/slywalker01.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="slywalker01"></a>
+<a href="https://github.com/pouda" title="Romaric Worobel (@pouda) - French translation"><img src="https://images.weserv.nl/?url=github.com/pouda.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="pouda"></a>
+<a href="https://github.com/hxgoxo" title="Hugo HB BREY (@hxgoxo) - French translation"><img src="https://images.weserv.nl/?url=github.com/hxgoxo.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="hxgoxo"></a>
+<a href="https://github.com/vblogio" title="Cédric Quillévéré (@vblogio) - French translation"><img src="https://images.weserv.nl/?url=github.com/vblogio.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="vblogio"></a>
+<a href="https://github.com/Taikylah" title="@Taikylah - French translation"><img src="https://images.weserv.nl/?url=github.com/Taikylah.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="Taikylah"></a>
+<a href="https://github.com/TehoorMarjan" title="Tehoor Marjan (@TehoorMarjan) - French translation"><img src="https://images.weserv.nl/?url=github.com/TehoorMarjan.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="TehoorMarjan"></a>
+<a href="https://github.com/shrimphorticulturist" title="@shrimphorticulturist - French translation"><img src="https://images.weserv.nl/?url=github.com/shrimphorticulturist.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="shrimphorticulturist"></a>
+<a href="https://github.com/stilicho2011" title="@stilicho2011 - Russian translation"><img src="https://images.weserv.nl/?url=github.com/stilicho2011.png&w=96&h=96&fit=cover&mask=circle" width="48" height="48" alt="stilicho2011"></a>
 </p>
 
 Thanks as well to everyone who has opened an issue or a discussion - several features started as a question from someone running into something unexpected.
