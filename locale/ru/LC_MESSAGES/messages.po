@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traefik Manager 1.15\n"
 "Report-Msgid-Bugs-To: https://github.com/chr0nzz/tm-locale/issues\n"
-"POT-Creation-Date: 2026-09-25 15:20+0000\n"
+"POT-Creation-Date: 2026-10-03 16:47+0000\n"
 "PO-Revision-Date: 2026-09-30 01:07+0000\n"
 "Last-Translator: chr0nzz <chronzz@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Russian <https://hosted.weblate.org/projects/traefik-manager/"
@@ -18,7 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "Generated-By: Babel 2.18.0\n"
-"X-Generator: Weblate 2026.10.dev0\n"
 
 #. Used in the browser
 #, python-brace-format
@@ -13159,6 +13158,13 @@ msgstr ""
 "для мобильного приложения и скриптов, а также единый вход через OIDC. Если "
 "перед Traefik Manager уже стоит провайдер forward-auth, встроенный вход "
 "можно не включать и подтвердить баннер."
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"With TLS on, this route only answers HTTPS, so plain http on {eps} returns "
+"404 page not found. Choose No TLS for an http-only route."
+msgstr ""
 
 #, python-format
 msgid ""

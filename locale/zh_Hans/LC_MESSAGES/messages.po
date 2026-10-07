@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: Traefik Manager 1.15\n"
 "Report-Msgid-Bugs-To: https://github.com/chr0nzz/tm-locale/issues\n"
-"POT-Creation-Date: 2026-09-25 15:20+0000\n"
+"POT-Creation-Date: 2026-10-03 16:47+0000\n"
 "PO-Revision-Date: 2026-09-30 00:00+0000\n"
 "Last-Translator: chr0nzz <chronzz@users.noreply.hosted.weblate.org>\n"
 "Language-Team: Chinese (Simplified Han script) <https://hosted.weblate.org/"
@@ -17,7 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.18.0\n"
-"X-Generator: Weblate 2026.10.dev0\n"
 
 #. Used in the browser
 #, python-brace-format
@@ -12209,6 +12208,13 @@ msgstr ""
 "谁可以进入，以及如何进入。内置密码、双重验证、供移动应用和脚本使用的 API 密"
 "钥，以及 OIDC 单点登录。如果 Traefik Manager 前面已有 forward-auth 提供者，可"
 "以关闭内置登录并确认横幅。"
+
+#. Used in the browser
+#, python-brace-format
+msgid ""
+"With TLS on, this route only answers HTTPS, so plain http on {eps} returns "
+"404 page not found. Choose No TLS for an http-only route."
+msgstr ""
 
 #, python-format
 msgid ""
