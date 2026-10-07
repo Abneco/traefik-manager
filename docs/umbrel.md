@@ -78,6 +78,25 @@ Either way, create the route with Cert Resolver set to **No TLS** and only the `
 A router with a `tls` block only matches HTTPS connections, so plain http on `web` gets `404 page not found`, even when `web` is listed on the route. The route form warns when TLS is on and `web` is selected.
 :::
 
+### The route on your front proxy
+
+A request reaches the Umbrel only when the reverse proxy in front has a route for its domain. Without one, that proxy answers `404 page not found` itself. If the proxy in front is a Traefik managed by Traefik Manager, add this route there:
+
+| Field | Value |
+|---|---|
+| Hostname | The app's domain, or `*.my-domain.com` to cover every app at once |
+| Backend | `http://<umbrel-ip>:43080`, or `42080` for the Traefik Manager app |
+| Entry point | Your HTTPS entry point, for example `websecure` |
+| Cert Resolver | The one your other working routes use |
+| Middlewares | The same as your other routes, if any |
+| Pass Host Header | On (the default), so the Umbrel's Traefik sees the original domain |
+
+On the Umbrel, each app then gets its own route for the same domain, with **No TLS** and only `web`.
+
+::: tip Wildcard hostnames
+`*.my-domain.com` matches one level of subdomain: `app.my-domain.com`, not `a.b.my-domain.com` or `my-domain.com` itself. Its certificate must cover the wildcard, which needs a DNS challenge resolver. With an HTTP challenge resolver, add one route per domain instead.
+:::
+
 ---
 
 ## Traefik Manager app
